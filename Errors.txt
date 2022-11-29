@@ -1,0 +1,88 @@
+error
+errno
+warning
+validate
+validation
+select
+query
+column
+version
+encoded
+parser
+xml
+entity
+exception
+illegal
+invalid
+fail
+stack
+access
+PATH
+PWD
+directory
+file
+SSL
+socket
+not found
+unknown
+uid=
+c:\
+varchar
+ODBC
+SQL
+quotation mark
+syntax
+ORA-
+111111
+root:
+www-data
+NT Authority\SYSTEM
+Administrator
+system32
+49
+1787569
+7777777
+sleep
+SLEEP
+localhost
+localnet
+loopback
+allrouters
+:1
+root:
+alert(
+prompt(
+javascript
+THIS IS INJECTED TITLE
+help
+command not found
+parse error in command substitution
+command substitution
+extra operand
+Permission denied
+shell
+bin
+packets
+was unexpected
+sshd
+stdin
+stdout
+pipe
+execute_child
+unreachable
+No such file or directory
+Not a directory
+is not recognized as an internal or external command
+Ping request could not find host IP
+was unexpected at this time
+Loading Processor Information
+OS Name
+Host Name
+AWS_ACCESS_KEY_ID
+malloc
+calloc
+realloc
+free
+abort
+buffer
+exec
