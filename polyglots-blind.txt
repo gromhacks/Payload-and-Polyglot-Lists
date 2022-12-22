@@ -776,6 +776,10 @@ http://metadata.google.internal/computeMetadata/v1
 http://metadata.google.internal/computeMetadata/v1/
 //metadata.google.internal/computeMetadata/v1
 \\metadata.google.internal\computeMetadata\v1
+http://169.254.170.2/v4/metadata
+http://169.254.170.2/v4/metadata/
+//169.254.170.2/v4/metadata/
+\\169.254.170.2\v4\metadata\
 http://169.254.169.254%00
 http://169.254.169.254/%00
 //169.254.169.254/%00
@@ -796,4 +800,8 @@ http://metadata.google.internal/computeMetadata/v1%00
 http://metadata.google.internal/computeMetadata/v1/%00
 //metadata.google.internal/computeMetadata/v1%00
 \\metadata.google.internal\computeMetadata\v1%00
+http://169.254.170.2/v4/metadata%00
+http://169.254.170.2/v4/metadata/%00
+//169.254.170.2/v4/metadata/%00
+\\169.254.170.2\v4\metadata\%00
 %E2%A0%80%0A%E2%A0%80
