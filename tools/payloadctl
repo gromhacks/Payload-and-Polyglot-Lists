@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+"""
+payloadctl - Payload & Polyglot Lists development tool.
+
+Commands:
+    build       Build full.txt master list from source files
+    dist        Generate distribution (by-category, by-pillar, encoded variants)
+    validate    Validate all payloads against running testbed endpoints
+    generate    Regenerate computed payloads (deserialization, SSTI, SQLi, misc)
+"""
+
+import argparse
+import os
+import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, 'tools'))
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog='payloadctl',
+        description='Payload & Polyglot Lists development tool',
+    )
+    sub = parser.add_subparsers(dest='command', help='Available commands')
+
+    # build
+    build_p = sub.add_parser('build', help='Build full.txt from source files')
+
+    # dist
+    dist_p = sub.add_parser('dist', help='Generate distribution directory')
+
+    # validate
+    val_p = sub.add_parser('validate', help='Validate payloads against testbed endpoints')
+
+    # generate
+    gen_p = sub.add_parser('generate', help='Regenerate computed payloads')
+    gen_p.add_argument('target', nargs='?', default='all',
+                       choices=['all', 'deser', 'ssti', 'sqli', 'misc'],
+                       help='Which payloads to generate (default: all)')
+
+    # prepare
+    prep_p = sub.add_parser('prepare', help='Prepare payload lists with your callback domain')
+    prep_p.add_argument('domain', help='Your callback server (e.g. abc123.burpcollaborator.net)')
+    prep_p.add_argument('-o', '--output', default=None,
+                        help='Output directory (default: ./ready)')
+
+    args = parser.parse_args()
+
+    if args.command is None:
+        parser.print_help()
+        sys.exit(1)
+
+    if args.command == 'build':
+        from cmd_build import run_build
+        run_build(ROOT)
+
+    elif args.command == 'dist':
+        from cmd_build import run_build
+        from cmd_dist import run_dist
+        run_build(ROOT)
+        run_dist(ROOT)
+
+    elif args.command == 'validate':
+        from cmd_validate import run_validate
+        run_validate(ROOT)
+
+    elif args.command == 'generate':
+        from cmd_generate import run_generate
+        run_generate(ROOT, args.target)
+
+    elif args.command == 'prepare':
+        from cmd_prepare import run_prepare
+        run_prepare(ROOT, args.domain, args.output)
+
+
+if __name__ == '__main__':
+    main()

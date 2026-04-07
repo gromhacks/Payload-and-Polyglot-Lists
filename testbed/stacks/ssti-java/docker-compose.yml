@@ -1,0 +1,13 @@
+services:
+  ssti-java:
+    build: ./app
+    ports:
+      - "8040:8080"
+    networks:
+      - testbed-net
+    restart: unless-stopped
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  ssti-php:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "8020:8080"
+    networks:
+      - testbed-net
+    restart: unless-stopped
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

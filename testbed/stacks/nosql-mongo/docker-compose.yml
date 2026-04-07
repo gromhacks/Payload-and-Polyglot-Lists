@@ -1,0 +1,23 @@
+version: "3.8"
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net
+
+services:
+  mongo:
+    image: mongo:7
+    networks:
+      - testbed-net
+
+  app:
+    build: ./app
+    depends_on:
+      - mongo
+    ports:
+      - "8051:8080"
+    environment:
+      MONGO_URL: mongodb://mongo:27017/testbed
+    networks:
+      - testbed-net

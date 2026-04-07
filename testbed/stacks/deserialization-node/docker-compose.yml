@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  deserialization-node:
+    build: ./app
+    ports:
+      - "8014:8080"
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

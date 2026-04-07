@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><title>SSI Testbed</title></head>
+<body>
+<h1>SSI Injection Testbed</h1>
+<p>Use GET /index.shtml?input=PAYLOAD to test SSI injection.</p>
+<form method="GET" action="/index.shtml">
+  <input type="text" name="input" placeholder="Enter SSI payload">
+  <button type="submit">Submit</button>
+</form>
+<hr>
+<h2>Output:</h2>
+<pre>
+<!--#set var="user_input" value="$QUERY_STRING" -->
+<!--#echo var="user_input" -->
+</pre>
+</body>
+</html>

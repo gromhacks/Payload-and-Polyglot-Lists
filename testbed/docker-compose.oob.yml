@@ -1,0 +1,23 @@
+services:
+  oob:
+    build: ./shared/oob-catcher
+    ports:
+      - "9999:9999"
+      - "15353:5353/udp"
+    container_name: oob
+    hostname: oob
+    networks:
+      testbed-net:
+        aliases:
+          - oob
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9999/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+networks:
+  testbed-net:
+    name: testbed-net
+    driver: bridge

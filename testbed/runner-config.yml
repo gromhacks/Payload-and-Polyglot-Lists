@@ -1,0 +1,202 @@
+# Runner Config - maps stack names to testbed endpoints
+# Used by runner.py to know where to send payloads
+
+sqli-sqlite:
+  url: http://localhost:8001/sqli
+  endpoints:
+    sqli: http://localhost:8001/sqli
+    sqli-numeric: http://localhost:8001/sqli-numeric
+  compose: stacks/sqli-sqlite/docker-compose.yml
+
+os-cmd-injection:
+  url: http://localhost:8002/popen
+  endpoints:
+    system: http://localhost:8002/system
+    popen: http://localhost:8002/popen
+    subprocess: http://localhost:8002/subprocess
+  compose: stacks/os-cmd-injection/docker-compose.yml
+
+ssti-python:
+  endpoints:
+    jinja2: http://localhost:8003/jinja2
+    mako: http://localhost:8003/mako
+    tornado: http://localhost:8003/tornado
+  compose: stacks/ssti-python/docker-compose.yml
+
+code-injection-python:
+  url: http://localhost:8004/eval
+  endpoints:
+    eval: http://localhost:8004/eval
+    exec: http://localhost:8004/exec
+    import: http://localhost:8004/import
+  compose: stacks/code-injection-python/docker-compose.yml
+
+deserialization-python:
+  endpoints:
+    pickle: http://localhost:8005/pickle
+    yaml: http://localhost:8005/yaml
+    jsonpickle: http://localhost:8005/jsonpickle
+  compose: stacks/deserialization-python/docker-compose.yml
+
+path-traversal:
+  url: http://localhost:8006/read
+  compose: stacks/path-traversal/docker-compose.yml
+
+ssrf:
+  url: http://localhost:8007/fetch
+  compose: stacks/ssrf/docker-compose.yml
+
+xxe:
+  url: http://localhost:8008/parse
+  endpoints:
+    parse: http://localhost:8008/parse
+    xinclude: http://localhost:8008/xinclude
+  compose: stacks/xxe/docker-compose.yml
+
+xss:
+  url: http://localhost:8010/json
+  endpoints:
+    reflected: http://localhost:8010/reflected
+    attr-double: http://localhost:8010/attr-double
+    attr-single: http://localhost:8010/attr-single
+    script-string: http://localhost:8010/script-string
+    href: http://localhost:8010/href
+    textarea: http://localhost:8010/textarea
+    json: http://localhost:8010/json
+  compose: stacks/xss/docker-compose.yml
+
+ssti-node:
+  endpoints:
+    ejs: http://localhost:8011/ejs
+    nunjucks: http://localhost:8011/nunjucks
+    handlebars: http://localhost:8011/handlebars
+    pug: http://localhost:8011/pug
+  compose: stacks/ssti-node/docker-compose.yml
+
+code-injection-node:
+  url: http://localhost:8012/eval
+  endpoints:
+    eval: http://localhost:8012/eval
+    function: http://localhost:8012/function
+    vm: http://localhost:8012/vm
+  compose: stacks/code-injection-node/docker-compose.yml
+
+prototype-pollution:
+  url: http://localhost:8013/merge
+  endpoints:
+    merge: http://localhost:8013/merge
+    ejs-render: http://localhost:8013/ejs-render
+  compose: stacks/prototype-pollution/docker-compose.yml
+
+deserialization-node:
+  endpoints:
+    unserialize: http://localhost:8014/unserialize
+    yaml: http://localhost:8014/yaml
+    funcster: http://localhost:8014/funcster
+  compose: stacks/deserialization-node/docker-compose.yml
+
+nosql-redis:
+  url: http://localhost:8015/eval
+  endpoints:
+    eval: http://localhost:8015/eval
+    command: http://localhost:8015/command
+  compose: stacks/nosql-redis/docker-compose.yml
+
+# Phase 2 - PHP
+ssti-php:
+  endpoints:
+    twig: http://localhost:8020/twig
+    smarty: http://localhost:8020/smarty
+  compose: stacks/ssti-php/docker-compose.yml
+
+code-injection-php:
+  url: http://localhost:8021/eval
+  endpoints:
+    eval: http://localhost:8021/eval
+    system: http://localhost:8021/system
+    assert: http://localhost:8021/assert
+  compose: stacks/code-injection-php/docker-compose.yml
+
+deserialization-php:
+  url: http://localhost:8022/unserialize
+  compose: stacks/deserialization-php/docker-compose.yml
+
+# Phase 2 - Ruby
+ssti-ruby:
+  url: http://localhost:8025/erb
+  compose: stacks/ssti-ruby/docker-compose.yml
+
+code-injection-ruby:
+  url: http://localhost:8026/eval
+  endpoints:
+    eval: http://localhost:8026/eval
+    system: http://localhost:8026/system
+    backticks: http://localhost:8026/backticks
+  compose: stacks/code-injection-ruby/docker-compose.yml
+
+# Phase 2 - PostgreSQL
+sqli-postgres:
+  url: http://localhost:8030/sqli
+  endpoints:
+    sqli: http://localhost:8030/sqli
+    sqli-numeric: http://localhost:8030/sqli-numeric
+  compose: stacks/sqli-postgres/docker-compose.yml
+
+# Phase 2 - Perl
+code-injection-perl:
+  url: http://localhost:8031/eval
+  endpoints:
+    eval: http://localhost:8031/eval
+    system: http://localhost:8031/system
+    backticks: http://localhost:8031/backticks
+  compose: stacks/code-injection-perl/docker-compose.yml
+
+# Phase 2 - SSI/ESI
+ssi-esi:
+  url: http://localhost:8035/index.shtml
+  compose: stacks/ssi-esi/docker-compose.yml
+
+# Phase 2 - Java
+ssti-java:
+  endpoints:
+    freemarker: http://localhost:8040/freemarker
+    velocity: http://localhost:8040/velocity
+    spel: http://localhost:8040/spel
+    pebble: http://localhost:8040/pebble
+  compose: stacks/ssti-java/docker-compose.yml
+
+el-injection-java:
+  endpoints:
+    spel: http://localhost:8041/spel
+    ognl: http://localhost:8041/ognl
+    mvel: http://localhost:8041/mvel
+    el: http://localhost:8041/el
+  compose: stacks/el-injection-java/docker-compose.yml
+
+deserialization-java:
+  url: http://localhost:8042/deserialize
+  endpoints:
+    deserialize: http://localhost:8042/deserialize
+    gadget-probe: http://localhost:8042/gadget-probe
+    yaml: http://localhost:8042/yaml
+    jackson: http://localhost:8042/jackson
+    fastjson: http://localhost:8042/fastjson
+    xstream: http://localhost:8042/xstream
+    xmldecoder: http://localhost:8042/xmldecoder
+  compose: stacks/deserialization-java/docker-compose.yml
+
+# Phase 3 - Heavy DBs
+sqli-mysql:
+  url: http://localhost:8050/sqli
+  endpoints:
+    sqli: http://localhost:8050/sqli
+    sqli-numeric: http://localhost:8050/sqli-numeric
+  compose: stacks/sqli-mysql/docker-compose.yml
+
+nosql-mongo:
+  url: http://localhost:8051/find
+  endpoints:
+    find: http://localhost:8051/find
+    where: http://localhost:8051/where
+    aggregate: http://localhost:8051/aggregate
+  compose: stacks/nosql-mongo/docker-compose.yml

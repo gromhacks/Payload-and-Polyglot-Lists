@@ -1,0 +1,12 @@
+services:
+  ssti-python:
+    build: ./app
+    ports:
+      - "8003:8080"
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

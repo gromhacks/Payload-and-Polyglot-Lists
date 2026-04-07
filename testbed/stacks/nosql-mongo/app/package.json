@@ -1,0 +1,9 @@
+{
+  "name": "nosql-mongo-testbed",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.18.0",
+    "mongodb": "^6.0.0"
+  }
+}

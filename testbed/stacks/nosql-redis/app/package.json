@@ -1,0 +1,9 @@
+{
+  "name": "nosql-redis-testbed",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.18.2",
+    "redis": "^4.6.12"
+  }
+}

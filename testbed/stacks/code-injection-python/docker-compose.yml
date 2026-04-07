@@ -1,0 +1,12 @@
+services:
+  code-injection-python:
+    build: ./app
+    ports:
+      - "8004:8080"
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

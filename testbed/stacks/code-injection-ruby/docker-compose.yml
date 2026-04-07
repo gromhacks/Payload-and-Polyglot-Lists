@@ -1,0 +1,12 @@
+services:
+  code-injection-ruby:
+    build: ./app
+    ports:
+      - "8026:8080"
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

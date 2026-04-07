@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  nosql-redis:
+    build: ./app
+    ports:
+      - "8015:8080"
+    depends_on:
+      - redis
+    networks:
+      - testbed-net
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

@@ -1,0 +1,26 @@
+version: "3.8"
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net
+
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: testbed
+      MYSQL_DATABASE: testbed
+    networks:
+      - testbed-net
+
+  app:
+    build: ./app
+    depends_on:
+      - mysql
+    ports:
+      - "8050:8080"
+    environment:
+      DB_HOST: mysql
+    networks:
+      - testbed-net

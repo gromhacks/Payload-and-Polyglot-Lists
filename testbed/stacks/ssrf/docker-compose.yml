@@ -1,0 +1,12 @@
+services:
+  ssrf:
+    build: ./app
+    ports:
+      - "8007:8080"
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

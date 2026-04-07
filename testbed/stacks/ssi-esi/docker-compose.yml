@@ -1,0 +1,12 @@
+services:
+  ssi-esi:
+    build: ./app
+    ports:
+      - "8035:80"
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

