@@ -139,7 +139,7 @@ Custom output directory:
 ./tools/payloadctl prepare YOUR_CALLBACK.oastify.com -o /path/to/engagement/payloads
 ```
 
-Raw templates with `{domain}` placeholder (for scripted substitution) are in `payloads/dist/`.
+Raw templates with `{domain}` placeholder (for scripted substitution) are in `payloads/lists/`.
 
 ---
 
@@ -245,7 +245,7 @@ Canary values: `1337` (primary, from `7*191`) and `7331` (secondary). Detection 
 
 # DEVELOPMENT: build, distribute, validate, generate
 ./tools/payloadctl build              # sources/ -> payloads/full.txt
-./tools/payloadctl dist               # full.txt -> payloads/dist/ (categories, pillars, encodings)
+./tools/payloadctl dist               # full.txt -> payloads/lists/ (categories, pillars, encodings)
 ./tools/payloadctl validate           # test all 1,324 payloads against 35 testbed stacks
 ./tools/payloadctl generate           # regenerate computed payloads (deser, ssti, sqli, misc)
 ./tools/payloadctl generate deser     # deserialization only
@@ -282,7 +282,7 @@ cd testbed && ./testbed up sqli-sqlite && cd ..
 ├── tools/                             # CLI and generators
 │   ├── payloadctl                     # CLI entry point
 │   ├── cmd_build.py                   # Build full.txt from source files
-│   ├── cmd_dist.py                    # Generate dist/ directory
+│   ├── cmd_dist.py                    # Generate lists/ directory
 │   ├── cmd_validate.py                # Validate payloads against testbeds
 │   ├── cmd_generate.py                # Run payload generators
 │   ├── cmd_prepare.py                 # Prepare payloads with callback domain

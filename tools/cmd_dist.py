@@ -83,7 +83,7 @@ def _write(path, lines):
 
 def run_dist(root):
     """Generate full distribution from payloads/full.txt and source files."""
-    dist = os.path.join(root, 'payloads', 'dist')
+    dist = os.path.join(root, 'payloads', 'lists')
     os.makedirs(dist, exist_ok=True)
 
     # Read master list
@@ -184,4 +184,4 @@ def run_dist(root):
         _write(os.path.join(enc_dir, 'full.txt'), encoded)
         print(f'dist: encoded/{enc_name}/full.txt -{len(encoded)} payloads')
 
-    print(f'dist: complete -> payloads/dist/')
+    print(f'dist: complete -> payloads/lists/')

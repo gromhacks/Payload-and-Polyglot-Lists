@@ -7,7 +7,7 @@ import shutil
 
 def run_prepare(root, domain, output_dir=None):
     """Replace {domain} in all payload files and write to output directory."""
-    dist = os.path.join(root, 'payloads', 'dist')
+    dist = os.path.join(root, 'payloads', 'lists')
     out = output_dir or os.path.join(root, 'ready')
 
     if os.path.exists(out):
