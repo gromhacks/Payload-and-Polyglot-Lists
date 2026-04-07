@@ -2,7 +2,7 @@ services:
   ssi-esi:
     build: ./app
     ports:
-      - "8035:80"
+      - "8035:8080"
     networks:
       - testbed-net
 

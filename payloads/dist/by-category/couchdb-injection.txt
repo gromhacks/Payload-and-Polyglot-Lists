@@ -1,0 +1,5 @@
+##CouchDB Injection - Error-Based##
+{"selector":{"$invalid_op":"test"}}
+{"invalid json
+{"selector":{"name":{"$exists":true}},"invalid_field":1}
+{"selector":{"name":{"$elemMatch":{"$invalid":1}}}}

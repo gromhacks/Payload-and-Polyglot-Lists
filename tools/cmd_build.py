@@ -19,6 +19,11 @@ SOURCE_FILES = [
     'payloads/sources/prototype-pollution.txt',
     'payloads/sources/header-crlf.txt',
     'payloads/sources/format-string.txt',
+    'payloads/sources/ldap-injection.txt',
+    'payloads/sources/xslt-injection.txt',
+    'payloads/sources/elasticsearch-injection.txt',
+    'payloads/sources/cypher-injection.txt',
+    'payloads/sources/couchdb-injection.txt',
     'payloads/sources/deserialization.txt',
 ]
 

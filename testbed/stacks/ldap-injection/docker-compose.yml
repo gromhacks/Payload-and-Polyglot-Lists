@@ -1,0 +1,25 @@
+services:
+  ldap:
+    image: osixia/openldap:1.5.0
+    environment:
+      LDAP_ORGANISATION: "Testbed"
+      LDAP_DOMAIN: "testbed.local"
+      LDAP_ADMIN_PASSWORD: "admin"
+    networks:
+      - testbed-net
+
+  app:
+    build: ./app
+    ports:
+      - "8055:8080"
+    depends_on:
+      - ldap
+    environment:
+      LDAP_HOST: ldap
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

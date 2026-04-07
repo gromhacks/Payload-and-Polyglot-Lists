@@ -1,0 +1,2 @@
+flask
+elasticsearch==7.17.0

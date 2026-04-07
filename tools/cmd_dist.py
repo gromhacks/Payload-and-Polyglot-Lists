@@ -32,6 +32,11 @@ CATEGORY_SOURCES = {
     'header-crlf': 'payloads/sources/header-crlf.txt',
     'format-string': 'payloads/sources/format-string.txt',
     'deserialization': 'payloads/sources/deserialization.txt',
+    'ldap-injection': 'payloads/sources/ldap-injection.txt',
+    'xslt-injection': 'payloads/sources/xslt-injection.txt',
+    'elasticsearch-injection': 'payloads/sources/elasticsearch-injection.txt',
+    'cypher-injection': 'payloads/sources/cypher-injection.txt',
+    'couchdb-injection': 'payloads/sources/couchdb-injection.txt',
     'polyglots': 'payloads/sources/polyglots-condensed.txt',
 }
 
@@ -136,7 +141,37 @@ def run_dist(root):
     _write(os.path.join(pil_dir, 'reflected-payloads-only.txt'), ronly)
     print(f'dist: by-pillar/reflected.txt -{len(ronly)} payloads')
 
-    # 4. Encoded variants
+    # 4. Standalone lists (not part of full.txt)
+    STANDALONE = {
+        'minimum': 'payloads/sources/minimum.txt',
+    }
+    for name, rel_path in STANDALONE.items():
+        src = os.path.join(root, rel_path)
+        if not os.path.exists(src):
+            continue
+        sections = _read_sections(src)
+        lines, only = [], []
+        for h, ps in sections:
+            lines.append(h)
+            lines.extend(ps)
+            only.extend(ps)
+        _write(os.path.join(dist, f'{name}.txt'), lines)
+        _write(os.path.join(dist, f'{name}-payloads-only.txt'), only)
+        print(f'dist: {name}.txt -{len(only)} payloads')
+
+        # Encoded variants
+        for enc_name, encoder in ENCODERS.items():
+            enc_dir = os.path.join(dist, 'encoded', enc_name)
+            os.makedirs(enc_dir, exist_ok=True)
+            encoded = []
+            for p in only:
+                try:
+                    encoded.append(encoder(p))
+                except:
+                    encoded.append(p)
+            _write(os.path.join(enc_dir, f'{name}.txt'), encoded)
+
+    # 5. Encoded variants
     for enc_name, encoder in ENCODERS.items():
         enc_dir = os.path.join(dist, 'encoded', enc_name)
         os.makedirs(enc_dir, exist_ok=True)

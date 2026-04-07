@@ -1,0 +1,25 @@
+services:
+  elasticsearch:
+    image: elasticsearch:7.17.24
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+    networks:
+      - testbed-net
+
+  app:
+    build: ./app
+    ports:
+      - "8057:8080"
+    depends_on:
+      - elasticsearch
+    environment:
+      ES_HOST: elasticsearch
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net

@@ -1,0 +1,23 @@
+services:
+  couchdb:
+    image: couchdb:3
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=testbed
+    networks:
+      - testbed-net
+  app:
+    build: ./app
+    ports:
+      - "8059:8080"
+    depends_on:
+      - couchdb
+    environment:
+      COUCHDB_URL: http://admin:testbed@couchdb:5984
+    networks:
+      - testbed-net
+
+networks:
+  testbed-net:
+    external: true
+    name: testbed-net
