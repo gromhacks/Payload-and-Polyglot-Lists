@@ -1,0 +1,2 @@
+##POLYGLOT - CRLF/Header Injection##
+%0d%0aX-Injected:1337%0d%0a

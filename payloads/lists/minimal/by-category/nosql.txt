@@ -1,0 +1,4 @@
+##POLYGLOT - NoSQL Injection (Math: 1337)##
+return 7*191
+##POLYGLOT - NoSQL Injection (Error)##
+{"$gt":"","$ne":""}

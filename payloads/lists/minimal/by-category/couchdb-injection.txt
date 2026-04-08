@@ -1,0 +1,2 @@
+##CouchDB Injection - Error-Based##
+{"selector":{"$invalid_op":"test"}}

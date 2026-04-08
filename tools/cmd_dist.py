@@ -1,7 +1,8 @@
-"""Generate distribution directory: by-category, by-pillar, encoded variants."""
+"""Generate distribution directory: full/ and minimal/ with matching structure."""
 
 import os
 import re
+import shutil
 import base64
 import urllib.parse
 import json as jsonlib
@@ -38,6 +39,32 @@ CATEGORY_SOURCES = {
     'cypher-injection': 'payloads/sources/cypher-injection.txt',
     'couchdb-injection': 'payloads/sources/couchdb-injection.txt',
     'polyglots': 'payloads/sources/polyglots-condensed.txt',
+}
+
+# Header-to-category mapping for minimal list (matches on header substrings)
+HEADER_CATEGORY_MAP = {
+    'sqli': [r'SQLi'],
+    'ssti': [r'SSTI'],
+    'os-cmd-injection': [r'OS Command|Command Injection'],
+    'code-injection': [r'Code Injection Cross-Language', r'Groovy Code Injection', r'SSI Injection'],
+    'xss': [r'XSS'],
+    'xxe': [r'XXE'],
+    'ssrf': [r'SSRF'],
+    'path-traversal': [r'Path Traversal'],
+    'nosql': [r'NoSQL'],
+    'el-injection': [r'EL Injection'],
+    'prototype-pollution': [r'Prototype Pollution'],
+    'header-crlf': [r'CRLF|Header Injection'],
+    'format-string': [r'Format String'],
+    'ldap-injection': [r'LDAP'],
+    'xslt-injection': [r'XSLT'],
+    'elasticsearch-injection': [r'Elasticsearch'],
+    'cypher-injection': [r'Cypher'],
+    'couchdb-injection': [r'CouchDB'],
+    'deserialization': [r'Pickle|YAML|yaml|jsonpickle|serialize|funcster|Unserialize|Marshal'
+                        r'|Oj|Hessian|Storable|Serialized|SnakeYAML|Jackson|Fastjson'
+                        r'|XStream|XMLDecoder|Json\.NET|JNDI'],
+    'polyglots': [r'POLYGLOT'],
 }
 
 # Encoders
@@ -81,24 +108,123 @@ def _write(path, lines):
     return len(lines)
 
 
-def run_dist(root):
-    """Generate full distribution from payloads/full.txt and source files."""
-    dist = os.path.join(root, 'payloads', 'lists')
-    os.makedirs(dist, exist_ok=True)
+def _build_pillar_lists(sections, out_dir, label):
+    """Build by-pillar breakdown from sections. Returns stats."""
+    pil_dir = os.path.join(out_dir, 'by-pillar')
+    os.makedirs(pil_dir, exist_ok=True)
 
-    # Read master list
+    pillar_payloads_set = set()
+    for pillar, patterns in PILLAR_MAP.items():
+        plines, ponly = [], []
+        for h, ps in sections:
+            clean = h.strip('#').strip()
+            if any(re.search(p, clean) for p in patterns):
+                plines.append(h)
+                plines.extend(ps)
+                ponly.extend(ps)
+                pillar_payloads_set.update(ps)
+        _write(os.path.join(pil_dir, f'{pillar}.txt'), plines)
+        _write(os.path.join(pil_dir, f'{pillar}-payloads-only.txt'), ponly)
+        print(f'dist: {label}/by-pillar/{pillar}.txt — {len(ponly)} payloads')
+
+    # Reflected (everything not in a named pillar)
+    rlines, ronly = [], []
+    for h, ps in sections:
+        remaining = [p for p in ps if p not in pillar_payloads_set]
+        if remaining:
+            rlines.append(h)
+            rlines.extend(remaining)
+            ronly.extend(remaining)
+    _write(os.path.join(pil_dir, 'reflected.txt'), rlines)
+    _write(os.path.join(pil_dir, 'reflected-payloads-only.txt'), ronly)
+    print(f'dist: {label}/by-pillar/reflected.txt — {len(ronly)} payloads')
+
+
+def _build_category_from_sections(sections, out_dir, label):
+    """Build by-category breakdown from parsed sections using header matching."""
+    cat_dir = os.path.join(out_dir, 'by-category')
+    os.makedirs(cat_dir, exist_ok=True)
+
+    # Bucket sections into categories
+    buckets = {cat: [] for cat in HEADER_CATEGORY_MAP}
+    for h, ps in sections:
+        clean = h.strip('#').strip()
+        matched = False
+        for cat, patterns in HEADER_CATEGORY_MAP.items():
+            if any(re.search(p, clean) for p in patterns):
+                buckets[cat].append((h, ps))
+                matched = True
+                break
+        if not matched:
+            # Fallback: try to match against category source names
+            buckets.setdefault('other', []).append((h, ps))
+
+    # Also collect polyglots across all categories
+    polyglot_sections = []
+    for h, ps in sections:
+        clean = h.strip('#').strip()
+        if re.search(r'POLYGLOT', clean):
+            polyglot_sections.append((h, ps))
+
+    for cat, cat_sections in buckets.items():
+        if not cat_sections:
+            continue
+        lines = []
+        for h2, ps2 in cat_sections:
+            lines.append(h2)
+            lines.extend(ps2)
+        _write(os.path.join(cat_dir, f'{cat}.txt'), lines)
+        pc = sum(len(p) for _, p in cat_sections)
+        print(f'dist: {label}/by-category/{cat}.txt — {pc} payloads')
+
+    # Write polyglots file (all POLYGLOT-prefixed sections)
+    if polyglot_sections:
+        plines = []
+        for h2, ps2 in polyglot_sections:
+            plines.append(h2)
+            plines.extend(ps2)
+        _write(os.path.join(cat_dir, 'polyglots.txt'), plines)
+        pc = sum(len(p) for _, p in polyglot_sections)
+        print(f'dist: {label}/by-category/polyglots.txt — {pc} payloads')
+
+
+def _build_encoded(payloads_only, out_dir, label):
+    """Build encoded variants of a payload list."""
+    for enc_name, encoder in ENCODERS.items():
+        enc_dir = os.path.join(out_dir, 'encoded', enc_name)
+        os.makedirs(enc_dir, exist_ok=True)
+        encoded = []
+        for p in payloads_only:
+            try:
+                encoded.append(encoder(p))
+            except Exception:
+                encoded.append(p)
+        _write(os.path.join(enc_dir, 'payloads.txt'), encoded)
+        print(f'dist: {label}/encoded/{enc_name}/payloads.txt — {len(encoded)} payloads')
+
+
+def run_dist(root):
+    """Generate full and minimal distributions with matching structure."""
+    dist = os.path.join(root, 'payloads', 'lists')
+    # Clean previous output to avoid stale files
+    if os.path.exists(dist):
+        shutil.rmtree(dist)
+    os.makedirs(dist)
+
+    # --- FULL distribution ---
+    full_dir = os.path.join(dist, 'full')
     full_path = os.path.join(root, 'payloads', 'full.txt')
     with open(full_path) as f:
         full_lines = [l.rstrip('\n') for l in f.readlines()]
 
-    # 1. Copy full.txt
-    _write(os.path.join(dist, 'full.txt'), full_lines)
+    # Master list and payloads-only
+    _write(os.path.join(full_dir, 'master.txt'), full_lines)
     payloads_only = [l for l in full_lines if not l.startswith('##') and l.strip()]
-    _write(os.path.join(dist, 'payloads-only.txt'), payloads_only)
-    print(f'dist: payloads-only.txt -{len(payloads_only)} payloads')
+    _write(os.path.join(full_dir, 'payloads-only.txt'), payloads_only)
+    print(f'dist: full/master.txt — {len(payloads_only)} payloads')
 
-    # 2. By category
-    cat_dir = os.path.join(dist, 'by-category')
+    # By category (from source files)
+    cat_dir = os.path.join(full_dir, 'by-category')
     os.makedirs(cat_dir, exist_ok=True)
     for cat, rel in CATEGORY_SOURCES.items():
         sections = _read_sections(os.path.join(root, rel))
@@ -108,80 +234,38 @@ def run_dist(root):
             lines.extend(ps)
         _write(os.path.join(cat_dir, f'{cat}.txt'), lines)
         pc = sum(len(p) for _, p in sections)
-        print(f'dist: by-category/{cat}.txt -{pc} payloads')
+        print(f'dist: full/by-category/{cat}.txt — {pc} payloads')
 
-    # 3. By pillar
-    pil_dir = os.path.join(dist, 'by-pillar')
-    os.makedirs(pil_dir, exist_ok=True)
+    # By pillar
     all_sections = _read_sections(full_path)
+    _build_pillar_lists(all_sections, full_dir, 'full')
 
-    pillar_payloads_set = set()
-    for pillar, patterns in PILLAR_MAP.items():
-        plines, ponly = [], []
-        for h, ps in all_sections:
-            clean = h.strip('#').strip()
-            if any(re.search(p, clean) for p in patterns):
-                plines.append(h)
-                plines.extend(ps)
-                ponly.extend(ps)
-                pillar_payloads_set.update(ps)
-        _write(os.path.join(pil_dir, f'{pillar}.txt'), plines)
-        _write(os.path.join(pil_dir, f'{pillar}-payloads-only.txt'), ponly)
-        print(f'dist: by-pillar/{pillar}.txt -{len(ponly)} payloads')
+    # Encoded
+    _build_encoded(payloads_only, full_dir, 'full')
 
-    # Reflected (everything not in a named pillar)
-    rlines, ronly = [], []
-    for h, ps in all_sections:
-        remaining = [p for p in ps if p not in pillar_payloads_set]
-        if remaining:
-            rlines.append(h)
-            rlines.extend(remaining)
-            ronly.extend(remaining)
-    _write(os.path.join(pil_dir, 'reflected.txt'), rlines)
-    _write(os.path.join(pil_dir, 'reflected-payloads-only.txt'), ronly)
-    print(f'dist: by-pillar/reflected.txt -{len(ronly)} payloads')
+    # --- MINIMAL distribution ---
+    min_dir = os.path.join(dist, 'minimal')
+    min_path = os.path.join(root, 'payloads', 'sources', 'minimum.txt')
+    min_sections = _read_sections(min_path)
 
-    # 4. Standalone lists (not part of full.txt)
-    STANDALONE = {
-        'minimum': 'payloads/sources/minimum.txt',
-    }
-    for name, rel_path in STANDALONE.items():
-        src = os.path.join(root, rel_path)
-        if not os.path.exists(src):
-            continue
-        sections = _read_sections(src)
-        lines, only = [], []
-        for h, ps in sections:
-            lines.append(h)
-            lines.extend(ps)
-            only.extend(ps)
-        _write(os.path.join(dist, f'{name}.txt'), lines)
-        _write(os.path.join(dist, f'{name}-payloads-only.txt'), only)
-        print(f'dist: {name}.txt -{len(only)} payloads')
+    # Master list and payloads-only
+    min_lines = []
+    min_payloads = []
+    for h, ps in min_sections:
+        min_lines.append(h)
+        min_lines.extend(ps)
+        min_payloads.extend(ps)
+    _write(os.path.join(min_dir, 'master.txt'), min_lines)
+    _write(os.path.join(min_dir, 'payloads-only.txt'), min_payloads)
+    print(f'dist: minimal/master.txt — {len(min_payloads)} payloads')
 
-        # Encoded variants
-        for enc_name, encoder in ENCODERS.items():
-            enc_dir = os.path.join(dist, 'encoded', enc_name)
-            os.makedirs(enc_dir, exist_ok=True)
-            encoded = []
-            for p in only:
-                try:
-                    encoded.append(encoder(p))
-                except:
-                    encoded.append(p)
-            _write(os.path.join(enc_dir, f'{name}.txt'), encoded)
+    # By category (from header matching)
+    _build_category_from_sections(min_sections, min_dir, 'minimal')
 
-    # 5. Encoded variants
-    for enc_name, encoder in ENCODERS.items():
-        enc_dir = os.path.join(dist, 'encoded', enc_name)
-        os.makedirs(enc_dir, exist_ok=True)
-        encoded = []
-        for p in payloads_only:
-            try:
-                encoded.append(encoder(p))
-            except:
-                encoded.append(p)
-        _write(os.path.join(enc_dir, 'full.txt'), encoded)
-        print(f'dist: encoded/{enc_name}/full.txt -{len(encoded)} payloads')
+    # By pillar
+    _build_pillar_lists(min_sections, min_dir, 'minimal')
 
-    print(f'dist: complete -> payloads/lists/')
+    # Encoded
+    _build_encoded(min_payloads, min_dir, 'minimal')
+
+    print(f'dist: complete -> payloads/lists/full/ + payloads/lists/minimal/')

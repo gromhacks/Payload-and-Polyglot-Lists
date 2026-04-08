@@ -1,0 +1,2 @@
+##POLYGLOT - Format String##
+%s%s%s%s%s%s%s%s%s%s

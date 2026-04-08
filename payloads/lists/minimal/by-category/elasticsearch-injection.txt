@@ -1,0 +1,4 @@
+##Elasticsearch Injection - Error-Based##
+{"query":{"invalid_query_type":{}}}
+##Elasticsearch Injection - Math-Based (Canary: 1337)##
+{"script_fields":{"x":{"script":"7*191"}}}

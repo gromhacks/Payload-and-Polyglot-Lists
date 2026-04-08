@@ -1,0 +1,4 @@
+##LDAP Injection - Error-Based##
+*)(cn=*))(|(cn=*
+##LDAP Injection - Math-Based (Canary: 1337)##
+*)(uid=1337)(&(objectClass=*

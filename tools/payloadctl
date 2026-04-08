@@ -32,6 +32,8 @@ def main():
 
     # validate
     val_p = sub.add_parser('validate', help='Validate payloads against testbed endpoints')
+    val_p.add_argument('wordlist', nargs='?', default=None,
+                       help='Path to wordlist (default: payloads/full.txt)')
 
     # generate
     gen_p = sub.add_parser('generate', help='Regenerate computed payloads')
@@ -63,7 +65,7 @@ def main():
 
     elif args.command == 'validate':
         from cmd_validate import run_validate
-        run_validate(ROOT)
+        run_validate(ROOT, args.wordlist)
 
     elif args.command == 'generate':
         from cmd_generate import run_generate
