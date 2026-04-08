@@ -63,7 +63,9 @@ HEADER_CATEGORY_MAP = {
     'couchdb-injection': [r'CouchDB'],
     'deserialization': [r'Pickle|YAML|yaml|jsonpickle|serialize|funcster|Unserialize|Marshal'
                         r'|Oj|Hessian|Storable|Serialized|SnakeYAML|Jackson|Fastjson'
-                        r'|XStream|XMLDecoder|Json\.NET|JNDI'],
+                        r'|XStream|XMLDecoder|Json\.NET|JNDI|BinaryFormatter|SoapFormatter'
+                        r'|ViewState|ObjectStateFormatter|LosFormatter|XmlSerializer'
+                        r'|JavaScriptSerializer|ysoserial|cryo'],
     'polyglots': [r'POLYGLOT'],
 }
 
