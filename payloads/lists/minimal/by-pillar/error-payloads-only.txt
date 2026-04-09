@@ -11,7 +11,7 @@ Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["1/0"]}]}
 {"rce":"_$$ND_FUNC$$_function(){throw new Error(1337)}()"}
 !!invalid_tag_probe 1337
-{"__js":"throw new Error(1337)"}
+{"fn":{"__js_function":"function(){return 7*191}"}}
 O:9999:"NonExist":0:{}
 --- !ruby/object:NonExistentClass1337\ni: x
 BAj/AAAA

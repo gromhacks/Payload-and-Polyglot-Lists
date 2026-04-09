@@ -44,20 +44,9 @@ try {
             $output = $smarty->fetch('string:' . $input);
             break;
 
-        case '/blade':
-            // Simulate Blade template processing without Laravel
-            // Converts Blade syntax to PHP and evaluates it
-            $input = str_replace(['{{', '}}', '{!!', '!!}'], ['<?php echo ', '; ?>', '<?php echo ', '; ?>'], $input);
-            $input = preg_replace('/@php\b/', '<?php ', $input);
-            $input = preg_replace('/@endphp\b/', ' ?>', $input);
-            ob_start();
-            eval('?>' . $input);
-            $output = ob_get_clean();
-            break;
-
         default:
             http_response_code(404);
-            $error = 'Unknown endpoint. Use /twig, /smarty, or /blade';
+            $error = 'Unknown endpoint. Use /twig or /smarty';
             break;
     }
 } catch (\Throwable $e) {

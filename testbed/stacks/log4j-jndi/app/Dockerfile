@@ -1,4 +1,4 @@
-FROM eclipse-temurin:8-jdk-alpine
+FROM openjdk:8u181-jdk-alpine
 WORKDIR /app
 COPY . .
 RUN apk add --no-cache curl && \

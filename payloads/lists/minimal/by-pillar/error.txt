@@ -25,7 +25,7 @@ Y19fYnVpbHRpbl9fCmV2YWwKKFMnMS8wJwp0Ui4=
 ##Node js-yaml - Error (unknown tag)##
 !!invalid_tag_probe 1337
 ##Node funcster - Error (invalid code)##
-{"__js":"throw new Error(1337)"}
+{"fn":{"__js_function":"function(){return 7*191}"}}
 ##PHP Unserialize - Error (nonexistent class)##
 O:9999:"NonExist":0:{}
 ##Ruby YAML - Error (invalid class)##

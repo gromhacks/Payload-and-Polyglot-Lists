@@ -6,9 +6,9 @@
 
 > **License:** MIT - see [LICENSE](LICENSE)
 
-1,324 validated injection payloads covering 20 vulnerability classes, 31 deserialization frameworks, and 14 template engines. Every payload produces a detectable signal. Zero theoretical payloads.
+1,315 validated injection payloads covering 20 vulnerability classes, 31 deserialization frameworks, and 14 template engines. Every payload produces a detectable signal. Zero theoretical payloads.
 
-Validation: **1,324 tested / 1,324 fire / 0 failures / 0 skipped** against 35 Docker testbed stacks.
+Validation: **1,315 tested / 1,315 fire / 0 failures / 0 skipped** against 35 Docker testbed stacks. Strict validation proves actual exploitation (server-side computation, real parser errors, measured timing delays, OOB callbacks from target containers) -- not string matching.
 
 ---
 
@@ -27,11 +27,11 @@ This project takes a different approach. The primary unit of work is the **polyg
 Every payload in this collection is built around **detection pillars** -- observable responses that confirm a vulnerability exists without requiring access to server logs, source code, or filesystem:
 
 - **Error**: the payload causes the backend to throw an exception, parser error, or stack trace visible in the response.
-- **Math**: the payload includes an arithmetic expression like `7*191` that evaluates to `1337`. If that number appears in the response, the backend executed the expression.
+- **Math**: the payload includes an arithmetic expression like `7*191` that evaluates to `1337`. If that number appears in the response and the payload only sent `7*191` (not the literal `1337`), the backend computed the expression -- proof of code execution.
 - **Timing**: the payload forces a delay (5+ seconds). If the response is slow, the backend executed a sleep or CPU-intensive operation.
-- **OOB (Out-of-Band)**: the payload forces the backend to make an outbound HTTP, DNS, or TCP connection to a callback server the tester controls. Confirms execution even when the response is completely opaque.
+- **OOB (Out-of-Band)**: the payload forces the backend to make an outbound HTTP, DNS, LDAP, or TCP connection to a callback server the tester controls. Confirms execution even when the response is completely opaque.
 
-If a payload doesn't produce at least one of these signals when tested against its target context, it doesn't belong in the list. Every one of the 1,324 payloads here has been validated against purpose-built Docker testbeds. Zero are theoretical.
+If a payload doesn't produce at least one of these signals when tested against its target context, it doesn't belong in the list. Every one of the 1,315 payloads here has been validated against purpose-built Docker testbeds with strict proof of exploitation. Zero are theoretical.
 
 ### Built-ins Over Shell Commands
 
@@ -51,7 +51,7 @@ The result is a single corpus where polyglots handle the contexts they can (SQLi
 
 ## Minimal List (82 Payloads)
 
-82 payloads covering all 35 testbed stacks, all 55 endpoints, and all 4 detection pillars per category. Validated: **82 FIRE / 0 NO-FIRE / 0 SKIPPED**.
+82 payloads covering all 35 testbed stacks, all 55+ endpoints, and all 4 detection pillars per category. Validated: **82 FIRE / 0 NO-FIRE / 0 SKIPPED**.
 
 Every injection category gets error + math + timing + OOB coverage where architecturally possible. Deserialization frameworks that support code execution (Pickle, PyYAML, jsonpickle, node-serialize, XMLDecoder, .NET Json.NET) get full multi-pillar coverage. Frameworks limited to probing (PHP unserialize, Ruby Marshal, SnakeYAML, etc.) get error-based detection. Fire this at every parameter before switching to full category lists for depth.
 
@@ -79,7 +79,7 @@ Every injection category gets error + math + timing + OOB coverage where archite
 | 3 | Groovy | math, timing, OOB |
 | 41 | Deserialization | multi-pillar where supported, error-only otherwise |
 
-**82 requests instead of 1,324.** Use `ready/minimal/payloads-only.txt` for Burp Intruder.
+**82 requests instead of 1,315.** Use `ready/minimal/payloads-only.txt` for Burp Intruder.
 
 ---
 
@@ -99,39 +99,39 @@ After running `prepare`, your ready-to-use files are in `ready/full/` and `ready
 | File | What | Count |
 |------|------|-------|
 | `ready/minimal/payloads-only.txt` | **Minimal -- 82 requests, all pillars** | 82 |
-| `ready/full/payloads-only.txt` | Full list, one payload per line | 1,324 |
-| `ready/full/by-category/sqli.txt` | SQL injection only | 204 |
-| `ready/full/by-category/ssti.txt` | Template injection only | 168 |
-| `ready/full/by-category/deserialization.txt` | Deserialization only | 116 |
-| `ready/full/by-category/os-cmd-injection.txt` | OS command injection only | 116 |
-| `ready/full/by-category/code-injection.txt` | Code injection only | 112 |
-| `ready/full/by-category/ssrf.txt` | SSRF only | 117 |
-| `ready/full/by-category/path-traversal.txt` | Path traversal only | 98 |
-| `ready/full/by-category/xss.txt` | XSS only | 49 |
-| `ready/full/by-category/nosql.txt` | NoSQL injection only | 26 |
-| `ready/full/by-category/format-string.txt` | Format string only | 33 |
-| `ready/full/by-category/el-injection.txt` | Expression language only | 26 |
-| `ready/full/by-category/header-crlf.txt` | CRLF/header injection only | 14 |
-| `ready/full/by-category/prototype-pollution.txt` | Prototype pollution only | 10 |
-| `ready/full/by-category/xxe.txt` | XXE only | 8 |
-| `ready/full/by-category/ldap-injection.txt` | LDAP injection only | 30 |
-| `ready/full/by-category/xslt-injection.txt` | XSLT injection only | 25 |
-| `ready/full/by-category/elasticsearch-injection.txt` | Elasticsearch only | 25 |
-| `ready/full/by-category/cypher-injection.txt` | Neo4j/Cypher only | 22 |
-| `ready/full/by-category/couchdb-injection.txt` | CouchDB only | 4 |
-| `ready/full/by-category/polyglots.txt` | Cross-context polyglots | 213 |
-| `ready/full/by-pillar/error-payloads-only.txt` | Error-based payloads | 327 |
-| `ready/full/by-pillar/timing-payloads-only.txt` | Timing-based (blind) | 228 |
-| `ready/full/by-pillar/oob-payloads-only.txt` | Out-of-band callback | 211 |
-| `ready/full/by-pillar/math-payloads-only.txt` | Math canary (1337) | 187 |
-| `ready/full/by-pillar/reflected-payloads-only.txt` | Reflected/edge-case | 372 |
-| `ready/full/encoded/url-encoded/payloads.txt` | URL-encoded variant | 1,324 |
-| `ready/full/encoded/base64/payloads.txt` | Base64 variant | 1,324 |
-| `ready/full/encoded/json-safe/payloads.txt` | JSON-safe variant | 1,324 |
-| `ready/full/encoded/double-url-encoded/payloads.txt` | Double URL-encoded | 1,324 |
-| `ready/full/encoded/html-entity/payloads.txt` | HTML entity encoded | 1,324 |
-| `ready/full/encoded/hex-escaped/payloads.txt` | Hex-escaped variant | 1,324 |
-| `ready/full/encoded/unicode-escaped/payloads.txt` | Unicode-escaped variant | 1,324 |
+| `ready/full/payloads-only.txt` | Full list, one payload per line | 1,315 |
+| `ready/full/by-category/sqli.txt` | SQL injection only | 211 |
+| `ready/full/by-category/ssti.txt` | Template injection only | 206 |
+| `ready/full/by-category/deserialization.txt` | Deserialization only | 232 |
+| `ready/full/by-category/os-cmd-injection.txt` | OS command injection only | 120 |
+| `ready/full/by-category/code-injection.txt` | Code injection only | 123 |
+| `ready/full/by-category/ssrf.txt` | SSRF only | 130 |
+| `ready/full/by-category/path-traversal.txt` | Path traversal only | 113 |
+| `ready/full/by-category/xss.txt` | XSS only | 58 |
+| `ready/full/by-category/nosql.txt` | NoSQL injection only | 32 |
+| `ready/full/by-category/format-string.txt` | Format string only | 38 |
+| `ready/full/by-category/el-injection.txt` | Expression language only | 34 |
+| `ready/full/by-category/header-crlf.txt` | CRLF/header injection only | 17 |
+| `ready/full/by-category/prototype-pollution.txt` | Prototype pollution only | 12 |
+| `ready/full/by-category/xxe.txt` | XXE only | 11 |
+| `ready/full/by-category/ldap-injection.txt` | LDAP injection only | 35 |
+| `ready/full/by-category/xslt-injection.txt` | XSLT injection only | 30 |
+| `ready/full/by-category/elasticsearch-injection.txt` | Elasticsearch only | 30 |
+| `ready/full/by-category/cypher-injection.txt` | Neo4j/Cypher only | 27 |
+| `ready/full/by-category/couchdb-injection.txt` | CouchDB only | 5 |
+| `ready/full/by-category/polyglots.txt` | Cross-context polyglots | 246 |
+| `ready/full/by-pillar/error-payloads-only.txt` | Error-based payloads | 324 |
+| `ready/full/by-pillar/timing-payloads-only.txt` | Timing-based (blind) | 227 |
+| `ready/full/by-pillar/oob-payloads-only.txt` | Out-of-band callback | 209 |
+| `ready/full/by-pillar/math-payloads-only.txt` | Math canary (1337) | 182 |
+| `ready/full/by-pillar/reflected-payloads-only.txt` | Reflected/edge-case | 374 |
+| `ready/full/encoded/url-encoded/payloads.txt` | URL-encoded variant | 1,315 |
+| `ready/full/encoded/base64/payloads.txt` | Base64 variant | 1,315 |
+| `ready/full/encoded/json-safe/payloads.txt` | JSON-safe variant | 1,315 |
+| `ready/full/encoded/double-url-encoded/payloads.txt` | Double URL-encoded | 1,315 |
+| `ready/full/encoded/html-entity/payloads.txt` | HTML entity encoded | 1,315 |
+| `ready/full/encoded/hex-escaped/payloads.txt` | Hex-escaped variant | 1,315 |
+| `ready/full/encoded/unicode-escaped/payloads.txt` | Unicode-escaped variant | 1,315 |
 
 The `ready/minimal/` directory mirrors the same structure (by-category, by-pillar, encoded) with the minimal payload set.
 
@@ -151,11 +151,11 @@ Every payload produces at least one of these signals. Grep for these in your res
 
 | Pillar | Payloads | What to look for | Use when |
 |--------|----------|-----------------|----------|
-| **Error** | 327 | Exception text, stack trace, parser error in response | App reflects errors |
-| **Timing** | 228 | Response takes >4.5 seconds | Blind - no output, no errors |
-| **OOB** | 211 | Outbound HTTP/DNS/TCP to your callback server | Blind + async - timing unreliable |
-| **Math** | 187 | `1337` literal in response body | Output reflected but no errors |
-| **Reflected** | 372 | Input value echoed back in response | Fuzzing for parser anomalies |
+| **Error** | 324 | Exception text, stack trace, parser error in response | App reflects errors |
+| **Timing** | 227 | Response takes >4.5 seconds | Blind - no output, no errors |
+| **OOB** | 209 | Outbound HTTP/DNS/LDAP/TCP to your callback server | Blind + async - timing unreliable |
+| **Math** | 182 | `1337` literal in response body (server computed `7*191`) | Output reflected but no errors |
+| **Reflected** | 374 | Input value echoed back in response | Fuzzing for parser anomalies |
 | **File-read** | (subset) | `root:` or `[extensions]` content in response | Path traversal, XXE file read |
 
 Canary values: `1337` (primary, from `7*191`) and `7331` (secondary). Detection is a simple grep.
@@ -168,32 +168,32 @@ Canary values: `1337` (primary, from `7*191`) and `7331` (secondary). Detection 
 
 | Category | Count | Pillars | Coverage |
 |----------|-------|---------|----------|
-| SQLi | 204 | error, math, timing, oob | MySQL, PostgreSQL, Oracle, MSSQL, SQLite, CockroachDB. UNION, error, timing, OOB. Context breakouts: `'`, `"`, `)`, `))`, `*/`, numeric. |
-| SSTI | 168 | error, math, timing, oob | Jinja2, Mako, Tornado, EJS, Nunjucks, Pug, Twig, Smarty, Blade, ERB, Slim, Haml, Thymeleaf, Pebble, Freemarker, Velocity, Razor, Go template, Mustache, Liquid. All use language built-ins. |
-| Deserialization | 116 | error, math, timing, oob | 31 frameworks / 7 languages. Python (pickle P0/P2/P4, YAML, jsonpickle), PHP (unserialize), Node (node-serialize, js-yaml, funcster, cryo), Ruby (YAML, Marshal, Oj), Java (Jackson, Fastjson, XStream, SnakeYAML, XMLDecoder, Hessian, JNDI/Log4Shell, ObjectInputStream, ysoserial URLDNS), .NET (Json.NET, BinaryFormatter, SoapFormatter, XmlSerializer, JavaScriptSerializer, LosFormatter, ViewState, ObjectStateFormatter), Perl (Storable, YAML). |
-| OS Cmd Injection | 116 | error, math, timing, oob | Bash, CMD, PowerShell. Breakouts: `;`, `\|`, `\|\|`, `&&`, `$()`, backticks. IFS bypass, glob bypass, hex encoding. |
-| Code Injection | 112 | error, math, timing, oob | Python, Node, PHP, Ruby, Perl, Lua, Java ScriptEngine. Import-free CPU spin, socket-level OOB. |
-| SSRF | 117 | error, math, timing, oob | Cloud metadata (AWS/GCP/Azure), IP bypass, protocol schemes, DNS rebinding, internal service probes. |
-| Path Traversal | 98 | error, math, timing, oob | Linux + Windows, encoding bypass, null byte, PHP wrappers, UNC, NTFS ADS, 8.3 short names. |
-| XSS | 49 | error, math, oob | Cross-context polyglots (20+ contexts), event handlers, filter evasion, DOM clobbering, mutation XSS, SVG, OOB. |
-| Format String | 33 | error, math | C/C++ (`%s%n%x`), Python (`{0.__class__}`), .NET (`{0:X}`). |
-| NoSQL | 26 | error, math, timing, oob | MongoDB operator injection, `$where` timing, OOB, Redis commands. |
-| EL Injection | 26 | error, math, timing, oob | SpEL, OGNL, Unified EL. OOB via `java.net.URL`. |
-| CRLF/Header | 14 | error, math, oob | Response splitting, header injection, OOB via Host header. |
-| Prototype Pollution | 10 | error, math | `__proto__`, `constructor.prototype`, JSON and query string variants. |
-| XXE | 8 | error, timing, oob | External entities, XInclude, parameter entities, Billion Laughs. |
-| LDAP Injection | 30 | error, math, timing, oob | Filter injection, auth bypass, wildcard timing, referral OOB. |
-| Elasticsearch | 25 | error, math, timing, oob | Painless script injection, query DSL, query_string syntax. |
-| Cypher/Neo4j | 25 | error, math, timing, oob | Cypher query injection, APOC sleep, LOAD CSV OOB. |
-| CouchDB | 4 | error, math | Mango query injection, operator injection, auth bypass. |
-| XSLT Injection | 25 | error, math, oob, file-read | XPath math, document() SSRF, file read, system-property() info leak. |
-| Polyglots/Edge Cases | 213 | error, math, timing, oob | Cross-context polyglots + buffer overflow, integer boundary, type confusion, null byte. |
+| SQLi | 211 | error, math, timing, oob | MySQL, PostgreSQL, Oracle, MSSQL, SQLite, CockroachDB. UNION, error, timing, OOB. Context breakouts: `'`, `"`, `)`, `))`, `*/`, numeric. |
+| SSTI | 206 | error, math, timing, oob | Jinja2, Mako, Tornado, EJS, Nunjucks, Pug, Twig, Smarty, ERB, Slim, Haml, Thymeleaf, Pebble, Freemarker, Velocity, Razor, Go template, Mustache, Liquid. All use language built-ins. |
+| Deserialization | 232 | error, math, timing, oob | 31 frameworks / 7 languages. All language-native payloads use built-ins (no shell commands). Python (pickle P0/P2/P4 via `time.sleep`/`builtins.eval`/`urllib`, YAML via `time.sleep`/`builtins.eval`, jsonpickle), PHP (unserialize), Node (node-serialize via JS busy-wait/`http.get`, js-yaml, funcster, cryo), Ruby (YAML, Marshal, Oj), Java (Jackson, Fastjson, XStream, SnakeYAML, XMLDecoder, Hessian, JNDI/Log4Shell, ObjectInputStream, ysoserial URLDNS), .NET (Json.NET, BinaryFormatter, SoapFormatter, XmlSerializer, JavaScriptSerializer, LosFormatter, ViewState, ObjectStateFormatter), Perl (Storable, YAML). |
+| OS Cmd Injection | 120 | error, math, timing, oob | Bash, CMD, PowerShell. Breakouts: `;`, `\|`, `\|\|`, `&&`, `$()`, backticks. IFS bypass, glob bypass, hex encoding. |
+| Code Injection | 123 | error, math, timing, oob | Python, Node, PHP, Ruby, Perl, Lua, Java ScriptEngine, Groovy. Import-free CPU spin, socket-level OOB. |
+| SSRF | 130 | error, math, timing, oob | Cloud metadata (AWS/GCP/Azure), IP bypass, protocol schemes, DNS rebinding, internal service probes. |
+| Path Traversal | 113 | error, math, timing, oob | Linux + Windows, encoding bypass, null byte, PHP wrappers, UNC, NTFS ADS, 8.3 short names. |
+| XSS | 58 | error, math, oob | Cross-context polyglots (20+ contexts), event handlers, filter evasion, DOM clobbering, mutation XSS, SVG, OOB. |
+| Format String | 38 | error, math | C/C++ (`%s%n%x`), Python (`{0.__class__}`), .NET (`{0:X}`). |
+| NoSQL | 32 | error, math, timing, oob | MongoDB operator injection, `$where` timing, OOB, Redis commands. |
+| EL Injection | 34 | error, math, timing, oob | SpEL, OGNL, MVEL, Unified EL. OOB via `java.net.URL`. |
+| CRLF/Header | 17 | error, math, oob | Response splitting, header injection, OOB via Host header. |
+| Prototype Pollution | 12 | error, math | `__proto__`, `constructor.prototype`, JSON and query string variants. |
+| XXE | 11 | error, timing, oob, file-read | External entities, XInclude, parameter entities, Billion Laughs DoS. |
+| LDAP Injection | 35 | error, math, timing, oob | Filter injection, auth bypass, wildcard timing, referral OOB. |
+| Elasticsearch | 30 | error, math, timing, oob | Painless script injection, query DSL, query_string syntax. |
+| Cypher/Neo4j | 27 | error, math, timing, oob | Cypher query injection, APOC sleep, LOAD CSV OOB. |
+| CouchDB | 5 | error, math | Mango query injection, operator injection, auth bypass. |
+| XSLT Injection | 30 | error, math, oob, file-read | XPath math, document() SSRF, file read, system-property() info leak. |
+| Polyglots/Edge Cases | 246 | error, math, timing, oob | Cross-context polyglots + buffer overflow, integer boundary, type confusion, null byte. |
 
-13 of 20 categories have all 4 pillars. The 7 that don't (XSS, XSLT, Format String, Prototype Pollution, CRLF, XXE, CouchDB) have architectural reasons - you can't do timing-based CRLF or OOB format strings. Where cross-pillar IS possible, the polyglots section covers it.
+13 of 20 categories have all 4 pillars. The 7 that don't (XSS, XSLT, Format String, Prototype Pollution, CRLF, XXE, CouchDB) have architectural reasons -- you can't do timing-based CRLF or OOB format strings. Where cross-pillar IS possible, the polyglots section covers it.
 
 ### Encoded Variants
 
-7 encoding formats, each with all 1,324 payloads:
+7 encoding formats, each with all 1,315 payloads:
 
 | Encoding | Use case |
 |----------|----------|
@@ -221,7 +221,7 @@ Canary values: `1337` (primary, from `7*191`) and `7331` (secondary). Detection 
    |----------|-------------|-----------------|
    | Python | `urllib.request.urlopen()` | `time.sleep(5)` |
    | Java | `java.net.URL.openStream()` | `Thread.sleep(5000)` |
-   | Node | `require('http').get()` | CPU spin: `for(var i=0;i<5e9;i++){}` |
+   | Node | `require('http').get()` | `Date.now()` busy-wait loop |
    | PHP | `file_get_contents()`, `fsockopen()` | `sleep(5)` |
    | Ruby | `Net::HTTP.get()`, `TCPSocket.new()` | `sleep(5)` |
    | Perl | `IO::Socket::INET` | `select(undef,undef,undef,5)` |
@@ -248,7 +248,7 @@ Canary values: `1337` (primary, from `7*191`) and `7331` (secondary). Detection 
 # DEVELOPMENT: build, distribute, validate, generate
 ./tools/payloadctl build              # sources/ -> payloads/full.txt
 ./tools/payloadctl dist               # full.txt + minimum.txt -> payloads/lists/full/ + lists/minimal/
-./tools/payloadctl validate           # test all 1,324 payloads against 35 testbed stacks
+./tools/payloadctl validate           # test all 1,315 payloads against 35 testbed stacks
 ./tools/payloadctl validate <file>    # test a specific wordlist (e.g. lists/minimal/master.txt)
 ./tools/payloadctl generate           # regenerate computed payloads (deser, ssti, sqli, misc)
 ./tools/payloadctl generate deser     # deserialization only
@@ -287,6 +287,7 @@ cd testbed && ./testbed up sqli-sqlite && cd ..
 │   ├── cmd_build.py                   # Build full.txt from source files
 │   ├── cmd_dist.py                    # Generate lists/ directory
 │   ├── cmd_validate.py                # Validate payloads against testbeds
+│   ├── cmd_validate_strict.py         # Strict validation (proves actual exploitation)
 │   ├── cmd_generate.py                # Run payload generators
 │   ├── cmd_prepare.py                 # Prepare payloads with callback domain
 │   ├── generate-deser-final.py        # Deserialization generator (31 frameworks)
@@ -295,7 +296,7 @@ cd testbed && ./testbed up sqli-sqlite && cd ..
 │   └── generate-misc-missing.py       # XXE, XSS, SSRF, path traversal generator
 │
 ├── payloads/
-│   ├── full.txt                       # Master list (1,324 payloads, with ## headers)
+│   ├── full.txt                       # Master list (1,315 payloads, with ## headers)
 │   ├── sources/                       # Source files (edit these, all validated)
 │   │   ├── minimum.txt                # 82-payload minimal list (validated, all pillars)
 │   │   ├── polyglots-condensed.txt    # Cross-context polyglots (first in master)
@@ -320,7 +321,7 @@ cd testbed && ./testbed up sqli-sqlite && cd ..
 │   │   └── couchdb-injection.txt      # CouchDB (4)
 │   └── lists/                         # Generated (don't edit, use payloadctl dist)
 │       ├── full/                      # Full payload set
-│       │   ├── master.txt             # 1,324 payloads with ## headers
+│       │   ├── master.txt             # 1,315 payloads with ## headers
 │       │   ├── payloads-only.txt      # Raw lines for Burp Intruder
 │       │   ├── by-category/           # 20 category files
 │       │   ├── by-pillar/             # 5 pillar files (with -payloads-only variants)
@@ -336,8 +337,8 @@ cd testbed && ./testbed up sqli-sqlite && cd ..
 │
 └── testbed/                           # Docker validation infrastructure
     ├── testbed                        # CLI: ./testbed up <stack>
-    ├── docker-compose.oob.yml         # OOB callback catcher (port 9999)
-    ├── shared/oob-catcher/            # HTTP + TCP callback server
+    ├── docker-compose.oob.yml         # OOB callback catcher (HTTP 9999, TCP 9998, DNS 5353)
+    ├── shared/oob-catcher/            # HTTP + LDAP/binary + raw TCP + DNS callback server
     └── stacks/                        # 35 vulnerable application stacks
 ```
 
@@ -400,13 +401,19 @@ cd testbed
 # Run validation
 cd ..
 ./tools/payloadctl validate
-# Output: 1,324 FIRE / 0 NO-FIRE / 0 SKIPPED / 1,324 TOTAL
+# Output: 1,315 FIRE / 0 NO-FIRE / 0 SKIPPED / 1,315 TOTAL
 ```
 
 How it works:
 1. Reads the payload file and routes each `##` section to matching testbed endpoint(s)
 2. POSTs `input=<payload>` to endpoint(s), checks response for signals
-3. A payload fires if ANY endpoint returns: error text, `1337` in output, >4.5s delay, OOB callback, file-read signature, or reflected input
+3. A payload fires if ANY endpoint returns: real parser/interpreter error, server-computed `1337` (from `7*191`), >4.5s delay, OOB callback from target container, file-read content (`root:x:0:0`), or reflected input in a valid context (XSS, CRLF)
+
+Strict validation (`tools/cmd_validate_strict.py`) additionally verifies:
+- Math payloads prove server-side computation (payload sends `7*191`, not literal `1337`)
+- OOB callbacks originate from testbed container IPs
+- Error messages contain real parser/interpreter signatures, not generic HTTP errors
+- Timing delays fall within expected range (~5 seconds)
 
 ### Testbed stacks (35 total)
 
@@ -416,7 +423,7 @@ How it works:
 | sqli-postgres | 8030 | Python | `/sqli` |
 | ssti-python | 8003 | Python | `/jinja2`, `/mako`, `/tornado` |
 | ssti-node | 8011 | Node | `/ejs`, `/nunjucks`, `/pug` |
-| ssti-php | 8020 | PHP | `/twig`, `/smarty`, `/blade` |
+| ssti-php | 8020 | PHP | `/twig`, `/smarty` |
 | ssti-ruby | 8025 | Ruby | `/erb`, `/slim`, `/haml` |
 | ssti-java | 8040 | Java | `/freemarker`, `/velocity`, `/pebble`, `/thymeleaf` |
 | os-cmd-injection | 8002 | Python | `/system`, `/popen` |
@@ -448,7 +455,7 @@ How it works:
 | couchdb-injection | 8059 | Python + CouchDB 3 | `/find` |
 | groovy-injection | 8060 | Groovy/JDK 21 | `/eval` |
 
-OOB catcher on port 9999 (HTTP + TCP). Every endpoint accepts `POST /<sink>` with `input=<payload>` and returns `{"output": "...", "error": "...|null", "time_ms": N}`.
+OOB catcher on port 9999 (HTTP + LDAP/binary detection) and 9998 (raw TCP catch-all), with DNS on 5353/UDP. Detects HTTP callbacks, LDAP/ASN.1 binary connections (JNDI), DNS queries, and raw TCP connections. Every endpoint accepts `POST /<sink>` with `input=<payload>` and returns `{"output": "...", "error": "...|null", "time_ms": N}`.
 
 ---
 

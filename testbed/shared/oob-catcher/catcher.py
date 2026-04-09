@@ -48,6 +48,16 @@ class CallbackHandler(BaseHTTPRequestHandler):
         """Override to catch errors from non-HTTP connections (LDAP, etc.)."""
         try:
             self.connection.settimeout(5)
+            # Peek at first bytes to detect binary protocols
+            first_bytes = self.connection.recv(4, socket.MSG_PEEK)
+            if first_bytes and first_bytes[0:1] == b'\x30':
+                # ASN.1 SEQUENCE tag = LDAP/binary protocol
+                log_callback('tcp', {
+                    'remote': self.client_address[0],
+                    'note': 'LDAP/ASN.1 binary connection detected'
+                })
+                self.connection.close()
+                return
             super().handle()
         except Exception:
             # Non-HTTP binary connection (LDAP, RMI, etc.) - log as callback
@@ -194,10 +204,51 @@ def dns_server(port=5353):
             print(f"[OOB] DNS error: {e}", flush=True)
 
 
+def tcp_handler(conn, addr):
+    """Handle a raw TCP connection on the catch-all port."""
+    try:
+        conn.settimeout(3)
+        data = conn.recv(1024)
+        log_callback('tcp', {
+            'remote': addr[0],
+            'port': addr[1],
+            'bytes': len(data) if data else 0,
+            'preview': data[:100].hex() if data else '',
+            'note': 'raw TCP connection'
+        })
+    except Exception:
+        log_callback('tcp', {
+            'remote': addr[0],
+            'note': 'raw TCP connection (no data)'
+        })
+    finally:
+        conn.close()
+
+
+def tcp_server(port=9998):
+    """Raw TCP listener to catch LDAP, RMI, IIOP and other binary protocols."""
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    sock.bind(('0.0.0.0', port))
+    sock.listen(32)
+    print(f"[OOB] TCP listener on :{port}", flush=True)
+
+    while True:
+        try:
+            conn, addr = sock.accept()
+            threading.Thread(target=tcp_handler, args=(conn, addr), daemon=True).start()
+        except Exception as e:
+            print(f"[OOB] TCP error: {e}", flush=True)
+
+
 def main():
     # Start DNS server in background thread
     dns_thread = threading.Thread(target=dns_server, args=(5353,), daemon=True)
     dns_thread.start()
+
+    # Start TCP catch-all server
+    tcp_thread = threading.Thread(target=tcp_server, args=(9998,), daemon=True)
+    tcp_thread.start()
 
     # Start HTTP server
     http_port = 9999

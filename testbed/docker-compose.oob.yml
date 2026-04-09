@@ -19,5 +19,5 @@ services:
 
 networks:
   testbed-net:
+    external: true
     name: testbed-net
-    driver: bridge
