@@ -1,5 +1,7 @@
 # Payload & Polyglot Lists
 
+> **Found a payload that doesn't work?** Please [open an issue](../../issues) with the payload, target context, and what you expected to happen. Pull requests with fixes or new payloads are always welcome.
+
 > **Research is ongoing.** This project is under active development and will be updated regularly with new payloads, vulnerability classes, and validation improvements.
 
 > **Disclaimer:** These payloads are provided for authorized security testing, education, and research purposes only. The authors assume no responsibility or liability for any misuse or downstream effects. Use entirely at your own risk. By using this project you accept full responsibility for your actions.
