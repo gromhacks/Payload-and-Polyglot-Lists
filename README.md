@@ -85,6 +85,20 @@ Every injection category gets error + math + timing + OOB coverage where archite
 
 ---
 
+## Picking the Right Payload for a Target
+
+See **[HOWTOUSE.md](HOWTOUSE.md)** for the full operator guide. It turns "I'm looking at a parameter, what do I throw at it?" into a repeatable workflow:
+
+1. **Parameter and context profiling** - 5 questions (value shape, stack fingerprint, response visibility, OOB availability, WAF) that prune categories before you fire a single payload.
+2. **Category-by-category "when to suspect it"** - exhaustive, production-focused hints for all 20 categories. Each category lists real SaaS feature types (low-code platforms, BI/reporting, monitoring, workflow automation, SSO, SSRF fetchers, eval sinks, email template builders, etc.), visual and behavioral cues (`7*7` returning `49` as the eval giveaway, `{{name}}` rendering as "Alice" confirming SSTI, ping output leaking from a diagnostic field, User-Agent strings in OOB logs naming the fetcher library), modern-stack ORM footguns (Prisma `$queryRaw`, Rails `.order()`, Hibernate JPQL concat, Mongoose `findOne(req.body)`), and cheap probes to confirm suspicion before burning the full list.
+3. **Dangerous serialization byte fingerprints** - raw magic bytes and base64 prefixes for 31 frameworks across Python, PHP, Java, .NET, Node, Ruby, and Perl (`rO0AB` = Java, `AAEAAAD/////` = .NET BinaryFormatter, `BAg` = Ruby Marshal, `gASV` = Python pickle P4, `Tzo`/`YTo` = PHP unserialize, etc.) with a 16-entry quick-reference cheat-card and disambiguation heuristics. Fingerprint the blob before firing so you load 5-15 matching payloads instead of all 232.
+4. **Target-hint to category matrix** - go from "I see `id=42` and `JSESSIONID`" to "try `by-category/sqli.txt` + Java deserialization + EL injection, watch math pillar" in one lookup.
+5. **Pillar-selection rules** - pick the signal you can actually observe (OOB > math > timing > error > reflected) before you fire, so you never test blind against a channel you can't read.
+
+Use HOWTOUSE.md before you run `payloadctl prepare`. Fingerprint first, minimal list second, category drill-down third - not a shotgun of 1,315 payloads at every parameter.
+
+---
+
 ## Quick Start
 
 ```bash
@@ -282,6 +296,7 @@ cd testbed && ./testbed up sqli-sqlite && cd ..
 ```
 .
 ├── README.md                          # This file
+├── HOWTOUSE.md                        # Operator guide: context profiling + category selection matrix
 ├── SPEC.md                            # Technical spec - per-engine pillars, payload syntax, coverage
 │
 ├── tools/                             # CLI and generators
