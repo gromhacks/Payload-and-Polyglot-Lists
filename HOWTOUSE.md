@@ -1,13 +1,13 @@
 # HOWTOUSE - Vulnerability Hunting with This Payload Corpus
 
-This guide answers the operator's real question: *"I'm looking at a parameter (or a form, or a header). Which of these 1,315 payloads should I actually throw at it, and what are the hints that told me so?"*
+This guide answers the operator's real question: *"I'm looking at a parameter (or a form, or a header). Which of these 1,353 payloads should I actually throw at it, and what are the hints that told me so?"*
 
 The corpus is polyglot-first and signal-guaranteed, but throwing every payload at every parameter is noisy, slow, and teaches the target's WAF about you. The better workflow is:
 
 1. **Profile the parameter** - what is the app *probably* doing with this value server-side?
 2. **Pick the category** that matches the processing pipeline.
 3. **Pick the pillar** (error / math / timing / OOB) that you can actually observe.
-4. **Fire the minimal list first** (`ready/minimal/payloads-only.txt` - 82 payloads) for a fast sweep, then drill into category lists for depth.
+4. **Fire the minimal list first** (`ready/minimal/payloads-only.txt` - 83 payloads) for a fast sweep, then drill into category lists for depth.
 
 This file tells you how to do step 1 and step 2.
 
@@ -281,7 +281,7 @@ The "when to suspect" bullets focus on real dev-world features - modern SaaS, RE
 - **Which file**: `by-category/deserialization.txt`, filtered to the framework you fingerprinted. See Section 3.
 - **Pillar**: math / timing / OOB for code-exec frameworks (pickle, PyYAML, jsonpickle, node-serialize, Fastjson, XMLDecoder, BinaryFormatter, Json.NET w/ `TypeNameHandling`). Error-only for probe-first frameworks (PHP unserialize without gadgets, Ruby Marshal without gadgets, SnakeYAML without Java classes).
 
-### SSRF - `ssrf.txt` (130 payloads)
+### SSRF - `ssrf.txt` (156 payloads)
 
 **When to suspect** - any time the server fetches a URL on behalf of the user. This is *everywhere* in modern SaaS and it's usually the easiest RCE-adjacent bug to find.
 
@@ -322,6 +322,8 @@ The "when to suspect" bullets focus on real dev-world features - modern SaaS, RE
 - **Where to inject**: the URL param itself. Also hidden SSRF via `Host` header, `X-Forwarded-Host`, SVG `<image href>`, XML `<!ENTITY>`, PDF `<uri>`, markdown image links, OGP meta tags in fetched content.
 - **Which file**: `by-category/ssrf.txt`. Cloud metadata, IP-bypass encodings, protocol schemes, DNS rebinding primitives, internal-service probes.
 - **Pillar**: **OOB is primary** - no listener, no reliable detection. Error / math / reflected if the fetched body is echoed back. File-read via `file://`.
+- **HTTPS gotcha**: many backend services enforce HTTPS and silently drop or reject plain `http://` callbacks. If your OOB payloads aren't firing, try switching every `http://` to `https://`. The easiest way is to front your listener with **ngrok** (`ngrok http 8080` gives you an `https://` URL), **Caddy** with automatic TLS on a public VPS, or any reverse proxy that terminates TLS. Your own VPS with a Let's Encrypt cert on a custom domain works too.
+- **Collaborator domain blocking**: a growing number of targets explicitly block well-known OOB domains (`*.burpcollaborator.net`, `*.oastify.com`, `*.interact.sh`, `*.canarytokens.com`) in their egress allow-lists or WAF rules. When callbacks never arrive but SSRF behavior is otherwise confirmed (e.g. timing differences, error messages), stand up your own collaborator on a **custom domain** that isn't on any deny list. Burp Suite supports this natively via *Project Options → Misc → Collaborator Server* pointed at your own DNS + HTTP/S listener. Alternatively, run **interactsh-server** or a simple DNS + HTTP logger on a cheap VPS with a fresh domain.
 
 ### Path Traversal - `path-traversal.txt` (113 payloads)
 
@@ -875,7 +877,7 @@ You must be able to **observe** the signal you're testing for. Picking the wrong
 5. If OOB: ./tools/payloadctl prepare <callback-domain>
    ↓
 6. First sweep - ALL params, minimal list:
-      ready/minimal/payloads-only.txt  (82 payloads)
+      ready/minimal/payloads-only.txt  (83 payloads)
    ↓
 7. Any hit? Narrow to that category and run:
       ready/full/by-category/<cat>.txt
@@ -891,13 +893,13 @@ You must be able to **observe** the signal you're testing for. Picking the wrong
 ```
 
 ### Do
-- Start with the **minimal list** (82 payloads) at every parameter - covers all 20 categories with at least one pillar each, and one sweep will flag where to dig deeper.
+- Start with the **minimal list** (83 payloads) at every parameter - covers all 20 categories with at least one pillar each, and one sweep will flag where to dig deeper.
 - **Prepare once per engagement** with your callback domain. Don't leak someone else's domain by accident.
 - **Match encoding to transport**: JSON body → `json-safe`, query param → `url-encoded`, WAF suspected → `double-url-encoded`.
 - **Watch pillars you can observe.** Writing an OOB payload with no listener is wasted work.
 
 ### Don't
-- Don't throw all 1,315 payloads at every param blindly - you'll burn the target's WAF budget and miss signals in noise.
+- Don't throw all 1,353 payloads at every param blindly - you'll burn the target's WAF budget and miss signals in noise.
 - Don't assume the category from the UI alone; fingerprint the backend.
 - Don't trust "no error" as "no vulnerability" - use timing and OOB to cover blind cases.
 - Don't rely on `curl`/`nslookup`-based payloads if you suspect a restricted container. This corpus prefers language built-ins for a reason; stick with them.
@@ -907,8 +909,8 @@ You must be able to **observe** the signal you're testing for. Picking the wrong
 
 ## 7. Quick Reference
 
-- **Minimal first-pass list**: `ready/minimal/payloads-only.txt` - 82 payloads, all 20 categories, all pillars where architecturally possible.
-- **Full list**: `ready/full/payloads-only.txt` - 1,315 payloads.
+- **Minimal first-pass list**: `ready/minimal/payloads-only.txt` - 83 payloads, all 20 categories, all pillars where architecturally possible.
+- **Full list**: `ready/full/payloads-only.txt` - 1,353 payloads.
 - **By category**: `ready/full/by-category/<cat>.txt` (20 files).
 - **By pillar**: `ready/full/by-pillar/{error,math,timing,oob,reflected}-payloads-only.txt`.
 - **Encoded**: `ready/full/encoded/<encoding>/payloads.txt` (7 encodings).
@@ -923,4 +925,4 @@ You must be able to **observe** the signal you're testing for. Picking the wrong
 - Target is out of scope or ROE forbids active injection.
 - You have no observation channel (no response body, no OOB listener, no timing visibility). Firing payloads blind with no validation of impact is noise, not testing.
 - Production systems handling real user data where even read-only PoC (file-read, data dumps) could constitute a breach. Use `math` and OOB-to-your-own-host only.
-- Rate-limited or contractually throttled targets - use the 82-payload minimal list, not the full 1,315.
+- Rate-limited or contractually throttled targets - use the 83-payload minimal list, not the full 1,353.

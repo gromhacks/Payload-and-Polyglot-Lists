@@ -8,9 +8,9 @@
 
 > **License:** MIT - see [LICENSE](LICENSE)
 
-1,315 validated injection payloads covering 20 vulnerability classes, 31 deserialization frameworks, and 14 template engines. Every payload produces a detectable signal. Zero theoretical payloads.
+1,353 validated injection payloads covering 20 vulnerability classes, 31 deserialization frameworks, and 14 template engines. Every payload produces a detectable signal. Zero theoretical payloads.
 
-Validation: **1,315 tested / 1,315 fire / 0 failures / 0 skipped** against 35 Docker testbed stacks. Strict validation proves actual exploitation (server-side computation, real parser errors, measured timing delays, OOB callbacks from target containers) -- not string matching.
+Validation: **1,353 tested / 1,353 fire / 0 failures / 0 skipped** against 35 Docker testbed stacks. Strict validation proves actual exploitation (server-side computation, real parser errors, measured timing delays, OOB callbacks from target containers) -- not string matching.
 
 ---
 
@@ -33,7 +33,7 @@ Every payload in this collection is built around **detection pillars** -- observ
 - **Timing**: the payload forces a delay (5+ seconds). If the response is slow, the backend executed a sleep or CPU-intensive operation.
 - **OOB (Out-of-Band)**: the payload forces the backend to make an outbound HTTP, DNS, LDAP, or TCP connection to a callback server the tester controls. Confirms execution even when the response is completely opaque.
 
-If a payload doesn't produce at least one of these signals when tested against its target context, it doesn't belong in the list. Every one of the 1,315 payloads here has been validated against purpose-built Docker testbeds with strict proof of exploitation. Zero are theoretical.
+If a payload doesn't produce at least one of these signals when tested against its target context, it doesn't belong in the list. Every one of the 1,353 payloads here has been validated against purpose-built Docker testbeds with strict proof of exploitation. Zero are theoretical.
 
 ### Built-ins Over Shell Commands
 
@@ -53,7 +53,7 @@ The result is a single corpus where polyglots handle the contexts they can (SQLi
 
 ## Minimal List (82 Payloads)
 
-82 payloads covering all 35 testbed stacks, all 55+ endpoints, and all 4 detection pillars per category. Validated: **82 FIRE / 0 NO-FIRE / 0 SKIPPED**.
+83 payloads covering all 35 testbed stacks, all 55+ endpoints, and all 4 detection pillars per category. Validated: **83 FIRE / 0 NO-FIRE / 0 SKIPPED**.
 
 Every injection category gets error + math + timing + OOB coverage where architecturally possible. Deserialization frameworks that support code execution (Pickle, PyYAML, jsonpickle, node-serialize, XMLDecoder, .NET Json.NET) get full multi-pillar coverage. Frameworks limited to probing (PHP unserialize, Ruby Marshal, SnakeYAML, etc.) get error-based detection. Fire this at every parameter before switching to full category lists for depth.
 
@@ -81,7 +81,7 @@ Every injection category gets error + math + timing + OOB coverage where archite
 | 3 | Groovy | math, timing, OOB |
 | 41 | Deserialization | multi-pillar where supported, error-only otherwise |
 
-**82 requests instead of 1,315.** Use `ready/minimal/payloads-only.txt` for Burp Intruder.
+**83 requests instead of 1,353.** Use `ready/minimal/payloads-only.txt` for Burp Intruder.
 
 ---
 
@@ -95,7 +95,7 @@ See **[HOWTOUSE.md](HOWTOUSE.md)** for the full operator guide. It turns "I'm lo
 4. **Target-hint to category matrix** - go from "I see `id=42` and `JSESSIONID`" to "try `by-category/sqli.txt` + Java deserialization + EL injection, watch math pillar" in one lookup.
 5. **Pillar-selection rules** - pick the signal you can actually observe (OOB > math > timing > error > reflected) before you fire, so you never test blind against a channel you can't read.
 
-Use HOWTOUSE.md before you run `payloadctl prepare`. Fingerprint first, minimal list second, category drill-down third - not a shotgun of 1,315 payloads at every parameter.
+Use HOWTOUSE.md before you run `payloadctl prepare`. Fingerprint first, minimal list second, category drill-down third - not a shotgun of 1,353 payloads at every parameter.
 
 ---
 
@@ -114,14 +114,14 @@ After running `prepare`, your ready-to-use files are in `ready/full/` and `ready
 
 | File | What | Count |
 |------|------|-------|
-| `ready/minimal/payloads-only.txt` | **Minimal -- 82 requests, all pillars** | 82 |
-| `ready/full/payloads-only.txt` | Full list, one payload per line | 1,315 |
+| `ready/minimal/payloads-only.txt` | **Minimal -- 83 requests, all pillars** | 83 |
+| `ready/full/payloads-only.txt` | Full list, one payload per line | 1,353 |
 | `ready/full/by-category/sqli.txt` | SQL injection only | 211 |
 | `ready/full/by-category/ssti.txt` | Template injection only | 206 |
 | `ready/full/by-category/deserialization.txt` | Deserialization only | 232 |
 | `ready/full/by-category/os-cmd-injection.txt` | OS command injection only | 120 |
 | `ready/full/by-category/code-injection.txt` | Code injection only | 123 |
-| `ready/full/by-category/ssrf.txt` | SSRF only | 130 |
+| `ready/full/by-category/ssrf.txt` | SSRF only | 156 |
 | `ready/full/by-category/path-traversal.txt` | Path traversal only | 113 |
 | `ready/full/by-category/xss.txt` | XSS only | 58 |
 | `ready/full/by-category/nosql.txt` | NoSQL injection only | 32 |
@@ -141,13 +141,13 @@ After running `prepare`, your ready-to-use files are in `ready/full/` and `ready
 | `ready/full/by-pillar/oob-payloads-only.txt` | Out-of-band callback | 209 |
 | `ready/full/by-pillar/math-payloads-only.txt` | Math canary (1337) | 182 |
 | `ready/full/by-pillar/reflected-payloads-only.txt` | Reflected/edge-case | 374 |
-| `ready/full/encoded/url-encoded/payloads.txt` | URL-encoded variant | 1,315 |
-| `ready/full/encoded/base64/payloads.txt` | Base64 variant | 1,315 |
-| `ready/full/encoded/json-safe/payloads.txt` | JSON-safe variant | 1,315 |
-| `ready/full/encoded/double-url-encoded/payloads.txt` | Double URL-encoded | 1,315 |
-| `ready/full/encoded/html-entity/payloads.txt` | HTML entity encoded | 1,315 |
-| `ready/full/encoded/hex-escaped/payloads.txt` | Hex-escaped variant | 1,315 |
-| `ready/full/encoded/unicode-escaped/payloads.txt` | Unicode-escaped variant | 1,315 |
+| `ready/full/encoded/url-encoded/payloads.txt` | URL-encoded variant | 1,353 |
+| `ready/full/encoded/base64/payloads.txt` | Base64 variant | 1,353 |
+| `ready/full/encoded/json-safe/payloads.txt` | JSON-safe variant | 1,353 |
+| `ready/full/encoded/double-url-encoded/payloads.txt` | Double URL-encoded | 1,353 |
+| `ready/full/encoded/html-entity/payloads.txt` | HTML entity encoded | 1,353 |
+| `ready/full/encoded/hex-escaped/payloads.txt` | Hex-escaped variant | 1,353 |
+| `ready/full/encoded/unicode-escaped/payloads.txt` | Unicode-escaped variant | 1,353 |
 
 The `ready/minimal/` directory mirrors the same structure (by-category, by-pillar, encoded) with the minimal payload set.
 
@@ -189,7 +189,7 @@ Canary values: `1337` (primary, from `7*191`) and `7331` (secondary). Detection 
 | Deserialization | 232 | error, math, timing, oob | 31 frameworks / 7 languages. All language-native payloads use built-ins (no shell commands). Python (pickle P0/P2/P4 via `time.sleep`/`builtins.eval`/`urllib`, YAML via `time.sleep`/`builtins.eval`, jsonpickle), PHP (unserialize), Node (node-serialize via JS busy-wait/`http.get`, js-yaml, funcster, cryo), Ruby (YAML, Marshal, Oj), Java (Jackson, Fastjson, XStream, SnakeYAML, XMLDecoder, Hessian, JNDI/Log4Shell, ObjectInputStream, ysoserial URLDNS), .NET (Json.NET, BinaryFormatter, SoapFormatter, XmlSerializer, JavaScriptSerializer, LosFormatter, ViewState, ObjectStateFormatter), Perl (Storable, YAML). |
 | OS Cmd Injection | 120 | error, math, timing, oob | Bash, CMD, PowerShell. Breakouts: `;`, `\|`, `\|\|`, `&&`, `$()`, backticks. IFS bypass, glob bypass, hex encoding. |
 | Code Injection | 123 | error, math, timing, oob | Python, Node, PHP, Ruby, Perl, Lua, Java ScriptEngine, Groovy. Import-free CPU spin, socket-level OOB. |
-| SSRF | 130 | error, math, timing, oob | Cloud metadata (AWS/GCP/Azure), IP bypass, protocol schemes, DNS rebinding, internal service probes. |
+| SSRF | 156 | error, math, timing, oob | Cloud metadata (AWS/GCP/Azure), IP bypass, protocol schemes, DNS rebinding, internal service probes. |
 | Path Traversal | 113 | error, math, timing, oob | Linux + Windows, encoding bypass, null byte, PHP wrappers, UNC, NTFS ADS, 8.3 short names. |
 | XSS | 58 | error, math, oob | Cross-context polyglots (20+ contexts), event handlers, filter evasion, DOM clobbering, mutation XSS, SVG, OOB. |
 | Format String | 38 | error, math | C/C++ (`%s%n%x`), Python (`{0.__class__}`), .NET (`{0:X}`). |
@@ -209,7 +209,7 @@ Canary values: `1337` (primary, from `7*191`) and `7331` (secondary). Detection 
 
 ### Encoded Variants
 
-7 encoding formats, each with all 1,315 payloads:
+7 encoding formats, each with all 1,353 payloads:
 
 | Encoding | Use case |
 |----------|----------|
@@ -264,7 +264,7 @@ Canary values: `1337` (primary, from `7*191`) and `7331` (secondary). Detection 
 # DEVELOPMENT: build, distribute, validate, generate
 ./tools/payloadctl build              # sources/ -> payloads/full.txt
 ./tools/payloadctl dist               # full.txt + minimum.txt -> payloads/lists/full/ + lists/minimal/
-./tools/payloadctl validate           # test all 1,315 payloads against 35 testbed stacks
+./tools/payloadctl validate           # test all 1,353 payloads against 35 testbed stacks
 ./tools/payloadctl validate <file>    # test a specific wordlist (e.g. lists/minimal/master.txt)
 ./tools/payloadctl generate           # regenerate computed payloads (deser, ssti, sqli, misc)
 ./tools/payloadctl generate deser     # deserialization only
@@ -313,9 +313,9 @@ cd testbed && ./testbed up sqli-sqlite && cd ..
 │   └── generate-misc-missing.py       # XXE, XSS, SSRF, path traversal generator
 │
 ├── payloads/
-│   ├── full.txt                       # Master list (1,315 payloads, with ## headers)
+│   ├── full.txt                       # Master list (1,353 payloads, with ## headers)
 │   ├── sources/                       # Source files (edit these, all validated)
-│   │   ├── minimum.txt                # 82-payload minimal list (validated, all pillars)
+│   │   ├── minimum.txt                # 83-payload minimal list (validated, all pillars)
 │   │   ├── polyglots-condensed.txt    # Cross-context polyglots (first in master)
 │   │   ├── sqli.txt                   # SQL injection (204)
 │   │   ├── ssti.txt                   # Template injection (168)
@@ -338,13 +338,13 @@ cd testbed && ./testbed up sqli-sqlite && cd ..
 │   │   └── couchdb-injection.txt      # CouchDB (4)
 │   └── lists/                         # Generated (don't edit, use payloadctl dist)
 │       ├── full/                      # Full payload set
-│       │   ├── master.txt             # 1,315 payloads with ## headers
+│       │   ├── master.txt             # 1,353 payloads with ## headers
 │       │   ├── payloads-only.txt      # Raw lines for Burp Intruder
 │       │   ├── by-category/           # 20 category files
 │       │   ├── by-pillar/             # 5 pillar files (with -payloads-only variants)
 │       │   └── encoded/               # 7 encoding variants
 │       └── minimal/                   # Minimal payload set (same structure)
-│           ├── master.txt             # 82 payloads with ## headers
+│           ├── master.txt             # 83 payloads with ## headers
 │           ├── payloads-only.txt      # Raw lines for Burp Intruder
 │           ├── by-category/           # 20 category files
 │           ├── by-pillar/             # 5 pillar files (with -payloads-only variants)
@@ -418,7 +418,7 @@ cd testbed
 # Run validation
 cd ..
 ./tools/payloadctl validate
-# Output: 1,315 FIRE / 0 NO-FIRE / 0 SKIPPED / 1,315 TOTAL
+# Output: 1,353 FIRE / 0 NO-FIRE / 0 SKIPPED / 1,353 TOTAL
 ```
 
 How it works:
